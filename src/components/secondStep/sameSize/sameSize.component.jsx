@@ -6,7 +6,7 @@ const SameSize = ({formData, setFormData}) => {
   return (
     <Container fluid="true">
       <Typography variant="h1" component="h1">Mismo Tamaño</Typography>
-      <UploadPhotoCard />
+      <UploadPhotoCard formData={formData} setFormData={setFormData} />
     </Container>
   )
 }
