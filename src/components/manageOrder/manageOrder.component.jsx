@@ -1,5 +1,5 @@
 import { Button, Container } from "@mui/material";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import ProductGrid from "../productGrid/productGrid.component";
 import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
@@ -12,7 +12,10 @@ const ManageOrder = () => {
             uploadedPhotos: []
       });
 
-      console.log(formData);
+
+  useEffect(() => {
+      console.log("FormData uploadedPhotos: ", formData.uploadedPhotos);
+    }, [formData]);
 
       // Main stepper logic
       const renderContentByStep = (step) => {

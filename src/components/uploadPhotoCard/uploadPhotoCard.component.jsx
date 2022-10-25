@@ -1,70 +1,76 @@
-import React, {useState} from "react";
-import { Button, Paper, styled, Typography } from "@mui/material";
+import React, {useEffect, useState} from "react";
+import { Box, Button, Paper, styled, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {Container} from "@mui/material";
 import UploadPhotoDialog from "../uploadPhotoDialog/uploadPhotoDialog.component";
+import UploadPhotoCardEmpty from "../uploadPhotoCardEmpty/uploadPhotoCardEmpty.component";
+import UploadPhotoCardHover from "../uploadPhotoCardHover/uploadPhotoCardHover.component";
 
+const UploadPhotoCard = ({cardId, formData, setFormData, handleDeleteCard}) => {
+      const [emptyCardHidden, setEmptyCardHidden] = useState(false);
+      const [newUploadPhotoCard, setNewUploadPhotoCard] = useState({
+            id: cardId,
+            imgSrc: null,
+            result: null,
+            dialogOpen: false,
+      });
 
-const UploadPhotoCard = ({formData, setFormData}) => {
-      // image source
-      const [srcImg, setSrcImg] = useState(null);
-      // image for cropping
-      const [image, setImage] = useState(null);
-      // aspect ratio of crop tool
-      const [crop, setCrop] = useState({aspect: 16/9});
-      //save result
-      const [result, setResult] = useState(null);
-            
-      const handleImage = (e) => {
-            setFormData({
-                  ...formData,
-                  uploadedPhotos: [...formData.uploadedPhotos, URL.createObjectURL(e.target.files[0])],
-            })
-      };
-
-      const PaperButton = styled(Paper) ({
-            elevation: "2",
-            display: 'flex',
-            flexWrap: 'wrap',
-            width: 220,
-            height: 220,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: '10px',
-            border: '2px color #666',
-            "&:hover": {
-                  backgroundColor: "rgb(100,100,100,0.8)",
-                  "& svg": {
-                        color: "rgb(243, 116, 231, 0.1)"
-                  },
-                  "& p": {
-                        color: 'white',
-                        display: 'block'
-                  }
-            },
-            position: 'relative'
-            
-      })
-
-      const handleUploadCardClick = () => {
-            
+      const handleOpen = () => {
+            setNewUploadPhotoCard({
+                  ...newUploadPhotoCard,
+                  dialogOpen: true
+            });
       }
+      
+      const handleClose = () => {
+            setNewUploadPhotoCard({
+                  ...newUploadPhotoCard,
+                  dialogOpen: false
+            });
+      }
+
+      useEffect(() => {
+            if(newUploadPhotoCard.imgSrc !== null) {
+                  setEmptyCardHidden(true);
+            }
+      }, [newUploadPhotoCard])
+
+      // this is shit
+      // you need to update the already existing uploadedPhotos.imgSrc
+      // maybe this means removing it and inserting another one.
+      // USING ID
+
+      useEffect(() => {
+            console.log("ChangedPhotoCard...", newUploadPhotoCard);
+            console.log("formdata looks like: ", formData.uploadedPhotos);
+      }, [newUploadPhotoCard]);
 
       return(
             <Container>
-                  <Button component="label" onClick={handleUploadCardClick}>
-                        <PaperButton>
-                              <AddIcon sx={{fontSize: '8em', color: '#F374E7'}}/>
-                              <Typography variant="h10" component="p" hidden style={{
+                  <Button component="label" position="relative" sx={{
+                        padding: 0,
+                        margin: 0,
+                  }}>
+                        {
+                              !emptyCardHidden ? (<UploadPhotoCardEmpty newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} formData={formData} setFormData={setFormData} sx={{
                                     position: 'absolute',
-                                    bottom: 0
-                              }}>
-                                    Haz un clic aquí para subir una foto
-                              </Typography>
-                        </PaperButton>
-                        <input hidden accept="image/*" multiple type="file" onChange={handleImage}/>
+                                    top: 0,
+                                    left: 0,
+                              }} />
+                              ): null 
+                        }
+                        {
+                              emptyCardHidden ? (<UploadPhotoCardHover newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} handleOpen={handleOpen} handleClose={handleClose} formData={formData} setFormData={setFormData}  handleDeleteCard={handleDeleteCard} sx={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              }}/>
+                              ): null
+                        }
+                        <UploadPhotoDialog newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} open={newUploadPhotoCard.dialogOpen} handleClose={handleClose} />
                   </Button>
-       </Container>
+                  
+            </Container>
       );
 }
 

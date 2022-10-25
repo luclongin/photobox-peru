@@ -1,20 +1,57 @@
-import React, { Fragment, useState, useCallback } from 'react'
+import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import Cropper from 'react-easy-crop'
-import { Container, Slider, Button, Typography, Box} from '@mui/material';
+import { Slider, Box} from '@mui/material';
 import getCroppedImg from '../../utils/cropImage';
-import {styled} from '@mui/material/styles';
-import UploadPhotoCard from '../uploadPhotoCard/uploadPhotoCard.component';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
 
-function readFile(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader()
-    reader.addEventListener('load', () => resolve(reader.result), false)
-    reader.readAsDataURL(file)
-  })
+const BootstrapDialog = styled(Dialog)(({  }) => ({
+  
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
 }
 
-const UploadPhotoDialog = () => {
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
+const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCard}) => {
       const [imageSrc, setImageSrc] = useState(null);
+      
+      useEffect(() => {
+        setImageSrc(newUploadPhotoCard.imgSrc);
+      }, [newUploadPhotoCard]);
+
       const [crop, setCrop] = useState({ x: 0, y: 0 });
       const [rotation, setRotation] = useState(0);
       const [zoom, setZoom] = useState(1);
@@ -25,36 +62,41 @@ const UploadPhotoDialog = () => {
         setCroppedAreaPixels(croppedAreaPixels);
       }, [])
 
-      const showCroppedImage = useCallback(async () => {
-      try {
-            const croppedImage = await getCroppedImg(
-            imageSrc,
-            croppedAreaPixels,
-            rotation
-            )
-            console.log('donee', { croppedImage });
-            setCroppedImage(croppedImage);
-      } catch (e) {
-            console.error(e);
-      }
-      }, [croppedAreaPixels, rotation])
-
       const onClose = useCallback(() => {
-      setCroppedImage(null)
-      }, []);
+        setCroppedImage(null)
+      }, [])
 
-      const onFileChange = async (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-          const file = e.target.files[0]
-          let imageDataUrl = await readFile(file);
-          setImageSrc(imageDataUrl)
+      const handleSave = useCallback(async () => {
+        try {
+              const croppedImage = await getCroppedImg(
+              imageSrc,
+              croppedAreaPixels,
+              rotation
+              )
+              setNewUploadPhotoCard({
+                ...newUploadPhotoCard,
+                result: croppedImage,
+                dialogOpen: false
+              });
+              onClose();
+
+        } catch (e) {
+              console.error(e);
         }
-      }
-
+      }, [croppedAreaPixels, rotation])
+      
       return(
-            <Container fluid="true" sx={{
-              width: 500
-            }}>
+        <BootstrapDialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={newUploadPhotoCard.dialogOpen}
+          fullWidth={true}
+          maxWidth='sm'
+        >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+          Crop Image
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
               { imageSrc ? (
               <Fragment>
                 <Box sx={{
@@ -68,7 +110,7 @@ const UploadPhotoDialog = () => {
                         crop={crop}
                         rotation={rotation}
                         zoom={zoom}
-                        aspect={4/3}
+                        aspect={1}
                         onCropChange={setCrop}
                         onRotationChange={setRotation}
                         onCropComplete={onCropComplete}
@@ -102,13 +144,6 @@ const UploadPhotoDialog = () => {
                       }}
                     />
                   </Box>
-                  <Button
-                    onClick={showCroppedImage}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Show Result
-                  </Button>
                 </Box>
               </Fragment>
             ) : (
@@ -117,7 +152,18 @@ const UploadPhotoDialog = () => {
               //<input type="file" onChange={onFileChange} accept="image/*" />
             )
             }
-            </Container>
+            </DialogContent>
+            <DialogActions>
+            <Button
+              autoFocus
+              onClick={handleSave}
+              variant="contained"
+              color="primary"
+            >
+              Done
+            </Button>
+          </DialogActions>
+          </BootstrapDialog>
             
             
       );
