@@ -1,10 +1,16 @@
 import './App.css';
+import React, {createContext} from 'react';
 import ManageOrder from './components/manageOrder/manageOrder.component';
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 function App() {
   return (
-    <div className="App">
-      <ManageOrder />
-    </div>
+      <Provider store={store}>
+        <div className="App">
+          <ManageOrder />
+        </div>
+      </Provider>
   );
 }
 

@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import { Radio } from '@mui/material';
 import {RadioGroup, FormControlLabel} from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProduct } from '../../features/productSelection/ProductSlice';
+import { nextButtonEnabled } from '../../features/handleFormButtons/FormButtonsSlice';
 
-const ProductCard = ({title, productName, formData, setFormData}) => {      
-      const [isChecked, setChecked] = useState(false);
-
+const ProductCard = ({title, productName}) => {   
+      const dispatch = useDispatch();
       const changeHandler = (e) => {
-            setFormData({
-                  ...formData,
-                  chosenProduct: e.target.value,
-                  enableNextButton: true
-            })
+            dispatch(setProduct(e.target.value));
+            dispatch(nextButtonEnabled(true));
       }
-
-      useEffect(() => {
-            (formData.chosenProduct === productName) ? setChecked(true) : setChecked(false)
-      }, [formData])
+      
+      const selectedProduct = useSelector(state => state.product);
+      const handleChecked = () => {
+            return (selectedProduct === productName);
+      }
 
       return (
             <Paper elevation={3} sx={{
@@ -33,7 +33,7 @@ const ProductCard = ({title, productName, formData, setFormData}) => {
                         name="chooseProduct"
                         onChange={changeHandler}
                   >
-                        <FormControlLabel checked={isChecked} value={productName} control={<Radio />} />
+                        <FormControlLabel checked={handleChecked()} value={productName} control={<Radio />} />
                   </RadioGroup>
             </Paper>
   )

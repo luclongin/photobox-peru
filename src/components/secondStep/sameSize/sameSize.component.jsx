@@ -1,50 +1,16 @@
-import { Button, Box, Container, Grid, Typography } from '@mui/material';
-import React, {useState, useEffect} from 'react';
+import { Button, Box, Grid, Typography } from '@mui/material';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import UploadPhotoCard from '../../uploadPhotoCard/uploadPhotoCard.component';
+import { photoAdded } from '../../../features/photoEdition/PhotoSlice';
 
-const SameSize = ({formData, setFormData}) => {
-  const [uploadCards, setUploadCards] = useState([]);
-  
-  useEffect(() => {
-    console.log("Displayed Upload Cards: ", uploadCards);
-  }, [uploadCards]);
-
-  const removeFromFormData = (cardImgSrc) => {
-    const newUploadedPhotos = formData.uploadedPhotos.filter((photoURL) => {
-      return photoURL !== cardImgSrc;
-    })
-    setFormData({
-      ...formData,
-      uploadedPhotos: newUploadedPhotos
-    })
-  }
-
-  const removeFromDisplayedUploadCards = (cardId) => {
-    setUploadCards(
-      current => current.filter((uploadCard) => {
-        return uploadCard.id !== cardId
-      })
-    );
-    removeFromFormData(cardId);
-  }
-
-  const handleDeleteCard = (cardId, cardImgSrc) => {
-    removeFromDisplayedUploadCards(cardId);
-    removeFromFormData(cardImgSrc);
-  }
-
-  // challenge is to find a way to display cards so that you can find it by URL
-  // maybe associate a card with an id
+const SameSize = () => {  
+  const addedPhotos = useSelector(state => state.photos);
+  console.log("addedPhotos", addedPhotos);
+  const dispatch = useDispatch();
 
   const handleAddCard = () => {
-    const cardId = uploadCards.length;
-    setUploadCards([
-      ...uploadCards,
-      {
-        id: cardId,
-        cardObject: <UploadPhotoCard cardId={cardId} formData={formData} setFormData={setFormData} handleDeleteCard={handleDeleteCard} />
-      }
-    ])
+    dispatch(photoAdded("20x20"));
   }
 
   return (
@@ -57,20 +23,15 @@ const SameSize = ({formData, setFormData}) => {
           justifyContent: 'center',
         }}>
           {
-
-          }
-          
-          {
-            uploadCards.map((uploadCard) => {
+            addedPhotos.map((photo) => {
               return(
-                <Grid key={uploadCard.id} item xs={3} sm={3} md={3} lg={3} xl={3}>
-                {uploadCard.cardObject}
+                <Grid key={photo.id} item xs={3} sm={3} md={3} lg={3} xl={3}>
+                  <UploadPhotoCard photo={photo} />
                 </Grid>
               );
             })
           }
         </Grid>
-        
     </Box>
   )
 }

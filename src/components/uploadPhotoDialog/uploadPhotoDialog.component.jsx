@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useCallback, useEffect } from 'react'
+import React, { Fragment, useState, useCallback, useEffect, useRef } from 'react'
 import Cropper from 'react-easy-crop'
 import { Slider, Box} from '@mui/material';
 import getCroppedImg from '../../utils/cropImage';
@@ -12,7 +12,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-
+import { photoUpdatedResult } from '../../features/photoEdition/PhotoSlice';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 const BootstrapDialog = styled(Dialog)(({  }) => ({
   
 }));
@@ -45,12 +47,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCard}) => {
-      const [imageSrc, setImageSrc] = useState(null);
-      
-      useEffect(() => {
-        setImageSrc(newUploadPhotoCard.imgSrc);
-      }, [newUploadPhotoCard]);
+const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
+      const dispatch = useDispatch();
+      const mounted = useRef();
+      //const [imageSrc, setImageSrc] = useState(null);
+      // troublesome because could be heavy on the computing side
+      const photo = useSelector(state=>state.photos.find(photo => photo.id === id));
 
       const [crop, setCrop] = useState({ x: 0, y: 0 });
       const [rotation, setRotation] = useState(0);
@@ -62,42 +64,36 @@ const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCa
         setCroppedAreaPixels(croppedAreaPixels);
       }, [])
 
-      const onClose = useCallback(() => {
-        setCroppedImage(null)
-      }, [])
-
       const handleSave = useCallback(async () => {
         try {
-              const croppedImage = await getCroppedImg(
-              imageSrc,
-              croppedAreaPixels,
-              rotation
-              )
-              setNewUploadPhotoCard({
-                ...newUploadPhotoCard,
-                result: croppedImage,
-                dialogOpen: false
-              });
-              onClose();
-
+                setCroppedImage(await getCroppedImg(
+                  photo.imgResult,
+                  croppedAreaPixels,
+                  rotation
+                ));
         } catch (e) {
               console.error(e);
         }
-      }, [croppedAreaPixels, rotation])
+      }, [croppedAreaPixels])
+
+      useEffect(() => {
+        dispatch(photoUpdatedResult({id: photo.id, imgResult: croppedImage}));
+        setOpenDialog(false);
+      }, [croppedImage]);
       
       return(
         <BootstrapDialog
-          onClose={handleClose}
+          onClose={() => setOpenDialog(false)}
           aria-labelledby="customized-dialog-title"
-          open={newUploadPhotoCard.dialogOpen}
+          open={openDialog}
           fullWidth={true}
           maxWidth='sm'
         >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => setOpenDialog(false)}>
           Crop Image
         </BootstrapDialogTitle>
         <DialogContent dividers>
-              { imageSrc ? (
+              { photo.imgResult ? (
               <Fragment>
                 <Box sx={{
                   position: 'relative',
@@ -106,7 +102,7 @@ const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCa
                   background: '#333',
                 }}>
                   <Cropper
-                        image={imageSrc}
+                        image={photo.imgResult}
                         crop={crop}
                         rotation={rotation}
                         zoom={zoom}
@@ -128,7 +124,7 @@ const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCa
                     alignItems: 'center',}}
                   >
                     <Typography
-                      variant="overline"                  >
+                      variant="overline">
                       Zoom
                     </Typography>
                     <Slider
@@ -148,8 +144,6 @@ const UploadPhotoDialog = ({handleClose, newUploadPhotoCard, setNewUploadPhotoCa
               </Fragment>
             ) : (
               <div>MERDE</div>
-              //<UploadPhotoCard />
-              //<input type="file" onChange={onFileChange} accept="image/*" />
             )
             }
             </DialogContent>

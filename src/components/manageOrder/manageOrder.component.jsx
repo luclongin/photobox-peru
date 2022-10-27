@@ -1,41 +1,35 @@
 import { Button, Container } from "@mui/material";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductGrid from "../productGrid/productGrid.component";
 import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
 
 const ManageOrder = () => {
+      const selectedProduct = useSelector(state => state.product);
       const [step, setStep] = useState(1);
-      const [formData, setFormData] = useState({
-            chosenProduct: '',
-            enableNextButton: false,
-            uploadedPhotos: []
-      });
-
-
-  useEffect(() => {
-      console.log("FormData uploadedPhotos: ", formData.uploadedPhotos);
-    }, [formData]);
+      const dispatch = useDispatch();
+      const nextButtonEnabled = useSelector(state => state.formButtons.enableNextButton);
 
       // Main stepper logic
       const renderContentByStep = (step) => {
             switch (step) {
                   case 1:
-                        return <ProductGrid formData={formData} setFormData={setFormData}/>
+                        return <ProductGrid />
                   case 2:
-                        return renderStepTwoContent(formData.chosenProduct);
+                        return renderStepTwoContent(selectedProduct);
                   default:
                         return <div>Not Found</div>
             }
       }
 
       // Renders a Product-specific component
-      const renderStepTwoContent = (chosenProduct) => {
-            switch (chosenProduct) {
+      const renderStepTwoContent = (product) => {
+            switch (product) {
                   case 'sameSize':
-                        return <SameSize formData={formData} setFormData={setFormData} />
+                        return <SameSize />
                   case 'sonados':
-                        return <Sonados formData={formData} setFormData={setFormData} />
+                        return <Sonados />
                   default:
                         return <div>Step Two Not Found</div>
             }
@@ -43,16 +37,13 @@ const ManageOrder = () => {
 
       const handleSubmit = () => {
             setStep(step + 1);
-            setFormData({
-                  ...formData,
-                  enableNextButton: false
-            })
+            dispatch(nextButtonEnabled(false));
       }
 
       return(
             <Container fluid="true">
                   {renderContentByStep(step)}
-                  <Button disabled={!formData.enableNextButton} onClick={handleSubmit}>
+                  <Button disabled={!nextButtonEnabled} onClick={handleSubmit}>
                         {(step > 0 && step < 2) ?"Next":"Submit"}
                   </Button>
                   {

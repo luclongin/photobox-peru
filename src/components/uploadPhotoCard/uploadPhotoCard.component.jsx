@@ -1,49 +1,16 @@
-import React, {useEffect, useState} from "react";
-import { Box, Button, Paper, styled, Typography } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
+import React, {useState} from "react";
+import { Button} from "@mui/material";
 import {Container} from "@mui/material";
 import UploadPhotoDialog from "../uploadPhotoDialog/uploadPhotoDialog.component";
 import UploadPhotoCardEmpty from "../uploadPhotoCardEmpty/uploadPhotoCardEmpty.component";
 import UploadPhotoCardHover from "../uploadPhotoCardHover/uploadPhotoCardHover.component";
 
-const UploadPhotoCard = ({cardId, formData, setFormData, handleDeleteCard}) => {
-      const [emptyCardHidden, setEmptyCardHidden] = useState(false);
-      const [newUploadPhotoCard, setNewUploadPhotoCard] = useState({
-            id: cardId,
-            imgSrc: null,
-            result: null,
-            dialogOpen: false,
-      });
-
-      const handleOpen = () => {
-            setNewUploadPhotoCard({
-                  ...newUploadPhotoCard,
-                  dialogOpen: true
-            });
-      }
+const UploadPhotoCard = ({photo}) => {
       
-      const handleClose = () => {
-            setNewUploadPhotoCard({
-                  ...newUploadPhotoCard,
-                  dialogOpen: false
-            });
-      }
-
-      useEffect(() => {
-            if(newUploadPhotoCard.imgSrc !== null) {
-                  setEmptyCardHidden(true);
-            }
-      }, [newUploadPhotoCard])
-
-      // this is shit
-      // you need to update the already existing uploadedPhotos.imgSrc
-      // maybe this means removing it and inserting another one.
-      // USING ID
-
-      useEffect(() => {
-            console.log("ChangedPhotoCard...", newUploadPhotoCard);
-            console.log("formdata looks like: ", formData.uploadedPhotos);
-      }, [newUploadPhotoCard]);
+      const [openDialog, setOpenDialog] = useState(false);
+      const [manageCard, setManageCard] = useState({
+            emptyCardHidden: false
+      })
 
       return(
             <Container>
@@ -52,7 +19,7 @@ const UploadPhotoCard = ({cardId, formData, setFormData, handleDeleteCard}) => {
                         margin: 0,
                   }}>
                         {
-                              !emptyCardHidden ? (<UploadPhotoCardEmpty newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} formData={formData} setFormData={setFormData} sx={{
+                              !manageCard.emptyCardHidden ? (<UploadPhotoCardEmpty id={photo.id} manageCard={manageCard} setManageCard={setManageCard} sx={{
                                     position: 'absolute',
                                     top: 0,
                                     left: 0,
@@ -60,14 +27,14 @@ const UploadPhotoCard = ({cardId, formData, setFormData, handleDeleteCard}) => {
                               ): null 
                         }
                         {
-                              emptyCardHidden ? (<UploadPhotoCardHover newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} handleOpen={handleOpen} handleClose={handleClose} formData={formData} setFormData={setFormData}  handleDeleteCard={handleDeleteCard} sx={{
+                              manageCard.emptyCardHidden ? (<UploadPhotoCardHover id={photo.id} setOpenDialog={setOpenDialog} sx={{
                               position: 'absolute',
                               top: 0,
                               left: 0,
                               }}/>
                               ): null
                         }
-                        <UploadPhotoDialog newUploadPhotoCard={newUploadPhotoCard} setNewUploadPhotoCard={setNewUploadPhotoCard} open={newUploadPhotoCard.dialogOpen} handleClose={handleClose} />
+                        <UploadPhotoDialog id={photo.id} openDialog={openDialog} setOpenDialog={setOpenDialog} />
                   </Button>
                   
             </Container>

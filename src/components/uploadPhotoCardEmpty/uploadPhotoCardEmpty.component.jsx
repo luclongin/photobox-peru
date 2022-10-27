@@ -1,8 +1,11 @@
 import React, { useState, Fragment, useEffect } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { Paper, styled, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { photoUpdatedSrc } from "../../features/photoEdition/PhotoSlice";
 
-const UploadPhotoCardEmpty = ({newUploadPhotoCard, setNewUploadPhotoCard, formData, setFormData}) => {
+const UploadPhotoCardEmpty = ({id, manageCard, setManageCard, newUploadPhotoCard, setNewUploadPhotoCard, formData, setFormData}) => {
+      const dispatch = useDispatch();
       const PaperButton = styled(Paper) ({
             elevation: "2",
             display: 'flex',
@@ -30,21 +33,13 @@ const UploadPhotoCardEmpty = ({newUploadPhotoCard, setNewUploadPhotoCard, formDa
 
       const handleImage = (e) => {
             const imageBlob = URL.createObjectURL(e.target.files[0]);
-            setNewUploadPhotoCard({
-                  ...newUploadPhotoCard,
-                  imgSrc: imageBlob,
-                  result: imageBlob
-            });
-            
-            setFormData({
-                  ...formData,
-                  uploadedPhotos: [
-                        ...formData.uploadedPhotos,
-                        {
-                              original: imageBlob,
-                              cropped: imageBlob
-                        }
-                  ]
+            dispatch(photoUpdatedSrc({
+                  id: id,
+                  imgSrc: imageBlob
+            }));
+            setManageCard({
+                  ...manageCard,
+                  emptyCardHidden: true
             });
       };
 
