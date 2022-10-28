@@ -8,10 +8,13 @@ const ProductSlice = createSlice({
       reducers: {
             setProduct: (state, action) => {
                   return action.payload
+            },
+            deleteProduct: (state) => {
+                  return ""
             }
       }
 })
 
-export const {setProduct} = ProductSlice.actions;
+export const {setProduct, deleteProduct} = ProductSlice.actions;
 
 export default ProductSlice.reducer;

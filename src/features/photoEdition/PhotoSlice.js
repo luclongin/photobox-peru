@@ -41,6 +41,9 @@ const photoSlice = createSlice({
                   const existingPhoto = state.find(photo => photo.id === id);
                   const idx = state.indexOf(existingPhoto);
                   state.splice(idx, 1);
+            },
+            allPhotosDeleted(state) {
+                  return []
             }
       }
 })
@@ -49,7 +52,8 @@ export const {
             photoAdded,
             photoUpdatedSrc,
             photoUpdatedResult,
-            photoDeleted
+            photoDeleted,
+            allPhotosDeleted
       } = photoSlice.actions;
 
 

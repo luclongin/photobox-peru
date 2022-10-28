@@ -1,10 +1,11 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { Paper, styled, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { photoUpdatedSrc } from "../../features/photoEdition/PhotoSlice";
+import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 
-const UploadPhotoCardEmpty = ({id, manageCard, setManageCard, newUploadPhotoCard, setNewUploadPhotoCard, formData, setFormData}) => {
+const UploadPhotoCardEmpty = ({id, manageCard, setManageCard}) => {
       const dispatch = useDispatch();
       const PaperButton = styled(Paper) ({
             elevation: "2",
@@ -41,6 +42,7 @@ const UploadPhotoCardEmpty = ({id, manageCard, setManageCard, newUploadPhotoCard
                   ...manageCard,
                   emptyCardHidden: true
             });
+            dispatch(nextButtonEnabled(true));
       };
 
       return(
