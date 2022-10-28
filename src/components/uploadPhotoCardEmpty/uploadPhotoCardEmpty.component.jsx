@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { photoUpdatedSrc } from "../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 
-const UploadPhotoCardEmpty = ({id, manageCard, setManageCard}) => {
+const UploadPhotoCardEmpty = ({ id }) => {
       const dispatch = useDispatch();
       const PaperButton = styled(Paper) ({
             elevation: "2",
@@ -38,10 +38,6 @@ const UploadPhotoCardEmpty = ({id, manageCard, setManageCard}) => {
                   id: id,
                   imgSrc: imageBlob
             }));
-            setManageCard({
-                  ...manageCard,
-                  emptyCardHidden: true
-            });
             dispatch(nextButtonEnabled(true));
       };
 

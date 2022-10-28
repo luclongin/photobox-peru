@@ -8,10 +8,6 @@ import UploadPhotoCardHover from "../uploadPhotoCardHover/uploadPhotoCardHover.c
 const UploadPhotoCard = ({photo}) => {
       
       const [openDialog, setOpenDialog] = useState(false);
-      const [manageCard, setManageCard] = useState({
-            emptyCardHidden: false
-      })
-
       return(
             <Container>
                   <Button component="label" position="relative" sx={{
@@ -19,7 +15,7 @@ const UploadPhotoCard = ({photo}) => {
                         margin: 0,
                   }}>
                         {
-                              !manageCard.emptyCardHidden ? (<UploadPhotoCardEmpty id={photo.id} manageCard={manageCard} setManageCard={setManageCard} sx={{
+                              photo.hidden ? (<UploadPhotoCardEmpty id={photo.id} sx={{
                                     position: 'absolute',
                                     top: 0,
                                     left: 0,
@@ -27,7 +23,7 @@ const UploadPhotoCard = ({photo}) => {
                               ): null 
                         }
                         {
-                              manageCard.emptyCardHidden ? (<UploadPhotoCardHover id={photo.id} setOpenDialog={setOpenDialog} sx={{
+                              !photo.hidden ? (<UploadPhotoCardHover id={photo.id} setOpenDialog={setOpenDialog} sx={{
                               position: 'absolute',
                               top: 0,
                               left: 0,

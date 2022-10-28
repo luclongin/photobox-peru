@@ -16,7 +16,8 @@ const photoSlice = createSlice({
                                     id: nanoid(),
                                     imgSrc: null,
                                     imgResult: null,
-                                    imgDimensions
+                                    imgDimensions,
+                                    hidden: true
                               }
                         }
                   }
@@ -27,6 +28,7 @@ const photoSlice = createSlice({
                   if(existingPhoto) {
                         existingPhoto.imgSrc = imgSrc;
                         existingPhoto.imgResult = imgSrc;
+                        existingPhoto.hidden = false;
                   }
             },
             photoUpdatedResult(state, action) {

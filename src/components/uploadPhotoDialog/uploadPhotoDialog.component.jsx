@@ -77,7 +77,11 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
       }, [croppedAreaPixels])
 
       useEffect(() => {
-        dispatch(photoUpdatedResult({id: photo.id, imgResult: croppedImage}));
+        // because of the way croppedImage can be triggered so easily (clicking back button)
+        // adding condition
+        if(croppedImage !== null) {
+          dispatch(photoUpdatedResult({id: photo.id, imgResult: croppedImage}));
+        }
         setOpenDialog(false);
       }, [croppedImage]);
       

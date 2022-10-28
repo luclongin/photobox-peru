@@ -8,6 +8,7 @@ import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
+import Checkout from "../checkout/checkout.component";
 
 const ManageOrder = () => {
       const selectedProduct = useSelector(state => state.product);
@@ -16,6 +17,7 @@ const ManageOrder = () => {
       const enableNextButton = useSelector(state => state.formButtons.enableNextButton);
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
       const enableSubmitButton = useSelector(state => state.formButtons.enableSubmitButton);
+      const photos = useSelector(state => state.photos);
 
       // Main stepper logic
       const renderContentByStep = (step) => {
@@ -26,6 +28,8 @@ const ManageOrder = () => {
                         return renderStepTwoContent(selectedProduct);
                   case 2: 
                         return <AddPhrase />
+                  case 3:
+                        return <Checkout />
                   default:
                         return <div>Not Found</div>
             }
@@ -65,6 +69,10 @@ const ManageOrder = () => {
             } else {
                   dispatch(backButtonEnabled(true));
                   dispatch(nextButtonEnabled(false));
+            }
+
+            if (step === 1 && photos.length > 0) {
+                  dispatch(nextButtonEnabled(true));
             }
       }, [step])
 

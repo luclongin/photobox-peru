@@ -2,7 +2,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = [];
 
-const defaultPhrases = {
+export const defaultPhrases = {
       "family": {
             text: "Family",
             color: "brown"
@@ -21,7 +21,7 @@ const AdditionalPhraseSlice = createSlice({
                   reducer(state, action) {
                         state.push(action.payload)
                   },
-                  prepare(text, color) {
+                  prepare({text, color}) {
                         return {
                               payload: {
                                     id: nanoid(),
@@ -33,12 +33,13 @@ const AdditionalPhraseSlice = createSlice({
             },
             // adding default phrase data from dictionary
             defaultPhraseAdded(state, action) {
+                  console.log("start");
                   const {defaultPhrase} = action.payload;
-                  const {defaultText, defaultColor} = defaultPhrases[defaultPhrase];
+                  const {text, color} = defaultPhrases[defaultPhrase];
                   state.push({
                         id: nanoid(),
-                        text: defaultText,
-                        color: defaultColor
+                        text: text,
+                        color: color
                   });
             },
             phraseDeleted(state, action) {
