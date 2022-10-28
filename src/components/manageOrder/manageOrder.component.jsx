@@ -9,6 +9,7 @@ import Sonados from "../secondStep/sonados/sonados.component";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import Checkout from "../checkout/checkout.component";
+import Cart from "../cart/cart.component";
 
 const ManageOrder = () => {
       const selectedProduct = useSelector(state => state.product);
@@ -29,7 +30,7 @@ const ManageOrder = () => {
                   case 2: 
                         return <AddPhrase />
                   case 3:
-                        return <Checkout />
+                        return <Cart />
                   default:
                         return <div>Not Found</div>
             }

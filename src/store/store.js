@@ -9,6 +9,6 @@ export default configureStore({
             product: ProductReducer,
             photos: PhotoReducer,
             formButtons: FormButtonsReducer,
-            additionalPhrase: AdditionalPhraseReducer
+            additionalPhrases: AdditionalPhraseReducer
       }
 })
