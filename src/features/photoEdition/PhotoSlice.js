@@ -22,6 +22,22 @@ const photoSlice = createSlice({
                         }
                   }
             },
+            photoDirectAdded: {
+                  reducer(state, action) {
+                        state.push(action.payload)
+                  },
+                  prepare({imgSrc, imgDimensions}) {
+                        return {
+                              payload: {
+                                    id: nanoid(),
+                                    imgSrc,
+                                    imgResult: imgSrc,
+                                    imgDimensions,
+                                    hidden: false
+                              }
+                        }
+                  }
+            },
             photoUpdatedSrc(state, action) {
                   const {id, imgSrc} = action.payload;
                   const existingPhoto = state.find(photo => photo.id === id);
@@ -52,6 +68,7 @@ const photoSlice = createSlice({
 
 export const {
             photoAdded,
+            photoDirectAdded,
             photoUpdatedSrc,
             photoUpdatedResult,
             photoDeleted,

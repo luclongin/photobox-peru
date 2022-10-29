@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadPhotoCard from '../../uploadPhotoCard/uploadPhotoCard.component';
 import { photoAdded } from '../../../features/photoEdition/PhotoSlice';
+import { useEffect, useState } from 'react';
 
 const SameSize = () => {  
   const addedPhotos = useSelector(state => state.photos);

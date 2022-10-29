@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.component";
 import { Fragment } from "react";
 
-
 const UploadPhotoCardWithImage = ({id, setOpenDialog}) => {
       const photo = useSelector(state=>state.photos.find(photo => photo.id === id));
       const HoverBox = styled(Box) ({
@@ -28,7 +27,7 @@ const UploadPhotoCardWithImage = ({id, setOpenDialog}) => {
                         <img width={350} height={350} src={photo.imgResult} alt="" style={{borderRadius: '10px'}}/>
                         
                         <Box sx={{zIndex: 3, position: 'absolute', top: 0}} className="hidden-hover" >
-                              <UploadPhotoCardHover id={id} setOpenDialog={setOpenDialog}/>) 
+                              <UploadPhotoCardHover id={id} setOpenDialog={setOpenDialog}/>
                         </Box>
                   </HoverBox>
                   

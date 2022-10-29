@@ -15,9 +15,6 @@ import Typography from '@mui/material/Typography';
 import { photoUpdatedResult } from '../../features/photoEdition/PhotoSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-const BootstrapDialog = styled(Dialog)(({  }) => ({
-  
-}));
 
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
@@ -86,7 +83,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
       }, [croppedImage]);
       
       return(
-        <BootstrapDialog
+        <Dialog
           onClose={() => setOpenDialog(false)}
           aria-labelledby="customized-dialog-title"
           open={openDialog}
@@ -161,9 +158,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
               Done
             </Button>
           </DialogActions>
-          </BootstrapDialog>
-            
-            
+          </Dialog>
       );
 }
 

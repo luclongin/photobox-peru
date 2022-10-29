@@ -1,14 +1,14 @@
 import { Box, } from "@mui/material";
 import CropIcon from '@mui/icons-material/Crop';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
 import { IconButton, styled } from "@mui/material";
+import { PhotoSharp } from "@mui/icons-material";
+import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
+import { decrementPhotoCount, removePhotoCount, setPhotoCount } from "../../features/photoCount/PhotoCountSlice";
 
-
-
-const UploadPhotoCardHover = ({ id, setOpenDialog }) =>{      
-      
+const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{      
       const dispatch = useDispatch();
       const UploadPhotoCardHoverButton = styled(IconButton) ({
             width: 30,
@@ -19,16 +19,38 @@ const UploadPhotoCardHover = ({ id, setOpenDialog }) =>{
             borderRadius: '3px',
       });
 
+      const topPos = (onlyDelete) => {
+            if (onlyDelete) {
+                  return(10)
+            } else {
+                  return(68);
+            }
+      }
+           
+      const photos = useSelector(state => state.photos);
+      const photoCount = useSelector(state => state.photoCount);
+
+      const handleDelete = () => {
+            dispatch(photoDeleted({id: id}));
+            dispatch(decrementPhotoCount());
+            // if you're deleting the last photo
+            // 1 because of async lag, photos doesn't get updated immediately after dispatch
+            if (photos.length === 1) {
+                  dispatch(nextButtonEnabled(false));
+            }
+      }
+
       return(
             <Box sx={{
                   width: 350,
                   height: 350,
                   minWidth: 350,
+                  borderRadius: 2,
                   position: 'absolute',
                   zIndex: 2,
-                  backgroundColor: 'rgb(0,0,0,0.5)'
+                  backgroundColor: 'rgb(0,0,0,0.3)'
             }}>
-                  <UploadPhotoCardHoverButton component="label" onClick={() => setOpenDialog(true)} sx={{
+                  { !onlyDelete && (<UploadPhotoCardHoverButton component="label" onClick={() => setOpenDialog(true)} sx={{
                         position: 'absolute',
                         top: 10,
                         right: 10,
@@ -39,11 +61,10 @@ const UploadPhotoCardHover = ({ id, setOpenDialog }) =>{
                               width: 30
                         }}/>
                   </UploadPhotoCardHoverButton>
-                  <UploadPhotoCardHoverButton component="label" onClick={() => { 
-                        dispatch(photoDeleted({id: id}));
-                  }} sx={{
+                  )}
+                  <UploadPhotoCardHoverButton component="label" onClick={handleDelete} sx={{
                         position: 'absolute',
-                        top: 68,
+                        top: topPos(onlyDelete),
                         right: 10,
                         padding: 3,
                         borderRadius: 3

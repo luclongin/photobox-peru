@@ -14,6 +14,7 @@ import {Grid, AppBar} from "@mui/material";
 import {ReactComponent as BackButtonIcon} from '../../images/backButton.svg';
 import theme from "../../utils/theme";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import AddCardButton from "./addCardButton/addCardButton.component";
 
 const ManageOrder = () => {
       
@@ -44,8 +45,6 @@ const ManageOrder = () => {
             }
             
       })
-
-
 
       // Main stepper logic
       const renderContentByStep = (step) => {
@@ -122,7 +121,6 @@ const ManageOrder = () => {
             }
       }, [step])
 
-
       return(
             <Box>
                   <Box flex={1} overflow="auto" height="80vh" sx={{
@@ -161,7 +159,7 @@ const ManageOrder = () => {
                               <Toolbar sx={{
                                     height: '100%'
                               }}>
-                                    
+                                    <AddCardButton />
                                     {isHiddenSubmitBtn === 'none' ? (
                                           <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
@@ -178,9 +176,6 @@ const ManageOrder = () => {
                                     )}
                               </Toolbar>
                         </AppBar>
-                        {/**/}
-                  
-                        
                   </Box>
             </Box>
       );
