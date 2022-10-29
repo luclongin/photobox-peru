@@ -6,15 +6,16 @@ import store from './store/store';
 import NavBar from './components/navbar/navbar.component';
 import { ThemeProvider } from '@mui/material';
 import theme from './utils/theme';
+import {Box} from '@mui/material';
 
 function App() {
   return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-        <div className="App">
-          <NavBar />
+        <Box className="App" display="flex" height="100vh" flexDirection="column">
+          <NavBar/>
           <ManageOrder />
-        </div>
+        </Box>
         </ThemeProvider>
       </Provider>
   );

@@ -10,9 +10,9 @@ const UploadPhotoCardEmpty = ({ id }) => {
       const PaperButton = styled(Paper) ({
             elevation: "2",
             display: 'flex',
-            flexWrap: 'wrap',
-            width: 220,
-            height: 220,
+            width: 350,
+            minWidth: 350,
+            height: 350,
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: '10px',
@@ -27,9 +27,6 @@ const UploadPhotoCardEmpty = ({ id }) => {
                         display: 'block'
                   }
             },
-            position: 'absolute',
-            top: 0,
-            left: 0,   
       })
 
       const handleImage = (e) => {
@@ -44,7 +41,7 @@ const UploadPhotoCardEmpty = ({ id }) => {
       return(
             <Fragment>
                   <PaperButton>
-                        <AddIcon sx={{fontSize: '8em', color: '#F374E7'}}/>
+                        <AddIcon sx={{fontSize: '16em', color: '#F374E7'}}/>
                         <Typography variant="h10" component="p" hidden style={{
                               position: 'absolute',
                               bottom: 0

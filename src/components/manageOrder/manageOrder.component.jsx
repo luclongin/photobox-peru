@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, IconButton, Toolbar, Typography } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
@@ -8,11 +8,15 @@ import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
-import Checkout from "../checkout/checkout.component";
 import Cart from "../cart/cart.component";
 import {styled, Box} from "@mui/material";
+import {Grid, AppBar} from "@mui/material";
+import {ReactComponent as BackButtonIcon} from '../../images/backButton.svg';
+import theme from "../../utils/theme";
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 const ManageOrder = () => {
+      
       const selectedProduct = useSelector(state => state.product);
       const [step, setStep] = useState(0);
       const dispatch = useDispatch();
@@ -20,17 +24,25 @@ const ManageOrder = () => {
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
       const enableSubmitButton = useSelector(state => state.formButtons.enableSubmitButton);
       const photos = useSelector(state => state.photos);
+      const [isHiddenNextBtn, setHiddenNextBtn] = useState('');
+      const [isHiddenBackBtn, setHiddenBackBtn] = useState('');
+      const [isHiddenSubmitBtn, setHiddenSubmitBtn] = useState('none');
 
       const NavigationButton = styled(Button)({
-            borderRadius: 10,
+            borderRadius: 5,
             color: '#ffffff',
-            backgroundColor: '#FF66C4',
-            width: 120,
+            backgroundColor: 'rgb(255, 102, 196, 1)',
+            width: 200,
             height: 50,
-            fontSize: '1.1em',
-            "& :disabled": {
-                  color: "#ffffff!important"
+            fontSize: '1em',
+            "&:disabled": {
+                  backgroundColor: 'rgb(255, 102, 196, 0.3)',
+                  color: '#ffffff'
+            },
+            "&:hover": {
+
             }
+            
       })
 
 
@@ -74,15 +86,33 @@ const ManageOrder = () => {
       const handleSubmit = () => {
       }
 
+      const showNextButton = () => {
+            setHiddenNextBtn('');
+      }
+
+      const hideNextButton = () => {
+            setHiddenNextBtn('none');
+      }
+
+      const showBackButton = () => {
+            setHiddenBackBtn('');
+      }
+
+      const hideBackButton = () => {
+            setHiddenBackBtn('none');
+      }
+
       useEffect(() => {
             console.log("step: ", step);
             if(step === 0) {
                   // back to product grid, starting from scratch
                   dispatch(allPhotosDeleted());
                   dispatch(deleteProduct());
+                  hideBackButton();
                   dispatch(nextButtonEnabled(false));
                   dispatch(backButtonEnabled(false));
             } else {
+                  showBackButton();
                   dispatch(backButtonEnabled(true));
                   dispatch(nextButtonEnabled(false));
             }
@@ -92,25 +122,67 @@ const ManageOrder = () => {
             }
       }, [step])
 
+
       return(
-            <Container fluid="true">
-                  <Typography variant="h4">Escoje un producto</Typography>
-                  {renderContentByStep(step)}
-                  <Box sx={{
-                        justifyContent: 'center',
-                        marginTop: 3
+            <Box>
+                  <Box flex={1} overflow="auto" height="80vh" sx={{
+                        position: 'relative',
+                        backgroundColor: '#FAF9F9',
+                        zIndex: '0'
                   }}>
-                        <NavigationButton disabled={!enableBackButton} onClick={handleBack}>
-                              Back
-                        </NavigationButton>
-                        <NavigationButton disabled={!enableNextButton} onClick={handleNext}>
-                              Next
-                        </NavigationButton>
-                        <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit}>
-                              Submit
-                        </NavigationButton>
+                        {(step === 0) ?
+                                    (<Typography variant="h4">Escoje un producto</Typography>)
+                                    : null
+                        }
+                        <IconButton disabled={!enableBackButton} onClick={handleBack} sx={{
+                              display: `${isHiddenBackBtn}`,
+                              width: 60,
+                              height: 60,
+                              position: 'absolute',
+                              left: 30,
+                              top: 30,
+                              backgroundColor: '#ffffff',
+                              border: '1px solid #BCB7BC'
+                        }}>
+                              <ArrowBackIosNewRoundedIcon sx={{
+                                    position: 'absolute',
+                                    left: '28%'
+                              }}/> 
+                        </IconButton>
+                        {renderContentByStep(step)}
                   </Box>
-            </Container>
+                  <Box sx={{
+                        height: '10vh',
+                  }}>
+                        <AppBar position="static" sx={{
+                              height: '100%',
+                              backgroundColor: '#FAF9F9'
+                        }}>
+                              <Toolbar sx={{
+                                    height: '100%'
+                              }}>
+                                    
+                                    {isHiddenSubmitBtn === 'none' ? (
+                                          <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
+                                                display: `${isHiddenNextBtn}`,
+                                                marginLeft: 'auto'
+                                          }}>
+                                          Siguiente
+                                          </NavigationButton>
+                                    ) : (
+                                          <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit} sx={{
+                                                display: `${isHiddenSubmitBtn}`
+                                          }}>
+                                                Submit
+                                          </NavigationButton>
+                                    )}
+                              </Toolbar>
+                        </AppBar>
+                        {/**/}
+                  
+                        
+                  </Box>
+            </Box>
       );
 }
 

@@ -1,4 +1,4 @@
-import { Button, Box, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography, ImageList, ImageListItem } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadPhotoCard from '../../uploadPhotoCard/uploadPhotoCard.component';
@@ -6,7 +6,6 @@ import { photoAdded } from '../../../features/photoEdition/PhotoSlice';
 
 const SameSize = () => {  
   const addedPhotos = useSelector(state => state.photos);
-  console.log("addedPhotos", addedPhotos);
   const dispatch = useDispatch();
 
   const handleAddCard = () => {
@@ -14,25 +13,25 @@ const SameSize = () => {
   }
 
   return (
-    <Box sx={{width: '100%'}}>
-      <Typography variant="h1" component="h1">Mismo Tamaño</Typography>
+    <Container>
+      <Typography variant="h4" component="h1">Mismo Tamaño</Typography>
         <Button onClick={handleAddCard}>
           Add Card
         </Button>
-        <Grid container columnSpacing={2} sx={{
-          justifyContent: 'center',
+        <ImageList cols={3} gap={0} sx={{
+          height: '100%'
         }}>
           {
             addedPhotos.map((photo) => {
               return(
-                <Grid key={photo.id} item xs={3} sm={3} md={3} lg={3} xl={3}>
+                <ImageListItem key={photo.id}>
                   <UploadPhotoCard photo={photo} />
-                </Grid>
+                </ImageListItem>
               );
             })
           }
-        </Grid>
-    </Box>
+        </ImageList>
+    </Container>
   )
 }
 

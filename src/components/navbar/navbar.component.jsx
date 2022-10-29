@@ -31,12 +31,15 @@ const NavBar = () => {
   };
 
   return (
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1,
+            zIndex: '1' }} height="10vh">
             <AppBar position="static" sx={{
                   backgroundColor: "#FFF",
-                  color: "#FF66C4"
+                  color: "#FF66C4",
+                  justifyContent: 'center',
+                  height: '100%'
             }}>
-                  <Toolbar sx={{position: 'relative', overflow: 'hidden', justifyContent:'center', alignItems: 'center'}}>
+                  <Toolbar height="100%" sx={{position: 'relative', overflow: 'hidden', justifyContent: 'center'}}>
                         <Fragment>
                               <IconButton
                                     edge="start"
@@ -44,7 +47,7 @@ const NavBar = () => {
                                     aria-label="menu"
                                     aria-controls="menu-appbar"
                                     aria-haspopup="true"
-                                    sx={{ mr: 2, position: 'absolute', left: '20px', top: '8px' }}
+                                    sx={{ mr: 2, position: 'absolute', left: '30px' }}
                                     onClick={handleMenu}
                               >
                                     <MenuIcon sx={{fontSize: '1.4em'}} />
