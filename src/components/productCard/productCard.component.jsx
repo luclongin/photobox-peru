@@ -8,6 +8,9 @@ import { nextButtonEnabled } from '../../features/handleFormButtons/FormButtonsS
 import { useState, useEffect} from 'react';
 import {Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
 
+/*
+      The box that shows on the first step for each product
+*/
 const ProductCard = ({title, productName}) => {   
       const dispatch = useDispatch();
       const selectedProduct = useSelector(state => state.product);
@@ -17,6 +20,7 @@ const ProductCard = ({title, productName}) => {
             dispatch(nextButtonEnabled(true));
       }
 
+      // Returns checked for radio
       const getChecked = () => {
             if (selectedProduct === productName && selectedProduct !== "") {
                   return(true)
@@ -24,6 +28,7 @@ const ProductCard = ({title, productName}) => {
             return(false);
       }
 
+      // If selected, color of radio changes
       const getStroke = (checked) => {
             if(checked) {
                   return "#FF66C4";
@@ -32,6 +37,7 @@ const ProductCard = ({title, productName}) => {
             };
       }
 
+      // Homemade RadioButton
       const RadioButton = ({ checked }) => (
             <svg
                 width="23px"

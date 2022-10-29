@@ -4,10 +4,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
 import { IconButton, styled } from "@mui/material";
-import { PhotoSharp } from "@mui/icons-material";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 import { decrementPhotoCount, removePhotoCount, setPhotoCount } from "../../features/photoCount/PhotoCountSlice";
 
+/*
+      Card that appears when hovering over a photo. Gives the option to delete or crop.
+
+*/
 const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{      
       const dispatch = useDispatch();
       const UploadPhotoCardHoverButton = styled(IconButton) ({
@@ -19,6 +22,8 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
             borderRadius: '3px',
       });
 
+      // WILL BE DEPRECATED
+      // only available for Empty PHoto Card
       const topPos = (onlyDelete) => {
             if (onlyDelete) {
                   return(10)
@@ -28,7 +33,6 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
       }
            
       const photos = useSelector(state => state.photos);
-      const photoCount = useSelector(state => state.photoCount);
 
       const handleDelete = () => {
             dispatch(photoDeleted({id: id}));

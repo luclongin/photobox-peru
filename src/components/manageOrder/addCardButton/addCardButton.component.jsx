@@ -7,6 +7,10 @@ import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButto
 import { Fragment } from "react";
 import { addPhotoCount, incrementPhotoCount } from "../../../features/photoCount/PhotoCountSlice";
 
+/*
+      Button in order to add directly a photo. Works exactly like your model website's button.
+      Simplifies workflow as we do not have to call photoAdded action.
+*/
 const AddCardButton = () => {
       const dispatch = useDispatch();
 

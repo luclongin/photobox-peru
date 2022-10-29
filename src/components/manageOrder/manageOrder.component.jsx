@@ -1,4 +1,4 @@
-import { Button, Container, IconButton, Toolbar, Typography } from "@mui/material";
+import { Button, IconButton, Toolbar, Typography } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
@@ -10,24 +10,31 @@ import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import Cart from "../cart/cart.component";
 import {styled, Box} from "@mui/material";
-import {Grid, AppBar} from "@mui/material";
-import {ReactComponent as BackButtonIcon} from '../../images/backButton.svg';
-import theme from "../../utils/theme";
+import {AppBar} from "@mui/material";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import AddCardButton from "./addCardButton/addCardButton.component";
 
+
+/*
+      Main function of our application. Handles the navigation and rendering of components.
+
+*/
 const ManageOrder = () => {
-      
-      const selectedProduct = useSelector(state => state.product);
-      const [step, setStep] = useState(0);
       const dispatch = useDispatch();
+
+      // Local States
+      const [step, setStep] = useState(0);
+      const [isHiddenNextBtn, setHiddenNextBtn] = useState('');
+      const [isHiddenBackBtn, setHiddenBackBtn] = useState('');
+      const [isHiddenSubmitBtn, setHiddenSubmitBtn] = useState('none');
+
+      // Redux Store Values
+      const selectedProduct = useSelector(state => state.product);
       const enableNextButton = useSelector(state => state.formButtons.enableNextButton);
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
       const enableSubmitButton = useSelector(state => state.formButtons.enableSubmitButton);
       const photos = useSelector(state => state.photos);
-      const [isHiddenNextBtn, setHiddenNextBtn] = useState('');
-      const [isHiddenBackBtn, setHiddenBackBtn] = useState('');
-      const [isHiddenSubmitBtn, setHiddenSubmitBtn] = useState('none');
+      
 
       const NavigationButton = styled(Button)({
             borderRadius: 5,
@@ -82,9 +89,6 @@ const ManageOrder = () => {
             setStep(step + 1);
       }
 
-      const handleSubmit = () => {
-      }
-
       const showNextButton = () => {
             setHiddenNextBtn('');
       }
@@ -102,7 +106,6 @@ const ManageOrder = () => {
       }
 
       useEffect(() => {
-            console.log("step: ", step);
             if(step === 0) {
                   // back to product grid, starting from scratch
                   dispatch(allPhotosDeleted());
@@ -116,6 +119,8 @@ const ManageOrder = () => {
                   dispatch(nextButtonEnabled(false));
             }
 
+            // Case where you click back from Phrases step
+            // and you have photos uploaded
             if (step === 1 && photos.length > 0) {
                   dispatch(nextButtonEnabled(true));
             }
@@ -128,9 +133,15 @@ const ManageOrder = () => {
                         backgroundColor: '#FAF9F9',
                         zIndex: '0'
                   }}>
-                        {(step === 0) ?
-                                    (<Typography variant="h4">Escoje un producto</Typography>)
-                                    : null
+                        
+                        { // Title only appears on 1st step
+                        (step === 0) ?
+                        (<Typography variant="h4">Escoje un producto</Typography>)
+                        : null
+                        }
+
+                        {
+                        // Back Button
                         }
                         <IconButton disabled={!enableBackButton} onClick={handleBack} sx={{
                               display: `${isHiddenBackBtn}`,
@@ -149,6 +160,11 @@ const ManageOrder = () => {
                         </IconButton>
                         {renderContentByStep(step)}
                   </Box>
+
+
+                  {
+                        // Next and Add New Photo Button
+                  }
                   <Box sx={{
                         height: '10vh',
                   }}>
@@ -160,6 +176,7 @@ const ManageOrder = () => {
                                     height: '100%'
                               }}>
                                     <AddCardButton />
+                                    
                                     {isHiddenSubmitBtn === 'none' ? (
                                           <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { Container, Box, InputLabel, Select, MenuItem, TextField, Button } from "@mui/material";
+import React, {useEffect} from "react";
+import { Box, InputLabel, Select, MenuItem, TextField, Button } from "@mui/material";
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
@@ -10,13 +10,14 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import {FormControl} from "@mui/material";
 
+/*
+      React Component that handles the order or one or multiple Phrases
+*/
 const AddPhrase = () => {
-      const [isHidden, setHidden] = useState(true);
       const defaultPhraseColor = 'lightWood';
-      const [selectedPhrase, setSelectedPhrase] = useState('');
-      const [isDisabled, setDisabled] = useState(true);
       const dispatch = useDispatch();
       
+      // 2 backgrounds available for demo preview
       const backgrounds = {
             "lightWood": lightWoodBackground,
             "darkWood": darkWoodBackground
@@ -27,6 +28,7 @@ const AddPhrase = () => {
             dispatch(nextButtonEnabled(true));
       }, []);
 
+      // Validation Schema that ensures inputted text conforms to a Regex
       const validationSchema = yup.object({
             phraseType: yup.string().required('Required'),
             phraseText: yup
@@ -48,6 +50,7 @@ const AddPhrase = () => {
                         }),
       });
 
+      // Using Formik for simple form handling
       const formik = useFormik({
             initialValues: {
                   phraseType: "",
@@ -56,7 +59,6 @@ const AddPhrase = () => {
             },
             validationSchema: validationSchema,
             onSubmit: (values, { resetForm }) => {
-                  console.log("type: ", values.phraseType);
                   if(values.phraseType === 'custom') {
                         dispatch(customPhraseAdded(
                               {

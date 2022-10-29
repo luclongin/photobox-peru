@@ -6,8 +6,14 @@ import { photoUpdatedSrc } from "../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.component";
 
+
+/*
+      WILL BE DEPRECATED.
+      Is the card that shows when calling the photoAdded() action.
+*/
 const UploadPhotoCardEmpty = ({ id }) => {
       const dispatch = useDispatch();
+      
       const PaperButton = styled(Paper) ({
             elevation: "2",
             display: 'flex',
@@ -39,6 +45,7 @@ const UploadPhotoCardEmpty = ({ id }) => {
             dispatch(nextButtonEnabled(true));
       };
 
+      // Needed for Hovering
       const HoverBox = styled(Box) ({
             "& .hidden-hover": {
                   display: "none"

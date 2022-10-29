@@ -4,8 +4,13 @@ import { useSelector } from "react-redux";
 import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.component";
 import { Fragment } from "react";
 
+
+/*
+Main photo card that displays uploaded image.
+*/
 const UploadPhotoCardWithImage = ({id, setOpenDialog}) => {
       const photo = useSelector(state=>state.photos.find(photo => photo.id === id));
+      // Needed for hovering
       const HoverBox = styled(Box) ({
             "& .hidden-hover": {
                   display: "none"

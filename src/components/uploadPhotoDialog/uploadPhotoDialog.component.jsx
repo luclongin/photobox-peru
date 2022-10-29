@@ -16,6 +16,10 @@ import { photoUpdatedResult } from '../../features/photoEdition/PhotoSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
+
+/*
+  Our dialog for Cropping. Heavily inspired by online demo. 
+*/
 function BootstrapDialogTitle(props) {
   const { children, onClose, ...other } = props;
   return (
@@ -47,7 +51,8 @@ BootstrapDialogTitle.propTypes = {
 const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
       const dispatch = useDispatch();
       const mounted = useRef();
-      //const [imageSrc, setImageSrc] = useState(null);
+      
+
       // troublesome because could be heavy on the computing side
       const photo = useSelector(state=>state.photos.find(photo => photo.id === id));
 
@@ -77,6 +82,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
         // because of the way croppedImage can be triggered so easily (clicking back button)
         // adding condition
         if(croppedImage !== null) {
+          // dispatching to update already existing photo item in store
           dispatch(photoUpdatedResult({id: photo.id, imgResult: croppedImage}));
         }
         setOpenDialog(false);
