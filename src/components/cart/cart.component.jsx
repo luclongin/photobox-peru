@@ -8,6 +8,7 @@ const Cart = () => {
       const photos = useSelector(state => state.photos);
       const addedPhrases = useSelector(state => state.additionalPhrases);
       const product = useSelector(state => state.product);
+      const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
 
       return(
             <div>
@@ -20,14 +21,15 @@ const Cart = () => {
                   />
                   {      
                         addedPhrases.map(() => {
-                              <CartItem
+                              return(<CartItem
                                     title={`Frase Adicional`}
                                     image={null}
                                     quantity={1}
                                     price={getPrice("additionalPhrase", 1)}
-                              />     
+                              />);
                         })
                   }
+                  <h2>Total: {totalPrice}</h2>
             </div>
       );
 }

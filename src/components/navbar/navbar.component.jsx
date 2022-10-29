@@ -1,0 +1,82 @@
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import { Avatar } from '@mui/material';
+import Logo from '../../../src/images/logo192.png';
+import { Fragment } from 'react';
+const NavBar = () => {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+      <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" sx={{
+                  backgroundColor: "#FFF",
+                  color: "#FF66C4"
+            }}>
+                  <Toolbar sx={{position: 'relative', overflow: 'hidden', justifyContent:'center', alignItems: 'center'}}>
+                        <Fragment>
+                              <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    sx={{ mr: 2, position: 'absolute', left: '20px', top: '8px' }}
+                                    onClick={handleMenu}
+                              >
+                                    <MenuIcon sx={{fontSize: '1.4em'}} />
+                              </IconButton>
+                              <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                          vertical: 'top',
+                                          horizontal: 'left',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                          vertical: 'top',
+                                          horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                              >
+                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                              </Menu>
+                        </Fragment>
+                        <IconButton sx={{
+                              justifyContent:'center'
+                        }}>
+                              <Avatar alt="logo" src={Logo} />
+                        </IconButton>
+                  </Toolbar>
+            </AppBar>
+      </Box>
+  );
+}
+
+export default NavBar;

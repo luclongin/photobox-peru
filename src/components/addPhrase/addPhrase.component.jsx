@@ -56,6 +56,7 @@ const AddPhrase = () => {
             },
             validationSchema: validationSchema,
             onSubmit: (values, { resetForm }) => {
+                  console.log("type: ", values.phraseType);
                   if(values.phraseType === 'custom') {
                         dispatch(customPhraseAdded(
                               {

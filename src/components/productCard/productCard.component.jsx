@@ -1,7 +1,7 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
 import { Radio } from '@mui/material';
-import {RadioGroup, FormControlLabel} from '@mui/material';
+import {RadioGroup, FormControlLabel, Button} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct } from '../../features/productSelection/ProductSlice';
 import { nextButtonEnabled } from '../../features/handleFormButtons/FormButtonsSlice';
@@ -19,23 +19,33 @@ const ProductCard = ({title, productName}) => {
       }
 
       return (
-            <Paper elevation={3} sx={{
+            <Button onClick={handleClick}>
+                  <Paper elevation={3} sx={{
+                  width: 240,
+                  height: 240,
                   display: 'flex',
-                  flexWrap: 'wrap',
-                  width: 280,
-                  height: 280
+                  justifyContent: 'center',
+                  alignItems: "center",
+                  position: 'relative'
             }}>
-                  {title}
-
+                  {
+                  title
+                  }
                   <RadioGroup
                         row
                         aria-labelledby="chooseProduct-sameSize"
                         name="chooseProduct"
                         onChange={changeHandler}
+                        sx={{
+                              position: 'absolute',
+                              bottom: 15
+                        }}
                   >
-                        <FormControlLabel checked={handleChecked()} value={productName} control={<Radio />} />
+                        <FormControlLabel checked={handleChecked()} value={productName} control={<Radio />} sx={{
+                              margin: '0'
+                        }}/>
                   </RadioGroup>
-            </Paper>
+            </Paper></Button>
   )
 }
 

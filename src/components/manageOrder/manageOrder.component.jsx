@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
@@ -10,6 +10,7 @@ import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import Checkout from "../checkout/checkout.component";
 import Cart from "../cart/cart.component";
+import {styled} from "@mui/material";
 
 const ManageOrder = () => {
       const selectedProduct = useSelector(state => state.product);
@@ -19,6 +20,20 @@ const ManageOrder = () => {
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
       const enableSubmitButton = useSelector(state => state.formButtons.enableSubmitButton);
       const photos = useSelector(state => state.photos);
+
+      const NavigationButton = styled(Button)({
+            borderRadius: 10,
+            color: '#ffffff',
+            backgroundColor: '#FF66C4',
+            width: 120,
+            height: 50,
+            fontSize: '1.1em',
+            "& :disabled": {
+                  color: "#ffffff!important"
+            }
+      })
+
+
 
       // Main stepper logic
       const renderContentByStep = (step) => {
@@ -79,16 +94,17 @@ const ManageOrder = () => {
 
       return(
             <Container fluid="true">
+                  <Typography variant="h4">Escoje un producto</Typography>
                   {renderContentByStep(step)}
-                  <Button disabled={!enableBackButton} onClick={handleBack}>
+                  <NavigationButton disabled={!enableBackButton} onClick={handleBack}>
                         Back
-                  </Button>
-                  <Button disabled={!enableNextButton} onClick={handleNext}>
+                  </NavigationButton>
+                  <NavigationButton disabled={!enableNextButton} onClick={handleNext}>
                         Next
-                  </Button>
-                  <Button disabled={!enableSubmitButton} onClick={handleSubmit}>
+                  </NavigationButton>
+                  <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit}>
                         Submit
-                  </Button>
+                  </NavigationButton>
             </Container>
       );
 }
