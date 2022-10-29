@@ -10,7 +10,7 @@ import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import Checkout from "../checkout/checkout.component";
 import Cart from "../cart/cart.component";
-import {styled} from "@mui/material";
+import {styled, Box} from "@mui/material";
 
 const ManageOrder = () => {
       const selectedProduct = useSelector(state => state.product);
@@ -96,15 +96,20 @@ const ManageOrder = () => {
             <Container fluid="true">
                   <Typography variant="h4">Escoje un producto</Typography>
                   {renderContentByStep(step)}
-                  <NavigationButton disabled={!enableBackButton} onClick={handleBack}>
-                        Back
-                  </NavigationButton>
-                  <NavigationButton disabled={!enableNextButton} onClick={handleNext}>
-                        Next
-                  </NavigationButton>
-                  <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit}>
-                        Submit
-                  </NavigationButton>
+                  <Box sx={{
+                        justifyContent: 'center',
+                        marginTop: 3
+                  }}>
+                        <NavigationButton disabled={!enableBackButton} onClick={handleBack}>
+                              Back
+                        </NavigationButton>
+                        <NavigationButton disabled={!enableNextButton} onClick={handleNext}>
+                              Next
+                        </NavigationButton>
+                        <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit}>
+                              Submit
+                        </NavigationButton>
+                  </Box>
             </Container>
       );
 }

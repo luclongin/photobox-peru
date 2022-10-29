@@ -1,52 +1,92 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
-import { Radio } from '@mui/material';
+import { ButtonBase, Radio, Typography } from '@mui/material';
 import {RadioGroup, FormControlLabel, Button} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct } from '../../features/productSelection/ProductSlice';
 import { nextButtonEnabled } from '../../features/handleFormButtons/FormButtonsSlice';
+import { useState, useEffect} from 'react';
+import {Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
 
 const ProductCard = ({title, productName}) => {   
       const dispatch = useDispatch();
-      const changeHandler = (e) => {
-            dispatch(setProduct(e.target.value));
+      const selectedProduct = useSelector(state => state.product);
+
+      const handleClick = () => {
+            dispatch(setProduct(productName));
             dispatch(nextButtonEnabled(true));
       }
-      
-      const selectedProduct = useSelector(state => state.product);
-      const handleChecked = () => {
-            return (selectedProduct === productName);
+
+      const getChecked = () => {
+            if (selectedProduct === productName && selectedProduct !== "") {
+                  return(true)
+            }
+            return(false);
       }
 
-      return (
-            <Button onClick={handleClick}>
-                  <Paper elevation={3} sx={{
-                  width: 240,
-                  height: 240,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: "center",
-                  position: 'relative'
-            }}>
-                  {
-                  title
-                  }
-                  <RadioGroup
-                        row
-                        aria-labelledby="chooseProduct-sameSize"
-                        name="chooseProduct"
-                        onChange={changeHandler}
-                        sx={{
-                              position: 'absolute',
-                              bottom: 15
-                        }}
-                  >
-                        <FormControlLabel checked={handleChecked()} value={productName} control={<Radio />} sx={{
-                              margin: '0'
-                        }}/>
-                  </RadioGroup>
-            </Paper></Button>
-  )
+      const getStroke = (checked) => {
+            if(checked) {
+                  return "#FF66C4";
+            } else {
+                  return "#BCB7BC"
+            };
+      }
+
+      const RadioButton = ({ checked }) => (
+            <svg
+                width="23px"
+                height="23px"
+                viewBox="0 0 24 24"
+                fontSize="23px">
+                <circle
+                    cx="50%"
+                    cy="50%"
+                    r="11px"
+                    stroke={getStroke(checked)}
+
+                    stroke-width="1px"
+                    fill="none"
+                />
+                {checked && (
+                    <circle
+                        cx="50%"
+                        cy="50%"
+                        r="6px"
+                        fill="#FF66C4"
+                    />
+                )}
+            </svg>
+        );
+
+
+      return(
+            <Card sx={{width: 240, height: 240 }}>
+                  <CardActionArea sx={{
+                              width: '100%',
+                              height: '100%'
+                        }} onClick={handleClick} value="dog">
+                        <CardContent>
+                              <Typography variant="h5">
+                                    {title}
+                              </Typography>
+                              <RadioGroup
+                                    row
+                                    aria-labelledby="chooseProduct-sameSize"
+                                    name="chooseProduct"
+                                    sx={{
+                                          justifyContent: 'center'
+                                    }}
+                              >
+                                    <FormControlLabel checked={getChecked()} value={productName} control={<RadioButton />} sx={{
+                                          margin: '0',
+                                          position: 'absolute',
+                                          bottom: 15
+                                    }}/>
+                              </RadioGroup>
+                        </CardContent>
+                  </CardActionArea>
+            </Card>
+      );
 }
 
 export default ProductCard;
