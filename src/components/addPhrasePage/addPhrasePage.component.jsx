@@ -10,11 +10,12 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import {FormControl} from "@mui/material";
 import theme from "../../utils/theme";
+import Cart from "../cart/cart.component";
 
 /*
       React Component that handles the order or one or multiple Phrases
 */
-const AddPhrase = () => {
+const AddPhrasePage = () => {
       const defaultPhraseColor = 'lightWood';
       const dispatch = useDispatch();
       
@@ -77,7 +78,10 @@ const AddPhrase = () => {
       });
             
       return(
-            <div>
+            <Grid container xs={12}>
+            <Grid item xs={9} sx={{
+                  mt: 5
+            }}>
                   <h1>Letreros</h1>
                   <h2>20x40cm</h2>
                   <Box sx={{
@@ -93,7 +97,7 @@ const AddPhrase = () => {
                               alignItems: 'center',
                               marginBottom: 2
                         }}>
-                              <FormControl>
+                                    <FormControl>
                                           <InputLabel id="choosePhraseType">Escoje un letrero</InputLabel>
                                           <Select
                                                 name="phraseType"
@@ -115,7 +119,7 @@ const AddPhrase = () => {
                                                       "&.Mui-focused fieldset": {
                                                             borderColor: theme.palette.primary.main
                                                       },
-                                                      width: 300
+                                                      width: 200
                                                       
                                                 }}
                                           >
@@ -142,7 +146,7 @@ const AddPhrase = () => {
                                                                   helperText={formik.touched.phraseText && formik.errors.phraseText}
                                                                   sx={{
                                                                         backgroundColor: '#FFFFFF',
-                                                                        width: 300,
+                                                                        width: 250,
                                                                         marginRight: 5,
                                                                         "& fieldset": {
                                                                               borderColor: theme.palette.primary.main
@@ -155,34 +159,36 @@ const AddPhrase = () => {
                                                                         },                                                               
                                                                   }}
                                                             />
-                                                      <FormControl>
-                                                      <InputLabel id="phraseColor">Selecciona color</InputLabel>
-                                                      <Select
-                                                            size="medium"
-                                                            name="choosePhraseColor"
-                                                            label="Selecciona color"
-                                                            labelId="phraseColor"
-                                                            value={formik.values.phraseColor}
-                                                            onChange={formik.handleChange}
-                                                            error={formik.touched.phraseColor && Boolean(formik.errors.phraseColor)}
-                                                            helperText={formik.touched.phraseColor && formik.errors.phraseColor}
-                                                            sx={{
-                                                                  width: 200,
-                                                                  backgroundColor: '#FFFFFF',
-                                                                  "& fieldset": {
-                                                                        borderColor: theme.palette.primary.main
-                                                                  },
-                                                                  "&:hover fieldset": {
-                                                                        borderColor: theme.palette.primary.darker + '!important'
-                                                                  },
-                                                                  "&.Mui-focused fieldset": {
-                                                                        borderColor: theme.palette.primary.main
-                                                                  },
-                                                            }}
-                                                      >
-                                                            <MenuItem value="lightWood">Light Wood</MenuItem>      
-                                                            <MenuItem value="darkWood">Dark Wood</MenuItem>
-                                                      </Select>
+                                                            
+                                                            <FormControl>
+
+                                                            <InputLabel id="choosePhraseColor">Selecciona color</InputLabel>
+                                                            <Select
+                                                                  size="medium"
+                                                                  name="phraseColor"
+                                                                  label="Selecciona color"
+                                                                  labelId="choosePhraseColor"
+                                                                  value={formik.values.phraseColor}
+                                                                  onChange={formik.handleChange}
+                                                                  error={formik.touched.phraseColor && Boolean(formik.errors.phraseColor)}
+                                                                  helperText={formik.touched.phraseColor && formik.errors.phraseColor}
+                                                                  sx={{
+                                                                        width: 180,
+                                                                        backgroundColor: '#FFFFFF',
+                                                                        "& fieldset": {
+                                                                              borderColor: theme.palette.primary.main
+                                                                        },
+                                                                        "&:hover fieldset": {
+                                                                              borderColor: theme.palette.primary.darker + '!important'
+                                                                        },
+                                                                        "&.Mui-focused fieldset": {
+                                                                              borderColor: theme.palette.primary.main
+                                                                        },
+                                                                  }}
+                                                            >
+                                                                  <MenuItem value="lightWood">Light Wood</MenuItem>      
+                                                                  <MenuItem value="darkWood">Dark Wood</MenuItem>
+                                                            </Select>
                                                       </FormControl>
                                                 </Grid>
                                                 <Grid item xs={12} sx={{
@@ -215,8 +221,12 @@ const AddPhrase = () => {
                         </form>
                         </Grid>
                   </Box>
-            </div>
+            </Grid>
+            <Grid item xs={3}>
+                  <Cart />
+            </Grid>
+            </Grid>
       );
 }
 
-export default AddPhrase;
+export default AddPhrasePage;

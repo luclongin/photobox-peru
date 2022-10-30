@@ -2,7 +2,7 @@ import { Button, IconButton, Toolbar, Typography } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
-import AddPhrase from "../addPhrase/addPhrase.component";
+import AddPhrasePage from "../addPhrasePage/addPhrasePage.component";
 import ProductGrid from "../productGrid/productGrid.component";
 import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
@@ -13,7 +13,7 @@ import {styled, Box} from "@mui/material";
 import {AppBar} from "@mui/material";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import AddCardButton from "./addCardButton/addCardButton.component";
-
+import Checkout from "../checkout/checkout.component";
 
 /*
       Main function of our application. Handles the navigation and rendering of components.
@@ -61,9 +61,9 @@ const ManageOrder = () => {
                   case 1:
                         return renderStepTwoContent(selectedProduct);
                   case 2: 
-                        return <AddPhrase />
+                        return <AddPhrasePage />
                   case 3:
-                        return <Cart />
+                        return <Checkout />
                   default:
                         return <div>Not Found</div>
             }
@@ -135,10 +135,13 @@ const ManageOrder = () => {
       }
 
       const getMainContentHeight = (step) => {
-            if(step === 0) {
-                  return "80vh";
-            } else {
-                  return "75vh";
+            switch(step) {
+                  case 0:
+                        return "80vh"
+                  case 1: 
+                        return "75vh"
+                  default: 
+                        return "90vh"
             }
       }
 
@@ -174,8 +177,7 @@ const ManageOrder = () => {
 
 
                   {
-                        // Next and Add New Photo Button
-                  }
+                  step < 2 && (
                   <Box sx={{
                         height: getBottomToolBarHeight(step),
                   }}>
@@ -191,7 +193,7 @@ const ManageOrder = () => {
                                     
                                     {(step === 1) && (<AddCardButton />)}
                                     
-                                    {isHiddenSubmitBtn === 'none' ? (
+                                    {(isHiddenSubmitBtn === 'none') ? (
                                           <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
                                                 position: 'absolute',
@@ -199,16 +201,11 @@ const ManageOrder = () => {
                                           }}>
                                           Siguiente
                                           </NavigationButton>
-                                    ) : (
-                                          <NavigationButton disabled={!enableSubmitButton} sx={{
-                                                display: `${isHiddenSubmitBtn}`
-                                          }}>
-                                                Submit
-                                          </NavigationButton>
-                                    )}
+                                    ) : null}
                               </Toolbar>
                         </AppBar>
                   </Box>
+                  )}
             </Box>
       );
 }
