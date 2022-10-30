@@ -1,9 +1,9 @@
-import { Button, Container, Grid, Typography, ImageList, ImageListItem } from '@mui/material';
+import { Button, Container, ImageList, ImageListItem } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadPhotoCard from '../../uploadPhotoCard/uploadPhotoCard.component';
 import { photoAdded } from '../../../features/photoEdition/PhotoSlice';
-import { useEffect, useState } from 'react';
+import {OrderStepTitle, OrderStepSubtitle} from '../../OrderStepTitle/orderStepTitle.component';
 
 const SameSize = () => {  
   const addedPhotos = useSelector(state => state.photos);
@@ -15,7 +15,8 @@ const SameSize = () => {
 
   return (
     <Container>
-      <Typography variant="h4" component="h1">Mismo Tamaño</Typography>
+        <OrderStepTitle title="Sube y edita tus fotos" />
+        <OrderStepSubtitle title="Producto " highlight="Mismo Tamaño" />
         <Button onClick={handleAddCard}>
           Add Card
         </Button>

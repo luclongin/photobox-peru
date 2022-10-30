@@ -29,17 +29,23 @@ const AddCardButton = () => {
             <Fragment>
                   <IconButton
                         sx={{
-                              width: 60,
-                              height: 60,
-                              backgroundColor: '#ffffff',
-                              border: '1px solid #BCB7BC'
+                              width: 90,
+                              height: 90,
+                              backgroundColor: 'rgb(255, 102, 196)',
+                              color: '#ffffff',
+                              "&:hover" : {
+                                    backgroundColor: 'rgb(178, 71, 137)',
+                                    color: "#ffffff"
+                              }
                         }}
                         component="label"
                         color="primary"
                         aria-label="upload picture"
                   >
                         <input hidden accept="image/*" multiple type="file" onChange={handleImage}/>
-                        <AddIcon />
+                        <AddIcon sx={{
+                              fontSize: '2em'
+                        }} />
                   </IconButton>
             </Fragment> 
       );

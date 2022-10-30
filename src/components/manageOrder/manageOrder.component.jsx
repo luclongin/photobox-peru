@@ -126,19 +126,30 @@ const ManageOrder = () => {
             }
       }, [step])
 
+      const getBottomToolBarHeight = (step) => {
+            if(step === 0) {
+                  return "10vh";
+            } else {
+                  return "15vh";
+            }
+      }
+
+      const getMainContentHeight = (step) => {
+            if(step === 0) {
+                  return "80vh";
+            } else {
+                  return "75vh";
+            }
+      }
+
       return(
             <Box>
-                  <Box flex={1} overflow="auto" height="80vh" sx={{
+                  <Box flex={1} overflow="auto" sx={{
                         position: 'relative',
                         backgroundColor: '#FAF9F9',
-                        zIndex: '0'
+                        zIndex: '0',
+                        height: getMainContentHeight(step)
                   }}>
-                        
-                        { // Title only appears on 1st step
-                        (step === 0) ?
-                        (<Typography variant="h4">Escoje un producto</Typography>)
-                        : null
-                        }
 
                         {
                         // Back Button
@@ -166,26 +177,30 @@ const ManageOrder = () => {
                         // Next and Add New Photo Button
                   }
                   <Box sx={{
-                        height: '10vh',
+                        height: getBottomToolBarHeight(step),
                   }}>
                         <AppBar position="static" sx={{
                               height: '100%',
                               backgroundColor: '#FAF9F9'
                         }}>
                               <Toolbar sx={{
-                                    height: '100%'
+                                    height: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center'
                               }}>
-                                    <AddCardButton />
+                                    
+                                    {(step === 1) && (<AddCardButton />)}
                                     
                                     {isHiddenSubmitBtn === 'none' ? (
                                           <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
-                                                marginLeft: 'auto'
+                                                position: 'absolute',
+                                                right: 30
                                           }}>
                                           Siguiente
                                           </NavigationButton>
                                     ) : (
-                                          <NavigationButton disabled={!enableSubmitButton} onClick={handleSubmit} sx={{
+                                          <NavigationButton disabled={!enableSubmitButton} sx={{
                                                 display: `${isHiddenSubmitBtn}`
                                           }}>
                                                 Submit

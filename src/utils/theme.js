@@ -13,10 +13,18 @@ const theme = createTheme({
   },
   typography: {
       fontFamily: [
-            'Questrial', 'sans-serif'
+            'Questrial'
       ],
       button: {
             textTransform: 'none'
+      },
+      h1 : {
+        fontSize: '2em',
+        color: '#000000'
+      },
+      h2 : {
+        fontSize: '1.3em',
+        color: '#9B8E9A'
       }
     },
 });
