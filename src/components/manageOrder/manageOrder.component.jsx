@@ -1,4 +1,4 @@
-import { Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { Button, IconButton, Toolbar } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
@@ -8,13 +8,12 @@ import SameSize from "../secondStep/sameSize/sameSize.component";
 import Sonados from "../secondStep/sonados/sonados.component";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
-import Cart from "../cart/cart.component";
 import {styled, Box} from "@mui/material";
 import {AppBar} from "@mui/material";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import AddCardButton from "./addCardButton/addCardButton.component";
 import Checkout from "../checkout/checkout.component";
-
+import { incrementStep, decrementStep } from "../../features/step/stepSlice";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 
@@ -23,7 +22,7 @@ const ManageOrder = () => {
       const dispatch = useDispatch();
 
       // Local States
-      const [step, setStep] = useState(0);
+      //const [step, setStep] = useState(0);
       const [isHiddenNextBtn, setHiddenNextBtn] = useState('');
       const [isHiddenBackBtn, setHiddenBackBtn] = useState('');
       const [isHiddenSubmitBtn, setHiddenSubmitBtn] = useState('none');
@@ -32,9 +31,8 @@ const ManageOrder = () => {
       const selectedProduct = useSelector(state => state.product);
       const enableNextButton = useSelector(state => state.formButtons.enableNextButton);
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
-      const enableSubmitButton = useSelector(state => state.formButtons.enableSubmitButton);
       const photos = useSelector(state => state.photos);
-      
+      const step = useSelector(state => state.step.value);
 
       const NavigationButton = styled(Button)({
             borderRadius: 5,
@@ -46,11 +44,7 @@ const ManageOrder = () => {
             "&:disabled": {
                   backgroundColor: 'rgb(255, 102, 196, 0.3)',
                   color: '#ffffff'
-            },
-            "&:hover": {
-
             }
-            
       })
 
       // Main stepper logic
@@ -61,6 +55,8 @@ const ManageOrder = () => {
                   case 1:
                         return renderStepTwoContent(selectedProduct);
                   case 2: 
+                        // sending step/setStep here because default nav buttons aren't used here
+                        // we're using a special button "hacer compra" that's inside the Cart component
                         return <AddPhrasePage />
                   case 3:
                         return <Checkout />
@@ -82,19 +78,11 @@ const ManageOrder = () => {
       }
 
       const handleBack = () => {
-            setStep(step-1);
+            dispatch(decrementStep());
       }
 
       const handleNext = () => {
-            setStep(step + 1);
-      }
-
-      const showNextButton = () => {
-            setHiddenNextBtn('');
-      }
-
-      const hideNextButton = () => {
-            setHiddenNextBtn('none');
+            dispatch(incrementStep());
       }
 
       const showBackButton = () => {
@@ -193,15 +181,14 @@ const ManageOrder = () => {
                                     
                                     {(step === 1) && (<AddCardButton />)}
                                     
-                                    {(isHiddenSubmitBtn === 'none') ? (
-                                          <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
+                                    <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
                                                 position: 'absolute',
                                                 right: 30
                                           }}>
                                           Siguiente
-                                          </NavigationButton>
-                                    ) : null}
+                                    </NavigationButton>
+                                    
                               </Toolbar>
                         </AppBar>
                   </Box>

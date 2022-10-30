@@ -1,6 +1,5 @@
 import { Typography, FormControl, Grid, Box } from "@mui/material";
 import ProductCard from "../productCard/productCard.component";
-import theme from "../../utils/theme";
 import {OrderStepTitle} from "../OrderStepTitle/orderStepTitle.component";
 const ProductGrid = () => {
       return(

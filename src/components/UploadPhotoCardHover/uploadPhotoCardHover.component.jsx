@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
 import { IconButton, styled } from "@mui/material";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
-import { decrementPhotoCount, removePhotoCount, setPhotoCount } from "../../features/photoCount/PhotoCountSlice";
 
 /*
       Card that appears when hovering over a photo. Gives the option to delete or crop.
@@ -36,7 +35,6 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
 
       const handleDelete = () => {
             dispatch(photoDeleted({id: id}));
-            dispatch(decrementPhotoCount());
             // if you're deleting the last photo
             // 1 because of async lag, photos doesn't get updated immediately after dispatch
             if (photos.length === 1) {

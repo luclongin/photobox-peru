@@ -32,12 +32,13 @@ const NavBar = () => {
 
   return (
       <Box sx={{ flexGrow: 1,
-            zIndex: '1' }} height="10vh">
+            zIndex: '1'}} height="10vh">
             <AppBar position="static" sx={{
                   backgroundColor: "#FFF",
                   color: "#FF66C4",
                   justifyContent: 'center',
-                  height: '100%'
+                  height: '100%',
+                  boxShadow: 2
             }}>
                   <Toolbar height="100%" sx={{position: 'relative', overflow: 'hidden', justifyContent: 'center'}}>
                         <Fragment>

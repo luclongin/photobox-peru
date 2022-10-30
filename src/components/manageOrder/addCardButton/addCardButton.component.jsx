@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { photoDirectAdded, photoUpdatedSrc } from "../../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
 import { Fragment } from "react";
-import { incrementPhotoCount } from "../../../features/photoCount/PhotoCountSlice";
 import theme from "../../../utils/theme";
 /*
       Button in order to add directly a photo. Works exactly like your model website's button.
@@ -22,7 +21,6 @@ const AddCardButton = () => {
                   imgSrc: imageBlob
             }));
             dispatch(nextButtonEnabled(true));
-            dispatch(incrementPhotoCount());
       }
 
       return(

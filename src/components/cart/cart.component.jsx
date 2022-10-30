@@ -5,13 +5,18 @@ import CartItem from "./cartItem/cartItem.component";
 import { getPrice } from "../../utils/pricing";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Divider from '@mui/material/Divider';
-
+import { incrementStep } from "../../features/step/stepSlice";
 
 const Cart = () => {
+      const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
       const addedPhrases = useSelector(state => state.additionalPhrases);
       const product = useSelector(state => state.product);
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
+
+      const handleClick = () => {
+            dispatch(incrementStep());
+      }
 
       return(
             <Box sx={{
@@ -19,7 +24,8 @@ const Cart = () => {
                   width: 380,
                   height: '100%',
                   position: 'absolute',
-                  right: 0
+                  right: 0,
+                  boxShadow: 2
             }}>
                   <Grid container justifyContent="center" sx={{
                         height: "55vh",
@@ -36,15 +42,19 @@ const Cart = () => {
                               overflowY: "scroll"
                         }}>
                               <Grid item xs={10}>
-                                    <CartItem
-                                          title={`Set ${product}`}
-                                          image={null} 
-                                          quantity={photos.length} 
-                                          price={getPrice(product, photos.length)}
-                                    />
+                                    {(photos.length > 0) && 
+                                          <CartItem
+                                                id="photosSet"
+                                                title={`Set ${product}`}
+                                                image={null} 
+                                                quantity={photos.length} 
+                                                price={getPrice(product, photos.length)}
+                                          />
+                                    }
                                     {addedPhrases.map((phrase) => {
                                           return(
                                                 <CartItem
+                                                      id={phrase.id}
                                                       title={`Letrero ${phrase.text}`}
                                                       image={null}
                                                       quantity={1}
@@ -87,7 +97,7 @@ const Cart = () => {
                               padding: 1,
                               fontSize: '1.2em',
                               mt: 5
-                        }}>
+                        }} onClick={handleClick}>
                               Hacer compra      
                         </Button>
                   </Box>      

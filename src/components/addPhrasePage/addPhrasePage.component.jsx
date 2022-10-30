@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Box, Grid, InputLabel, Select, styled, MenuItem, TextField, Button } from "@mui/material";
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
+import { backButtonEnabled, nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 import lightWoodBackground from '../../images/lightWood.png';
 import darkWoodBackground from '../../images/darkWood.png';
 import { customPhraseAdded, defaultPhraseAdded } from "../../features/additionalPhrase/AdditionalPhraseSlice";
@@ -11,11 +11,13 @@ import { useFormik } from 'formik';
 import {FormControl} from "@mui/material";
 import theme from "../../utils/theme";
 import Cart from "../cart/cart.component";
-
+import { useSelector } from "react-redux";
+import ProductGrid from "../productGrid/productGrid.component";
+import ManageOrder from "../manageOrder/manageOrder.component";
 /*
       React Component that handles the order or one or multiple Phrases
 */
-const AddPhrasePage = () => {
+const AddPhraseContainer = () => {
       const defaultPhraseColor = 'lightWood';
       const dispatch = useDispatch();
       
@@ -227,6 +229,24 @@ const AddPhrasePage = () => {
             </Grid>
             </Grid>
       );
+}
+/*
+You have the option to delete items from the Add Phrase Page
+via the Cart. This ensures that the user goes back to the initial
+page if the user deletes everything.
+*/
+
+const AddPhrasePage = () => {
+      const dispatch = useDispatch();
+      const photos = useSelector(state => state.photos);
+      const addedPhrases = useSelector(state => state.additionalPhrases);
+      if(photos.length > 0 || addedPhrases.length > 0) {
+            return <AddPhraseContainer />
+      } else {
+            dispatch(backButtonEnabled(false));
+            return <ManageOrder />
+
+      }
 }
 
 export default AddPhrasePage;

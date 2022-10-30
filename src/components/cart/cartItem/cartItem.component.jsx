@@ -2,13 +2,29 @@ import { Box, Grid, Typography, IconButton } from "@mui/material";
 import React from "react";
 import theme from "../../../utils/theme";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-const CartItem = ({title, image, quantity, price}) => {
+import { useDispatch } from "react-redux";
+import { allPhotosDeleted } from "../../../features/photoEdition/PhotoSlice";
+import { phraseDeleted } from "../../../features/additionalPhrase/AdditionalPhraseSlice";
+const CartItem = ({id, title, image, quantity, price}) => {
+      const dispatch = useDispatch();
+
+      const handleDeleteCartItem = (e) => {
+            if(id === 'photosSet') {
+                  // photoSet 
+                  dispatch(allPhotosDeleted());
+            } else {
+                  // additional Phrase
+                  dispatch(phraseDeleted({id: id}));
+            }
+      }
+
       return(
             <Box sx={{
                   backgroundColor: '#FFFFFF',
                   borderRadius: 2,
-                  border: '1px solid ' + theme.palette.primary.main,
-                  mb: 1
+                  //border: '1px solid ' + theme.palette.primary.main,
+                  mb: 1,
+                  boxShadow: 3
             }}>
                   <Grid container sx={{padding: 1}}>
                         <Grid item xs="auto" justifyContent="center" alignItems="center" sx={{}}>
@@ -34,7 +50,7 @@ const CartItem = ({title, image, quantity, price}) => {
                                     top: -10,
                                     right: -20,
                                     
-                              }}>
+                              }} onClick={handleDeleteCartItem}>
                                     <HighlightOffIcon fontSize="small" />
                               </IconButton>
                               <Typography variant="carth2" sx={{
