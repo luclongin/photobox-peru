@@ -16,7 +16,7 @@ export const OrderStepTitle = ({title}) => {
 export const OrderStepSubtitle = ({title, highlight}) => {
       return(<Typography variant="h2" sx={{
             position: 'relative',
-            top: -25,
+            top: -30,
       }}>
             {title}
             <Typography variant="span" sx={{color: theme.palette.primary.main}}>{highlight}</Typography>

@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { photoDirectAdded, photoUpdatedSrc } from "../../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
 import { Fragment } from "react";
-import { addPhotoCount, incrementPhotoCount } from "../../../features/photoCount/PhotoCountSlice";
-
+import { incrementPhotoCount } from "../../../features/photoCount/PhotoCountSlice";
+import theme from "../../../utils/theme";
 /*
       Button in order to add directly a photo. Works exactly like your model website's button.
       Simplifies workflow as we do not have to call photoAdded action.
@@ -34,7 +34,7 @@ const AddCardButton = () => {
                               backgroundColor: 'rgb(255, 102, 196)',
                               color: '#ffffff',
                               "&:hover" : {
-                                    backgroundColor: 'rgb(178, 71, 137)',
+                                    backgroundColor: theme.palette.primary.darker,
                                     color: "#ffffff"
                               }
                         }}

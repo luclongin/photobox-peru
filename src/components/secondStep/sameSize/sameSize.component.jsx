@@ -15,7 +15,7 @@ const SameSize = () => {
 
   return (
     <Container>
-        <OrderStepTitle title="Sube y edita tus fotos" />
+        <OrderStepTitle title="Suba y edita tus fotos" />
         <OrderStepSubtitle title="Producto " highlight="Mismo Tamaño" />
         <Button onClick={handleAddCard}>
           Add Card

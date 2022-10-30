@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import CartItem from "./cartItem/cartItem.component";
 import { getPrice } from "../../utils/pricing";
+import { Box } from "@mui/material";
+
 
 const Cart = () => {
       const photos = useSelector(state => state.photos);
@@ -11,7 +13,7 @@ const Cart = () => {
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
 
       return(
-            <div>
+            <Box>
                   <h1>Mi pedido</h1>
                   <CartItem
                         title={`Set ${product}`}
@@ -30,7 +32,7 @@ const Cart = () => {
                         })
                   }
                   <h2>Total: {totalPrice}</h2>
-            </div>
+            </Box>
       );
 }
 
