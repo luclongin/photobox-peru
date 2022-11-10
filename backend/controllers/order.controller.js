@@ -17,7 +17,7 @@ exports.upload = (req, res) => {
   } catch (e) {
     // else it's an array
     fileValues = Object.values(file);
-  }  
+  }
 
   fileValues.forEach(item => {
     item.mv(`${__dirname}/../public/uploads/${item.name}`, (err) => {
@@ -27,30 +27,37 @@ exports.upload = (req, res) => {
       }
     });
   });
+
   return;
 };
-/*
+
 exports.create = (req, res) => {
       // Validate request
-      if (!req.body.firstName) {
+      console.log("reqbody:", req.body);
+      const data = Object.assign({}, req.body);
+      console.log("data:", data);
+      data.userId = "rabbit";
+
+      if (!req.body) {
         res.status(400).send({
           message: "Content can not be empty!"
         });
         return;
       }
 
-      // Create a User
-      const user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+      const newOrder = {
+        orderId: data.orderId,
+        userId: data.userId,
+        productType: data.productType,
+        deliveryType: data.deliveryType,
       };
-  
-      // Save Tutorial in the database
-      Order.create(user)
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
+
+      console.log("newOrder:", newOrder);
+      // Save Order in the database
+      Order.create(newOrder).then(data => {
+        console.log("aftercreation:", data);
+        res.send(data);
+      }).catch(err => {
           res.status(500).send({
             message:
               err.message || "Some error occurred while creating the Tutorial."
@@ -58,12 +65,10 @@ exports.create = (req, res) => {
         });
     };
 
+
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-  const firstName = req.query.firstName;
-  var condition = firstName ? { firstName: { [Op.like]: `%${firstName}%` } } : null;
-
-  Order.findAll({ where: condition })
+  Order.findAll()
     .then(data => {
       res.send(data);
     })
@@ -73,4 +78,4 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     });
-};*/
+};

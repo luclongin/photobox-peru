@@ -5,7 +5,7 @@ import FormButtonsReducer from '../features/handleFormButtons/FormButtonsSlice';
 import AdditionalPhraseReducer from '../features/additionalPhrase/AdditionalPhraseSlice';
 import StepReducer from '../features/step/stepSlice';
 import DeliveryReducer from '../features/delivery/deliverySlice';
-import AddressReducer from '../features/userAddress/userAddressSlice';
+import UserInfoReducer from '../features/userInfo/userInfoSlice';
 import OrderReducer from '../features/order/orders';
 
 export default configureStore({
@@ -16,7 +16,7 @@ export default configureStore({
             additionalPhrases: AdditionalPhraseReducer,
             step: StepReducer,
             delivery: DeliveryReducer,
-            address: AddressReducer,
+            userInfo: UserInfoReducer,
             order: OrderReducer,
       }
 })

@@ -5,15 +5,18 @@ import Cart from "../cart/cart.component";
 import AddressDialog from "../addressDialog/addressDialog.component";
 import { useDispatch, useSelector } from "react-redux";
 import { setDelivery } from "../../features/delivery/deliverySlice";
-import { uploadCroppedPhotos } from "../../features/order/orders";
+import { createOrder, uploadCroppedPhotos } from "../../features/order/orders";
 import dataURLtoFile from "../../utils/dataURLtoFile";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Checkout = () => {
       const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
       const additionalPhrases = useSelector(state => state.additionalPhrases);
-
+      const productType = useSelector(state => state.product);
       const delivery = useSelector(state => state.delivery);
+      const userInfo = useSelector(state => state.userInfo);
+      console.log("photos:", photos);
       
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -35,16 +38,41 @@ const Checkout = () => {
             return file;
       }
 
+      const getFormData = object => Object.keys(object).reduce((formData, key) => {
+            formData.append(key, object[key]);
+            return formData;
+        }, new FormData());
+
+      /*const convertDataToFormData = (photos) => {
+            // IN PHOTOS
+            // GET ALL PHOTOS PERTAINING TO UNIQUE ID
+            
+            //IN ORDERS
+            // 1 UNIQUE ID IS ENOUGH TO GET PHOTOS..
+            // DELIVERY TYPE
+            // ADDRESS
+            // TOTAL PRICE
+            // HOW MANY PHOTOS + ADD. PHRASES
+            let formData = new FormData();
+            
+            return formData;
+      }*/
+      
+      //console.log("trying: ", convertPhotosToFormData(photos));
+
       const uploadPhotos = async e => {  
             e.preventDefault();
-            let formData = new FormData();
+
+            // HANDLING UPLOAD OF PHOTOS
+            let photosFormData = new FormData();
             // a way to execute await in a for loop all simultaneously
             await Promise.all(photos.map(async (photo) => {
                   const photoName = photo.id + '-' + photo.name;
                   const newImage = await getFileFromUrl(photo.imgResult, photoName);
-                  formData.append('file', newImage);
+                  photosFormData.append('file', newImage);
             }));
-            dispatch(uploadCroppedPhotos(formData)).unwrap()
+
+            dispatch(uploadCroppedPhotos(photosFormData)).unwrap()
             .then(data => {
                   console.log(data);
                   // revoke all URLs
@@ -55,6 +83,21 @@ const Checkout = () => {
             }).catch(e => {
                   console.log("merde", e);
             });
+
+            // HANDLING ORDER 
+            let orderData = new FormData();
+            // create new id 
+            orderData.append('orderId', nanoid());
+            orderData.append('userId', userInfo.userId);
+            orderData.append('productType', productType);
+            orderData.append('deliveryType', delivery);
+            
+            dispatch(createOrder(orderData)).unwrap()
+            .then(data => {
+                  console.log(data);
+            }).catch(e => {
+                  console.log("oh merde", e);
+            })
       }
 
       return(

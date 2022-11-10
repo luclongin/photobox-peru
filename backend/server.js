@@ -4,7 +4,7 @@ const app = express();
 const fileUpload = require('express-fileupload');
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -17,18 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
 
-db.sequelize.sync()
+db.sequelize.sync({ logging: console.log })
   .then(() => {
     console.log("Synced db.");
   })
   .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
-
-// // drop the table if it already exists
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
 
 // simple route
 app.get("/", (req, res) => {

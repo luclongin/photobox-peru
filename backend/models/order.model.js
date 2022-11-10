@@ -1,17 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
       const Order = sequelize.define("orders", {
-            photosId: {
-                  type: Sequelize.STRING
+            orderId: {
+                  type: Sequelize.STRING,
+                  allowNull: false,
+                  primaryKey: true
             },
-            additionalPhrasesId: {
-                  type: Sequelize.STRING
+            userId: {
+                  type: Sequelize.STRING,
+                  allowNull: false,
+            },
+            productType: {
+                  type: Sequelize.STRING,
+                  allowNull: false,
             },
             deliveryType: {
-                  type: Sequelize.STRING
-            },
-            address: {
-                  type: Sequelize.STRING
+                  type: Sequelize.STRING,
+                  allowNull: false,
             }
       });
+      Order.removeAttribute('id');
       return Order;
 };

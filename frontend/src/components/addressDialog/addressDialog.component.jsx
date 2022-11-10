@@ -9,7 +9,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch } from 'react-redux';
-import { setAddress } from '../../features/userAddress/userAddressSlice';
+import { setAddress } from '../../features/userInfo/userInfoSlice';
 
 const AddressDialog = ({open, handleClose}) => {
       const dispatch = useDispatch();

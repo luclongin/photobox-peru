@@ -2,31 +2,22 @@ import http from '../http-common'
 import { UploadHttp } from '../http-common';
 
 const create = data => {
-  return http.post("/users", data);
+  console.log("order data: ", data);
+  return UploadHttp.post("/orders", data);
 };
 
 const upload = data => {
-  console.log("order data: ", data);
   return UploadHttp.post("/orders/upload", data);
 }
-/*
-const get = id => {
-  return http.get(`/users/${id}`);
-};
 
 const getAll = () => {
-  return http.get("/users");
+  return http.get("/orders");
 };
-const findByName = name => {
-  return http.get(`/users?firstName=${name}`);
-};*/
 
 const OrderService = {
-      //create,
+      create,
       upload,
-      //get,
-      //getAll,
-      //findByName
+      getAll,
 };
 
 export default OrderService;
