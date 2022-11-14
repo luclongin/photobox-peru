@@ -14,11 +14,11 @@ const photoSlice = createSlice({
                         return {
                               payload: {
                                     id: nanoid(),
-                                    name: "",
                                     imgSrc: null,
                                     imgResult: null,
                                     imgDimensions,
-                                    hidden: true
+                                    hidden: true,
+                                    type: null
                               }
                         }
                   }
@@ -27,27 +27,27 @@ const photoSlice = createSlice({
                   reducer(state, action) {
                         state.push(action.payload)
                   },
-                  prepare({imgSrc, imgDimensions, name}) {
+                  prepare({imgSrc, imgDimensions, type}) {
                         return {
                               payload: {
                                     id: nanoid(),
-                                    name,
                                     imgSrc,
                                     imgResult: imgSrc,
                                     imgDimensions,
-                                    hidden: false
+                                    hidden: false,
+                                    type
                               }
                         }
                   }
             },
             photoUpdatedSrc(state, action) {
-                  const {id, imgSrc} = action.payload;
+                  const {id, imgSrc, type} = action.payload;
                   const existingPhoto = state.find(photo => photo.id === id);
                   if(existingPhoto) {
                         existingPhoto.imgSrc = imgSrc;
                         existingPhoto.imgResult = imgSrc;
                         existingPhoto.hidden = false;
-                        //existingPhoto.file = file;
+                        existingPhoto.type = type;
                   }
             },
             photoUpdatedResult(state, action) {

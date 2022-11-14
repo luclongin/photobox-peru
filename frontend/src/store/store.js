@@ -7,6 +7,8 @@ import StepReducer from '../features/step/stepSlice';
 import DeliveryReducer from '../features/delivery/deliverySlice';
 import UserInfoReducer from '../features/userInfo/userInfoSlice';
 import OrderReducer from '../features/order/orders';
+import PhotoUploadReducer from '../features/photoUpload/photoUpload';
+import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
 
 export default configureStore({
       reducer: {
@@ -17,6 +19,8 @@ export default configureStore({
             step: StepReducer,
             delivery: DeliveryReducer,
             userInfo: UserInfoReducer,
-            order: OrderReducer,
+            orders: OrderReducer,
+            uploadedPhotos: PhotoUploadReducer,
+            uploadedUser: UserUploadReducer
       }
-})
+});

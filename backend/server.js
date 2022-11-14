@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 var corsOptions = {
   origin: "http://localhost:3000"
@@ -31,6 +32,9 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/order.routes")(app);
+
+app.use(express.static(path.join(__dirname, '/public')));
+app.use('/uploads', express.static('uploads'));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

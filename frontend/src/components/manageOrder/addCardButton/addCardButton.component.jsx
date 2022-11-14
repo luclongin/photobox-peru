@@ -21,7 +21,7 @@ const AddCardButton = () => {
             dispatch(photoDirectAdded({
                   imgDimensions: "20x20",
                   imgSrc: imageBlob,
-                  name: e.target.files[0].name
+                  type: e.target.files[0].type
             }));
             dispatch(nextButtonEnabled(true));
       }

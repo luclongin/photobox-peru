@@ -11,9 +11,9 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch } from 'react-redux';
 import { setAddress } from '../../features/userInfo/userInfoSlice';
 
-const AddressDialog = ({open, handleClose}) => {
+const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, defaultValues}) => {
       const dispatch = useDispatch();
-
+      
       const validationSchema = yup.object({
             userFullName: yup.string()
                               .matches(/^[A-Za-z]*(\s[A-Za-z]*)+$/, 'Nombre completo incorrecto')
@@ -34,21 +34,31 @@ const AddressDialog = ({open, handleClose}) => {
                               .matches(/^[a-zA-Zñáéíóúü\s]*$/, 'Ciudad incorrecta')
                               .required('Escribe tu ciudad'),
       });
+      
+      let formValues = {};
 
-      // Using Formik for simple form handling
-      const formik = useFormik({
-            initialValues: {
+      if(defaultValues === null) {
+            formValues = {
                   userFullName: "",
                   userEmail: "",
                   userAddress: "",
                   userPhoneNumber: "",
                   userDistrict: "",
                   userCity: ""
-            },
+            }
+      } else {
+            formValues = defaultValues;
+      }
+
+      // Using Formik for simple form handling
+      const formik = useFormik({
+            initialValues: formValues,
             validationSchema: validationSchema,
             onSubmit: (values, { resetForm }) => {
                   dispatch(setAddress(values));
-                  resetForm();
+                  setAddressAdded(true);
+                  setUserInfo(values);
+                  //resetForm();
                   handleClose();
             },
       });

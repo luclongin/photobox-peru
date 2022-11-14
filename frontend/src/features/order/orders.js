@@ -4,18 +4,10 @@ import OrderService from "../../services/OrderService";
 const initialState = [];
 
 export const createOrder = createAsyncThunk(
-      "orders/create",
+      "orders/createOrder",
       async (orderData) => {
-            const res = await OrderService.create(orderData);
+            const res = await OrderService.createOrder(orderData);
             console.log("thunkafter");
-            return res.data;
-      }
-);
-
-export const uploadCroppedPhotos = createAsyncThunk(
-      "orders/upload",
-      async (photo) => {
-            const res = await OrderService.upload(photo);
             return res.data;
       }
 );
@@ -23,9 +15,7 @@ export const uploadCroppedPhotos = createAsyncThunk(
 export const retrieveOrders = createAsyncThunk(
       "orders/retrieve",
       async () => {
-            console.log("thunkbefore");
             const res = await OrderService.getAll();
-            console.log("thunkbefore");
             return res.data;
       }
 );
@@ -39,9 +29,6 @@ const ordersSlice = createSlice({
             },
             [retrieveOrders.fulfilled]: (state, action) => {
                   return [...action.payload];
-            },
-            [uploadCroppedPhotos.fulfilled]: (state, action) => {
-                  return state;
             },
       },
 });

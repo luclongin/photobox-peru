@@ -40,14 +40,11 @@ const UploadPhotoCardEmpty = ({ id }) => {
 
       const handleImage = async (e) => {
             e.preventDefault();
-
-
-
             const imageBlob = URL.createObjectURL(e.target.files[0]);
             dispatch(photoUpdatedSrc({
                   id: id,
-                  imgSrc: imageBlob
-                  //file: e.target.files[0]
+                  imgSrc: imageBlob,
+                  type: e.target.files[0].type
             }));
 
             
