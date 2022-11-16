@@ -9,6 +9,8 @@ import UserInfoReducer from '../features/userInfo/userInfoSlice';
 import OrderReducer from '../features/order/orders';
 import PhotoUploadReducer from '../features/photoUpload/photoUpload';
 import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
+import AdditionalPhraseUploadReducer from '../features/additionalPhraseUpload/additionalPhraseUploadSlice';
+
 
 export default configureStore({
       reducer: {
@@ -21,6 +23,7 @@ export default configureStore({
             userInfo: UserInfoReducer,
             orders: OrderReducer,
             uploadedPhotos: PhotoUploadReducer,
-            uploadedUser: UserUploadReducer
+            uploadedUser: UserUploadReducer,
+            uploadedAdditionalPhrases: AdditionalPhraseUploadReducer
       }
 });

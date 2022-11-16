@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-      const AdditionalPhrase = sequelize.define("additionalphrases", {
+      const AdditionalPhrase = sequelize.define("additionalPhrases", {
             phraseId: {
                   type: Sequelize.STRING,
                   allowNull: false,
@@ -14,6 +14,10 @@ module.exports = (sequelize, Sequelize) => {
                   allowNull: false,
             },
             phraseText: {
+                  type: Sequelize.STRING,
+                  allowNull: false,
+            },
+            phraseColor: {
                   type: Sequelize.STRING,
                   allowNull: false,
             }

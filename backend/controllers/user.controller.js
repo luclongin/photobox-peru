@@ -35,7 +35,6 @@ exports.createUser = (req, res) => {
 };
 
 exports.getUsers = (req, res) => {
-      console.log("yooooo");
       Users.findAll().then(data => {
         res.send(data);
       }).catch(err => {

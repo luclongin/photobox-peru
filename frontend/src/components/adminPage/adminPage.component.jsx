@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { retrieveOrders } from "../../features/order/orders";
 import { getPhotos } from "../../features/photoUpload/photoUpload";
 import { getUsers } from "../../features/userInfoUpload/userInfoUpload";
+import { getAdditionalPhrases } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
+import { deleteOrder } from "../../features/order/orders";
 
 const AdminPage = () => {
       const dispatch = useDispatch();
       const orders = useSelector(state => state.orders);
       const uploadedPhotos = useSelector(state => state.uploadedPhotos);
       const uploadedUsers = useSelector(state => state.uploadedUser);
-
+      const uploadedPhrases = useSelector(state => state.uploadedAdditionalPhrases);
+      
       const initFetchOrders = useCallback(() => {
             dispatch(retrieveOrders());
       }, [dispatch]);
@@ -37,6 +40,14 @@ const AdminPage = () => {
             initFetchUploadedUsers()
       }, [initFetchUploadedUsers]);
 
+      const initFetchUploadedPhrases = useCallback(() => {
+            dispatch(getAdditionalPhrases());
+      }, [dispatch]);
+
+      useEffect(() => {
+            initFetchUploadedPhrases()
+      }, [initFetchUploadedPhrases]);
+
       return(
             <Box sx={{justifyContent: 'center', display: 'flex', backgroundColor: '#eee'}}>
                   <Grid container spacing={2} sx={{width: "80%"}}>
@@ -58,14 +69,16 @@ const AdminPage = () => {
                                                 {
                                                       uploadedUsers.map((user, userIndex) => {
                                                             if(user.userId === order.userId) {
-                                                                        return(<Box key={userIndex}>
+                                                                        return(
+                                                                        <Box key={userIndex}>
                                                                               <p><b>Nombre Completo</b> {user.userFullName}</p>
                                                                               <p><b>Email</b> {user.userEmail}</p>
                                                                               <p><b>Numero de telefono</b> {user.userPhoneNumber}</p>
                                                                               <p><b>Dirección</b> {user.userAddress}</p>
                                                                               <p><b>Distrito</b> {user.userDistrict}</p>
                                                                               <p><b>Ciudad</b> {user.userCity}</p>
-                                                                        </Box>);
+                                                                        </Box>
+                                                                        );
                                                                   
                                                             }
                                                       })
@@ -82,10 +95,32 @@ const AdminPage = () => {
                                                             }
                                                       })
                                                 }
+                                                <Divider sx={{mt: 2, mb: 2}}></Divider>
+                                                {
+                                                      uploadedPhrases.map((additionalPhrase, phraseIndex) => {
+                                                            if(additionalPhrase.orderId === order.orderId) {
+                                                                  return(
+                                                                        <Box key={phraseIndex}>
+                                                                              <Box>
+                                                                                    <p><b>Letrero adicional</b></p>
+                                                                                    <p><b>ID</b> {additionalPhrase.phraseId}</p>
+                                                                                    <p><b>Tipo</b> {additionalPhrase.phraseType}</p>
+                                                                                    <p><b>Texto</b> {additionalPhrase.phraseText}</p>
+                                                                                    <p><b>Color</b> {additionalPhrase.phraseColor}</p>
+                                                                              </Box>
+                                                                              <Divider sx={{mt: 2, mb: 2}}></Divider>
+                                                                        </Box>
+                                                                  );
+                                                            }
+                                                      })
+                                                }
 
                                                 <Box sx={{mt: 2}}>
-                                                      <Button variant="contained">Descargar fotos</Button>
-                                                      <Button variant="contained" sx={{backgroundColor: 'red'}}>Eliminar Pedido</Button>
+                                                      <Button variant="contained" sx={{backgroundColor: 'red'}}
+                                                      onClick={(e) => {
+                                                            dispatch(deleteOrder(order.orderId));
+                                                            }
+                                                      }>Eliminar Pedido</Button>
                                                 </Box>                                          
                                           </Paper>
                                     </Grid>

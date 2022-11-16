@@ -4,12 +4,12 @@ const initialState = [];
 
 export const defaultPhrases = {
       "family": {
-            text: "Family",
-            color: "brown"
+            phraseText: "Family",
+            phraseType: "default"
       },
       "friends": {
-            text: "Friends",
-            color: "wood"
+            phraseText: "Friends",
+            phraseType: "default"
       }
 };
 
@@ -21,12 +21,13 @@ const AdditionalPhraseSlice = createSlice({
                   reducer(state, action) {
                         state.push(action.payload)
                   },
-                  prepare({text, color}) {
+                  prepare({phraseText, phraseType, phraseColor}) {
                         return {
                               payload: {
                                     id: nanoid(),
-                                    text,
-                                    color
+                                    phraseText,
+                                    phraseType,
+                                    phraseColor
                               }
                         }
                   }
@@ -34,11 +35,12 @@ const AdditionalPhraseSlice = createSlice({
             // adding default phrase data from dictionary
             defaultPhraseAdded(state, action) {
                   const {defaultPhrase} = action.payload;
-                  const {text, color} = defaultPhrases[defaultPhrase];
+                  const {phraseText, phraseType} = defaultPhrases[defaultPhrase];
                   state.push({
                         id: nanoid(),
-                        text: text,
-                        color: color
+                        phraseText: phraseText,
+                        phraseType: phraseType,
+                        phraseColor: "default"
                   });
             },
             phraseDeleted(state, action) {

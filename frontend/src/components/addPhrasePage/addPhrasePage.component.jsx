@@ -36,7 +36,7 @@ const AddPhraseContainer = () => {
             phraseText: yup
                         .string()
                         .when("phraseType", {
-                              is: phraseType => phraseType === 'custom',
+                              is: phraseType => phraseType === 'Personalizado',
                               then: yup.string()
                                     .matches(/^(?!\s+$)[0-9a-zñáéíóúü]*/i, 'Frase incorrecta')
                                     .required('Escribe tu frase')
@@ -44,7 +44,7 @@ const AddPhraseContainer = () => {
             phraseColor: yup
                         .string()
                         .when("phraseType", {
-                              is: phraseType => phraseType === 'custom',
+                              is: phraseType => phraseType === 'Personalizado',
                               then: yup.string('Choose Color').oneOf(
                                     ['lightWood', 'darkWood'],
                                     'Color required')
@@ -61,11 +61,12 @@ const AddPhraseContainer = () => {
             },
             validationSchema: validationSchema,
             onSubmit: (values, { resetForm }) => {
-                  if(values.phraseType === 'custom') {
+                  if(values.phraseType === 'Personalizado') {
                         dispatch(customPhraseAdded(
                               {
-                              text: values.phraseText,
-                              color: values.phraseColor
+                              phraseText: values.phraseText,
+                              phraseType: values.phraseType,
+                              phraseColor: values.phraseColor
                               }
                         ));
                   } else {
@@ -125,12 +126,12 @@ const AddPhraseContainer = () => {
                                           >
                                                 <MenuItem value="family">Family</MenuItem>      
                                                 <MenuItem value="friends">Friends</MenuItem>
-                                                <MenuItem value="custom">Personalizado</MenuItem> 
+                                                <MenuItem value="Personalizado">Personalizado</MenuItem> 
                                           </Select>
                                     </FormControl>
                                     </Grid>
                               <Fragment>
-                                    { (formik.values.phraseType === "custom") ? 
+                                    { (formik.values.phraseType === "Personalizado") ? 
                                                 <Fragment>
                                                       <Grid item xs={12} sx={{
                                                             marginBottom: 4

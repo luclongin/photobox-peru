@@ -9,9 +9,14 @@ const getAll = () => {
   return http.get("/orders");
 };
 
+const deleteOrder = id => {
+  return http.delete(`/orders/${id}`);
+}
+
 const OrderService = {
       createOrder,
       getAll,
+      deleteOrder
 };
 
 export default OrderService;

@@ -14,9 +14,7 @@ export const createUser = createAsyncThunk(
 export const getUsers = createAsyncThunk(
       "orders/users",
       async () => {
-            console.log("thunkbeforeuser");
             const res = await UserService.getUsers();
-            console.log("thunkafteruser");
             return res.data;
       }
 );

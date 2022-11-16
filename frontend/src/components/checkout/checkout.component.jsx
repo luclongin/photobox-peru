@@ -10,6 +10,7 @@ import { createPhoto, uploadCroppedPhotos } from "../../features/photoUpload/pho
 import { nanoid } from "@reduxjs/toolkit";
 import { createUser } from "../../features/userInfoUpload/userInfoUpload";
 import AddressAddition from "../addressAddition/addressAddition.component";
+import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Checkout = () => {
       const productType = useSelector(state => state.product);
       const delivery = useSelector(state => state.delivery);
       const userInfo = useSelector(state => state.userInfo);
-      console.log("userInfo", userInfo);
+      const additionalPhrases = useSelector(state => state.additionalPhrases);
       
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -38,6 +39,28 @@ const Checkout = () => {
                   default:
                         return;
             }
+      }
+
+      const handleAdditionalPhrase = async (e, orderId) => {
+            e.preventDefault();
+            //create new phrase
+            await Promise.all(additionalPhrases.map(async (phrase) => {
+                  let phraseData = new FormData();
+                  const phraseId = nanoid();
+                  phraseData.append('phraseId', phraseId);
+                  phraseData.append('orderId', orderId);
+                  phraseData.append('phraseType', phrase.phraseType);
+                  phraseData.append('phraseText', phrase.phraseText);
+                  phraseData.append('phraseColor', phrase.phraseColor);
+                  
+                  dispatch(createAdditionalPhrase(phraseData)).unwrap()
+                  .then(data => {
+                        console.log("OH YES");
+                        console.log(data);
+                  }).catch(e => {
+                        console.log("merde addphrase", e);
+                  })
+            }));
       }
 
       const handlePhotoUpload = async (e, orderId) => {
@@ -102,7 +125,6 @@ const Checkout = () => {
 
       const handleCreateUser = async e => {
             e.preventDefault();
-
             const userData = new FormData();
             //create new user
             userData.append('userId', userInfo.userId);
@@ -112,7 +134,6 @@ const Checkout = () => {
             userData.append('userPhoneNumber', userInfo.userPhoneNumber);
             userData.append('userDistrict', userInfo.userDistrict);
             userData.append('userCity', userInfo.userCity);
-
             dispatch(createUser(userData)).unwrap().then(data => {
                   console.log(data);
             }).catch(e => {
@@ -124,6 +145,7 @@ const Checkout = () => {
             const orderId = await handleCreateOrder(e);
             handlePhotoUpload(e, orderId);
             handleCreateUser(e);
+            handleAdditionalPhrase(e, orderId);
       }
 
       return(

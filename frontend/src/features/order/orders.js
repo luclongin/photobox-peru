@@ -7,7 +7,6 @@ export const createOrder = createAsyncThunk(
       "orders/createOrder",
       async (orderData) => {
             const res = await OrderService.createOrder(orderData);
-            console.log("thunkafter");
             return res.data;
       }
 );
@@ -20,6 +19,17 @@ export const retrieveOrders = createAsyncThunk(
       }
 );
 
+export const deleteOrder = createAsyncThunk(
+      "orders/delete",
+      async (orderId) => {
+            console.log("deletethunkbefore");
+            console.log("id: ", orderId);
+            const res = await OrderService.deleteOrder(orderId);
+            console.log("deletethunkafter");
+            return res.data;
+      }
+)
+
 const ordersSlice = createSlice({
       name: "order",
       initialState,
@@ -29,6 +39,11 @@ const ordersSlice = createSlice({
             },
             [retrieveOrders.fulfilled]: (state, action) => {
                   return [...action.payload];
+            },
+            [deleteOrder.fulfilled]: (state, action) => {
+                  let index = state.findIndex(({orderId}) => orderId === action.payload.orderId);
+                  console.log("index yoyo:", index);
+                  state.splice(index, 1);
             },
       },
 });

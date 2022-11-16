@@ -12,7 +12,6 @@ const getUsers = data => {
 const UserService = {
       createUser,
       getUsers
-};
-    
+};  
 
 export default UserService;

@@ -61,11 +61,12 @@ const Cart = () => {
                                           />
                                     }
                                     {addedPhrases.map((phrase) => {
+                                          console.log("phrase added:", phrase);
                                           return(
                                                 <CartItem
                                                       key={phrase.id}
                                                       id={phrase.id}
-                                                      title={`Letrero ${phrase.text}`}
+                                                      title={`Letrero ${phrase.phraseText}`}
                                                       image={null}
                                                       quantity={1}
                                                       price={getPrice("additionalPhrase", 1)}
