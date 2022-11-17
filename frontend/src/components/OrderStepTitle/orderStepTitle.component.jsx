@@ -2,10 +2,10 @@ import React from "react";
 import theme from "../../utils/theme";
 import { Typography } from "@mui/material";
 
-export const OrderStepTitle = ({title, marginBottom=4}) => {
+export const OrderStepTitle = ({title, marginBottom=4, marginTop=4}) => {
       return(<Typography variant="h1" sx={{
             marginBottom: marginBottom,
-            marginTop: 4
+            marginTop: marginTop
       }}>
             {title}
             <Typography variant="span" sx={{color: theme.palette.primary.main}}>.</Typography>

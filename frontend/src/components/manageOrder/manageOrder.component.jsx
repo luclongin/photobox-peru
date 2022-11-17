@@ -141,10 +141,6 @@ const ManageOrder = () => {
                         zIndex: '0',
                         height: getMainContentHeight(step)
                   }}>
-
-                        {
-                        // Back Button
-                        }
                         <IconButton disabled={!enableBackButton} onClick={handleBack} sx={{
                               display: `${isHiddenBackBtn}`,
                               width: 60,

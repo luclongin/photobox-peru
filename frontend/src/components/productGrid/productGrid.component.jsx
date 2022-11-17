@@ -3,32 +3,23 @@ import ProductCard from "../productCard/productCard.component";
 import {OrderStepTitle} from "../OrderStepTitle/orderStepTitle.component";
 const ProductGrid = () => {
       return(
-            <Box sx={{ flexGrow: 1, marginTop: 4}}>
-            <OrderStepTitle title="Escoje tu producto" />
-            <Grid container spacing={3} wrap='wrap' justifyContent='center'>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Mismo Tamaño" productName="sameSize" />
+            <Box sx={{height: "100%", direction: 'column', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  <Grid container spacing={4} wrap='wrap' display="flex" alignItems="center" justifyContent='center' sx={{
+                        mb: 4
+                  }}>
+                        <Grid item xs={12}>
+                              <OrderStepTitle title="Escoje tu producto" marginBottom={3} marginTop={0} />
+                        </Grid>
+                        <Grid item justifyContent="center" alignItems="center">
+                              <ProductCard title="Mismo Tamaño" productName="sameSize" />
+                        </Grid>
+                        <Grid item justifyContent="center" alignItems="center">
+                              <ProductCard title="Letras" productName="letras" />
+                        </Grid>
+                        <Grid item justifyContent="center" alignItems="center">
+                              <ProductCard title="Gift Card" productName="giftCard" />
+                        </Grid>
                   </Grid>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Soñados" productName="sonados" />
-                  </Grid>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Mix" productName="mix" />
-                  </Grid>
-            </Grid>
-            <Grid container spacing={3} wrap='wrap' justifyContent='center' sx={{
-                  marginTop: '5px'
-            }}>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Mix2" productName="mix2" />
-                  </Grid>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Mix3" productName="mix3" />
-                  </Grid>
-                  <Grid item justifyContent="center" alignItems="center">
-                        <ProductCard title="Mix4" productName="mix4" />
-                  </Grid>
-            </Grid>
             </Box>
       );
 }

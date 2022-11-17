@@ -124,6 +124,7 @@ const AdminPage = () => {
                                                             dispatch(deleteOrder(order.orderId));
                                                             dispatch(deletePhoto(order.orderId));
                                                             dispatch(deleteUser(order.userId));
+                                                            //uploadedPhrases could be null
                                                             if(uploadedPhrases) {
                                                                   dispatch(deleteAdditionalPhrase(order.orderId));
                                                             }

@@ -66,7 +66,7 @@ const ProductCard = ({title, productName}) => {
 
 
       return(
-            <Card sx={{width: 240, height: 240 }}>
+            <Card sx={{width: 320, height: 320 }}>
                   <CardActionArea sx={{
                               width: '100%',
                               height: '100%'
