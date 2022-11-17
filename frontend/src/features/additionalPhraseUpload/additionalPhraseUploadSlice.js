@@ -21,6 +21,14 @@ export const getAdditionalPhrases = createAsyncThunk(
       }
 );
 
+export const deleteAdditionalPhrase = createAsyncThunk(
+      "orders/deleteAdditionalPhrase",
+      async (orderId) => {
+            const res = await AdditionalPhraseService.deleteAdditionalPhrase(orderId);
+            return res.data;
+      }
+)
+
 const uploadedAdditionalPhraseSlice = createSlice({
       name: "additionalPhrase",
       initialState,
@@ -30,9 +38,15 @@ const uploadedAdditionalPhraseSlice = createSlice({
             },
             [getAdditionalPhrases.fulfilled]: (state, action) => {
                   return [...action.payload];
-            }
+            },
+            [deleteAdditionalPhrase.fulfilled]: (state, action) => {
+                  let index = state.findIndex(({orderId}) => orderId === action.payload.orderId);
+                  state.splice(index, 1);
+            },
       }
 });
+
+
 
 const { reducer } = uploadedAdditionalPhraseSlice;
 export default reducer;

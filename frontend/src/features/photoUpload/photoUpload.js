@@ -27,6 +27,14 @@ export const getPhotos = createAsyncThunk(
       }
 );
 
+export const deletePhoto = createAsyncThunk(
+      "orders/deletePhoto",
+      async (orderId) => {
+            const res = await PhotoService.deletePhoto(orderId);
+            return res.data;
+      }
+)
+
 const photosSlice = createSlice({
       name: "photos",
       initialState,
@@ -40,6 +48,10 @@ const photosSlice = createSlice({
             [getPhotos.fulfilled]: (state, action) => {
                   return [...action.payload];
             },
+            [deletePhoto.fulfilled]: (state, action) => {
+                  let index = state.findIndex(({orderId}) => orderId === action.payload.orderId);
+                  state.splice(index, 1);
+            }
       },
 });
 

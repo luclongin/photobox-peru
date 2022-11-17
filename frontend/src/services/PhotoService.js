@@ -13,10 +13,15 @@ const getPhotos = data => {
       return http.get("/orders/photos", data);
 }
 
+const deletePhoto = id => {
+      return http.delete(`/orders/photos/${id}`);
+}
+
 const PhotoService = {
       uploadPhoto,
       createPhoto,
-      getPhotos
+      getPhotos,
+      deletePhoto
 };
     
 

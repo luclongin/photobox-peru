@@ -49,16 +49,14 @@ exports.findAll = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
-  console.log("id from server", id);
   Order.destroy({
     where: {orderId: id}
   }).then(num => {
-    console.log("NUM:", num);
     if(num === 1) {
-      res.send("Order #" + data.orderId + " was deleted successfully");
+      res.send("Order #" + id + " was deleted successfully");
     } else {
       res.send({
-        message: "Cannot delete Order #" + data.orderId
+        message: "Cannot delete Order #" + id
       });
     }
   }).catch(err => {

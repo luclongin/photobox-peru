@@ -44,3 +44,23 @@ exports.getUsers = (req, res) => {
           });
       });
     }
+
+
+exports.delete = (req, res) => {
+      const id = req.params.id;
+      Users.destroy({
+        where: {userId: id}
+      }).then(num => {
+        if(num === 1) {
+          res.send("User with order #" + id + " was deleted successfully");
+        } else {
+          res.send({
+            message: "Cannot delete User with order #" + id
+          });
+        }
+      }).catch(err => {
+        res.status(500).send({
+          message: "could not delete order"
+        })
+      })
+    }

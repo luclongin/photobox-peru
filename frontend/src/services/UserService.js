@@ -9,9 +9,14 @@ const getUsers = data => {
       return http.get("/orders/users", data);
 }
 
+const deleteUser = id => {
+      return http.delete(`/orders/users/${id}`);
+}
+
 const UserService = {
       createUser,
-      getUsers
+      getUsers,
+      deleteUser
 };  
 
 export default UserService;

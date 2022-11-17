@@ -71,3 +71,25 @@ exports.getPhotos = (req, res) => {
       });
   });
 }
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  console.log("PHOTO PARAM ID", id);
+
+  Photo.destroy({
+    where: {orderId: id}
+  }).then(num => {
+    console.log("dude, num:", num);
+    if(num === 1) {
+      res.send("Photo with order #" + id + " was deleted successfully");
+    } else {
+      res.send({
+        message: "Cannot delete Photo with order #" + id
+      });
+    }
+  }).catch(err => {
+    res.status(500).send({
+      message: "could not delete order"
+    })
+  })
+}

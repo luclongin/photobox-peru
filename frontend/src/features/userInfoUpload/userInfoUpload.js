@@ -19,6 +19,15 @@ export const getUsers = createAsyncThunk(
       }
 );
 
+export const deleteUser = createAsyncThunk(
+      "orders/deleteUser",
+      async (userId) => {
+            const res = await UserService.deleteUser(userId);
+            console.log("returned res:", res);
+            return res.data;
+      }
+)
+
 const uploadedUserSlice = createSlice({
       name: "uploadedUser",
       initialState,
@@ -28,6 +37,10 @@ const uploadedUserSlice = createSlice({
             },
             [getUsers.fulfilled]: (state, action) => {
                   return [...action.payload];
+            },
+            [deleteUser.fulfilled]: (state, action) => {
+                  let index = state.findIndex(({userId}) => userId === action.payload.userId);
+                  state.splice(index, 1);
             }
       }
 });

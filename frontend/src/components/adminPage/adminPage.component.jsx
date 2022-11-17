@@ -8,6 +8,9 @@ import { getPhotos } from "../../features/photoUpload/photoUpload";
 import { getUsers } from "../../features/userInfoUpload/userInfoUpload";
 import { getAdditionalPhrases } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 import { deleteOrder } from "../../features/order/orders";
+import { deleteUser } from "../../features/userInfoUpload/userInfoUpload";
+import { deletePhoto } from "../../features/photoUpload/photoUpload";
+import { deleteAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 
 const AdminPage = () => {
       const dispatch = useDispatch();
@@ -119,7 +122,12 @@ const AdminPage = () => {
                                                       <Button variant="contained" sx={{backgroundColor: 'red'}}
                                                       onClick={(e) => {
                                                             dispatch(deleteOrder(order.orderId));
+                                                            dispatch(deletePhoto(order.orderId));
+                                                            dispatch(deleteUser(order.userId));
+                                                            if(uploadedPhrases) {
+                                                                  dispatch(deleteAdditionalPhrase(order.orderId));
                                                             }
+                                                      }
                                                       }>Eliminar Pedido</Button>
                                                 </Box>                                          
                                           </Paper>

@@ -42,3 +42,22 @@ exports.getAdditionalPhrases = (req, res) => {
           });
       });
     }
+
+exports.delete = (req, res) => {
+      const id = req.params.id;
+      AdditionalPhrases.destroy({
+        where: {orderId: id}
+      }).then(num => {
+        if(num === 1) {
+          res.send("AddPhrase with order #" + id + " was deleted successfully");
+        } else {
+          res.send({
+            message: "Cannot delete AddPhrase with order #" + id
+          });
+        }
+      }).catch(err => {
+        res.status(500).send({
+          message: "could not delete order"
+        })
+      })
+    }
