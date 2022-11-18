@@ -8,10 +8,6 @@ import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.c
 import { photoSetFile } from "../../features/photoEdition/PhotoSlice";
 import { uploadCroppedPhotos } from "../../features/order/orders";
 
-/*
-      WILL BE DEPRECATED.
-      Is the card that shows when calling the photoAdded() action.
-*/
 const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
@@ -61,6 +57,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                   marginTop: 6
             }
       });
+
       let relativeFontSize = '';
       if (width < 350) {
             relativeFontSize = '5em';
@@ -80,7 +77,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                         </PaperButton>
                         <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
                         <Box sx={{zIndex: 3, position: 'absolute', top: -6}} className="hidden-hover" >
-                              <UploadPhotoCardHover width={width} id={id} setOpenDialog={null} onlyDelete={true}/>
+                              <UploadPhotoCardHover width={width} id={id} setOpenDialog={null} noButtonShown={true} hoverWidth={width}/>
                         </Box>
                   </HoverBox>
             </Fragment>

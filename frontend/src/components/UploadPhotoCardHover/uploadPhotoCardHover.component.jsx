@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
 import { IconButton, styled } from "@mui/material";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
+import { Fragment } from "react";
+import { photoUpdatedSrc } from "../../features/photoEdition/PhotoSlice";
 
 /*
       Card that appears when hovering over a photo. Gives the option to delete or crop.
 
 */
-const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete, width }) =>{      
+const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="350px" }) =>{      
       const dispatch = useDispatch();
       const UploadPhotoCardHoverButton = styled(IconButton) ({
             width: 30,
@@ -19,60 +21,59 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete, width }) =>{
             ariaLabel:"Crop Photo",
             backgroundColor: 'white',
       });
-
-      // WILL BE DEPRECATED
-      // only available for Empty PHoto Card
-      const topPos = (onlyDelete) => {
-            if (onlyDelete) {
-                  return(10)
-            } else {
-                  return(68);
-            }
-      }
            
       const photos = useSelector(state => state.photos);
+      const product = useSelector(state => state.product);
 
       const handleDelete = () => {
-            dispatch(photoDeleted({id: id}));
-            // if you're deleting the last photo
-            // 1 because of async lag, photos doesn't get updated immediately after dispatch
-            if (photos.length === 1) {
-                  dispatch(nextButtonEnabled(false));
+            if(product === "sameSize") {
+                  dispatch(photoDeleted({id: id}));
+                  // if you're deleting the last photo
+                  // 1 because of async lag, photos doesn't get updated immediately after dispatch
+                  if (photos.length === 1) {
+                        dispatch(nextButtonEnabled(false));
+                  }
+            } else if(product === "letras") {
+                  dispatch(photoUpdatedSrc({id: id, imgSrc: null, type: null}));
             }
       }
 
       return(
             <Box sx={{
-                  width: width,
-                  height: width,
-                  minWidth: width,
+                  width: hoverWidth,
+                  height: hoverWidth,
+                  minWidth: hoverWidth,
                   position: 'absolute',
                   zIndex: 2,
                   backgroundColor: 'rgb(0,0,0,0.3)'
             }}>
-                  { !onlyDelete && (<UploadPhotoCardHoverButton component="label" onClick={() => setOpenDialog(true)} sx={{
-                        position: 'absolute',
-                        top: 10,
-                        right: 10,
-                        padding: 3,
-                        borderRadius: 3
-                  }}>
-                        <CropIcon sx={{
-                              width: Math.round(width/10)
-                        }}/>
-                  </UploadPhotoCardHoverButton>
+                  { !noButtonShown && (
+                  <Fragment>
+                        <UploadPhotoCardHoverButton component="label" onClick={() => setOpenDialog(true)} sx={{
+                              position: 'absolute',
+                              top: 10,
+                              right: 10,
+                              padding: 3,
+                              borderRadius: 3
+                        }}>
+                              <CropIcon sx={{
+                                    width: 30
+                              }}/>
+                        </UploadPhotoCardHoverButton>
+                        
+                        <UploadPhotoCardHoverButton component="label" onClick={handleDelete} sx={{
+                              position: 'absolute',
+                              top: 68,
+                              right: 10,
+                              padding: 3,
+                              borderRadius: 3
+                        }}>
+                              <DeleteIcon sx={{
+                                    width: 30
+                              }}/>
+                        </UploadPhotoCardHoverButton>
+                  </Fragment>
                   )}
-                  <UploadPhotoCardHoverButton component="label" onClick={handleDelete} sx={{
-                        position: 'absolute',
-                        top: topPos(onlyDelete),
-                        right: 10,
-                        padding: 3,
-                        borderRadius: 3
-                  }}>
-                        <DeleteIcon sx={{
-                              width: 30
-                        }}/>
-                  </UploadPhotoCardHoverButton>
             </Box>
       );
 }

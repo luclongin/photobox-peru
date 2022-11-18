@@ -14,6 +14,7 @@ import AddCardButton from "./addCardButton/addCardButton.component";
 import Checkout from "../checkout/checkout.component";
 import { incrementStep, decrementStep } from "../../features/step/stepSlice";
 import Letras from "../secondStep/letras/letras.component";
+import { photoAdded } from "../../features/photoEdition/PhotoSlice";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -93,6 +94,12 @@ const ManageOrder = () => {
       }
 
       useEffect(() => {
+            if(step === 1 && selectedProduct === "letras") {
+                  dispatch(photoAdded("20x20"));
+                  dispatch(photoAdded("20x20"));
+                  dispatch(photoAdded("20x20"));
+            }
+
             if(step === 0) {
                   // back to product grid, starting from scratch
                   dispatch(allPhotosDeleted());
