@@ -46,7 +46,17 @@ const theme = createTheme({
         textDecoration: 'underline',
         textDecorationColor: '#FF66C4',
         textDecorationThickness: 3,
-      }
+      },
+      letrasinput: {
+        fontSize: '12.2em',
+        fontFamily: 'Arial',
+        fontWeight: 'bold',
+        margin: '0',
+        padding: '0',
+        position: 'absolute',
+        top: '-30px',
+        left: '10px'
+      },
     },
 });
 

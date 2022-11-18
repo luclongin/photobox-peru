@@ -12,19 +12,19 @@ import { uploadCroppedPhotos } from "../../features/order/orders";
       WILL BE DEPRECATED.
       Is the card that shows when calling the photoAdded() action.
 */
-const UploadPhotoCardEmpty = ({ id }) => {
+const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
 
       const PaperButton = styled(Paper) ({
             elevation: "2",
             display: 'flex',
-            width: 350,
-            minWidth: 350,
-            height: 350,
+            width: width,
+            minWidth: width,
+            height: width,
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: '10px',
+            borderRadius: '0',
             border: '2px color #666',
             "&:hover": {
                   backgroundColor: "rgb(100,100,100,0.8)",
@@ -47,7 +47,6 @@ const UploadPhotoCardEmpty = ({ id }) => {
                   type: e.target.files[0].type
             }));
 
-            
             //console.log("photos from empty: ", photos);
             dispatch(nextButtonEnabled(true));
       };
@@ -62,12 +61,16 @@ const UploadPhotoCardEmpty = ({ id }) => {
                   marginTop: 6
             }
       });
+      let relativeFontSize = '';
+      if (width < 350) {
+            relativeFontSize = '5em';
+      }
 
       return(
             <Fragment>
-                  <HoverBox>
+                  <HoverBox sx={{position: 'relative'}}>
                         <PaperButton>
-                              <AddIcon sx={{fontSize: '16em', color: '#F374E7'}}/>
+                                    <AddIcon sx={{fontSize: relativeFontSize, color: '#F374E7'}}/>
                               <Typography variant="h10" component="p" hidden style={{
                                     position: 'absolute',
                                     bottom: 0
@@ -76,8 +79,8 @@ const UploadPhotoCardEmpty = ({ id }) => {
                               </Typography>
                         </PaperButton>
                         <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
-                        <Box sx={{zIndex: 3, position: 'absolute', top: 0}} className="hidden-hover" >
-                              <UploadPhotoCardHover id={id} setOpenDialog={null} onlyDelete={true}/>
+                        <Box sx={{zIndex: 3, position: 'absolute', top: -6}} className="hidden-hover" >
+                              <UploadPhotoCardHover width={width} id={id} setOpenDialog={null} onlyDelete={true}/>
                         </Box>
                   </HoverBox>
             </Fragment>

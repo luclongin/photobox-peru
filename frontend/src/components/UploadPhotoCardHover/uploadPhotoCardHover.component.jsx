@@ -10,7 +10,7 @@ import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsS
       Card that appears when hovering over a photo. Gives the option to delete or crop.
 
 */
-const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{      
+const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete, width }) =>{      
       const dispatch = useDispatch();
       const UploadPhotoCardHoverButton = styled(IconButton) ({
             width: 30,
@@ -18,7 +18,6 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
             color:"primary",
             ariaLabel:"Crop Photo",
             backgroundColor: 'white',
-            borderRadius: '3px',
       });
 
       // WILL BE DEPRECATED
@@ -44,10 +43,9 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
 
       return(
             <Box sx={{
-                  width: 350,
-                  height: 350,
-                  minWidth: 350,
-                  borderRadius: 2,
+                  width: width,
+                  height: width,
+                  minWidth: width,
                   position: 'absolute',
                   zIndex: 2,
                   backgroundColor: 'rgb(0,0,0,0.3)'
@@ -60,7 +58,7 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, onlyDelete }) =>{
                         borderRadius: 3
                   }}>
                         <CropIcon sx={{
-                              width: 30
+                              width: Math.round(width/10)
                         }}/>
                   </UploadPhotoCardHoverButton>
                   )}

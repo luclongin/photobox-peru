@@ -11,7 +11,7 @@ const getAdditionalPhrases = data => {
 
 const deleteAdditionalPhrase = id => {
       return http.delete(`/orders/additionalPhrases/${id}`);
-    }
+}
 
 const AdditionalPhraseService = {
       createAdditionalPhrase,

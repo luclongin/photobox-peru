@@ -5,7 +5,6 @@ import { nextButtonEnabled, backButtonEnabled } from "../../features/handleFormB
 import AddPhrasePage from "../addPhrasePage/addPhrasePage.component";
 import ProductGrid from "../productGrid/productGrid.component";
 import SameSize from "../secondStep/sameSize/sameSize.component";
-import Sonados from "../secondStep/sonados/sonados.component";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import {styled, Box} from "@mui/material";
@@ -14,9 +13,9 @@ import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRound
 import AddCardButton from "./addCardButton/addCardButton.component";
 import Checkout from "../checkout/checkout.component";
 import { incrementStep, decrementStep } from "../../features/step/stepSlice";
+import Letras from "../secondStep/letras/letras.component";
 /*
       Main function of our application. Handles the navigation and rendering of components.
-
 */
 const ManageOrder = () => {
       const dispatch = useDispatch();
@@ -70,8 +69,8 @@ const ManageOrder = () => {
             switch (product) {
                   case 'sameSize':
                         return <SameSize />
-                  case 'sonados':
-                        return <Sonados />
+                  case 'letras':
+                        return <Letras />
                   default:
                         return <div>Step Two Not Found</div>
             }
@@ -175,7 +174,7 @@ const ManageOrder = () => {
                                     justifyContent: 'center'
                               }}>
                                     
-                                    {(step === 1) && (<AddCardButton />)}
+                                    {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton />)}
                                     
                                     <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
