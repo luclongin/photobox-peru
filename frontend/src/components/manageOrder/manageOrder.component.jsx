@@ -15,6 +15,7 @@ import Checkout from "../checkout/checkout.component";
 import { incrementStep, decrementStep } from "../../features/step/stepSlice";
 import Letras from "../secondStep/letras/letras.component";
 import { photoAdded } from "../../features/photoEdition/PhotoSlice";
+import { setLetters } from "../../features/lettersEdition/LettersSlice";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -33,6 +34,7 @@ const ManageOrder = () => {
       const enableBackButton = useSelector(state => state.formButtons.enableBackButton);
       const photos = useSelector(state => state.photos);
       const step = useSelector(state => state.step.value);
+      const letters = useSelector(state => state.letters);
 
       const NavigationButton = styled(Button)({
             borderRadius: 5,
@@ -55,8 +57,6 @@ const ManageOrder = () => {
                   case 1:
                         return renderStepTwoContent(selectedProduct);
                   case 2: 
-                        // sending step/setStep here because default nav buttons aren't used here
-                        // we're using a special button "hacer compra" that's inside the Cart component
                         return <AddPhrasePage />
                   case 3:
                         return <Checkout />
@@ -115,7 +115,11 @@ const ManageOrder = () => {
 
             // Case where you click back from Phrases step
             // and you have photos uploaded
-            if (step === 1 && photos.length > 0) {
+            if (step === 1 && selectedProduct==="sameSize" && photos.length > 0) {
+                  dispatch(nextButtonEnabled(true));
+            }
+
+            if (step === 1 && selectedProduct==="letras" && photos.length===3) {
                   dispatch(nextButtonEnabled(true));
             }
       }, [step])

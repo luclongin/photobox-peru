@@ -11,6 +11,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { createUser } from "../../features/userInfoUpload/userInfoUpload";
 import AddressAddition from "../addressAddition/addressAddition.component";
 import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
+import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const Checkout = () => {
       const delivery = useSelector(state => state.delivery);
       const userInfo = useSelector(state => state.userInfo);
       const additionalPhrases = useSelector(state => state.additionalPhrases);
-      
+      const letters = useSelector(state => state.letters);
+
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
       }
@@ -55,7 +57,6 @@ const Checkout = () => {
                   
                   dispatch(createAdditionalPhrase(phraseData)).unwrap()
                   .then(data => {
-                        console.log("OH YES");
                         console.log(data);
                   }).catch(e => {
                         console.log("merde addphrase", e);
@@ -141,11 +142,29 @@ const Checkout = () => {
             });
       }
 
+      const handleCreateLetter = async (e, orderId) => {
+            e.preventDefault();
+            const letterData = new FormData();
+            //create new letters input\
+            letterData.append('orderId', orderId);
+            letterData.append('letter1', letters.letter1);
+            letterData.append('letter2', letters.letter2);
+            letterData.append('letter3', letters.letter3);
+            dispatch(createLetter(letterData)).unwrap().then(data => {
+                  console.log(data);
+            }).catch(e => {
+                  console.log("oh merde letter", e);
+            })
+      }
+
       const handleCheckout = async e => {  
             const orderId = await handleCreateOrder(e);
             handlePhotoUpload(e, orderId);
             handleCreateUser(e);
             handleAdditionalPhrase(e, orderId);
+            if(letters.letter1) {
+                  handleCreateLetter(e, orderId);
+            }
       }
 
       return(

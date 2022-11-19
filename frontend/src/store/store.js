@@ -10,7 +10,8 @@ import OrderReducer from '../features/order/orders';
 import PhotoUploadReducer from '../features/photoUpload/photoUpload';
 import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
 import AdditionalPhraseUploadReducer from '../features/additionalPhraseUpload/additionalPhraseUploadSlice';
-
+import LettersReducer from '../features/lettersEdition/LettersSlice';
+import LetterUploadReducer from '../features/lettersUpload/lettersUploadSlice';
 
 export default configureStore({
       reducer: {
@@ -24,6 +25,8 @@ export default configureStore({
             orders: OrderReducer,
             uploadedPhotos: PhotoUploadReducer,
             uploadedUser: UserUploadReducer,
-            uploadedAdditionalPhrases: AdditionalPhraseUploadReducer
+            uploadedAdditionalPhrases: AdditionalPhraseUploadReducer,
+            letters: LettersReducer,
+            uploadedLetters: LetterUploadReducer,
       }
 });

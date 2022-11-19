@@ -3,7 +3,6 @@ import { Box, IconButton, styled } from "@mui/material";
 import { useSelector } from "react-redux";
 import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.component";
 import { Fragment } from "react";
-
 import UploadPhotoCardEmpty from "../uploadPhotoCardEmpty/uploadPhotoCardEmpty.component";
 /*
 Main photo card that displays uploaded image.

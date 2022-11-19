@@ -48,14 +48,14 @@ const theme = createTheme({
         textDecorationThickness: 3,
       },
       letrasinput: {
-        fontSize: '12.2em',
+        fontSize: '11em',
         fontFamily: 'Arial',
         fontWeight: 'bold',
         margin: '0',
         padding: '0',
         position: 'absolute',
-        top: '-30px',
-        left: '10px'
+        top: '-20px',
+        left: '15px'
       },
     },
 });

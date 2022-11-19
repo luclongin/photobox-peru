@@ -11,6 +11,8 @@ import { deleteOrder } from "../../features/order/orders";
 import { deleteUser } from "../../features/userInfoUpload/userInfoUpload";
 import { deletePhoto } from "../../features/photoUpload/photoUpload";
 import { deleteAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
+import { getLetters } from "../../features/lettersUpload/lettersUploadSlice";
+
 
 const AdminPage = () => {
       const dispatch = useDispatch();
@@ -18,7 +20,16 @@ const AdminPage = () => {
       const uploadedPhotos = useSelector(state => state.uploadedPhotos);
       const uploadedUsers = useSelector(state => state.uploadedUser);
       const uploadedPhrases = useSelector(state => state.uploadedAdditionalPhrases);
-      
+      const uploadedLetters = useSelector(state => state.uploadedLetters);
+
+      const initFetchLetters = useCallback(() => {
+            dispatch(getLetters());
+      }, [dispatch]);
+
+      useEffect(() => {
+            initFetchLetters()
+      }, [initFetchLetters])
+
       const initFetchOrders = useCallback(() => {
             dispatch(retrieveOrders());
       }, [dispatch]);
@@ -98,6 +109,15 @@ const AdminPage = () => {
                                                             }
                                                       })
                                                 }
+                                                <p>
+                                                      <b>Letters</b>
+                                                </p>
+                                                <p>
+                                                      <span>{uploadedLetters[0].letter1} </span>
+                                                      <span>{uploadedLetters[0].letter2} </span>
+                                                      <span>{uploadedLetters[0].letter3}</span>
+                                    
+                                                </p>
                                                 <Divider sx={{mt: 2, mb: 2}}></Divider>
                                                 {
                                                       uploadedPhrases.map((additionalPhrase, phraseIndex) => {

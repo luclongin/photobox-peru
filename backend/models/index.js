@@ -24,5 +24,6 @@ db.orders = require("./order.model.js")(sequelize, Sequelize);
 db.photos = require("./photo.model.js")(sequelize, Sequelize);
 db.users = require("./user.model.js")(sequelize, Sequelize);
 db.additionalPhrases = require("./additionalPhrase.model.js")(sequelize, Sequelize);
+db.letters = require('./letter.model.js')(sequelize, Sequelize);
 
 module.exports = db;

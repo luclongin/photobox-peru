@@ -3,6 +3,7 @@ module.exports = app => {
       const photos = require("../controllers/photo.controller.js");
       const users = require("../controllers/user.controller.js");
       const additionalPhrases = require("../controllers/additionalPhrase.controller");
+      const letters = require("../controllers/letters.controller");
 
       var router = require("express").Router();
 
@@ -26,6 +27,11 @@ module.exports = app => {
       router.post("/createAdditionalPhrase", additionalPhrases.createAdditionalPhrase);
       router.get("/additionalPhrases", additionalPhrases.getAdditionalPhrases);
       router.delete("/additionalPhrases/:id", additionalPhrases.delete);
+
+      // LETTERS
+      router.post("/createLetter", letters.createLetter);
+      router.get("/getLetters", letters.getLetters);
+      router.delete('letters/:id', letters.deleteLetters);
 
       // GENERAL
       app.use('/api/orders', router);

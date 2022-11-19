@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Box, Grid, InputLabel, Select, MenuItem, TextField, Button } from "@mui/material";
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsSlice";
 import lightWoodBackground from '../../images/lightWood.png';
 import darkWoodBackground from '../../images/darkWood.png';
@@ -18,7 +18,8 @@ import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 const AddPhraseContainer = () => {
       const defaultPhraseColor = 'lightWood';
       const dispatch = useDispatch();
-      
+      const letters = useSelector(state => state.letters);
+      console.log("letras", letters);
       // 2 backgrounds available for demo preview
       const backgrounds = {
             "lightWood": lightWoodBackground,
