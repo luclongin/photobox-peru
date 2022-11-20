@@ -25,8 +25,6 @@ const UploadPhotoCardWithImage = ({id, setOpenDialog, width="350px"}) => {
       } else {
             relativeBorderRadius = '10px';
       }
-
-      console.log("photo", photo);
       return(
             <Fragment>
                   {

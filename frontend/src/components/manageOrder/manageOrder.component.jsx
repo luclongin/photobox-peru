@@ -112,16 +112,16 @@ const ManageOrder = () => {
                   dispatch(backButtonEnabled(true));
                   dispatch(nextButtonEnabled(false));
             }
-
             // Case where you click back from Phrases step
             // and you have photos uploaded
-            if (step === 1 && selectedProduct==="sameSize" && photos.length > 0) {
+            /*if (step === 1 && selectedProduct==="sameSize" && photos.length > 0) {
                   dispatch(nextButtonEnabled(true));
-            }
-
+            }*/
+            /*
             if (step === 1 && selectedProduct==="letras" && photos.length===3) {
+                  console.log("YOYO");
                   dispatch(nextButtonEnabled(true));
-            }
+            }*/
       }, [step])
 
       const getBottomToolBarHeight = (step) => {

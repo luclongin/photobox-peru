@@ -11,6 +11,7 @@ import { uploadCroppedPhotos } from "../../features/order/orders";
 const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
+      const letters = useSelector(state => state.letters);
 
       const PaperButton = styled(Paper) ({
             elevation: "2",
@@ -42,9 +43,32 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                   imgSrc: imageBlob,
                   type: e.target.files[0].type
             }));
+            
+            // HANDLE NEXT BUTTON IF THREE PHOTOS
+            // INDEPENDENT FROM PHOTOS
+            // CASE: LAST IMAGE IS UPLOADED AND ALL LETTERS ARE ALREADY FILLED
+            let enableNext = true;
+            // because this is dispatch image, there is a lag of one photo
+            // so if we have 2 photos imgSrc already completed
+            // and this function is called, then that means that a 3rd one
+           
+            let imgCount = 0;
+            photos.map(photo => {
+                  if(photo.imgSrc !== null) {
+                        imgCount += 1;  
+                  }
+            });
+            if(imgCount < 2) {
+                  enableNext = false;
+            }
 
-            //console.log("photos from empty: ", photos);
-            dispatch(nextButtonEnabled(true));
+            const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
+            enableNext = enableNext && lettersAllFilled;
+            if(enableNext) {
+                  dispatch(nextButtonEnabled(true));
+            } else {
+                  dispatch(nextButtonEnabled(false));
+            }
       };
 
       // Needed for Hovering

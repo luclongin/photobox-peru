@@ -23,6 +23,7 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="35
       });
            
       const photos = useSelector(state => state.photos);
+      const letters = useSelector(state => state.letters);
       const product = useSelector(state => state.product);
 
       const handleDelete = () => {
@@ -35,6 +36,7 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="35
                   }
             } else if(product === "letras") {
                   dispatch(photoUpdatedSrc({id: id, imgSrc: null, type: null}));
+                  dispatch(nextButtonEnabled(false));
             }
       }
 

@@ -13,7 +13,6 @@ import { deletePhoto } from "../../features/photoUpload/photoUpload";
 import { deleteAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 import { getLetters } from "../../features/lettersUpload/lettersUploadSlice";
 
-
 const AdminPage = () => {
       const dispatch = useDispatch();
       const orders = useSelector(state => state.orders);
@@ -61,6 +60,8 @@ const AdminPage = () => {
       useEffect(() => {
             initFetchUploadedPhrases()
       }, [initFetchUploadedPhrases]);
+
+      console.log("letters", uploadedLetters);
 
       return(
             <Box sx={{justifyContent: 'center', display: 'flex', backgroundColor: '#eee'}}>
@@ -113,10 +114,19 @@ const AdminPage = () => {
                                                       <b>Letters</b>
                                                 </p>
                                                 <p>
-                                                      <span>{uploadedLetters[0].letter1} </span>
-                                                      <span>{uploadedLetters[0].letter2} </span>
-                                                      <span>{uploadedLetters[0].letter3}</span>
-                                    
+                                                      {
+                                                            uploadedLetters.map((letter, letterIndex) => {
+                                                                  if(letter.orderId === order.orderId) {
+                                                                        return(
+                                                                              <Fragment>
+                                                                                    <span key={letterIndex}>{letter.letter1}</span>
+                                                                                    <span key={letterIndex}>{letter.letter2}</span>
+                                                                                    <span key={letterIndex}>{letter.letter3}</span>
+                                                                              </Fragment>
+                                                                        );
+                                                                  }
+                                                            })
+                                                      }
                                                 </p>
                                                 <Divider sx={{mt: 2, mb: 2}}></Divider>
                                                 {
