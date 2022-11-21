@@ -23,7 +23,24 @@ const AddCardButton = () => {
                   imgSrc: imageBlob,
                   type: e.target.files[0].type
             }));
-            dispatch(nextButtonEnabled(true));
+
+            // ONLY AT LEAST 3
+            let enableNext = true;
+            // because this is dispatch image, there is a lag of one photo
+            // so if we have 2 photos imgSrc already completed
+            // and this function is called, then that means that a 3rd one
+           
+            let imgCount = 0;
+            photos.map(photo => {
+                  if(photo.imgSrc !== null) {
+                        imgCount += 1;  
+                  }
+            });
+            if(imgCount < 2) {
+                  enableNext = false;
+            }
+
+            //dispatch(nextButtonEnabled(true));
       }
 
       return(
