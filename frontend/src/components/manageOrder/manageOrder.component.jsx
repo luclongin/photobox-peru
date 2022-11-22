@@ -16,6 +16,7 @@ import { incrementStep, decrementStep } from "../../features/step/stepSlice";
 import Letras from "../secondStep/letras/letras.component";
 import { photoAdded } from "../../features/photoEdition/PhotoSlice";
 import { setLetters } from "../../features/lettersEdition/LettersSlice";
+import GiftCard from "../secondStep/giftCard/giftCard.component";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -72,6 +73,8 @@ const ManageOrder = () => {
                         return <SameSize />
                   case 'letras':
                         return <Letras />
+                  case 'giftCard':
+                        return <GiftCard />
                   default:
                         return <div>Step Two Not Found</div>
             }
@@ -112,16 +115,7 @@ const ManageOrder = () => {
                   dispatch(backButtonEnabled(true));
                   dispatch(nextButtonEnabled(false));
             }
-            // Case where you click back from Phrases step
-            // and you have photos uploaded
-            /*if (step === 1 && selectedProduct==="sameSize" && photos.length > 0) {
-                  dispatch(nextButtonEnabled(true));
-            }*/
-            /*
-            if (step === 1 && selectedProduct==="letras" && photos.length===3) {
-                  console.log("YOYO");
-                  dispatch(nextButtonEnabled(true));
-            }*/
+            
       }, [step])
 
       const getBottomToolBarHeight = (step) => {
@@ -171,7 +165,7 @@ const ManageOrder = () => {
 
 
                   {
-                  step < 2 && (
+                  (step < 2) && (
                   <Box sx={{
                         height: getBottomToolBarHeight(step),
                   }}>
@@ -187,6 +181,7 @@ const ManageOrder = () => {
                                     
                                     {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton />)}
                                     
+                                    {(selectedProduct!=="giftCard") &&
                                     <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
                                                 position: 'absolute',
@@ -194,7 +189,7 @@ const ManageOrder = () => {
                                           }}>
                                           Siguiente
                                     </NavigationButton>
-                                    
+                                    }
                               </Toolbar>
                         </AppBar>
                   </Box>

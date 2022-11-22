@@ -33,6 +33,11 @@ module.exports = app => {
       router.get("/getLetters", letters.getLetters);
       router.delete('letters/:id', letters.deleteLetters);
 
+      // GIFT VOUCHES
+      router.post("/createVoucher", vouchers.createVoucher);
+      router.get("/vouchers", vouchers.getVouchers);
+      router.delete("/vouchers/:id", vouchers.deleteVoucher);
+
       // GENERAL
       app.use('/api/orders', router);
 };

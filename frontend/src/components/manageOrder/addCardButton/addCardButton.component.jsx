@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { photoDirectAdded, photoUpdatedSrc } from "../../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
 import { Fragment } from "react";
@@ -12,6 +12,7 @@ import theme from "../../../utils/theme";
 */
 const AddCardButton = () => {
       const dispatch = useDispatch();
+      const photos = useSelector(state => state.photos);
 
       const handleImage = (e) => {
             
@@ -40,7 +41,9 @@ const AddCardButton = () => {
                   enableNext = false;
             }
 
-            //dispatch(nextButtonEnabled(true));
+            if(enableNext) {
+                  dispatch(nextButtonEnabled(true));
+            }
       }
 
       return(

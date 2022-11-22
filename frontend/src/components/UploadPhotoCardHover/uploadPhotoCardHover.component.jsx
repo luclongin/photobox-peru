@@ -31,7 +31,7 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="35
                   dispatch(photoDeleted({id: id}));
                   // if you're deleting the last photo
                   // 1 because of async lag, photos doesn't get updated immediately after dispatch
-                  if (photos.length === 1) {
+                  if (photos.length < 4) {
                         dispatch(nextButtonEnabled(false));
                   }
             } else if(product === "letras") {
