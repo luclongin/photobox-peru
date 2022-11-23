@@ -12,6 +12,8 @@ import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
 import AdditionalPhraseUploadReducer from '../features/additionalPhraseUpload/additionalPhraseUploadSlice';
 import LettersReducer from '../features/lettersEdition/LettersSlice';
 import LetterUploadReducer from '../features/lettersUpload/lettersUploadSlice';
+import GiftCardUploadReducer from '../features/giftCardUpload/giftCardUpload';
+import GiftCardReducer from '../features/giftCard/giftCardSlice';
 
 export default configureStore({
       reducer: {
@@ -28,5 +30,7 @@ export default configureStore({
             uploadedAdditionalPhrases: AdditionalPhraseUploadReducer,
             letters: LettersReducer,
             uploadedLetters: LetterUploadReducer,
+            uploadedGiftCards: GiftCardUploadReducer,
+            giftcard: GiftCardReducer
       }
 });

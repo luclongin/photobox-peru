@@ -13,8 +13,13 @@ const deleteGiftCard = id => {
       return http.delete(`/orders/giftCards/${id}`);
 }
 
+const checkGiftCard = giftCardId => {
+      return http.get(`/orders/checkGiftCard/${giftCardId}`);
+}
+
 const GiftCardService = {
     createGiftCard,
+    checkGiftCard,
     getGiftCards,
     deleteGiftCard
 };  

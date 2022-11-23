@@ -17,6 +17,7 @@ import Letras from "../secondStep/letras/letras.component";
 import { photoAdded } from "../../features/photoEdition/PhotoSlice";
 import { setLetters } from "../../features/lettersEdition/LettersSlice";
 import GiftCard from "../secondStep/giftCard/giftCard.component";
+import DisplayGiftCard from "../displayGiftCard/displayGiftCard.component";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -58,11 +59,24 @@ const ManageOrder = () => {
                   case 1:
                         return renderStepTwoContent(selectedProduct);
                   case 2: 
-                        return <AddPhrasePage />
+                        return renderStepThreeContent(selectedProduct);
                   case 3:
                         return <Checkout />
                   default:
                         return <div>Not Found</div>
+            }
+      }
+
+      const renderStepThreeContent = (selectedProduct) => {
+            switch (selectedProduct) {
+                  case 'sameSize':
+                        return <AddPhrasePage />
+                  case 'letras':
+                        return <AddPhrasePage />
+                  case 'giftCard':
+                        return <DisplayGiftCard />
+                  default:
+                        return <div>Step Three Not Found</div>
             }
       }
 
@@ -114,6 +128,12 @@ const ManageOrder = () => {
                   showBackButton();
                   dispatch(backButtonEnabled(true));
                   dispatch(nextButtonEnabled(false));
+            }
+
+            if(step === 2 && selectedProduct === "giftCard") {
+                  hideBackButton();
+                  dispatch(backButtonEnabled(false));
+
             }
             
       }, [step])
@@ -181,7 +201,11 @@ const ManageOrder = () => {
                                     
                                     {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton />)}
                                     
-                                    {(selectedProduct!=="giftCard") &&
+                                    {// do not show button if step is 1 and product is giftcard
+                                          // negation is show this button if step is different than 1
+                                          // and if product is not giftcard in step 1
+                                    }
+                                    {(selectedProduct==="giftCard") && (step === 1) ? null :
                                     <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
                                                 position: 'absolute',

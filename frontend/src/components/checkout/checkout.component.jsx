@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, Divider, Button, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Divider, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Button, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, Typography, TextField } from "@mui/material";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 import Cart from "../cart/cart.component";
 import AddressDialog from "../addressDialog/addressDialog.component";
@@ -12,6 +12,9 @@ import { createUser } from "../../features/userInfoUpload/userInfoUpload";
 import AddressAddition from "../addressAddition/addressAddition.component";
 import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
+import SearchIcon from '@mui/icons-material/Search';
+import CheckIcon from '@mui/icons-material/Check';
+import { checkGiftCard } from "../../features/giftCardUpload/giftCardUpload";
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -21,6 +24,8 @@ const Checkout = () => {
       const userInfo = useSelector(state => state.userInfo);
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const letters = useSelector(state => state.letters);
+
+      const [discountCode, setDiscountCode] = useState("");
 
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -167,6 +172,21 @@ const Checkout = () => {
             }
       }
 
+      const handleDiscountChange = (e) => {
+            setDiscountCode(e.target.value);
+      }
+
+      const handleDiscount = () => {
+            dispatch(checkGiftCard(discountCode)).then(res => {
+                  if(res.payload !== false) {
+                        // if discount exists
+                        
+                  } else {
+                        // if discount doesn't exist
+                  }
+            })
+      }
+
       return(
             <Box>
                   <Grid container sx={{
@@ -202,7 +222,7 @@ const Checkout = () => {
                               <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
                               
                               <Grid container>
-                                    <Grid item xs={12} display="flex"> 
+                                    <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
                                                 <Typography variant="orderh1" sx={{textAlign: 'left', mt: 2}}>
@@ -211,8 +231,43 @@ const Checkout = () => {
                                                 <AddressAddition />
                                           </FormGroup>
                                     </Grid>
+
+                                    <Grid item xs={6} display="flex">
+                                          <FormGroup>
+                                                <Typography variant="orderh1" sx={{textAlign: 'left', mt: 2}}>
+                                                Descuentos
+                                          </Typography>
+
+                                          <FormControl sx={{mt: 2}}>
+                                                <InputLabel htmlFor="outlined-adornment-discount">Añadir descuento</InputLabel>
+                                                <OutlinedInput
+                                                      label="Mi descuento"
+                                                      id="outlined-adornment-discount"
+                                                      size="medium"
+                                                      value={discountCode}
+                                                      onChange={handleDiscountChange}
+                                                      endAdornment={
+                                                            <InputAdornment position="end">
+                                                                  <IconButton
+                                                                        aria-label="toggle search"
+                                                                        edge="end"
+                                                                        onClick={handleDiscount}
+                                                                  >
+                                                                        <SearchIcon/>
+                                                                  </IconButton>
+                                                            </InputAdornment>
+                                                      }
+                                                      sx={{
+                                                      }}
+                                                />
+                                                </FormControl>
+                                                </FormGroup>
+                                    </Grid>
                               </Grid>
+
+
                               <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
+
                               <Grid container>
                                     <Grid item xs={12} display="flex"> 
                                           <FormGroup sx={{

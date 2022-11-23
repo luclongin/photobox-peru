@@ -22,10 +22,7 @@ export const retrieveOrders = createAsyncThunk(
 export const deleteOrder = createAsyncThunk(
       "orders/delete",
       async (orderId) => {
-            console.log("deletethunkbefore");
-            console.log("id: ", orderId);
             const res = await OrderService.deleteOrder(orderId);
-            console.log("deletethunkafter");
             return res.data;
       }
 )

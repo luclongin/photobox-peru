@@ -14,9 +14,7 @@ export const createLetter = createAsyncThunk(
 export const getLetters = createAsyncThunk(
       "orders/getLetters",
       async () => {
-            console.log("thunkbefore");
             const res = await LetterService.getLetters();
-            console.log("thunkafter");
             return res.data;
       }
 );

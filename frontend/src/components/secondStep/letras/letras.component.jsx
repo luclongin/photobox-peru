@@ -47,21 +47,6 @@ const Letras = () => {
     const addedPhotos = useSelector(state => state.photos);   
     const [letters, setLetters] = useState({letter1: "", letter2: "&", letter3: ""});
     
-    /*const handleNextButton = () => {
-        let enableNext = true;
-        addedPhotos.forEach(photo => {
-            enableNext = enableNext && (photo.imgSrc !== null);
-        })
-        const lettersAllFilled = (letters.letter1 !== null) && (letters.letter2 !== null) && (letters.letter3 !== null);
-        enableNext = enableNext && lettersAllFilled;
-        if(enableNext) {
-            dispatch(nextButtonEnabled(true));
-        } else {
-            dispatch(nextButtonEnabled(false));
-        }
-        return enableNext;
-    }*/
-
     const textOnChangeHandler = (e, letterOrder) => {
         const letter = e.target.value;
         if(letter === "Q") {

@@ -14,9 +14,7 @@ export const createAdditionalPhrase = createAsyncThunk(
 export const getAdditionalPhrases = createAsyncThunk(
       "orders/getAdditionalPhrases",
       async () => {
-            console.log("thunkbefore");
             const res = await AdditionalPhraseService.getAdditionalPhrases();
-            console.log("thunkafter");
             return res.data;
       }
 );

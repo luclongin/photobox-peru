@@ -1,23 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-    const GiftVouchers = sequelize.define("giftVouchers", {
-            voucherId: {
+    const GiftCards = sequelize.define("giftCards", {
+            giftCardId: {
                     type: Sequelize.STRING,
                     allowNull: false,
                     primaryKey: true
             },
-            userId: {
+            giftCardAmount: {
                     type: Sequelize.STRING,
                     allowNull: false,
             },
-            voucherAmount: {
-                    type: Sequelize.STRING,
-                    allowNull: false,
-            },
-            voucherDate: {
+            giftCardDate: {
                     type: Sequelize.STRING,
                     allowNull: false,
             }
     });
-    GiftVouchers.removeAttribute('id');
-    return GiftVouchers;
+    GiftCards.removeAttribute('id');
+    return GiftCards;
 };

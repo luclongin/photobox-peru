@@ -4,7 +4,7 @@ module.exports = app => {
       const users = require("../controllers/user.controller.js");
       const additionalPhrases = require("../controllers/additionalPhrase.controller");
       const letters = require("../controllers/letters.controller");
-
+      const giftCards = require("../controllers/giftCards.controller")
       var router = require("express").Router();
 
       // PHOTO HANDLER
@@ -34,9 +34,10 @@ module.exports = app => {
       router.delete('letters/:id', letters.deleteLetters);
 
       // GIFT VOUCHES
-      router.post("/createVoucher", vouchers.createVoucher);
-      router.get("/vouchers", vouchers.getVouchers);
-      router.delete("/vouchers/:id", vouchers.deleteVoucher);
+      router.post("/createGiftCard", giftCards.createGiftCard);
+      router.get("/getGiftCards", giftCards.getGiftCards);
+      router.delete("/giftCards/:id", giftCards.deleteGiftCard);
+      router.get("/checkGiftCard/:giftCardId", giftCards.checkGiftCard);
 
       // GENERAL
       app.use('/api/orders', router);

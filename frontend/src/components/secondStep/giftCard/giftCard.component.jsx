@@ -3,11 +3,32 @@ import { OrderStepSubtitle, OrderStepTitle } from "../../OrderStepTitle/orderSte
 import VoucherImage from '../../../images/voucher.png';
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { createGiftCard } from "../../../features/giftCardUpload/giftCardUpload";
+import { nanoid } from "@reduxjs/toolkit";
+import { setGiftCard } from "../../../features/giftCard/giftCardSlice";
+import { incrementStep } from "../../../features/step/stepSlice";
 
 const GiftCard = () => {
+    const dispatch = useDispatch();
 
     const handleSubmitGiftCard = (e) => {
-        
+        e.preventDefault();
+        let giftCardData = new FormData();
+        const giftCardId = nanoid();
+        giftCardData.append('giftCardId', giftCardId);
+        giftCardData.append('giftCardAmount', finalAmount);
+        const dateOfCreation = new Date().toISOString();
+        giftCardData.append('giftCardDate', dateOfCreation);
+        if(giftCardId !== "" && finalAmount !== "" && dateOfCreation !== "") {
+            dispatch(setGiftCard({
+                giftCardId: giftCardId,
+                giftCardAmount: finalAmount,
+                giftCardDate: dateOfCreation
+            }));
+        }
+        dispatch(createGiftCard(giftCardData));
+        dispatch(incrementStep());
     }
 
 
