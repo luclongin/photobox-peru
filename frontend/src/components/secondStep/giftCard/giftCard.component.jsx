@@ -4,10 +4,10 @@ import VoucherImage from '../../../images/voucher.png';
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { createGiftCard } from "../../../features/giftCardUpload/giftCardUpload";
+import { createDiscount } from "../../../features/discountUpload/discountUpload";
 import { nanoid } from "@reduxjs/toolkit";
-import { setGiftCard } from "../../../features/giftCard/giftCardSlice";
 import { incrementStep } from "../../../features/step/stepSlice";
+import { setGiftCard } from "../../../features/giftCard/giftCardSlice";
 
 const GiftCard = () => {
     const dispatch = useDispatch();
@@ -16,10 +16,14 @@ const GiftCard = () => {
         e.preventDefault();
         let giftCardData = new FormData();
         const giftCardId = nanoid();
-        giftCardData.append('giftCardId', giftCardId);
-        giftCardData.append('giftCardAmount', finalAmount);
+        giftCardData.append('discountId', giftCardId);
+        giftCardData.append('discountType', 'giftCard');
+        giftCardData.append('discountAmount', finalAmount);
+        giftCardData.append('discountPercentage', "");
         const dateOfCreation = new Date().toISOString();
-        giftCardData.append('giftCardDate', dateOfCreation);
+        giftCardData.append('discountStartDate', dateOfCreation);
+        giftCardData.append('discountEndDate', "");
+        giftCardData.append('discountUsedAddresses', "");
         if(giftCardId !== "" && finalAmount !== "" && dateOfCreation !== "") {
             dispatch(setGiftCard({
                 giftCardId: giftCardId,
@@ -27,7 +31,7 @@ const GiftCard = () => {
                 giftCardDate: dateOfCreation
             }));
         }
-        dispatch(createGiftCard(giftCardData));
+        dispatch(createDiscount(giftCardData));
         dispatch(incrementStep());
     }
 

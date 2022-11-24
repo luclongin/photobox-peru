@@ -12,9 +12,9 @@ import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
 import AdditionalPhraseUploadReducer from '../features/additionalPhraseUpload/additionalPhraseUploadSlice';
 import LettersReducer from '../features/lettersEdition/LettersSlice';
 import LetterUploadReducer from '../features/lettersUpload/lettersUploadSlice';
-import GiftCardUploadReducer from '../features/giftCardUpload/giftCardUpload';
+import DiscountAmountReducer from '../features/discountAmount/discountAmountSlice';
+import DiscountUploadReducer from '../features/discountUpload/discountUpload';
 import GiftCardReducer from '../features/giftCard/giftCardSlice';
-import DiscountReducer from '../features/discount/discountSlice';
 
 export default configureStore({
       reducer: {
@@ -31,8 +31,8 @@ export default configureStore({
             uploadedAdditionalPhrases: AdditionalPhraseUploadReducer,
             letters: LettersReducer,
             uploadedLetters: LetterUploadReducer,
-            uploadedGiftCards: GiftCardUploadReducer,
-            giftcard: GiftCardReducer,
-            discountAmount: DiscountReducer
+            uploadedDiscounts: DiscountUploadReducer,
+            discountAmount: DiscountAmountReducer,
+            giftcard: GiftCardReducer
       }
 });

@@ -13,12 +13,12 @@ import AddressAddition from "../addressAddition/addressAddition.component";
 import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
 import SearchIcon from '@mui/icons-material/Search';
-import { checkGiftCard } from "../../features/giftCardUpload/giftCardUpload";
-import { setDiscountAmount } from "../../features/discount/discountSlice";
+import { checkDiscount } from "../../features/discountUpload/discountUpload";
+import { setDiscountAmount } from "../../features/discountAmount/discountAmountSlice";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Fragment } from "react";
-import { deleteGiftCard } from "../../features/giftCardUpload/giftCardUpload";
+import { deleteDiscount } from "../../features/discountUpload/discountUpload";
 import { useEffect } from "react";
 
 const Checkout = () => {
@@ -185,7 +185,7 @@ const Checkout = () => {
             if(discountApplied) {
                   // if there is an applied discount
                   // remove discount from db
-                  dispatch(deleteGiftCard(discountCode));
+                  dispatch(deleteDiscount(discountCode));
             } 
       }
 
@@ -197,7 +197,7 @@ const Checkout = () => {
       }
 
       const handleDiscount = () => {
-            dispatch(checkGiftCard(discountCode)).then(res => {
+            dispatch(checkDiscount(discountCode)).then(res => {
                   if(res.payload !== false) {
                         setDiscountApplied(true);
                         setDiscountCodeFailed(false);

@@ -7,6 +7,7 @@ const DisplayGiftCard = () => {
     const giftcard = useSelector(state => state.giftcard);
     console.log("giftcard:", giftcard);
     const day = giftcard.giftCardDate;
+    
     const date = day.split("T")[0].split('-').reverse().join('/');
     const hour = day.split("T")[1].split(":")[0];
     const minutes = day.split("T")[1].split(":")[1];
