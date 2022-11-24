@@ -30,9 +30,9 @@ const GiftCard = () => {
                 giftCardAmount: finalAmount,
                 giftCardDate: dateOfCreation
             }));
+            dispatch(createDiscount(giftCardData));
+            dispatch(incrementStep());
         }
-        dispatch(createDiscount(giftCardData));
-        dispatch(incrementStep());
     }
 
 
