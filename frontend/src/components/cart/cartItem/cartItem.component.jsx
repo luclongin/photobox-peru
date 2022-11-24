@@ -2,9 +2,10 @@ import { Box, Grid, Typography, IconButton } from "@mui/material";
 import React, {useState} from "react";
 import theme from "../../../utils/theme";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { allPhotosDeleted } from "../../../features/photoEdition/PhotoSlice";
 import { phraseDeleted } from "../../../features/additionalPhrase/AdditionalPhraseSlice";
+
 const CartItem = ({id, title, image, quantity, price, cartCount, setCartCount}) => {
       const dispatch = useDispatch();
       

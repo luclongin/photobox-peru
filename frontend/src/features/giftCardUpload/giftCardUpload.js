@@ -21,7 +21,7 @@ export const checkGiftCard = createAsyncThunk(
                   // if the discount exists
                   result = {
                         discountId: res.data.id,
-                        discountAmout: res.data.amount
+                        discountAmount: res.data.amount
                   }
             } else {
                   // if the discount is wrong

@@ -14,6 +14,7 @@ import LettersReducer from '../features/lettersEdition/LettersSlice';
 import LetterUploadReducer from '../features/lettersUpload/lettersUploadSlice';
 import GiftCardUploadReducer from '../features/giftCardUpload/giftCardUpload';
 import GiftCardReducer from '../features/giftCard/giftCardSlice';
+import DiscountReducer from '../features/discount/discountSlice';
 
 export default configureStore({
       reducer: {
@@ -31,6 +32,7 @@ export default configureStore({
             letters: LettersReducer,
             uploadedLetters: LetterUploadReducer,
             uploadedGiftCards: GiftCardUploadReducer,
-            giftcard: GiftCardReducer
+            giftcard: GiftCardReducer,
+            discountAmount: DiscountReducer
       }
 });

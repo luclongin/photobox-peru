@@ -15,7 +15,8 @@ const Cart = () => {
       const product = useSelector(state => state.product);
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
       const delivery = useSelector(state => state.delivery);
-
+      const appliedDiscount = useSelector(state => state.discountAmount);
+      
       const handleClick = () => {
             dispatch(incrementStep());
       }
@@ -25,6 +26,11 @@ const Cart = () => {
             if(photos.length === 0 && addedPhrases.length === 0) {
                   dispatch(setStep(0));
             }
+      }
+
+      let finalPrice = totalPrice + getPrice("delivery", delivery) - appliedDiscount;
+      if(finalPrice < 0) {
+            finalPrice=0;
       }
 
       restartProcessOrNot();
@@ -96,12 +102,23 @@ const Cart = () => {
                                           delivery === "gratis" ? "GRATIS" : "14 S/"
                                     }</Typography>            
                               </Grid>
+                              { appliedDiscount > 0 ?
+                              <Grid item xs={9} justifyContent="space-between" display="flex" sx={{
+                                    mt: 1
+                              }}>
+                                    <Typography variant="carth1gray">Descuento</Typography>      
+                                    <Typography variant="carth1gray">
+                                          {appliedDiscount} S/
+                                    </Typography>            
+                              </Grid>
+                              : null
+                              }
                         </Grid>      
                         <Divider variant="middle" sx={{mt: 2, mb: 2}}/>  
                         <Grid container justifyContent="center">
                               <Grid item xs={9} justifyContent="space-between" display="flex">
                                     <Typography variant="carth1">Total</Typography>
-                                    <Typography variant="carth1">{totalPrice + getPrice("delivery", delivery)} S/</Typography>
+                                    <Typography variant="carth1">{finalPrice} S/</Typography>
                               </Grid>
                         </Grid>
                         <Button variant="contained" sx={{

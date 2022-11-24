@@ -16,7 +16,7 @@ const GiftCardSlice = createSlice({
                         console.log("newState", newState);
                         return newState;
                   }
-              },
+            },
             deleteGiftCard: (state) => {
                   return initialState
             }
