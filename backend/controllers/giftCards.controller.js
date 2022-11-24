@@ -72,6 +72,7 @@ exports.checkGiftCard = (req, res) => {
 }
 
 exports.deleteGiftCard = (req, res) => {
+    console.log("deleting gift card");
       const id = req.params.giftCardId;
       GiftCards.destroy({
         where: {giftCardId: id}

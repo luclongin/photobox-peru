@@ -36,7 +36,7 @@ module.exports = app => {
       // GIFT VOUCHES
       router.post("/createGiftCard", giftCards.createGiftCard);
       router.get("/getGiftCards", giftCards.getGiftCards);
-      router.delete("/giftCards/:id", giftCards.deleteGiftCard);
+      router.delete("/giftCards/:giftCardId", giftCards.deleteGiftCard);
       router.get("/checkGiftCard/:giftCardId", giftCards.checkGiftCard);
 
       // GENERAL

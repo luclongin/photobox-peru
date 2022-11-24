@@ -18,6 +18,8 @@ import { setDiscountAmount } from "../../features/discount/discountSlice";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Fragment } from "react";
+import { deleteGiftCard } from "../../features/giftCardUpload/giftCardUpload";
+import { useEffect } from "react";
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -30,6 +32,11 @@ const Checkout = () => {
       const [discountCode, setDiscountCode] = useState("");
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
+
+      useEffect(() => {
+            console.log("discountApplied from checkout:", discountApplied);
+      }, [discountApplied]);
+
 
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -174,6 +181,12 @@ const Checkout = () => {
             if(letters.letter1) {
                   handleCreateLetter(e, orderId);
             }
+            console.log("discountApplied from handleCheckout", discountApplied);
+            if(discountApplied) {
+                  // if there is an applied discount
+                  // remove discount from db
+                  dispatch(deleteGiftCard(discountCode));
+            } 
       }
 
       const handleDiscountChange = (e) => {
@@ -186,8 +199,6 @@ const Checkout = () => {
       const handleDiscount = () => {
             dispatch(checkGiftCard(discountCode)).then(res => {
                   if(res.payload !== false) {
-                        // if discount exists
-                        //console.log("res.payload:", res.payload);
                         setDiscountApplied(true);
                         setDiscountCodeFailed(false);
                         dispatch(setDiscountAmount(res.payload.discountAmount));

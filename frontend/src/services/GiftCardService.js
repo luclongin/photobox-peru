@@ -9,8 +9,8 @@ const getGiftCards = data => {
       return http.get("/orders/getGiftCards", data);
 }
 
-const deleteGiftCard = id => {
-      return http.delete(`/orders/giftCards/${id}`);
+const deleteGiftCard = giftCardId => {
+      return http.delete(`/orders/giftCards/${giftCardId}`);
 }
 
 const checkGiftCard = giftCardId => {

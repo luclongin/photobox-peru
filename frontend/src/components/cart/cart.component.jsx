@@ -16,6 +16,7 @@ const Cart = () => {
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
       const delivery = useSelector(state => state.delivery);
       const appliedDiscount = useSelector(state => state.discountAmount);
+      console.log("appliedDiscount from cart:", appliedDiscount);
       
       const handleClick = () => {
             dispatch(incrementStep());

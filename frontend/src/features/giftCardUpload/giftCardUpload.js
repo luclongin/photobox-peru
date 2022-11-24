@@ -40,9 +40,11 @@ export const getGiftCards = createAsyncThunk(
 );
 
 export const deleteGiftCard = createAsyncThunk(
-      "orders/deleteGiftCard",
+      "orders/giftCards",
       async (giftCardId) => {
+            console.log("thunkbefore");
             const res = await GiftCardService.deleteGiftCard(giftCardId);
+            console.log("thunkafter");
             return res.data;
       }
 )
