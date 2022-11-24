@@ -1,3 +1,4 @@
 node_modules
 yarn.lock
 backend/public/uploads
+frontend/yarn-error.log
