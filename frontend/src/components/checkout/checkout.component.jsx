@@ -14,7 +14,7 @@ import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/ad
 import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
 import SearchIcon from '@mui/icons-material/Search';
 import { checkDiscount } from "../../features/discountUpload/discountUpload";
-import { setDiscountAmount } from "../../features/discountAmount/discountAmountSlice";
+import { setAppliedDiscount, setDiscountAmount } from "../../features/appliedDiscount/appliedDiscountSlice";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Fragment } from "react";
@@ -32,11 +32,6 @@ const Checkout = () => {
       const [discountCode, setDiscountCode] = useState("");
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
-
-      useEffect(() => {
-            console.log("discountApplied from checkout:", discountApplied);
-      }, [discountApplied]);
-
 
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -200,21 +195,36 @@ const Checkout = () => {
             dispatch(checkDiscount(discountCode)).then(res => {
                   if(res.payload !== false) {
                         setDiscountApplied(true);
-                        setDiscountCodeFailed(false);
-                        dispatch(setDiscountAmount(res.payload.discountAmount));
+                        setDiscountCodeFailed(false);     
+                        let amount = null;
+                        let typeOfDiscount = "";
+                        if(res.payload.discountAmount !== "") {
+                              amount = res.payload.discountAmount;
+                              typeOfDiscount = "amount";
+                        } else {
+                              amount = res.payload.discountPercentage;
+                              typeOfDiscount = "percentage";
+                        }
+                        dispatch(setAppliedDiscount({
+                              type: typeOfDiscount,
+                              value: amount
+                        }));
                   } else {
                         // if discount doesn't exist
                         // error message
                         setDiscountCodeFailed(true);
                   }
-            })
+            });
       }
 
       const handleRemoveDiscount = () => {
             setDiscountCode("");
             setDiscountApplied(null);
             setDiscountCodeFailed(false);
-            dispatch(setDiscountAmount(null));
+            dispatch(setAppliedDiscount({
+                  type: "",
+                  value: ""
+            }));
       }
 
       return(

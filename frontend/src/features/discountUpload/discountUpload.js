@@ -21,7 +21,9 @@ export const checkDiscount = createAsyncThunk(
                   // if the discount exists
                   result = {
                         discountId: res.data.id,
-                        discountAmount: res.data.amount
+                        discountAmount: res.data.amount,
+                        discountType: res.data.type,
+                        discountPercentage: res.data.percentage
                   }
             } else {
                   // if the discount is wrong

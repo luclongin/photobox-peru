@@ -12,7 +12,7 @@ import UserUploadReducer from '../features/userInfoUpload/userInfoUpload';
 import AdditionalPhraseUploadReducer from '../features/additionalPhraseUpload/additionalPhraseUploadSlice';
 import LettersReducer from '../features/lettersEdition/LettersSlice';
 import LetterUploadReducer from '../features/lettersUpload/lettersUploadSlice';
-import DiscountAmountReducer from '../features/discountAmount/discountAmountSlice';
+import AppliedDiscountReducer from '../features/appliedDiscount/appliedDiscountSlice';
 import DiscountUploadReducer from '../features/discountUpload/discountUpload';
 import GiftCardReducer from '../features/giftCard/giftCardSlice';
 
@@ -32,7 +32,7 @@ export default configureStore({
             letters: LettersReducer,
             uploadedLetters: LetterUploadReducer,
             uploadedDiscounts: DiscountUploadReducer,
-            discountAmount: DiscountAmountReducer,
+            appliedDiscount: AppliedDiscountReducer,
             giftcard: GiftCardReducer
       }
 });

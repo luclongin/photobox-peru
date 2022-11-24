@@ -15,8 +15,7 @@ const Cart = () => {
       const product = useSelector(state => state.product);
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
       const delivery = useSelector(state => state.delivery);
-      const appliedDiscount = useSelector(state => state.discountAmount);
-      console.log("appliedDiscount from cart:", appliedDiscount);
+      const appliedDiscount = useSelector(state => state.appliedDiscount);
       
       const handleClick = () => {
             dispatch(incrementStep());
@@ -29,7 +28,14 @@ const Cart = () => {
             }
       }
 
-      let finalPrice = totalPrice + getPrice("delivery", delivery) - appliedDiscount;
+      let finalPrice = totalPrice + getPrice("delivery", delivery);
+      if(appliedDiscount.type === "amount") {
+            finalPrice = totalPrice + getPrice("delivery", delivery) - appliedDiscount.value;
+      } else if (appliedDiscount.type === "percentage") {
+            // toFixed(2) fixes the total amount to 2 decimals always
+            finalPrice = ((1-(appliedDiscount.value/100))*(totalPrice + getPrice("delivery", delivery))).toFixed(2);
+      } 
+
       if(finalPrice < 0) {
             finalPrice=0;
       }
@@ -103,13 +109,24 @@ const Cart = () => {
                                           delivery === "gratis" ? "GRATIS" : "14 S/"
                                     }</Typography>            
                               </Grid>
-                              { appliedDiscount > 0 ?
+                              { appliedDiscount.type === "amount" ?
                               <Grid item xs={9} justifyContent="space-between" display="flex" sx={{
                                     mt: 1
                               }}>
                                     <Typography variant="carth1gray">Descuento</Typography>      
                                     <Typography variant="carth1gray">
-                                          {appliedDiscount} S/
+                                          {appliedDiscount.value} S/
+                                    </Typography>            
+                              </Grid>
+                              : null
+                              }
+                              { appliedDiscount.type === "percentage" ?
+                              <Grid item xs={9} justifyContent="space-between" display="flex" sx={{
+                                    mt: 1
+                              }}>
+                                    <Typography variant="carth1gray">Descuento</Typography>      
+                                    <Typography variant="carth1gray">
+                                          {appliedDiscount.value} %
                                     </Typography>            
                               </Grid>
                               : null

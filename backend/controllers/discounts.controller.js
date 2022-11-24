@@ -60,7 +60,8 @@ exports.checkDiscount = (req, res) => {
         message: "found discount by id",
         id: reply.discountId,
         amount: reply.discountAmount,
-        date: reply.discountStartDate
+        percentage: reply.discountPercentage,
+        type: reply.discountType
       });
     } else {
         // if id not found send false
