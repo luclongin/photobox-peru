@@ -7,6 +7,8 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import Divider from '@mui/material/Divider';
 import { incrementStep, setStep } from "../../features/step/stepSlice";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
+import { setTotalPrice } from "../../features/totalPrice/totalPrice";
+
 
 const Cart = () => {
       const dispatch = useDispatch();
@@ -16,7 +18,8 @@ const Cart = () => {
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
       const delivery = useSelector(state => state.delivery);
       const appliedDiscount = useSelector(state => state.appliedDiscount);
-      
+      const [finalPrice, setFinalPrice] = useState(0);
+
       const handleClick = () => {
             dispatch(incrementStep());
       }
@@ -28,17 +31,22 @@ const Cart = () => {
             }
       }
 
-      let finalPrice = totalPrice + getPrice("delivery", delivery);
+      let price = totalPrice + getPrice("delivery", delivery);
       if(appliedDiscount.type === "amount") {
-            finalPrice = totalPrice + getPrice("delivery", delivery) - appliedDiscount.value;
+            price = price + getPrice("delivery", delivery) - appliedDiscount.value;
       } else if (appliedDiscount.type === "percentage") {
             // toFixed(2) fixes the total amount to 2 decimals always
-            finalPrice = ((1-(appliedDiscount.value/100))*(totalPrice + getPrice("delivery", delivery))).toFixed(2);
+            price = ((1-(appliedDiscount.value/100))*(price + getPrice("delivery", delivery))).toFixed(2);
       } 
 
-      if(finalPrice < 0) {
-            finalPrice=0;
+      if(price < 0) {
+            price=0;
       }
+
+      if(price >= 0) {
+            //dispatch(setTotalPrice(price));
+      }
+
 
       restartProcessOrNot();
 
@@ -136,7 +144,7 @@ const Cart = () => {
                         <Grid container justifyContent="center">
                               <Grid item xs={9} justifyContent="space-between" display="flex">
                                     <Typography variant="carth1">Total</Typography>
-                                    <Typography variant="carth1">{finalPrice} S/</Typography>
+                                    <Typography variant="carth1">{price} S/</Typography>
                               </Grid>
                         </Grid>
                         <Button variant="contained" sx={{

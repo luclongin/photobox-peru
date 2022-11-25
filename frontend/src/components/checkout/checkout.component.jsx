@@ -20,6 +20,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Fragment } from "react";
 import { deleteDiscount } from "../../features/discountUpload/discountUpload";
 import { useEffect } from "react";
+import { setTotalPrice } from "../../features/totalPrice/totalPrice";
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -125,6 +126,7 @@ const Checkout = () => {
             orderData.append('userId', userInfo.userId);
             orderData.append('productType', productType);
             orderData.append('deliveryType', delivery);
+            //orderData.append('totalPrice', totalPrice);
             
             dispatch(createOrder(orderData)).unwrap()
             .then(data => {

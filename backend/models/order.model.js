@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
             deliveryType: {
                   type: Sequelize.STRING,
                   allowNull: false,
+            },
+            totalPrice: {
+                  type: Sequelize.STRING,
+                  allowNull: false
             }
       });
       Order.removeAttribute('id');

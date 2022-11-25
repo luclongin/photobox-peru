@@ -15,22 +15,27 @@ export const checkDiscount = createAsyncThunk(
       "orders/checkDiscount",
       async (discountId) => {
             if(discountId !== undefined && discountId !== "" && discountId !== null) {
-                  const res = await DiscountService.checkDiscount(discountId);
-                  let result;
-                  if(res.data.exists) {
-                        console.log("res data:", res.data);
-                        // if the discount exists
-                        result = {
-                              discountId: res.data.id,
-                              discountAmount: res.data.amount,
-                              discountType: res.data.type,
-                              discountPercentage: res.data.percentage
+                  try {
+                        const res = await DiscountService.checkDiscount(discountId);
+                        let result;
+                        if(res.data.exists) {
+                              console.log("res data:", res.data);
+                              // if the discount exists
+                              result = {
+                                    discountId: res.data.id,
+                                    discountAmount: res.data.amount,
+                                    discountType: res.data.type,
+                                    discountPercentage: res.data.percentage
+                              }
+                        } else {
+                              // if the discount is wrong
+                              result = false;
                         }
-                  } else {
-                        // if the discount is wrong
-                        result = false;
+                        console.log("Result:", result);
+                        return result;
+                  } catch (e) {
+                        return false;
                   }
-                  return result;
             } else {
                   return false;
             }

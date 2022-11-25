@@ -18,6 +18,7 @@ exports.createOrder = (req, res) => {
         userId: data.userId,
         productType: data.productType,
         deliveryType: data.deliveryType,
+        totalPrice: data.totalPrice
       };
 
       // Save Order in the database

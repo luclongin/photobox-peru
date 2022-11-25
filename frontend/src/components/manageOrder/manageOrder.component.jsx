@@ -18,6 +18,9 @@ import { photoAdded } from "../../features/photoEdition/PhotoSlice";
 import { setLetters } from "../../features/lettersEdition/LettersSlice";
 import GiftCard from "../secondStep/giftCard/giftCard.component";
 import DisplayGiftCard from "../displayGiftCard/displayGiftCard.component";
+import { getPrice } from "../../utils/pricing";
+import { setTotalPrice } from "../../features/totalPrice/totalPrice";
+
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -37,6 +40,7 @@ const ManageOrder = () => {
       const photos = useSelector(state => state.photos);
       const step = useSelector(state => state.step.value);
       const letters = useSelector(state => state.letters);
+      const additionalPhrases = useSelector(state => state.additionalPhrases);
 
       const NavigationButton = styled(Button)({
             borderRadius: 5,
@@ -110,6 +114,14 @@ const ManageOrder = () => {
             setHiddenBackBtn('none');
       }
 
+      const checkIfAllPhotosUploaded = () => {
+            let ifIs = true;
+            photos.map(photo => {
+                  ifIs = ifIs && (photo.imgSrc !== "" || photo.imgSrc !== null)
+            });
+            return ifIs;
+      }
+
       useEffect(() => {
             if(step === 1 && selectedProduct === "letras") {
                   dispatch(photoAdded("20x20"));
@@ -130,11 +142,26 @@ const ManageOrder = () => {
                   dispatch(nextButtonEnabled(false));
             }
 
+            if(step === 1) {
+                  const ifIs = checkIfAllPhotosUploaded();
+                  if(ifIs) {
+                        dispatch(nextButtonEnabled(true));
+                  }
+            }
+
+
             if(step === 2 && selectedProduct === "giftCard") {
                   hideBackButton();
                   dispatch(backButtonEnabled(false));
-
             }
+
+            if((selectedProduct === "letras" || selectedProduct === "sameSize")) {
+                  if(step === 2) {
+                        const totalPrice = getPrice(selectedProduct, photos.length) + getPrice("additionalPhrase", additionalPhrases.length);
+                        dispatch(setTotalPrice(totalPrice));
+                  }
+            }
+
             
       }, [step])
 

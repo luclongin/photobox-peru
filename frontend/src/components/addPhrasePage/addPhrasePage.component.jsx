@@ -12,6 +12,9 @@ import {FormControl} from "@mui/material";
 import theme from "../../utils/theme";
 import Cart from "../cart/cart.component";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
+import { setTotalPrice } from "../../features/totalPrice/totalPrice";
+import { getPrice } from "../../utils/pricing";
+
 /*
       React Component that handles the order or one or multiple Phrases
 */
@@ -19,6 +22,7 @@ const AddPhraseContainer = () => {
       const defaultPhraseColor = 'lightWood';
       const dispatch = useDispatch();
       const letters = useSelector(state => state.letters);
+
       console.log("letras", letters);
       // 2 backgrounds available for demo preview
       const backgrounds = {
