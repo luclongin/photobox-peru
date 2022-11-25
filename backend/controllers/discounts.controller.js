@@ -49,7 +49,6 @@ exports.getDiscounts = (req, res) => {
 
 exports.checkDiscount = (req, res) => {
   const id = req.params.discountId;
-  console.log("IDBRO:", id);
   Discounts.findAll({
     where: {discountId: id}
   }).then(answer => {

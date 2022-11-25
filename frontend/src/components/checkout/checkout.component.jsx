@@ -193,6 +193,7 @@ const Checkout = () => {
 
       const handleDiscount = () => {
             dispatch(checkDiscount(discountCode)).then(res => {
+                  console.log("res.payload:", res.payload);
                   if(res.payload !== false) {
                         setDiscountApplied(true);
                         setDiscountCodeFailed(false);     
@@ -214,7 +215,7 @@ const Checkout = () => {
                         // error message
                         setDiscountCodeFailed(true);
                   }
-            });
+            })
       }
 
       const handleRemoveDiscount = () => {
