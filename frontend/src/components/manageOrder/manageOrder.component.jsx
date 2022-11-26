@@ -20,6 +20,7 @@ import GiftCard from "../secondStep/giftCard/giftCard.component";
 import DisplayGiftCard from "../displayGiftCard/displayGiftCard.component";
 import { getPrice } from "../../utils/pricing";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
+import { setAppliedDiscount } from "../../features/appliedDiscount/appliedDiscountSlice";
 
 /*
       Main function of our application. Handles the navigation and rendering of components.
@@ -141,7 +142,11 @@ const ManageOrder = () => {
                   hideBackButton();
                   dispatch(nextButtonEnabled(false));
                   dispatch(backButtonEnabled(false));
-
+                  // remove all added coupons
+                  dispatch(setAppliedDiscount({
+                        type: "",
+                        value: ""
+                  }));
                   
             } else {
                   showBackButton();
