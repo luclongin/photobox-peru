@@ -1,17 +1,44 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
-import { ButtonBase, Radio, Typography } from '@mui/material';
+import { Box, ButtonBase, Radio, Typography } from '@mui/material';
 import {RadioGroup, FormControlLabel, Button} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct } from '../../features/productSelection/ProductSlice';
 import { nextButtonEnabled } from '../../features/handleFormButtons/FormButtonsSlice';
 import { useState, useEffect} from 'react';
 import {Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
+import SameSizeImg from '../../images/sameSize.png';
+import LetrasImg from '../../images/letras.png';
+import GiftCardImg from '../../images/giftCard.png';
+
 
 /*
       The box that shows on the first step for each product
 */
-const ProductCard = ({title, productName}) => {   
+const ProductCard = ({title, productName}) => {  
+      
+      const getImgByProduct = (productName) => {
+            switch(productName) {
+                  case "sameSize":
+                        return(
+                              <Box sx={{
+                                    paddingTop: '30px'
+                              }}>
+                                    <img src={SameSizeImg} width={230}/>
+                              </Box>);
+                  case "letras":
+                        return (<Box sx={{paddingTop: '20px'}}>
+                                    <img src={LetrasImg} width={160}/>
+                              </Box>);
+                  case "giftCard":
+                        return (<Box sx={{paddingTop: '40px'}}>
+                                    <img src={GiftCardImg} width={220}/>
+                              </Box>);
+                  default:
+                        return null;
+            }
+      }      
+
       const dispatch = useDispatch();
       const selectedProduct = useSelector(state => state.product);
 
@@ -66,27 +93,37 @@ const ProductCard = ({title, productName}) => {
 
 
       return(
-            <Card sx={{width: 320, height: 320 }}>
+            <Card sx={{width: 320, height: 360 }}>
                   <CardActionArea sx={{
                               width: '100%',
                               height: '100%'
                         }} onClick={handleClick} value="dog">
-                        <CardContent>
-                              <Typography variant="h5">
-                                    {title}
-                              </Typography>
+                        <CardContent sx={{position: 'relative', height: "100%", padding: 0}}>
+                              {getImgByProduct(productName)}
+                              <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                              }}>
+                                    <Typography variant="h5" sx={{
+                                          position: 'absolute',
+                                          bottom: 55
+                                    }}>
+                                          {title}
+                                    </Typography>
+                              </Box>
                               <RadioGroup
                                     row
                                     aria-labelledby="chooseProduct-sameSize"
                                     name="chooseProduct"
                                     sx={{
                                           justifyContent: 'center'
+      
                                     }}
                               >
                                     <FormControlLabel checked={getChecked()} value={productName} control={<RadioButton />} sx={{
                                           margin: '0',
                                           position: 'absolute',
-                                          bottom: 15
+                                          bottom: 20
                                     }}/>
                               </RadioGroup>
                         </CardContent>

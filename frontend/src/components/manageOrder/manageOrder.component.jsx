@@ -136,6 +136,8 @@ const ManageOrder = () => {
                   hideBackButton();
                   dispatch(nextButtonEnabled(false));
                   dispatch(backButtonEnabled(false));
+
+                  
             } else {
                   showBackButton();
                   dispatch(backButtonEnabled(true));
@@ -226,7 +228,7 @@ const ManageOrder = () => {
                                     justifyContent: 'center'
                               }}>
                                     
-                                    {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton />)}
+                                    {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton width={90} plusSize="2em"/>)}
                                     
                                     {// do not show button if step is 1 and product is giftcard
                                           // negation is show this button if step is different than 1
