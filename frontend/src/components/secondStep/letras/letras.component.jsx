@@ -10,20 +10,21 @@ import { photoAdded } from "../../../features/photoEdition/PhotoSlice";
 import { Fragment } from "react";
 import { dispatchLetters } from "../../../features/lettersEdition/LettersSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
-const MyTextField = ({autofocus, placeholder, handler, letterOrder}) => {
+const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
 
     return(
         <TextField autoFocus={autofocus}
         onChange={(e) => handler(e, letterOrder)}
         variant="standard"
+        value={value}
         placeholder={placeholder}
             InputProps={{
                 inputProps: {
                     style: {
                         textAlign: 'center'
-                    }
+                    },
+                    maxLength: 1,
                 },
-                maxLength: 1,
                 disableUnderline: true,
                 style: {
                     fontSize: "10.6em",
@@ -48,14 +49,15 @@ const Letras = () => {
     const [letters, setLetters] = useState({letter1: "", letter2: "&", letter3: ""});
     
     const textOnChangeHandler = (e, letterOrder) => {
-        const letter = e.target.value;
+        const letter = e.target.value.toUpperCase();
         if(letter === "Q") {
             console.log(e.target.style);
             e.target.style.margin = '-16px 0 0 0'
         } else {
             e.target.style.margin = "0"
         }
-        setLetters({...letters, [letterOrder]: e.target.value});
+
+        setLetters({...letters, [letterOrder]: letter});
     }
 
     useEffect(() => {
@@ -98,7 +100,7 @@ const Letras = () => {
                             position: 'relative',
                             overflow: 'hidden',
                         }}>
-                            <MyTextField letters={letters} setLetters={setLetters} handler={textOnChangeHandler} letterOrder="letter1" placeholder={"P"} autofocus={true}/>
+                            <MyTextField letters={letters} setLetters={setLetters} value={letters.letter1} handler={textOnChangeHandler} letterOrder="letter1" placeholder={"P"} autofocus={true}/>
                         </Grid>
                         <Grid item xs={6}>
                         <UploadPhotoCard photo={addedPhotos[0]} width={160} />
@@ -120,7 +122,7 @@ const Letras = () => {
                             justifyContent: 'flex-end',
                             overflow: 'hidden'
                         }}>
-                            <MyTextField letters={letters} setLetters={setLetters} handler={textOnChangeHandler} letterOrder="letter3" placeholder={"B"} autofocus={false}/>
+                            <MyTextField letters={letters} value={letters.letter3} setLetters={setLetters} handler={textOnChangeHandler} letterOrder="letter3" placeholder={"B"} autofocus={false}/>
                         </Grid>
                         <Grid item xs={6}>
                             <UploadPhotoCard photo={addedPhotos[2]} width={160} />
