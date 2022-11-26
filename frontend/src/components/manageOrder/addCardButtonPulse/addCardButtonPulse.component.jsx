@@ -12,7 +12,7 @@ import {styled} from "@mui/material";
       Button in order to add directly a photo. Works exactly like your model website's button.
       Simplifies workflow as we do not have to call photoAdded action.
 */
-const AddCardButtonPulse = ({width, plusSize}) => {
+const AddCardButtonPulse = ({width, plusSize, textOnly=false}) => {
       const dispatch = useDispatch();
       const photos = useSelector(state => state.photos);
 
@@ -105,14 +105,15 @@ const AddCardButtonPulse = ({width, plusSize}) => {
                         }} />
                   </PulseButton>
                   </Grid>
-                  <Grid item xs={12} sx={{
-                    mt: 5,
+                  {!textOnly && (<Grid item xs={12} sx={{
+                    mt: 4,
                     color: "#9B8E9A"
                   }}>
                     <Typography variant="h6">
                         Haz clic para subir fotos
                     </Typography>
-                  </Grid>
+                  </Grid>)
+                  }
             </Grid> 
       );
 }

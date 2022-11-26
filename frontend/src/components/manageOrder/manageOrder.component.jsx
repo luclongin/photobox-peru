@@ -10,7 +10,7 @@ import { deleteProduct } from "../../features/productSelection/ProductSlice";
 import {styled, Box} from "@mui/material";
 import {AppBar} from "@mui/material";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import AddCardButton from "./addCardButton/addCardButton.component";
+import AddCardButtonPulse from "./addCardButtonPulse/addCardButtonPulse.component";
 import Checkout from "../checkout/checkout.component";
 import { incrementStep, decrementStep } from "../../features/step/stepSlice";
 import Letras from "../secondStep/letras/letras.component";
@@ -116,9 +116,14 @@ const ManageOrder = () => {
 
       const checkIfAllPhotosUploaded = () => {
             let ifIs = true;
-            photos.map(photo => {
-                  ifIs = ifIs && (photo.imgSrc !== "" || photo.imgSrc !== null)
-            });
+            if(photos.length > 0) {
+                  photos.map(photo => {
+                        console.log("ifIsPhoto", photo.imgSrc);
+                        ifIs = ifIs && (photo.imgSrc !== "" || photo.imgSrc !== null)
+                  });
+            } else {
+                  ifIs = false;
+            }
             return ifIs;
       }
 
@@ -146,6 +151,7 @@ const ManageOrder = () => {
 
             if(step === 1) {
                   const ifIs = checkIfAllPhotosUploaded();
+                  console.log("Current ifIS", ifIs);
                   if(ifIs) {
                         dispatch(nextButtonEnabled(true));
                   }
@@ -230,7 +236,7 @@ const ManageOrder = () => {
                                     (selectedProduct === 'sameSize') && 
                                     (photos.length > 0) &&
                                     (photos[0].imgSrc !== "") &&
-                                    (<AddCardButton width={90} plusSize="2em"/>)
+                                    (<AddCardButtonPulse width={90} plusSize="2em" textOnly={true}/>)
                                     }
                                     
                                     {// do not show button if step is 1 and product is giftcard
