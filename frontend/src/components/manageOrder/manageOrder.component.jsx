@@ -151,7 +151,6 @@ const ManageOrder = () => {
                   }
             }
 
-
             if(step === 2 && selectedProduct === "giftCard") {
                   hideBackButton();
                   dispatch(backButtonEnabled(false));
@@ -163,7 +162,6 @@ const ManageOrder = () => {
                         dispatch(setTotalPrice(totalPrice));
                   }
             }
-
             
       }, [step])
 
@@ -227,8 +225,13 @@ const ManageOrder = () => {
                                     display: 'flex',
                                     justifyContent: 'center'
                               }}>
-                                    
-                                    {(step === 1) && (selectedProduct === 'sameSize') && (<AddCardButton width={90} plusSize="2em"/>)}
+                                    {
+                                    (step === 1) && 
+                                    (selectedProduct === 'sameSize') && 
+                                    (photos.length > 0) &&
+                                    (photos[0].imgSrc !== "") &&
+                                    (<AddCardButton width={90} plusSize="2em"/>)
+                                    }
                                     
                                     {// do not show button if step is 1 and product is giftcard
                                           // negation is show this button if step is different than 1
