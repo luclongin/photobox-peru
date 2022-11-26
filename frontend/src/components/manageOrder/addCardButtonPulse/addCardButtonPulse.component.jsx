@@ -25,25 +25,25 @@ const AddCardButtonPulse = ({width, plusSize, textOnly=false}) => {
             width: '100%',
             height: '100%',
             borderRadius: '50%',
-            animation: 'ripple 2s infinite ease-in-out',
+            animation: 'ripple 2.5s infinite ease-in-out',
             content: '""',
             }
         },
         '@keyframes ripple': {
             "0%": {
                 transform: "scale(1)",
-                opacity: "0.1",
-                boxShadow: "0 0 0 0 rgb(178, 71, 137)"
+                opacity: "0.9",
+                boxShadow: "0 0 0 0 #FF36C4"
             },
             "70%": {
                 transform: "scale(1)",
-                opacity: "0.1",
-                boxShadow: "0 0 0 10px rgb(178, 71, 137)"
+                opacity: "0.2",
+                boxShadow: "0 0 0 10px #FF36C4"
             },
             "100%": {
                 transform: "scale(1)",
-                opacity: "0.1",
-                boxShadow: "0 0 0 0 rgb(178, 71, 137)"
+                opacity: "0.05",
+                boxShadow: "0 0 0 0 #FF36C4"
             }
         }
       });

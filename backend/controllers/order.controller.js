@@ -36,8 +36,9 @@ exports.createOrder = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-  Order.findAll()
-    .then(data => {
+  console.log("got me some data??");
+  Order.findAll().then(data => {
+      console.log("got me some data");
       res.send(data);
     })
     .catch(err => {

@@ -37,7 +37,7 @@ const SameSize = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-            <AddCardButtonPulse width={200} plusSize="5em"/> 
+            <AddCardButtonPulse width={200} plusSize="6em"/> 
         </Box>
         : null
         }
