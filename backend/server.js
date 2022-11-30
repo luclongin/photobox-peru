@@ -4,6 +4,19 @@ const app = express();
 const fileUpload = require('express-fileupload');
 const path = require('path');
 
+// MERCADO PAGO SET UP
+const mercadopago = require("mercadopago");
+
+mercadopago.configure({
+	access_token: "TEST-7540547530633933-112708-96815504e4d0f8f18992b297206c5542-1249132598",
+});
+
+
+
+
+
+
+
 var corsOptions = {
   origin: "http://localhost:3000"
 };
@@ -32,6 +45,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/order.routes")(app);
+require("./routes/checkout.routes")(app);
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/uploads', express.static('uploads'));

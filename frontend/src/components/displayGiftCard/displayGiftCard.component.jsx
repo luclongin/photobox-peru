@@ -1,9 +1,63 @@
 import { Box, Container, IconButton, Grid, Typography, Divider, Tooltip } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { createPreference } from "../../features/checkoutSlice/checkoutSlice";
+import loadMercadoPagoScript from "../../utils/loadMercadoPagoScript";
+import { useEffect, useState } from "react";
 
-const DisplayGiftCard = () => {
+const DisplayGiftCard = () => {   
+    const dispatch = useDispatch();
+    const id = "123viva";
+    const [preferenceId, setPreferenceId] = useState(null);
+
+    useEffect(() => {
+        const orderData = new FormData();
+        orderData.append('quantity', 1);
+        orderData.append('description', 'my photo box');
+        orderData.append('price', 100);
+        
+        console.log("let's go");
+        dispatch(createPreference(orderData))
+        .then(res => {
+            console.log("this is res", res);
+            return res.json();
+        }).catch(err => {
+            console.log("shit", err);
+        })
+    }, [id]);
+    /*
+    loadMercadoPagoScript(() => {
+        console.log("loaded");
+    });
+    */
+
+
+
+    //const mercadopago = new MercadoPago('TEST-72018f64-6873-4a3d-aabe-ae14d73a2b65', {
+    //    locale: 'es-PE' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+    //});
+
+    /*.then(resPreference => {
+            // Initialize the checkout
+            /*mercadopago.checkout({
+                preference: {
+                id: resPreference.id
+                },
+                render: {
+                container: '#button-checkout', // Class name where the payment button will be displayed
+                label: 'Pay', // Change the payment button text (optional)
+                }
+            });
+        }).catch(err => {
+            alert("BOOH");
+            console.log("ERROR");
+        })
+    }*/
+
+
+
+
     const giftcard = useSelector(state => state.giftcard);
     console.log("giftcard:", giftcard);
     const day = giftcard.giftCardDate;
@@ -11,7 +65,10 @@ const DisplayGiftCard = () => {
     const date = day.split("T")[0].split('-').reverse().join('/');
     const hour = day.split("T")[1].split(":")[0];
     const minutes = day.split("T")[1].split(":")[1];
+
+    
     return(
+        
         <Container fluid sx={{
             display: "flex",
             justifyContent: "center",
@@ -79,7 +136,9 @@ const DisplayGiftCard = () => {
                         <b>Fecha de creacion:</b> {date} {hour}:{minutes}
                     </Typography>
                 </Grid>
-                
+                <Grid item xs={12}>
+
+                </Grid>
             </Grid>
         </Container>
         

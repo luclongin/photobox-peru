@@ -17,8 +17,10 @@ const theme = createTheme({
   },
   typography: {
       fontFamily: [
-            'Questrial'
-      ],
+            'Questrial',
+            'Arial',
+            'sans-serif'
+      ].join(','),
       button: {
             textTransform: 'none'
       },
@@ -49,8 +51,8 @@ const theme = createTheme({
       },
       letrasinput: {
         fontSize: '11em',
+        fontStyle: 'Bold',
         fontFamily: 'Arial',
-        fontWeight: 'bold',
         margin: '0',
         padding: '0',
         position: 'absolute',

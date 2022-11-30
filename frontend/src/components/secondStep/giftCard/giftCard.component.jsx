@@ -79,9 +79,11 @@ const GiftCard = () => {
         name={index}
         value={amount}
         sx={{
-            fontSize: '1.3em',
+            fontSize: '1em',
+            padding: 1,
+            borderColor: 'rgba(0, 0, 0, 0.1)',
             width: '100px',
-            color: clicked ? 'white' : "#FF66C4"
+            color: clicked ? 'white' : "black"
         }}>
             {amount} S/
         </Button>

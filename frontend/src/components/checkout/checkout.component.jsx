@@ -127,7 +127,6 @@ const Checkout = () => {
             orderData.append('productType', productType);
             orderData.append('deliveryType', delivery);
             orderData.append('totalPrice', '0');
-            //orderData.append('totalPrice', totalPrice);
             
             dispatch(createOrder(orderData)).unwrap()
             .then(data => {
