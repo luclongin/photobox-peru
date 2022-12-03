@@ -1,12 +1,28 @@
-import { Box, Container, IconButton, Grid, Typography, Divider, Tooltip } from "@mui/material";
+import { Box, Container, IconButton, Grid, Typography, Divider, Tooltip, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { createPreference } from "../../features/checkoutSlice/checkoutSlice";
 import loadMercadoPagoScript from "../../utils/loadMercadoPagoScript";
 import { useEffect, useState } from "react";
+import { useMercadopago } from 'react-sdk-mercadopago';
 
 const DisplayGiftCard = () => {   
+    //const mercadopago = require("mercadopago");
+
+    const giftcard = useSelector(state => state.giftcard);
+    console.log("giftcard:", giftcard);
+    const day = giftcard.giftCardDate;
+    
+    const date = day.split("T")[0].split('-').reverse().join('/');
+    const hour = day.split("T")[1].split(":")[0];
+    const minutes = day.split("T")[1].split(":")[1];
+
+    // PUBLIC KEY
+    const mercadopago = useMercadopago.v2('APP_USR-6d805d48-0abb-4277-8f9f-a4a01fdc0a34', {
+        locale: 'es-PE'
+    });
+
     const dispatch = useDispatch();
     const id = "123viva";
     const [preferenceId, setPreferenceId] = useState(null);
@@ -14,29 +30,44 @@ const DisplayGiftCard = () => {
     useEffect(() => {
         const orderData = new FormData();
         orderData.append('quantity', 1);
-        orderData.append('description', 'my photo box');
-        orderData.append('price', 100);
+        orderData.append('description', 'PhotoBox Peru Gift Card');
+        orderData.append('price', giftcard.giftCardAmount);
         
         console.log("let's go");
         dispatch(createPreference(orderData))
         .then(res => {
-            console.log("this is res", res);
-            return res.json();
+            //console.log("this is res", res);
+            setPreferenceId(res.payload.id);
+            //return res.json();
         }).catch(err => {
             console.log("shit", err);
         })
     }, [id]);
-    /*
-    loadMercadoPagoScript(() => {
-        console.log("loaded");
-    });
-    */
 
+    useEffect(() => {
+        if(preferenceId) {
+            console.log("my preference:", preferenceId);
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://sdk.mercadopago.com/js/v2';
+            const container = document.getElementById("displayGiftCard_container");
+            container.appendChild(script);
+        }
+    }, [preferenceId]);
 
-
-    //const mercadopago = new MercadoPago('TEST-72018f64-6873-4a3d-aabe-ae14d73a2b65', {
-    //    locale: 'es-PE' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
-    //});
+    useEffect(() => {
+        if(mercadopago && preferenceId) {
+            mercadopago.checkout({
+                preference: {
+                    id: preferenceId
+                },
+                render: {
+                    container: '#cho-container',
+                    label: 'Pay',
+                }
+            })
+        }
+    }, [preferenceId]);
 
     /*.then(resPreference => {
             // Initialize the checkout
@@ -56,20 +87,8 @@ const DisplayGiftCard = () => {
     }*/
 
 
-
-
-    const giftcard = useSelector(state => state.giftcard);
-    console.log("giftcard:", giftcard);
-    const day = giftcard.giftCardDate;
-    
-    const date = day.split("T")[0].split('-').reverse().join('/');
-    const hour = day.split("T")[1].split(":")[0];
-    const minutes = day.split("T")[1].split(":")[1];
-
-    
     return(
-        
-        <Container fluid sx={{
+        <Container id="displayGiftCard_container" fluid sx={{
             display: "flex",
             justifyContent: "center",
         }}>
@@ -137,8 +156,9 @@ const DisplayGiftCard = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-
+                        <Button variant="contained" id="checkout-btn" sx={{color: 'white'}}>Buy Now</Button>
                 </Grid>
+                <Box id="cho-container"></Box>
             </Grid>
         </Container>
         

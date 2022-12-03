@@ -16,15 +16,39 @@ exports.createPreference = (req, res) => {
             {
                 title: orderData.description,
                 unit_price: Number(orderData.price),
+                currency_id: 'PEN',
                 quantity: Number(orderData.quantity),
+                //additional_info: orderData.additionalInfo,
             }
         ],
+        /*payer: {
+            name: orderData.firstName,
+            surname: orderData.lastName,
+            email: orderData.email,
+            phone: orderData.phoneNumber,
+            address: orderData.address,
+            date_created: orderData.dateCreated
+        },*/
         back_urls: {
             "success": "http://localhost:3000/feedback",
             "failure": "http://localhost:3000/feedback",
             "pending": "http://localhost:3000/feedback",
         },
         auto_return: "approved",
+        payment_methods: {
+          excluded_payment_methods: [
+            {
+            }
+          ],
+          excluded_payment_types: [
+            {
+                "id": "ticket"
+            },
+            {
+                "id": "bank_transfer"
+            }
+          ]
+        },
     };
 
     mercadopago.preferences.create(preference).then(response => {
