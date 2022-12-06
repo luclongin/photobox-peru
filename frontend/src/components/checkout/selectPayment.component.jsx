@@ -37,13 +37,12 @@ const StyledButton = styled('button')(
   font-family: Questrial, sans-serif;
   font-size: 0.95rem;
   box-sizing: border-box;
-  min-height: calc(2.5em + 22px);
+  height: 65px;
   min-width: 200px;
   width: 350px;
   padding: 12px;
   border-radius: 12px;
   text-align: left;
-  line-height: 1.5;
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
@@ -102,7 +101,7 @@ const StyledOption = styled(OptionUnstyled)(
   ({ theme }) => `
   list-style: none;
   padding: 5px;
-  height: 50px;
+  height: 55px;
   width: 327px;
   min-width: 200px;
   border-radius: 8px;
