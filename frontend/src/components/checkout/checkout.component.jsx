@@ -21,6 +21,9 @@ import { Fragment } from "react";
 import { deleteDiscount } from "../../features/discountUpload/discountUpload";
 import { useEffect } from "react";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
+import CheckOutOption from "./checkOutOption.component";
+import UnstyledSelectRichOptions from "./selectPayment.component";
+
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -235,28 +238,23 @@ const Checkout = () => {
                   <Grid container sx={{
                         paddingLeft: 30
                   }}>
-                        <Grid item xs={5}>
+                        <Grid item xs={6}>
                               <OrderStepTitle title="Mi pedido" marginBottom={5}/>
                               <Grid container>
                                     <Grid item xs={12} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
-                                                <Typography variant="orderh1" sx={{textAlign: 'left'}}>
-                                                      Delivery
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', paddingBottom: 0}}>
+                                                      Tipo de delivery
                                                 </Typography>
-                                                <RadioGroup
-                                                      aria-labelledby="delivery-select"
-                                                      name="delivery-selection"
-                                                      onChange={handleDelivery}
-                                                      value={delivery}
-                                                >
-                                                      <FormControlLabel value="gratis" control={<Radio />} label="Delivery Gratis (entregado en 1 semana)" sx={{
-                                                            mt: 2
-                                                      }}/>
-                                                      <FormControlLabel value="express" control={<Radio />} label="Delivery Express (entregado en 48 horas)" sx={{
-                                                            mt: -1
-                                                      }} />
-                                                </RadioGroup>
+                                                <Grid container spacing={2} sx={{mt: 0, p: 0}}>
+                                                      <Grid item xs={6}>
+                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"gratis"} title={"Delivery Gratis"} subtitle={"Entregado en 1 semana"}/>
+                                                      </Grid>      
+                                                      <Grid item xs={6}>
+                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"express"} title={"Delivery Express"} subtitle={"Entregado en 48h"}/>
+                                                      </Grid>      
+                                                </Grid>
                                           </FormGroup>
                                     </Grid>
 
@@ -268,7 +266,7 @@ const Checkout = () => {
                                     <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
-                                                <Typography variant="orderh1" sx={{textAlign: 'left', mt: 2}}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 2}}>
                                                       Dirección
                                                 </Typography>
                                                 <AddressAddition />
@@ -277,7 +275,7 @@ const Checkout = () => {
 
                                     <Grid item xs={6} display="flex">
                                           <FormGroup>
-                                                <Typography variant="orderh1" sx={{textAlign: 'left', mt: 2}}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 2}}>
                                                 Descuentos
                                           </Typography>
 
@@ -346,14 +344,22 @@ const Checkout = () => {
                                     <Grid item xs={12} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
-                                                <Typography variant="orderh1" sx={{textAlign: 'left', mt: 2}}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 2}}>
                                                       Métodos de pago
                                                 </Typography>
-                                                <Button onClick={handleCheckout}>
-                                                      Subir fotos en FS
-                                                </Button>
+
+                                                <Grid container spacing={0} sx={{mt: 0, p: 0}}>
+                                                      <Grid item xs={12} sx={{mt: 2}}>
+                                                            <UnstyledSelectRichOptions />
+                                                      </Grid>
+                                                      
+                                                </Grid>
                                           </FormGroup>
                                     </Grid>
+
+                                    <Button onClick={handleCheckout}>
+                                                      Subir fotos en FS
+                                                </Button>
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>

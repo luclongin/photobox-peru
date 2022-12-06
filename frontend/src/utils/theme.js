@@ -49,6 +49,9 @@ const theme = createTheme({
         textDecorationColor: '#FF66C4',
         textDecorationThickness: 3,
       },
+      orderh1withoutUnderline: {
+        fontSize: '1.6em',
+      },
       letrasinput: {
         fontSize: '11em',
         fontStyle: 'Bold',
@@ -59,6 +62,16 @@ const theme = createTheme({
         top: '-20px',
         left: '15px'
       },
+      deliveryTitle: {
+        fontSize: '1.2em',
+        color: '#000000',
+        fontFamily: 'Questrial'
+      },
+      deliverySubtitle: {
+        fontSize: '0.95em',
+        color: '#9B8E9A',
+        fontFamily: 'Questrial'
+      }
     },
 });
 

@@ -10,7 +10,7 @@ import {Card, CardContent, CardMedia, CardActionArea} from '@mui/material';
 import SameSizeImg from '../../images/sameSize.png';
 import LetrasImg from '../../images/letras.png';
 import GiftCardImg from '../../images/giftCard.png';
-
+import CustomRadioButton from '../customRadioButton/customRadioButton.component';
 
 /*
       The box that shows on the first step for each product
@@ -97,7 +97,7 @@ const ProductCard = ({title, productName}) => {
                   <CardActionArea sx={{
                               width: '100%',
                               height: '100%'
-                        }} onClick={handleClick} value="dog">
+                        }} onClick={handleClick}>
                         <CardContent sx={{position: 'relative', height: "100%", padding: 0}}>
                               {getImgByProduct(productName)}
                               <Box sx={{
@@ -120,7 +120,7 @@ const ProductCard = ({title, productName}) => {
       
                                     }}
                               >
-                                    <FormControlLabel checked={getChecked()} value={productName} control={<RadioButton />} sx={{
+                                    <FormControlLabel checked={getChecked()} value={productName} control={<CustomRadioButton size={"23px"} checked={getChecked()} />} sx={{
                                           margin: '0',
                                           position: 'absolute',
                                           bottom: 20
