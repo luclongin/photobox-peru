@@ -176,22 +176,30 @@ const ManageOrder = () => {
             
       }, [step])
 
-      const getBottomToolBarHeight = (step) => {
-            if(step === 0) {
-                  return "10vh";
+      const getBottomToolBarHeight = (step, product) => {
+            if(product === "giftCard" && step > 0) {
+                  return "0vh";
             } else {
-                  return "15vh";
+                  if(step === 0) {
+                        return "10vh";
+                  } else {
+                        return "15vh";
+                  }
             }
       }
 
-      const getMainContentHeight = (step) => {
-            switch(step) {
-                  case 0:
-                        return "80vh"
-                  case 1: 
-                        return "75vh"
-                  default: 
-                        return "90vh"
+      const getMainContentHeight = (step, product) => {
+            if(product === "giftCard" && step > 0) {
+                  return "90vh";
+            } else {
+                  switch(step) {
+                        case 0:
+                              return "80vh"
+                        case 1: 
+                              return "75vh"
+                        default: 
+                              return "90vh"
+                  }
             }
       }
 
@@ -201,7 +209,7 @@ const ManageOrder = () => {
                         position: 'relative',
                         backgroundColor: '#FAF9F9',
                         zIndex: '0',
-                        height: getMainContentHeight(step)
+                        height: getMainContentHeight(step, selectedProduct)
                   }}>
                         <IconButton disabled={!enableBackButton} onClick={handleBack} sx={{
                               display: `${isHiddenBackBtn}`,
@@ -225,7 +233,8 @@ const ManageOrder = () => {
                   {
                   (step < 2) && (
                   <Box sx={{
-                        height: getBottomToolBarHeight(step),
+                        display: (getBottomToolBarHeight(step, selectedProduct)==="0vh") ? "none" : "flex",
+                        height: getBottomToolBarHeight(step, selectedProduct),
                   }}>
                         <AppBar position="static" sx={{
                               height: '100%',

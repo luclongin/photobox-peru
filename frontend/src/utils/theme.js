@@ -52,6 +52,10 @@ const theme = createTheme({
       orderh1withoutUnderline: {
         fontSize: '1.6em',
       },
+      giftCardHowItWorks: {
+        fontSize: '1.2em',
+        lineHeight: '1.3em'
+      },
       letrasinput: {
         fontSize: '11em',
         fontStyle: 'Bold',
