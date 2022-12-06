@@ -193,28 +193,6 @@ const Checkout = () => {
                         <Grid item xs={6}>
                               <OrderStepTitle title="Mi pedido" marginBottom={5}/>
                               <Grid container>
-                                    <Grid item xs={12} display="flex"> 
-                                          <FormGroup sx={{
-                                    }}>
-                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', paddingBottom: 0}}>
-                                                      Tipo de delivery
-                                                </Typography>
-                                                <Grid container spacing={2} sx={{mt: 0, p: 0}}>
-                                                      <Grid item xs={6}>
-                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"gratis"} title={"Delivery Gratis"} subtitle={"Entregado en 1 semana"}/>
-                                                      </Grid>      
-                                                      <Grid item xs={6}>
-                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"express"} title={"Delivery Express"} subtitle={"Entregado en 48h"}/>
-                                                      </Grid>      
-                                                </Grid>
-                                          </FormGroup>
-                                    </Grid>
-
-                              </Grid>
-
-                              <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
-                              
-                              <Grid container>
                                     <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
@@ -226,6 +204,29 @@ const Checkout = () => {
                                     </Grid>
 
                                     
+                              </Grid>
+                              
+
+                              <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
+                              
+                              <Grid container>
+                                    <Grid item xs={12} display="flex"> 
+                                          <FormGroup sx={{
+                                    }}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', paddingBottom: 0}}>
+                                                      Tipo de delivery
+                                                </Typography>
+                                                <Grid container spacing={2} sx={{mt: "-15px", p: 0}}>
+                                                      <Grid item xs={6}>
+                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"gratis"} title={"Delivery Gratis"} subtitle={"Entregado en 1 semana"}/>
+                                                      </Grid>      
+                                                      <Grid item xs={6}>
+                                                            <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"express"} title={"Delivery Express"} subtitle={"Entregado en 48h"}/>
+                                                      </Grid>      
+                                                </Grid>
+                                          </FormGroup>
+                                    </Grid>
+
                               </Grid>
 
 

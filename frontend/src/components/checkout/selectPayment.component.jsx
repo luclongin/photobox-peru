@@ -32,19 +32,24 @@ const grey = {
   900: '#24292f',
 };
 
+//border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+//box-sizing: border-box;
+
+//hover border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
 const StyledButton = styled('button')(
   ({ theme }) => `
   font-family: Questrial, sans-serif;
   font-size: 0.95rem;
-  box-sizing: border-box;
+  
   height: 65px;
   min-width: 200px;
   width: 350px;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 6px;
+  border: none;
   text-align: left;
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   position: relative;
   transition-property: all;
@@ -53,7 +58,7 @@ const StyledButton = styled('button')(
 
   &:hover {
     background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+    
   }
 
   &.${selectUnstyledClasses.focusVisible} {
@@ -72,7 +77,7 @@ const StyledButton = styled('button')(
     content: '▾';
     position: absolute;
     right: 20px;
-    top: 30px;
+    top: 22px;
   }
   `,
 );
@@ -224,7 +229,7 @@ function renderValue(option) {
 
 export default function UnstyledSelectRichOptions() {
   return (
-    <CustomSelect renderValue={renderValue}>
+    <CustomSelect sx={{boxShadow: 1}} renderValue={renderValue}>
       {paymentOptions.map((payment) => (
         <StyledOption key={payment.option} value={payment.option} label={payment.title + "+" + payment.subtitle}>
             <Grid container>
