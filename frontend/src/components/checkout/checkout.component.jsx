@@ -12,11 +12,8 @@ import { createUser } from "../../features/userInfoUpload/userInfoUpload";
 import AddressAddition from "../addressAddition/addressAddition.component";
 import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
 import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
-import SearchIcon from '@mui/icons-material/Search';
 import { checkDiscount } from "../../features/discountUpload/discountUpload";
 import { setAppliedDiscount, setDiscountAmount } from "../../features/appliedDiscount/appliedDiscountSlice";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Fragment } from "react";
 import { deleteDiscount } from "../../features/discountUpload/discountUpload";
 import { useEffect } from "react";
@@ -33,10 +30,7 @@ const Checkout = () => {
       const userInfo = useSelector(state => state.userInfo);
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const letters = useSelector(state => state.letters);
-      const [discountCode, setDiscountCode] = useState("");
-      const [discountApplied, setDiscountApplied] = useState(null);
-      const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
-
+      
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
       }
@@ -181,57 +175,15 @@ const Checkout = () => {
             if(letters.letter1) {
                   handleCreateLetter(e, orderId);
             }
-            console.log("discountApplied from handleCheckout", discountApplied);
-            if(discountApplied) {
+            //console.log("discountApplied from handleCheckout", discountApplied);
+            /*if(discountApplied) {
                   // if there is an applied discount
                   // remove discount from db
                   dispatch(deleteDiscount(discountCode));
-            } 
+            } */
       }
 
-      const handleDiscountChange = (e) => {
-            setDiscountCode(e.target.value);
-            if(e.target.value === "") {
-                  setDiscountCodeFailed(false);
-            }
-      }
-
-      const handleDiscount = () => {
-            dispatch(checkDiscount(discountCode)).then(res => {
-                  console.log("res.payload:", res.payload);
-                  if(res.payload !== false) {
-                        setDiscountApplied(true);
-                        setDiscountCodeFailed(false);     
-                        let amount = null;
-                        let typeOfDiscount = "";
-                        if(res.payload.discountAmount !== "") {
-                              amount = res.payload.discountAmount;
-                              typeOfDiscount = "amount";
-                        } else {
-                              amount = res.payload.discountPercentage;
-                              typeOfDiscount = "percentage";
-                        }
-                        dispatch(setAppliedDiscount({
-                              type: typeOfDiscount,
-                              value: amount
-                        }));
-                  } else {
-                        // if discount doesn't exist
-                        // error message
-                        setDiscountCodeFailed(true);
-                  }
-            })
-      }
-
-      const handleRemoveDiscount = () => {
-            setDiscountCode("");
-            setDiscountApplied(null);
-            setDiscountCodeFailed(false);
-            dispatch(setAppliedDiscount({
-                  type: "",
-                  value: ""
-            }));
-      }
+      
 
       return(
             <Box>
@@ -273,68 +225,7 @@ const Checkout = () => {
                                           </FormGroup>
                                     </Grid>
 
-                                    <Grid item xs={6} display="flex">
-                                          <FormGroup>
-                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 2}}>
-                                                Descuentos
-                                          </Typography>
-
-                                          <FormControl sx={{mt: 2}}>
-                                                <InputLabel htmlFor="outlined-adornment-discount">Añadir descuento</InputLabel>
-                                                <OutlinedInput
-                                                      label="Añadir descuento"
-                                                      id="outlined-adornment-discount"
-                                                      size="medium"
-                                                      color={(discountApplied===null) ? null: "success"}
-                                                      disabled={(discountApplied!==null)}
-                                                      error={discountCodeFailed===true}
-                                                      value={discountCode}
-                                                      onChange={handleDiscountChange}
-                                                      endAdornment={
-                                                            <InputAdornment position="end">
-                                                                  { discountApplied===null ?
-                                                                        
-                                                                        <IconButton
-                                                                              aria-label="toggle search"
-                                                                              edge="end"
-                                                                              onClick={handleDiscount}
-                                                                              sx={{
-                                                                              }}
-                                                                        >
-                                                                              <SearchIcon/>
-                                                                        </IconButton>
-                                                                        
-                                                                        :
-                                                                        <Fragment>
-                                                                        <CheckCircleOutlineIcon sx={{color:"#3CB371", marginRight: -1}} />
-                                                                        <Tooltip title="Eliminar descuento">
-                                                                        <IconButton
-                                                                              onClick={handleRemoveDiscount}
-                                                                              sx={{
-                                                                                    marginRight: -2
-                                                                              }}
-                                                                        >
-                                                                              <HighlightOffIcon />
-                                                                        </IconButton>
-                                                                        </Tooltip>
-                                                                        </Fragment>
-                                                                  }
-                                                            </InputAdornment>
-                                                      }
-                                                />
-                                                {
-                                                      // show if tried and failed
-                                                      discountCodeFailed ?
-                                                      <FormHelperText error sx={{ml: 0}}>El codigo no es valido</FormHelperText>
-                                                      : null
-                                                }
-                              
-                                                {(discountApplied!==null) ?
-                                                      <FormHelperText sx={{ml: 0, mt: 0, color: '#3CB371'}}>El descuento esta anadido</FormHelperText> : null
-                                                }
-                                                </FormControl>
-                                                </FormGroup>
-                                    </Grid>
+                                    
                               </Grid>
 
 
