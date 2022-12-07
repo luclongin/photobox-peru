@@ -32,11 +32,12 @@ const AddressAddition = () => {
                   {
                   !addressAdded ? 
                         <Box>
-                              <Button variant="contained" startIcon={<AddHomeIcon />} sx={{
-                                    color: "#FFFFFF",
-                                    width: 200,
+                              <Button variant="contained" startIcon={<AddHomeIcon sx={{color: '#FF66C4'}} />} sx={{
+                                    color: "black",
+                                    backgroundColor: 'white!important',
+                                    width: 180,
                                     padding: 1.5,
-                                    fontSize: '1.1em',
+                                    fontSize: '1em',
                                     mt: 2,
                                     mb: 2
                               }} onClick={handleOpen}>

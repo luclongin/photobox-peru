@@ -26,7 +26,7 @@ const CartItem = ({id, title, image, quantity, price, cartCount, setCartCount}) 
                   borderRadius: 2,
                   //border: '1px solid ' + theme.palette.primary.main,
                   mb: 1,
-                  boxShadow: 3
+                  boxShadow: 2
             }}>
                   <Grid container sx={{padding: 1}}>
                         <Grid item xs="auto" justifyContent="center" alignItems="center" sx={{}}>
