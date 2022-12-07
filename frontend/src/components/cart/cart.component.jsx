@@ -27,9 +27,11 @@ const Cart = () => {
       const [discountCode, setDiscountCode] = useState("");
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
+      const step = useSelector(state => state.step);
 
       const handleClick = () => {
             dispatch(incrementStep());
+            console.log("step:", step);
       }
 
       // User deletes all items from Cart
@@ -83,6 +85,17 @@ const Cart = () => {
             }));
       }
 
+      const getCartItemTitle = (product) => {
+            switch(product) {
+                  case "sameSize":
+                        return "Mismo Tamaño";
+                  case "letras":
+                        return "Letras";
+                  default:
+                        return null;
+            }
+      }
+
       let price = totalPrice + getPrice("delivery", delivery);
       if(appliedDiscount.type === "amount") {
             price = price + getPrice("delivery", delivery) - appliedDiscount.value;
@@ -127,14 +140,14 @@ const Cart = () => {
                                     {(photos.length > 0) && 
                                           <CartItem
                                                 id="photosSet"
-                                                title={`Set ${product}`}
+                                                title={`Set ${getCartItemTitle(product)}`}
                                                 image={null} 
                                                 quantity={photos.length} 
                                                 price={getPrice(product, photos.length)}
+                                                subtitle="20x20cm"
                                           />
                                     }
                                     {addedPhrases.map((phrase) => {
-                                          console.log("phrase added:", phrase);
                                           return(
                                                 <CartItem
                                                       key={phrase.id}
@@ -143,6 +156,7 @@ const Cart = () => {
                                                       image={null}
                                                       quantity={1}
                                                       price={getPrice("additionalPhrase", 1)}
+                                                      subtitle="20x40cm"
                                                 />
                                           );
                                     })}
@@ -272,7 +286,10 @@ const Cart = () => {
                               fontSize: '1.2em',
                               mt: 3
                         }} onClick={handleClick}>
-                              Realizar Pago
+                              {// step 2 because we're at a 1 step lag
+                              // step 2 onclick gives step 2, meaning we'll be in step 3
+                              (step.value === 3) ? "Realizar Pago" : "Siguiente"
+                              }
                         </Button>
                   </Box>      
             </Box>

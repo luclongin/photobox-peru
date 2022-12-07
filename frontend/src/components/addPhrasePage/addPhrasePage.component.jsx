@@ -90,7 +90,7 @@ const AddPhraseContainer = () => {
                   <Grid item xs={5} sx={{
                         display: 'flex',
                         justifyContent: 'end',
-                        pr: 8,
+                        pr: 5,
                         pt: 12
                   }}> 
                         <Fragment>

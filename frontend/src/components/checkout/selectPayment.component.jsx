@@ -107,7 +107,7 @@ const StyledOption = styled(OptionUnstyled)(
   list-style: none;
   padding: 5px;
   height: 55px;
-  width: 327px;
+  width: 325px;
   min-width: 200px;
   border-radius: 8px;
   cursor: default;

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { allPhotosDeleted } from "../../../features/photoEdition/PhotoSlice";
 import { phraseDeleted } from "../../../features/additionalPhrase/AdditionalPhraseSlice";
 
-const CartItem = ({id, title, image, quantity, price, cartCount, setCartCount}) => {
+const CartItem = ({id, title, subtitle, image, quantity, price, cartCount, setCartCount}) => {
       const dispatch = useDispatch();
       
       const handleDeleteCartItem = (e) => {
@@ -28,25 +28,42 @@ const CartItem = ({id, title, image, quantity, price, cartCount, setCartCount}) 
                   mb: 1,
                   boxShadow: 2
             }}>
-                  <Grid container sx={{padding: 1}}>
+                  <Grid container sx={{padding: 1, height: '75px'}}>
                         <Grid item xs="auto" justifyContent="center" alignItems="center" sx={{}}>
                               <Box sx={{
                                     width: 60,
-                                    height: 50,
+                                    height: 60,
                                     borderRadius: 2,
+                                    
                                     backgroundColor: theme.palette.primary.main
                               }}>
                               </Box>
                         </Grid>
-                        <Grid item xs={6} alignItems="center" sx={{position: 'relative'}}>
-                              <Typography variant="carth1" sx={{
-                                    position: 'absolute', top: 4, left: 10
-                              }}>{title}</Typography>
-                              <Typography variant="carth2" sx={{
-                                    position: 'absolute', bottom: 2, left: 10
-                              }}>{quantity}x</Typography>
+                        <Grid item xs={7} alignItems="center" sx={{position: 'relative'}}>
+                              <Grid container>
+                                    <Grid item xs={12}>
+                                          <Typography variant="carth1" sx={{
+                                                position: 'absolute', top: 4, left: 10, textAlign: 'left'}}>
+                                                {title}
+                                          </Typography>
+                                    </Grid>  
+                                    <Grid item xs={12}>
+                                          <Typography variant="carth3" sx={{
+                                                position: 'absolute', top: 23, left: 10, textAlign: 'left', color: '#9B8E9A'}}>
+                                                {subtitle}
+                                          </Typography>
+                                    </Grid>  
+                                    <Grid item xs={12} sx={{backgroundColor: 'orange'}}>
+                                          <Typography variant="carth2" sx={{
+                                                position: 'absolute', bottom: 0, left: 10
+                                          }}>
+                                                {quantity}x
+                                          </Typography>
+                                    </Grid>    
+                              </Grid>
+                              
                         </Grid>
-                        <Grid item xs={3} sx={{position: 'relative', backgroundColor: ''}}>
+                        <Grid item xs={2} sx={{position: 'relative'}}>
                               <IconButton sx={{
                                     position: 'absolute',
                                     top: -10,
@@ -57,7 +74,7 @@ const CartItem = ({id, title, image, quantity, price, cartCount, setCartCount}) 
                               </IconButton>
                               <Typography variant="carth2" sx={{
                                     position: 'absolute',
-                                    bottom: 2,
+                                    bottom: 0,
                                     right: -10,
                                     color: "#000000"
                               }}>

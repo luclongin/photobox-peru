@@ -191,7 +191,7 @@ const Checkout = () => {
                         paddingLeft: 30
                   }}>
                         <Grid item xs={6}>
-                              <OrderStepTitle title="Mi pedido" marginBottom={5}/>
+                              <OrderStepTitle title="Mi pedido" marginBottom={4}/>
                               <Grid container>
                                     <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
@@ -207,7 +207,7 @@ const Checkout = () => {
                               </Grid>
                               
 
-                              <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
+                              <Divider variant="middle" sx={{mt: 1, mb: 2, ml: -1}}/> 
                               
                               <Grid container>
                                     <Grid item xs={12} display="flex"> 
@@ -230,7 +230,7 @@ const Checkout = () => {
                               </Grid>
 
 
-                              <Divider variant="middle" sx={{mt: 2, mb: 2, ml: -1}}/> 
+                              <Divider variant="middle" sx={{mt: 3, mb: 0, ml: -1}}/> 
 
                               <Grid container>
                                     <Grid item xs={12} display="flex"> 
