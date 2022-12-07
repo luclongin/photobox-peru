@@ -35,8 +35,9 @@ const AddressAddition = () => {
                               <Button variant="contained" startIcon={<AddHomeIcon sx={{color: '#FF66C4'}} />} sx={{
                                     color: "black",
                                     backgroundColor: 'white!important',
-                                    width: 180,
+                                    width: 200,
                                     padding: 1.5,
+                                    pr: 2,
                                     fontSize: '1em',
                                     mt: 2,
                                     mb: 2

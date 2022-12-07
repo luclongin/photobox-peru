@@ -272,7 +272,7 @@ const Cart = () => {
                               fontSize: '1.2em',
                               mt: 3
                         }} onClick={handleClick}>
-                              Hacer compra      
+                              Realizar Pago
                         </Button>
                   </Box>      
             </Box>

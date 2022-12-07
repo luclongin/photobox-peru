@@ -255,7 +255,7 @@ const Checkout = () => {
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>
-                              <Cart />
+                              <Cart/>
                         </Grid>
 
                   </Grid>
