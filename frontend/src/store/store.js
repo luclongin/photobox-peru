@@ -16,6 +16,7 @@ import AppliedDiscountReducer from '../features/appliedDiscount/appliedDiscountS
 import DiscountUploadReducer from '../features/discountUpload/discountUpload';
 import GiftCardReducer from '../features/giftCard/giftCardSlice';
 import TotalPriceReducer from '../features/totalPrice/totalPrice';
+import PaymentMethodReducer from '../features/selectPaymentMethod/selectPaymentMethodSlice';
 
 export default configureStore({
       reducer: {
@@ -35,6 +36,7 @@ export default configureStore({
             uploadedDiscounts: DiscountUploadReducer,
             appliedDiscount: AppliedDiscountReducer,
             giftcard: GiftCardReducer,
-            totalPrice: TotalPriceReducer
+            totalPrice: TotalPriceReducer,
+            paymentMethod: PaymentMethodReducer
       }
 });

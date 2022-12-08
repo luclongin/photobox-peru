@@ -14,6 +14,7 @@ import { setAppliedDiscount } from "../../features/appliedDiscount/appliedDiscou
 import SearchIcon from '@mui/icons-material/Search';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import MercadoPagoButton from "../mercadoPagoButton/mercadoPagoButton.component";
 
 const Cart = () => {
       const dispatch = useDispatch();
@@ -28,10 +29,21 @@ const Cart = () => {
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const step = useSelector(state => state.step);
+      const paymentMethod = useSelector(state => state.paymentMethod);
 
       const handleClick = () => {
-            dispatch(incrementStep());
-            console.log("step:", step);
+            // step === 3 means final checkout, because of 1 step lag
+            if (step.value === 3) {
+                  console.log("paymentMethod from click", paymentMethod);
+                  switch(paymentMethod) {
+                        case "card":
+                              document.getElementById("cho-container").getElementsByTagName('button')[0].click();
+                        default:
+                              console.log("yo");
+                  }
+            } else {
+                  dispatch(incrementStep());
+            }
       }
 
       // User deletes all items from Cart
@@ -171,7 +183,7 @@ const Cart = () => {
                   }}>
                         <Divider variant="middle" sx={{mb: 2}}/>  
                         <FormGroup sx={{width: "100%", display: 'flex', justifyContent: 'center'}}>
-                        <Grid container xs={12} display="flex" justifyContent="center">
+                        <Grid container display="flex" justifyContent="center">
 
                         <Grid item xs={9} sx={{}}>
                               <FormControl sx={{position: 'relative', width: '100%'}}>
@@ -291,6 +303,7 @@ const Cart = () => {
                               (step.value === 3) ? "Realizar Pago" : "Siguiente"
                               }
                         </Button>
+                        <MercadoPagoButton />
                   </Box>      
             </Box>
       );

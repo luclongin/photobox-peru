@@ -33,14 +33,14 @@ const theme = createTheme({
         color: '#9B8E9A'
       },
       carth1: {
-        fontSize: '1.1em',
+        fontSize: '1em',
         color: '#000'
       },
       carth2: {
-        fontSize: '1em'
+        fontSize: '0.9em'
       },
       carth3: {
-        fontSize: '0.9em'
+        fontSize: '0.85em'
       },
       carth1gray: {
         fontSize: '1.1em',

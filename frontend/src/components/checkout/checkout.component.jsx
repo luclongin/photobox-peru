@@ -19,8 +19,8 @@ import { deleteDiscount } from "../../features/discountUpload/discountUpload";
 import { useEffect } from "react";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
 import CheckOutOption from "./checkOutOption.component";
-import UnstyledSelectRichOptions from "./selectPayment.component";
-
+import SelectPaymentComponent from "./selectPayment.component";
+import YapePopUp from "../yapePopUp/yapePopUp.component";
 
 const Checkout = () => {
       const dispatch = useDispatch();
@@ -30,7 +30,9 @@ const Checkout = () => {
       const userInfo = useSelector(state => state.userInfo);
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const letters = useSelector(state => state.letters);
-      
+      const paymentMethod = useSelector(state => state.paymentMethod);
+      const [yapeIsOpen, setYapeIsOpen] = useState(false);
+
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
       }
@@ -183,7 +185,9 @@ const Checkout = () => {
             } */
       }
 
-      
+      const openYape = () => {
+
+      }
 
       return(
             <Box>
@@ -196,7 +200,7 @@ const Checkout = () => {
                                     <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
                                     }}>
-                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 2}}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 1}}>
                                                       Dirección
                                                 </Typography>
                                                 <AddressAddition />
@@ -242,7 +246,7 @@ const Checkout = () => {
 
                                                 <Grid container spacing={0} sx={{mt: 0, p: 0}}>
                                                       <Grid item xs={12} sx={{mt: 2}}>
-                                                            <UnstyledSelectRichOptions />
+                                                            <SelectPaymentComponent />
                                                       </Grid>
                                                       
                                                 </Grid>
@@ -250,8 +254,14 @@ const Checkout = () => {
                                     </Grid>
 
                                     <Button onClick={handleCheckout}>
-                                                      Subir fotos en FS
-                                                </Button>
+                                          Subir fotoss en FS
+                                    </Button>
+                                    <Button onClick={() => {
+                                          setYapeIsOpen(true);
+                                    }}>
+                                          Open Yape Yo
+                                    </Button>
+                                    <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>

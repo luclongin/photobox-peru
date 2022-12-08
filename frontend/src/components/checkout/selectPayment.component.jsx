@@ -5,10 +5,13 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import { styled } from '@mui/system';
 import { PopperUnstyled } from '@mui/base';
 import { Grid, Typography } from '@mui/material';
-
+import { useDispatch } from 'react-redux';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import YapeIcon from '../../images/yape.png';
 import PlinIcon from '../../images/plin.png';
+import { setPaymentMethod } from '../../features/selectPaymentMethod/selectPaymentMethodSlice';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const blue = {
   100: '#DAECFF',
@@ -178,7 +181,7 @@ CustomSelect.propTypes = {
 };
 
 
-const getPaymentIcon = (paymentType, size) => {
+const getPaymentIcon = (paymentType) => {
     switch(paymentType) {
         case "card":
             return <CreditCardIcon sx={{
@@ -196,7 +199,6 @@ const getPaymentIcon = (paymentType, size) => {
 }
 
 function renderValue(option) {
-    console.log("option::", option);
     if(option === null) {
         return <span>Escojer metodo de pago</span>
     }
@@ -227,9 +229,21 @@ function renderValue(option) {
     )
 }
 
-export default function UnstyledSelectRichOptions() {
+
+
+
+export default function SelectPaymentComponent() {
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPaymentMethod(selectedMethod));
+  }, [selectedMethod]);
+  
   return (
-    <CustomSelect sx={{boxShadow: 1}} renderValue={renderValue}>
+    <CustomSelect sx={{boxShadow: 1}} value={selectedMethod} renderValue={renderValue} onChange={(e, newValue) => {
+      setSelectedMethod(newValue);
+    }}>
       {paymentOptions.map((payment) => (
         <StyledOption key={payment.option} value={payment.option} label={payment.title + "+" + payment.subtitle}>
             <Grid container>

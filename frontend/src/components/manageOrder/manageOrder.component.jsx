@@ -173,6 +173,14 @@ const ManageOrder = () => {
                         dispatch(setTotalPrice(totalPrice));
                   }
             }
+
+            // step 3 is payment
+            
+
+            if(step === 4) {
+                  // step 4 is after payment
+                  console.log("oh this is step 4 yooo");
+            }
             
       }, [step])
 

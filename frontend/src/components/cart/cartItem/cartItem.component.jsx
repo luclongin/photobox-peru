@@ -55,7 +55,7 @@ const CartItem = ({id, title, subtitle, image, quantity, price, cartCount, setCa
                                     </Grid>  
                                     <Grid item xs={12} sx={{backgroundColor: 'orange'}}>
                                           <Typography variant="carth2" sx={{
-                                                position: 'absolute', bottom: 0, left: 10
+                                                position: 'absolute', bottom: 1, left: 10
                                           }}>
                                                 {quantity}x
                                           </Typography>
@@ -72,7 +72,7 @@ const CartItem = ({id, title, subtitle, image, quantity, price, cartCount, setCa
                               }} onClick={handleDeleteCartItem}>
                                     <HighlightOffIcon fontSize="small" />
                               </IconButton>
-                              <Typography variant="carth2" sx={{
+                              <Typography variant="carth1" sx={{
                                     position: 'absolute',
                                     bottom: 0,
                                     right: -10,
