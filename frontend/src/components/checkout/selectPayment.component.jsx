@@ -12,6 +12,7 @@ import PlinIcon from '../../images/plin.png';
 import { setPaymentMethod } from '../../features/selectPaymentMethod/selectPaymentMethodSlice';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { setDialogsState } from '../../features/handleDialogs/handleDialogsSlice';
 
 const blue = {
   100: '#DAECFF',
@@ -238,6 +239,11 @@ export default function SelectPaymentComponent() {
 
   useEffect(() => {
     dispatch(setPaymentMethod(selectedMethod));
+    if(selectedMethod === "yape") {
+      dispatch(setDialogsState({yape: true, plin: false}));
+    } else if(selectedMethod === "plin") {
+      dispatch(setDialogsState({yape: false, plin: true}));
+    }
   }, [selectedMethod]);
   
   return (

@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import QrCode from '../../images/qr_example.png';
 import {Grid} from "@mui/material";
+import { useDispatch } from "react-redux";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -55,6 +56,8 @@ function BootstrapDialogTitle(props) {
 
 const YapePopUp = ({open, handleOpen, price}) => {
 
+    const dispatch = useDispatch();
+    
     const handleClose = () => {
         handleOpen(false);
     };

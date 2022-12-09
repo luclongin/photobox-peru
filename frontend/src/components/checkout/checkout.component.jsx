@@ -31,7 +31,6 @@ const Checkout = () => {
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const letters = useSelector(state => state.letters);
       const paymentMethod = useSelector(state => state.paymentMethod);
-      const [yapeIsOpen, setYapeIsOpen] = useState(false);
 
       const handleDelivery = (e) => {
             dispatch(setDelivery(e.target.value));
@@ -185,10 +184,6 @@ const Checkout = () => {
             } */
       }
 
-      const openYape = () => {
-
-      }
-
       return(
             <Box>
                   <Grid container sx={{
@@ -256,12 +251,8 @@ const Checkout = () => {
                                     <Button onClick={handleCheckout}>
                                           Subir fotoss en FS
                                     </Button>
-                                    <Button onClick={() => {
-                                          setYapeIsOpen(true);
-                                    }}>
-                                          Open Yape Yo
-                                    </Button>
-                                    <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
+                                    
+                                    
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>

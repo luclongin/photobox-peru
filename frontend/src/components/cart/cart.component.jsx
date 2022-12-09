@@ -15,6 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import MercadoPagoButton from "../mercadoPagoButton/mercadoPagoButton.component";
+import YapePopUp from "../yapePopUp/yapePopUp.component";
+import { setDialogsState } from "../../features/handleDialogs/handleDialogsSlice";
 
 const Cart = () => {
       const dispatch = useDispatch();
@@ -30,16 +32,18 @@ const Cart = () => {
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const step = useSelector(state => state.step);
       const paymentMethod = useSelector(state => state.paymentMethod);
+      const [yapeIsOpen, setYapeIsOpen] = useState(false);
+      const yapeState = useSelector(state => state.dialogs);
 
       const handleClick = () => {
+            console.log("selected method:", paymentMethod);
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
                   console.log("paymentMethod from click", paymentMethod);
-                  switch(paymentMethod) {
-                        case "card":
-                              document.getElementById("cho-container").getElementsByTagName('button')[0].click();
-                        default:
-                              console.log("yo");
+                  if(paymentMethod === "card") {
+                        document.getElementsByClassName("mercadopago-button")[0].click();
+                  } else if(paymentMethod === "yape") {
+                        setYapeIsOpen(true);
                   }
             } else {
                   dispatch(incrementStep());
@@ -303,7 +307,10 @@ const Cart = () => {
                               (step.value === 3) ? "Realizar Pago" : "Siguiente"
                               }
                         </Button>
-                        <MercadoPagoButton />
+                        <Box sx={{display: ''}}>
+                              <MercadoPagoButton/>
+                        </Box>
+                        <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
                   </Box>      
             </Box>
       );
