@@ -16,7 +16,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import MercadoPagoButton from "../mercadoPagoButton/mercadoPagoButton.component";
 import YapePopUp from "../yapePopUp/yapePopUp.component";
-import { setDialogsState } from "../../features/handleDialogs/handleDialogsSlice";
 
 const Cart = () => {
       const dispatch = useDispatch();
@@ -307,7 +306,7 @@ const Cart = () => {
                               (step.value === 3) ? "Realizar Pago" : "Siguiente"
                               }
                         </Button>
-                        <Box sx={{display: ''}}>
+                        <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>
                         <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />

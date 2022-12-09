@@ -17,7 +17,6 @@ import DiscountUploadReducer from '../features/discountUpload/discountUpload';
 import GiftCardReducer from '../features/giftCard/giftCardSlice';
 import TotalPriceReducer from '../features/totalPrice/totalPrice';
 import PaymentMethodReducer from '../features/selectPaymentMethod/selectPaymentMethodSlice';
-import DialogsStateReducer from '../features/handleDialogs/handleDialogsSlice';
 
 export default configureStore({
       reducer: {
@@ -39,6 +38,5 @@ export default configureStore({
             giftcard: GiftCardReducer,
             totalPrice: TotalPriceReducer,
             paymentMethod: PaymentMethodReducer,
-            dialogs: DialogsStateReducer
       }
 });
