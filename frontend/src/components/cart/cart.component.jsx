@@ -33,6 +33,7 @@ const Cart = () => {
       const paymentMethod = useSelector(state => state.paymentMethod);
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
       const yapeState = useSelector(state => state.dialogs);
+      const [plinIsOpen, setPlinIsOpen] = useState(false);
 
       const handleClick = () => {
             console.log("selected method:", paymentMethod);
@@ -43,6 +44,8 @@ const Cart = () => {
                         document.getElementsByClassName("mercadopago-button")[0].click();
                   } else if(paymentMethod === "yape") {
                         setYapeIsOpen(true);
+                  } else if(paymentMethod === "plin") {
+                        setPlinIsOpen(true);
                   }
             } else {
                   dispatch(incrementStep());
@@ -310,6 +313,10 @@ const Cart = () => {
                               <MercadoPagoButton/>
                         </Box>
                         <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
+                        {
+                        // have to create a new component for plin. Saving for later.
+                        }
+                        <YapePopUp open={plinIsOpen} handleOpen={setPlinIsOpen} price={"100"} />
                   </Box>      
             </Box>
       );

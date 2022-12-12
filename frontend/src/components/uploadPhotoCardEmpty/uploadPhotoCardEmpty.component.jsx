@@ -84,7 +84,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
 
       let relativeFontSize = '';
       if (width < 350) {
-            relativeFontSize = '5em';
+            relativeFontSize = '7.5em';
       }
 
       return(

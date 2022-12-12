@@ -194,8 +194,10 @@ const Checkout = () => {
                               <Grid container>
                                     <Grid item xs={6} display="flex"> 
                                           <FormGroup sx={{
+                                          mt: 2,
+                                          mb: 2
                                     }}>
-                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 1}}>
+                                                <Typography variant="orderh1withoutUnderline" sx={{textAlign: 'left', mt: 1, mb: 1}}>
                                                       Dirección
                                                 </Typography>
                                                 <AddressAddition />
@@ -242,8 +244,7 @@ const Checkout = () => {
                                                 <Grid container spacing={0} sx={{mt: 0, p: 0}}>
                                                       <Grid item xs={12} sx={{mt: 2}}>
                                                             <SelectPaymentComponent />
-                                                      </Grid>
-                                                      
+                                                      </Grid>       
                                                 </Grid>
                                           </FormGroup>
                                     </Grid>

@@ -11,12 +11,16 @@ import { setGiftCard } from "../../../features/giftCard/giftCardSlice";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import RedeemOutlinedIcon from '@mui/icons-material/RedeemOutlined';
 import SendToMobileOutlinedIcon from '@mui/icons-material/SendToMobileOutlined';
+import LetrasDialog from "../letras/letrasPayPopUp.component";
 
 const GiftCard = () => {
     const dispatch = useDispatch();
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleSubmitGiftCard = (e) => {
-        e.preventDefault();
+        setDialogOpen(true);
+
+        /*e.preventDefault();
         let giftCardData = new FormData();
         const giftCardId = nanoid();
         giftCardData.append('discountId', giftCardId);
@@ -35,7 +39,7 @@ const GiftCard = () => {
             }));
             dispatch(createDiscount(giftCardData));
             dispatch(incrementStep());
-        }
+        }*/
     }
 
 
@@ -187,6 +191,7 @@ const GiftCard = () => {
                             >
                                 Comprar
                             </AddButton>
+                            <LetrasDialog open={dialogOpen} handleOpen={setDialogOpen} />
                         </Grid>
                     </Grid>
                     <Grid container>

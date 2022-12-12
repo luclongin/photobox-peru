@@ -200,7 +200,7 @@ const getPaymentIcon = (paymentType) => {
 
 function renderValue(option) {
     if(option === null) {
-        return <span>Escojer metodo de pago</span>
+        return <span>Escojer método de pago</span>
     }
 
     return (
@@ -275,7 +275,7 @@ export default function SelectPaymentComponent() {
 }
 
 const paymentOptions = [
-{ option: 'card', title: 'Tarjeta de debito o credito', subtitle: 'Comision adicional'},
-{ option: 'yape', title: 'Yape', subtitle: 'Sin comision'},
-{ option: 'plin', title: 'Plin', subtitle: 'Sin comision'}
+{ option: 'card', title: 'Tarjeta de débito o crédito', subtitle: 'Comision adicional'},
+{ option: 'yape', title: 'Yape', subtitle: 'Sin comisión'},
+{ option: 'plin', title: 'Plin', subtitle: 'Sin comisión'}
 ];

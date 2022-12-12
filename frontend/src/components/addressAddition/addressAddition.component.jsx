@@ -31,7 +31,7 @@ const AddressAddition = () => {
             <Fragment> 
                   {
                   !addressAdded ? 
-                        <Box>
+                        <Box sx={{m: 0, p: 0}}>
                               <Button variant="contained" startIcon={<AddHomeIcon sx={{color: '#FF66C4'}} />} sx={{
                                     color: "black",
                                     backgroundColor: 'white!important',
@@ -39,8 +39,7 @@ const AddressAddition = () => {
                                     padding: 1.5,
                                     pr: 2,
                                     fontSize: '1em',
-                                    mt: 2,
-                                    mb: 2
+                                    m: 0
                               }} onClick={handleOpen}>
                                     Añadir dirección
                               </Button>

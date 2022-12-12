@@ -70,12 +70,12 @@ const theme = createTheme({
         left: '15px'
       },
       deliveryTitle: {
-        fontSize: '1.2em',
+        fontSize: '1.1em',
         color: '#000000',
         fontFamily: 'Questrial'
       },
       deliverySubtitle: {
-        fontSize: '0.95em',
+        fontSize: '0.9em',
         color: '#9B8E9A',
         fontFamily: 'Questrial'
       }
