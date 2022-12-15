@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import { Avatar } from '@mui/material';
 import Logo from '../../../src/images/logo192.png';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 
 /*
@@ -72,11 +73,14 @@ const NavBar = () => {
                                     <MenuItem onClick={handleClose}>My account</MenuItem>
                               </Menu>
                         </Fragment>
-                        <IconButton sx={{
-                              justifyContent:'center'
-                        }}>
-                              <Avatar alt="logo" src={Logo} />
-                        </IconButton>
+                        <Link to={'/'}>
+                              <IconButton sx={{
+                                    justifyContent:'center'
+                              }}>
+                                    <Avatar alt="logo" src={Logo} variant="square"
+                                    sx={{width: 50, height: 50, mt: 0.5}}/>
+                              </IconButton>
+                        </Link>
                   </Toolbar>
             </AppBar>
       </Box>

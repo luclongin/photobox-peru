@@ -21,16 +21,16 @@ exports.createPreference = (req, res) => {
                 //additional_info: orderData.additionalInfo,
             }
         ],
-        /*payer: {
+        payer: {
             name: orderData.firstName,
             surname: orderData.lastName,
             email: orderData.email,
             phone: orderData.phoneNumber,
             address: orderData.address,
             date_created: orderData.dateCreated
-        },*/
+        },
         back_urls: {
-            "success": "http://localhost:3000/feedback",
+            "success": "http://localhost:3000/gracias",
             "failure": "http://localhost:3000/feedback",
             "pending": "http://localhost:3000/feedback",
         },

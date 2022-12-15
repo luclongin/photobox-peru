@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import QrCode from '../../images/qr_example.png';
 import {Grid} from "@mui/material";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -21,6 +22,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogActions-root': {
       padding: theme.spacing(1),
     },
+    "& .MuiPaper-root": {
+      width: '460px'
+    }
   }));
 
 function BootstrapDialogTitle(props) {
@@ -70,63 +74,96 @@ const YapePopUp = ({open, handleOpen, price}) => {
         >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} sx={{
             textAlign: 'center',
-            fontSize: '1.8em'
+            fontSize: '1.6em',
+            p: 1,
+            backgroundColor: '#FAF9F9'
         }}>
           Pagar con Yape
         </BootstrapDialogTitle>
-        <DialogContent dividers sx={{paddingTop: "0px!important",}}>
-            <Grid container>
+        <DialogContent dividers sx={{
+            paddingTop: "0px!important",
+            backgroundColor: '#FAF9F9'
+        }}>
+            <Grid container sx={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}>
                 <Grid item xs={12} sx={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',   
+                    pt: 2           
                 }}>
-                    <img src={QrCode} alt="qrcode" width="250px" height="250px"/>
-                </Grid>
-                <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', mt: "-20px"}}>
-                    <Box sx={{width: '200px'}}>    
-                        <Typography variant="p" sx={{
-                            fontSize: '1em'
+                  <Box sx={{
+                    backgroundColor: 'white',
+                    borderRadius: '15px',
+                    border: '1px solid rgba(0, 0, 0, 0.12)'
+                  }}>
+                    <img src={QrCode} alt="qrcode" width="220px" height="220px"/>
+                    <Box sx={{
+                      mt: "-22px",
+                      textAlign: 'center'
+                    }}>
+                      <Typography variant="p" sx={{
+                            fontSize: '1em',
+                            color: '#9B8E9A'
                         }}>
                             Katherine Pinche
                         </Typography>
-                        <br />
+                      </Box>
+                      <Box sx={{
+                        mt: '-2px',
+                        pb: 1,
+                        textAlign: 'center'
+                      }}>
                         <Typography variant="p" sx={{
-                            fontSize: '1.2em'
+                            fontSize: '0.9em',
+                            fontWeight: 'bold'
                         }}>
-                            +51 123 456 789
+                            +51123456789
                         </Typography>
+                        </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center'}}>
+                    <Box sx={{width: '200px'}}>    
+                        
                     </Box>
                 </Grid>
-                <Grid item xs={12} sx={{textAlign: 'center'}}>
-                    <Typography variant="p" sx={{
-                        fontSize: '1.5em'
-                    }}>
-                        Monto a pagar
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} sx={{textAlign: 'center'}}>
-                    <Typography variant="p" sx={{
-                        fontSize: '2em'
-                    }}>
-                        {price} S/
-                    </Typography>
+                <Grid item xs={8} sx={{textAlign: 'center', pt: 4, pb: 3}}>
+                      <Typography variant="p" sx={{
+                          fontSize: '1.5em'
+                      }}>
+                          Monto a pagar <b>S/ {price}</b>
+                      </Typography>
                 </Grid>
                 <Grid>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Typography variant="p">
-                                Escanea el codigo QR desde la app Yape y realiza el pago.<br />
-                                Luego envianos la captura de pantalla del Yapeo realizado al +51 123 456 789 (es el unico comprobante de pago) para completar la solicitud.
+                    <Grid container sx={{display: 'flex', justifyContent: 'center'}}>
+                        <Grid item xs={10}>
+                            <Typography variant="p" sx={{fontSize: '1em'}}>
+                                <b>1.</b> Escanea el codigo QR desde la app Yape y realiza el pago.
+                            </Typography>
+                            <Typography variant="p" sx={{display: 'block', fontSize: '1em', pt: 1}}>
+                                <b>2.</b> Luego envianos la captura de pantalla del Yapeo realizado al <b>+51123456789</b> (es el unico comprobante de pago) para completar la solicitud.
                             </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button variant="contained" sx={{backgroundColor: 'white', color: "#FF66C4"}} autoFocus onClick={handleClose}>
-            Ya pagué
-          </Button>
+        <DialogActions sx={{
+            backgroundColor: '#FAF9F9'
+          }}>
+          <Link to="/yape">
+            <Button variant="contained" sx={{
+              backgroundColor: 'white', 
+              color: "#FF66C4",
+              "&:hover": {
+                color: 'white'
+              }
+            }} autoFocus>
+              Ya pagué
+            </Button>
+          </Link>
         </DialogActions>
       </BootstrapDialog>
     );

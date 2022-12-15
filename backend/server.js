@@ -8,7 +8,7 @@ const path = require('path');
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
-	access_token: "APP_USR-8947202883787262-120219-adae9f18764f3836149db8cac266c275-1249132598",
+	access_token: "APP_USR-584352574812505-120220-96d3fa38fe1befe43a71d5e87a652d13-1253671658",
 });
 
 

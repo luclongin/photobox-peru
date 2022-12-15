@@ -40,7 +40,15 @@ const UserInfoSlice = createSlice({
                   }
             },
             deleteAddress: (state) => {
-                  return ""
+                  return ({
+                        userId: "",
+                        userFullName: "",
+                        userEmail: "",
+                        userAddress: "",
+                        userPhoneNumber: "",
+                        userDistrict: "",
+                        userCity: ""
+                  });
             }
       }
 })

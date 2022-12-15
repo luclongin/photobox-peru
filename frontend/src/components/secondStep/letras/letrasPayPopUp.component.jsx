@@ -12,9 +12,9 @@ import theme from '../../../utils/theme';
 import AddressAddition from '../../addressAddition/addressAddition.component';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import YapePopUp from '../../yapePopUp/yapePopUp.component';
-import { useSelector } from 'react-redux';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAddress
+ } from '../../../features/userInfo/userInfoSlice';
 const StyleDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiPaper-root": {
       overflowY: "visible",
@@ -23,25 +23,34 @@ const StyleDialog = styled(Dialog)(({ theme }) => ({
   }));
 
 const LetrasDialog = ({open, handleOpen}) => {
-
+    const dispatch = useDispatch();
     const paymentMethod = useSelector(state => state.paymentMethod);
     const [yapeIsOpen, setYapeIsOpen] = useState(false);
     const [plinIsOpen, setPlinIsOpen] = useState(false);
 
-  const handleClose = () => {
-    handleOpen(false);
-};
+    const handleClose = () => {
+        handleOpen(false);
+        dispatch(deleteAddress());
+    };
 
-const handleClick = () => {
-    console.log("paymentMethod from click", paymentMethod);
-    if(paymentMethod === "card") {
-        document.getElementsByClassName("mercadopago-button")[0].click();
-    } else if(paymentMethod === "yape") {
-        setYapeIsOpen(true);
-    } else if(paymentMethod === "plin") {
-        setPlinIsOpen(true);
+    const userInfo = useSelector(state => state.userInfo);
+    const [infoAdded, setInfoAdded] = useState(true);
+
+    const handleClick = () => {
+        console.log("userInfo:", userInfo);
+        if(userInfo.userId !== "" && paymentMethod !== "") {
+            setInfoAdded(true);
+            if(paymentMethod === "card") {
+                document.getElementsByClassName("mercadopago-button")[0].click();
+            } else if(paymentMethod === "yape") {
+                setYapeIsOpen(true);
+            } else if(paymentMethod === "plin") {
+                setPlinIsOpen(true);
+            }
+        } else {
+            setInfoAdded(false);
+        }
     }
-}
 
   return (
     <Box>
@@ -54,13 +63,13 @@ const handleClick = () => {
             pl: 4
         }}>Pagar Gift Card</DialogTitle>
         <IconButton sx={{  
-                        position: 'absolute',
-                        right: 10,
-                        top: 12,
-                        color: "rgb(0,0,0,0.3)"        
-                  }} onClick={handleClose}>
-                        <HighlightOffIcon fontSize="large" />
-                  </IconButton>
+            position: 'absolute',
+            right: 10,
+            top: 12,
+            color: "rgb(0,0,0,0.3)"        
+        }} onClick={handleClose}>
+            <HighlightOffIcon fontSize="large" />
+        </IconButton>
         <DialogContent sx={{
             backgroundColor: '#FAF9F9',
             pb: 0.5,
@@ -86,10 +95,22 @@ const handleClick = () => {
                         Pagar
                      </Typography>
                     <SelectPaymentComponent />
+                    {
+                        !infoAdded && (<Typography variant="p" sx={{
+                            fontSize: '0.9em',
+                            color: 'red',
+                            position: 'relative',
+                            top: 4
+                        }}>
+                            Llena tus datos y escoje un metodo de pago
+                        </Typography>
+                        )
+                    }
                 </Grid>
             </Grid>
         </DialogContent>
-        <Box sx={{textAlign: 'center', p: 3}}>
+        <Box sx={{textAlign: 'center', p: 3,
+            backgroundColor: '#FAF9F9',}}>
             <Button variant="contained" sx={{
                     color: '#FFFFFF',
                     width: 180,

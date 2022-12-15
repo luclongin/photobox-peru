@@ -12,6 +12,8 @@ import {
 import ErrorPage from './errorPage';
 import store from './store/store';
 import { Provider } from 'react-redux';
+import OrderFeedbackCard from './components/orderFeedback/orderFeedbackCard.component';
+import OrderFeedbackYape from './components/orderFeedback/orderFeedbackYape.component';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
     path: "/kat",
     element: <AdminPage />,
   },
+  {
+    path: "/gracias",
+    element: <OrderFeedbackCard />,
+  },
+  {
+    path: "/yape",
+    element: <OrderFeedbackYape />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

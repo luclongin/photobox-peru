@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const MercadoPagoButton = () => {
     // PUBLIC KEY
-    const mercadopago = useMercadopago.v2('APP_USR-6d805d48-0abb-4277-8f9f-a4a01fdc0a34', {
+    const mercadopago = useMercadopago.v2('APP_USR-56a889a9-b928-4f89-8f60-fe89f3b1ad78', {
         locale: 'es-PE'
     });
     const dispatch = useDispatch();
@@ -36,7 +36,6 @@ const MercadoPagoButton = () => {
 
     useEffect(() => {
         if(preferenceId) {
-            console.log("my preference:", preferenceId);
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = 'https://sdk.mercadopago.com/js/v2';

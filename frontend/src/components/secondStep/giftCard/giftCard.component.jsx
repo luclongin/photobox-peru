@@ -15,12 +15,24 @@ import LetrasDialog from "../letras/letrasPayPopUp.component";
 
 const GiftCard = () => {
     const dispatch = useDispatch();
+    const [finalAmount, setFinalAmount] = useState(0);
+    const initialClicked = [false, false, false, false];
+    const [clicked, setClicked] = useState(initialClicked);
+    const [customAmount, setCustomAmount] = useState("");
+    const [toggleErrorText, setToggleErrorText] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleSubmitGiftCard = (e) => {
-        setDialogOpen(true);
+        e.preventDefault();
+        if(finalAmount === "" || finalAmount === 0) {
+            setToggleErrorText(true);
+        } else {
+            setToggleErrorText(false);
+            setDialogOpen(true);
+        }
 
-        /*e.preventDefault();
+
+        /*
         let giftCardData = new FormData();
         const giftCardId = nanoid();
         giftCardData.append('discountId', giftCardId);
@@ -56,10 +68,7 @@ const GiftCard = () => {
         }
   })
 
-    const initialClicked = [false, false, false, false];
-    const [clicked, setClicked] = useState(initialClicked);
-    const [customAmount, setCustomAmount] = useState("");
-    const [finalAmount, setFinalAmount] = useState(0);
+    
 
     const toggleClicked = (e) => {
         let clickedCopy = [false, false, false, false];
@@ -193,6 +202,18 @@ const GiftCard = () => {
                             </AddButton>
                             <LetrasDialog open={dialogOpen} handleOpen={setDialogOpen} />
                         </Grid>
+                        {
+                            toggleErrorText && (
+                             <Grid xs={12} sx={{textAlign: 'left', pl: 2, pt: 1}}>
+                             {
+                                 toggleErrorText && (<Typography variant="p" sx={{color: 'red'}}>
+                                     Escoje un monto
+                                 </Typography>)
+                             }
+                            </Grid>
+                            )
+                        }
+                       
                     </Grid>
                     <Grid container>
                         <Grid item xs={12} sx={{textAlign: 'left', pl: 2, pt: 5}}>

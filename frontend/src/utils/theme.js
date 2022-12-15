@@ -1,7 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
-import Button from '@mui/material/Button';
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -32,6 +29,9 @@ const theme = createTheme({
         fontSize: '1.3em',
         color: '#9B8E9A'
       },
+      p: {
+        fontFamily: 'Questrial'
+      },
       carth1: {
         fontSize: '1em',
         color: '#000'
@@ -54,6 +54,10 @@ const theme = createTheme({
       },
       orderh1withoutUnderline: {
         fontSize: '1.6em',
+      },
+      orderFeedbackh1: {
+        fontSize: '2em',
+        fontWeight: 'bold'
       },
       giftCardHowItWorks: {
         fontSize: '1.2em',
