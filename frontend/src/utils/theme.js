@@ -21,6 +21,43 @@ const theme = createTheme({
       button: {
             textTransform: 'none'
       },
+      thirdparth1: {
+        fontSize: '3.4em',
+        fontWeight: 'bold',
+        "span": {
+          color: '#FF66C4'
+        }
+      },
+      thridpartsubtitle: {
+        fontSize: '1.4em'
+      },
+      secondparttitle: {
+        fontSize: '2.8em',
+        lineHeight: '50px',
+        fontWeight: 'bold',
+        "span": {
+          color: '#FF66C4'
+        }
+      },
+      secondpartsubtitle: {
+        fontSize: '1.1em',
+        fontWeight: 'bold'
+      },
+      homepageh1: {
+        fontSize: '4.1em',
+        fontWeight: 'bold',
+        lineHeight: '70px',
+        "span": {
+          color: '#FF66C4'
+        }
+      },
+      homepageh2: {
+        fontSize: '1.5em',
+        lineHeight: '28px',
+        "span": {
+          color: '#FF66C4'
+        }
+      },
       h1 : {
         fontSize: '2em',
         color: '#000000'
@@ -66,7 +103,8 @@ const theme = createTheme({
       letrasinput: {
         fontSize: '11em',
         fontStyle: 'Bold',
-        fontFamily: 'Arial',
+        fontWeight: 'bold',
+        fontFamily: 'Arial Bold',
         margin: '0',
         padding: '0',
         position: 'absolute',

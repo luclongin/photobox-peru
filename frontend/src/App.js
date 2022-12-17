@@ -7,6 +7,7 @@ import NavBar from './components/navbar/navbar.component';
 import { ThemeProvider } from '@mui/material';
 import theme from './utils/theme';
 import {Box} from '@mui/material';
+import HomePage from './components/homepage/homepage.component';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <ThemeProvider theme={theme}>
         <Box className="App" display="flex" height="100vh" flexDirection="column">
           <NavBar/>
-          <ManageOrder />
+          <HomePage />
         </Box>
         </ThemeProvider>
       </Provider>

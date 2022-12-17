@@ -14,6 +14,8 @@ import store from './store/store';
 import { Provider } from 'react-redux';
 import OrderFeedbackCard from './components/orderFeedback/orderFeedbackCard.component';
 import OrderFeedbackYape from './components/orderFeedback/orderFeedbackYape.component';
+import ManageOrder from './components/manageOrder/manageOrder.component';
+import Order from './components/order/order.component';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/yape",
     element: <OrderFeedbackYape />
+  },
+  {
+    path: "/pedido",
+    element: <Order />
   }
 ]);
 

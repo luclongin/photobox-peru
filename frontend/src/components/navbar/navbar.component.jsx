@@ -11,7 +11,6 @@ import Logo from '../../../src/images/logo192.png';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-
 /*
       Our main navigation bar, strongly inspired by MUI documentation
 */
@@ -78,7 +77,7 @@ const NavBar = () => {
                                     justifyContent:'center'
                               }}>
                                     <Avatar alt="logo" src={Logo} variant="square"
-                                    sx={{width: 50, height: 50, mt: 0.5}}/>
+                                    sx={{width: 46, height: 46, position: 'relative', top: 2}}/>
                               </IconButton>
                         </Link>
                   </Toolbar>
