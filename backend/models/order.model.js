@@ -20,6 +20,14 @@ module.exports = (sequelize, Sequelize) => {
             totalPrice: {
                   type: Sequelize.STRING,
                   allowNull: false
+            },
+            paymentType: {
+                  type: Sequelize.STRING,
+                  allowNull: false
+            },
+            hasPaid: {
+                  type: Sequelize.STRING,
+                  allowNull: false
             }
       });
       Order.removeAttribute('id');

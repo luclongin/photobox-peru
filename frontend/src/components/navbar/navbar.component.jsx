@@ -10,6 +10,9 @@ import { Avatar } from '@mui/material';
 import Logo from '../../../src/images/logo192.png';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from '../../features/productSelection/ProductSlice.js';
+import { setStep } from '../../features/step/stepSlice.js';
 
 /*
       Our main navigation bar, strongly inspired by MUI documentation
@@ -17,6 +20,8 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+      const dispatch = useDispatch();
+
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -29,6 +34,11 @@ const NavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleClick = () => {
+      dispatch(deleteProduct());
+      dispatch(setStep(0));
+  }
 
   return (
       <Box sx={{ flexGrow: 1,
@@ -72,7 +82,7 @@ const NavBar = () => {
                                     <MenuItem onClick={handleClose}>My account</MenuItem>
                               </Menu>
                         </Fragment>
-                        <Link to={'/'}>
+                        <Link to={'/'} onClick={handleClick}>
                               <IconButton sx={{
                                     justifyContent:'center'
                               }}>

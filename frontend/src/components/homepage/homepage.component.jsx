@@ -237,15 +237,43 @@ const ThirdPart = () => {
 
 const FourthPart = () => {
     return(
-        <Box>
+        <Box sx={{
+            backgroundColor: "#fdecef"
+        }}>
             <Grid container>
                 <Grid item xs={12}>
                     <Typography variant="thirdpart">
                         Siguenos
                     </Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{
+                    height: '50vh',
+                }}>
                     <Carousel />
+                </Grid>
+            </Grid>
+        </Box>
+    );
+}
+
+const BottomToolbar = () => {
+    return(
+        <Box>
+            <Grid container>
+                <Grid item xs={4}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Typography variant="p">
+                                Sobre nosotros
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={4}>
+                    
+                </Grid>
+                <Grid item xs={4}>
+                    
                 </Grid>
             </Grid>
         </Box>

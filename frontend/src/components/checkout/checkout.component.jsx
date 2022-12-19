@@ -36,6 +36,7 @@ const Checkout = () => {
             dispatch(setDelivery(e.target.value));
       }
 
+      /*
       const getFileFromUrl = async (url, name) => {
             let file = await fetch(url).then(async r => await r.blob())
             .then(blobFile => new File([blobFile], name, {type: "image/jpeg"}));
@@ -125,6 +126,16 @@ const Checkout = () => {
             orderData.append('productType', productType);
             orderData.append('deliveryType', delivery);
             orderData.append('totalPrice', '0');
+            orderData.append('paymentType', paymentMethod);
+            // if yape/plin: desconocido -> check your payment system
+            // if card than should be TRUE as this function is always 
+            // executed after the payment has been successful..
+
+            if(paymentMethod === "yape" || paymentMethod === "plin") {
+                  orderData.append('hasPaid', 'desconocido');
+            } else {
+                  orderData.append('hasPaid', 'SI');
+            }
             
             dispatch(createOrder(orderData)).unwrap()
             .then(data => {
@@ -170,19 +181,16 @@ const Checkout = () => {
 
       const handleCheckout = async e => {  
             const orderId = await handleCreateOrder(e);
+            console.log("order created");
+            console.log("orderId:", orderId);
             handlePhotoUpload(e, orderId);
             handleCreateUser(e);
             handleAdditionalPhrase(e, orderId);
             if(letters.letter1) {
                   handleCreateLetter(e, orderId);
             }
-            //console.log("discountApplied from handleCheckout", discountApplied);
-            /*if(discountApplied) {
-                  // if there is an applied discount
-                  // remove discount from db
-                  dispatch(deleteDiscount(discountCode));
-            } */
-      }
+      }*/
+
 
       return(
             <Box>
@@ -203,13 +211,8 @@ const Checkout = () => {
                                                 <AddressAddition />
                                           </FormGroup>
                                     </Grid>
-
-                                    
                               </Grid>
-                              
-
                               <Divider variant="middle" sx={{mt: 1, mb: 2, ml: -1}}/> 
-                              
                               <Grid container>
                                     <Grid item xs={12} display="flex"> 
                                           <FormGroup sx={{
@@ -219,6 +222,10 @@ const Checkout = () => {
                                                 </Typography>
                                                 <Grid container spacing={2} sx={{mt: "-15px", p: 0}}>
                                                       <Grid item xs={6}>
+                                                            {
+                                                                  // essentially you're sending the redux func to the component
+                                                                  // you dispatch this fnc there
+                                                            }
                                                             <CheckOutOption setStateFn={setDelivery} selectedState={delivery} option={"gratis"} title={"Delivery Gratis"} subtitle={"Entregado en 1 semana"}/>
                                                       </Grid>      
                                                       <Grid item xs={6}>
@@ -229,7 +236,6 @@ const Checkout = () => {
                                     </Grid>
 
                               </Grid>
-
 
                               <Divider variant="middle" sx={{mt: 3, mb: 0, ml: -1}}/> 
 
@@ -248,16 +254,15 @@ const Checkout = () => {
                                                 </Grid>
                                           </FormGroup>
                                     </Grid>
-
-                                    <Button onClick={handleCheckout}>
-                                          Subir fotoss en FS
-                                    </Button>
-                                    
-                                    
+                                    {
+                                          /*<Button onClick={handleCheckout}>
+                                                Subir fotoss en FS
+                                          </Button>*/
+                                    }
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>
-                              <Cart/>
+                              <Cart />
                         </Grid>
 
                   </Grid>

@@ -5,6 +5,11 @@ import { useSelector } from "react-redux";
 import CartItem from "./cartItem/cartItem.component";
 import { getPrice } from "../../utils/pricing";
 import Divider from '@mui/material/Divider';
+import { createAdditionalPhrase } from "../../features/additionalPhraseUpload/additionalPhraseUploadSlice";
+import { createLetter } from "../../features/lettersUpload/lettersUploadSlice"; 
+import { createOrder } from "../../features/order/orders";
+import { createPhoto, uploadCroppedPhotos } from "../../features/photoUpload/photoUpload";
+import { createUser } from "../../features/userInfoUpload/userInfoUpload";
 import { incrementStep, setStep } from "../../features/step/stepSlice";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
@@ -16,13 +21,17 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import MercadoPagoButton from "../mercadoPagoButton/mercadoPagoButton.component";
 import YapePopUp from "../yapePopUp/yapePopUp.component";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Cart = () => {
+
       const dispatch = useDispatch();
+      const letters = useSelector(state => state.letters);
+      const userInfo = useSelector(state => state.userInfo);
       const photos = useSelector(state => state.photos);
-      const addedPhrases = useSelector(state => state.additionalPhrases);
+      const additionalPhrases = useSelector(state => state.additionalPhrases);
       const product = useSelector(state => state.product);
-      const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", addedPhrases.length);
+      const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", additionalPhrases.length);
       const delivery = useSelector(state => state.delivery);
       const appliedDiscount = useSelector(state => state.appliedDiscount);
       const [finalPrice, setFinalPrice] = useState(0);
@@ -35,7 +44,9 @@ const Cart = () => {
       const yapeState = useSelector(state => state.dialogs);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
 
-      const handleClick = () => {
+      const handleClick = (e) => {
+            e.preventDefault();
+
             console.log("selected method:", paymentMethod);
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
@@ -54,7 +65,7 @@ const Cart = () => {
 
       // User deletes all items from Cart
       const restartProcessOrNot = () => {
-            if(photos.length === 0 && addedPhrases.length === 0) {
+            if(photos.length === 0 && additionalPhrases.length === 0) {
                   dispatch(setStep(0));
             }
       }
@@ -124,14 +135,181 @@ const Cart = () => {
 
       if(price < 0) {
             price=0;
+            dispatch(setTotalPrice(price));
       }
 
       if(price >= 0) {
-            //dispatch(setTotalPrice(price));
+            dispatch(setTotalPrice(price));
       }
 
 
       restartProcessOrNot();
+
+
+      // CHECKOUT
+      // These next functions handle checkout btn
+
+      const getFileFromUrl = async (url, name) => {
+            let file = await fetch(url).then(async r => await r.blob())
+            .then(blobFile => new File([blobFile], name, {type: "image/jpeg"}));
+            return file;
+      }
+
+      const addFileExtension = (type) => {
+            switch(type) {
+                  case "image/jpeg":
+                        return ".jpg";
+                  case "image/png":
+                        return ".png";
+                  default:
+                        return;
+            }
+      }
+
+      const handleAdditionalPhrase = async (e, orderId) => {
+            e.preventDefault();
+            //create new phrase
+            await Promise.all(additionalPhrases.map(async (phrase) => {
+                  let phraseData = new FormData();
+                  const phraseId = nanoid();
+                  phraseData.append('phraseId', phraseId);
+                  phraseData.append('orderId', orderId);
+                  phraseData.append('phraseType', phrase.phraseType);
+                  phraseData.append('phraseText', phrase.phraseText);
+                  phraseData.append('phraseColor', phrase.phraseColor);
+                  
+                  dispatch(createAdditionalPhrase(phraseData)).unwrap()
+                  .then(data => {
+                        console.log(data);
+                  }).catch(e => {
+                        console.log("merde addphrase", e);
+                  })
+            }));
+      }
+
+      const handlePhotoUpload = async (e, orderId) => {
+            e.preventDefault();
+
+            // HANDLING UPLOAD OF PHOTOS
+            let photosFormData = new FormData();
+            // a way to execute await in a for loop all simultaneously
+            await Promise.all(photos.map(async (photo) => {
+                  const photoName = photo.id + addFileExtension(photo.type);
+                  const newImage = await getFileFromUrl(photo.imgResult, photoName);
+                  photosFormData.append('file', newImage);
+            }));
+
+            dispatch(uploadCroppedPhotos(photosFormData)).unwrap()
+            .then(data => {
+                  console.log(data);
+                  // revoke all URLs
+                  photos.forEach(photo => {
+                        URL.revokeObjectURL(photo.imgResult);
+                        URL.revokeObjectURL(photo.imgSrc);
+                  })
+            }).catch(e => {
+                  console.log("merde", e);
+            });
+
+            // HANDLE CREATE PHOTOS IN DB
+            await Promise.all(photos.map(async (photo) => {
+                  let photoData = new FormData();
+                  photoData.append('photoId', photo.id);
+                  photoData.append('orderId', orderId);
+                  const photoName = photo.id + addFileExtension(photo.type);
+                  photoData.append('photoName', photoName);
+                  dispatch(createPhoto(photoData)).unwrap()
+                  .then(data => {
+                        console.log(data);
+                  }).catch(e => {
+                        console.log("oh merde photo upload", e);
+                  });
+            }));
+      };
+
+      const handleCreateOrder = async e => {
+            e.preventDefault();
+            // HANDLING ORDER 
+            let orderData = new FormData();
+            // create new id 
+            const orderId = nanoid();
+            orderData.append('orderId', orderId);
+            orderData.append('userId', userInfo.userId);
+            orderData.append('productType', product);
+            orderData.append('deliveryType', delivery);
+            orderData.append('totalPrice', price);
+            orderData.append('paymentType', paymentMethod);
+            // if yape/plin: desconocido -> check your payment system
+            // if card than should be TRUE as this function is always 
+            // executed after the payment has been successful..
+            let hasPaidValue = '';
+
+            if(paymentMethod === "yape" || paymentMethod === "plin") {
+                  hasPaidValue = 'unknown';
+            } else {
+                  hasPaidValue = 'si';
+            }
+            orderData.append('hasPaid', hasPaidValue);
+            
+            dispatch(createOrder(orderData)).unwrap()
+            .then(data => {
+                  console.log(data);
+            }).catch(e => {
+                  console.log("oh merde", e);
+            });
+            return orderId;
+      };
+
+      const handleCreateUser = async e => {
+            e.preventDefault();
+            const userData = new FormData();
+            //create new user
+            userData.append('userId', userInfo.userId);
+            userData.append('userFullName', userInfo.userFullName);
+            userData.append('userEmail', userInfo.userEmail);
+            userData.append('userAddress', userInfo.userAddress);
+            userData.append('userPhoneNumber', userInfo.userPhoneNumber);
+            userData.append('userDistrict', userInfo.userDistrict);
+            userData.append('userCity', userInfo.userCity);
+            dispatch(createUser(userData)).unwrap().then(data => {
+                  console.log(data);
+            }).catch(e => {
+                  console.log("oh merde user", e);
+            });
+      }
+
+      const handleCreateLetter = async (e, orderId) => {
+            e.preventDefault();
+            const letterData = new FormData();
+            //create new letters input\
+            letterData.append('orderId', orderId);
+            letterData.append('letter1', letters.letter1);
+            letterData.append('letter2', letters.letter2);
+            letterData.append('letter3', letters.letter3);
+            dispatch(createLetter(letterData)).unwrap().then(data => {
+                  console.log(data);
+            }).catch(e => {
+                  console.log("oh merde letter", e);
+            })
+      }
+
+      const handleCheckout = async e => {  
+            const orderId = await handleCreateOrder(e);
+            console.log("order created");
+            console.log("orderId:", orderId);
+            handlePhotoUpload(e, orderId);
+            handleCreateUser(e);
+            handleAdditionalPhrase(e, orderId);
+            if(letters.letter1) {
+                  handleCreateLetter(e, orderId);
+            }
+            //console.log("discountApplied from handleCheckout", discountApplied);
+            /*if(discountApplied) {
+                  // if there is an applied discount
+                  // remove discount from db
+                  dispatch(deleteDiscount(discountCode));
+            } */
+      }
 
       return(
             <Box sx={{
@@ -165,7 +343,7 @@ const Cart = () => {
                                                 subtitle="20x20cm"
                                           />
                                     }
-                                    {addedPhrases.map((phrase) => {
+                                    {additionalPhrases.map((phrase) => {
                                           return(
                                                 <CartItem
                                                       key={phrase.id}
@@ -179,7 +357,6 @@ const Cart = () => {
                                           );
                                     })}
                               </Grid>
-
                         </Grid>
                   </Grid>
                   <Box sx={{
@@ -309,6 +486,9 @@ const Cart = () => {
                               (step.value === 3) ? "Realizar Pago" : "Siguiente"
                               }
                         </Button>
+                        <Button onClick={handleCheckout}>Handle Checkout</Button>
+
+
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>

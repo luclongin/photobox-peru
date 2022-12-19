@@ -261,6 +261,9 @@ const AdminPage = () => {
                                                       }
                                                       <p><b>Delivery</b> {order.deliveryType}</p>
                                                       <p><b>Set</b> {order.productType}</p>
+                                                      <p><b>Precio</b> {order.totalPrice}</p>
+                                                      <p><b>Metodo de pago</b> {order.paymentType}</p>
+                                                      <p><b>Estado de pago</b> {order.hasPaid}</p>
                                                       <Divider sx={{mt: 2, mb: 2}}></Divider>
                                                       {
                                                             uploadedPhotos.map((photo, photoIndex) => {
