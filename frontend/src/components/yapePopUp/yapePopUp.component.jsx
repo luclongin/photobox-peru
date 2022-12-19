@@ -12,8 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import QrCode from '../../images/qr_example.png';
 import {Grid} from "@mui/material";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -58,10 +57,10 @@ function BootstrapDialogTitle(props) {
   
 
 
-const YapePopUp = ({open, handleOpen, price}) => {
+const YapePopUp = ({open, handleOpen, price, handlePayment}) => {
 
-    const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
+
     const handleClose = () => {
         handleOpen(false);
     };
@@ -153,17 +152,19 @@ const YapePopUp = ({open, handleOpen, price}) => {
         <DialogActions sx={{
             backgroundColor: '#FAF9F9'
           }}>
-          <Link to="/yape">
+          
             <Button variant="contained" sx={{
               backgroundColor: 'white', 
               color: "#FF66C4",
               "&:hover": {
                 color: 'white'
               }
-            }} autoFocus>
+            }} autoFocus onClick={() => {
+              handlePayment();
+              navigate('/yape');
+            }}>
               Ya pagué
             </Button>
-          </Link>
         </DialogActions>
       </BootstrapDialog>
     );

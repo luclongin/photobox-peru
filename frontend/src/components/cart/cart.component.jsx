@@ -488,11 +488,10 @@ const Cart = () => {
                         </Button>
                         <Button onClick={handleCheckout}>Handle Checkout</Button>
 
-
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>
-                        <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
+                        <YapePopUp handlePayment={handleCheckout} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
                         {
                         // have to create a new component for plin. Saving for later.
                         }
