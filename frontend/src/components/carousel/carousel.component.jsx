@@ -18,9 +18,9 @@ const CustomPrevBtn = (props) => {
     const {onClick} = props;
     return(
         <Box sx={{
-            height: '380px',
+            height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,#fdecef 25%,hsla(0,20%,98%,0))',
+            background: 'linear-gradient(90deg,#fff 18%,hsla(0,28%,80%,0))',
             position: 'absolute',
             top: 0,
             left: -20,
@@ -30,22 +30,24 @@ const CustomPrevBtn = (props) => {
             alignItems: 'center'
         }}>
             <IconButton sx={{
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
                 backgroundColor: '#ffffff',
-                border: '1px solid #BCB7BC',
+                border: '1px solid #ffffff',
+                boxShadow: 1,
                 cursor: 'pointer',
                 zIndex: '2',
                 ml: '-50px',
                 "&:hover": {
-                    color: theme.palette.primary.main,
-                    borderColor: theme.palette.primary.main,
-                    backgroundColor: '#ffffff'
-                }
+                    backgroundColor: 'rgb(250,250,250)',
+                    borderColor: 'rgb(250,250,250)'
+                },
+                color: theme.palette.primary.main
             }} onClick={onClick}>
                     <ArrowBackIosNewRoundedIcon sx={{
-                        //position: 'absolute',
-                        //left: '28%'
+                        position: 'absolute',
+                        left: '28%',
+                        fontSize: '1.3em'
                     }}/> 
             </IconButton>
         </Box>
@@ -56,9 +58,9 @@ const CustomNextBtn = (props) => {
     const {onClick} = props;
     return(
         <Box sx={{
-            height: '380px',
+            height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,hsla(0,20%,98%,0),#fdecef 75%)',
+            background: 'linear-gradient(90deg,hsla(0,18%,80%,0),#fff 85%)',
             position: 'absolute',
             top: 0,
             right: -15,
@@ -68,22 +70,24 @@ const CustomNextBtn = (props) => {
             alignItems: 'center',
         }}>
             <IconButton sx={{
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
                 backgroundColor: '#ffffff',
-                border: '1px solid #BCB7BC',
+                border: '1px solid #fff',
+                boxShadow: 1,
                 cursor: 'pointer',
                 zIndex: '2',
                 mr: '-50px',
                 "&:hover": {
-                    color: theme.palette.primary.main,
-                    borderColor: theme.palette.primary.main,
-                    backgroundColor: '#ffffff'
-                }
+                    backgroundColor: 'rgb(250,250,250)',
+                    borderColor: 'rgb(250,250,250)'
+                },
+                color: theme.palette.primary.main
             }} onClick={onClick}>
                     <ArrowForwardIosRoundedIcon sx={{
-                        //position: 'absolute',
-                        //left: '28%'
+                        position: 'absolute',
+                        left: '33%',
+                        fontSize: '1.3em'
                     }}/> 
             </IconButton>
         </Box>

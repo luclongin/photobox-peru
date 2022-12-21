@@ -238,10 +238,11 @@ const ThirdPart = () => {
 const FourthPart = () => {
     return(
         <Box sx={{
-            backgroundColor: "#fdecef"
+            backgroundColor: "#fff",
+            pt: 6
         }}>
             <Grid container>
-                <Grid item xs={12} sx={{pb: 5}}>
+                <Grid item xs={12} sx={{pb: 6}}>
                     <Typography variant="secondparttitle">
                         Siguenos en Instagram<span>.</span>
                     </Typography>

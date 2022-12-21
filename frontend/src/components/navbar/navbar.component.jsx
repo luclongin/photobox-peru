@@ -1,4 +1,5 @@
 import React from 'react';
+import { styled } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +14,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../features/productSelection/ProductSlice.js';
 import { setStep } from '../../features/step/stepSlice.js';
+import theme from '../../utils/theme';
+
+const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 /*
       Our main navigation bar, strongly inspired by MUI documentation
@@ -43,11 +47,10 @@ const NavBar = () => {
   return (
       <Box sx={{ flexGrow: 1,
             zIndex: '1'}} height="10vh">
-            <AppBar position="static" sx={{
+            <AppBar position="fixed" sx={{
                   backgroundColor: "#FFF",
                   color: "#FF66C4",
                   justifyContent: 'center',
-                  height: '100%',
                   boxShadow: 2
             }}>
                   <Toolbar height="100%" sx={{position: 'relative', overflow: 'hidden', justifyContent: 'center'}}>
@@ -92,6 +95,7 @@ const NavBar = () => {
                         </Link>
                   </Toolbar>
             </AppBar>
+            <Offset />
       </Box>
   );
 }
