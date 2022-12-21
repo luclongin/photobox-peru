@@ -35,6 +35,7 @@ exports.createPreference = (req, res) => {
             "pending": "http://localhost:3000/feedback",
         },
         auto_return: "approved",
+        notification_url: "http://localhost:3000/notifications",
         payment_methods: {
           excluded_payment_methods: [
             {
@@ -58,6 +59,10 @@ exports.createPreference = (req, res) => {
     }).catch(err => {
         console.log("ERR", err);
     });
+}
+
+exports.success = (req, res) => {
+    res.send("VAMOS BB");
 }
 
 exports.getFeedback = (req, res) => {

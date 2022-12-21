@@ -2,11 +2,24 @@ import { Box, Grid, Typography } from "@mui/material"
 import React from "react";
 import NavBar from "../navbar/navbar.component";
 import { useSearchParams } from "react-router-dom";
+import { useMercadopago } from 'react-sdk-mercadopago';
+
 
 const OrderFeedbackCard = () => {
     const [urlParams] = useSearchParams();
     console.log("urlParams:", urlParams);
   
+    console.log("merchant order id:", urlParams.get('merchant_order_id'));
+    const doodoo = urlParams.get('merchant_order_id');
+
+    // PUBLIC KEY
+    const mercadopago = useMercadopago.v2('APP_USR-56a889a9-b928-4f89-8f60-fe89f3b1ad78', {
+        locale: 'es-PE'
+    });
+
+    console.log("merci", mercadopago);
+
+
     return(
         <Box>
             <NavBar/>

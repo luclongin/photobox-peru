@@ -1,29 +1,136 @@
 import React from "react";
-import Carousel from 'react-material-ui-carousel';
-import {Grid, Box, Paper, Button} from '@mui/material';
+import Slider from 'react-slick';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import {Grid, Box, Paper, Button, IconButton} from '@mui/material';
 import Img1 from '../../images/homepage_carousel1.jpg';
 import Img2 from '../../images/homepage_carousel2.jpg';
 import Img3 from '../../images/homepage_carousel3.jpg';
 import Img4 from '../../images/homepage_carousel4.jpg';
 import Img5 from '../../images/homepage_carousel5.jpg';
 import Img6 from '../../images/homepage_carousel6.jpg';
+import '../../../node_modules/slick-carousel/slick/slick.css';
+import '../../../node_modules/slick-carousel/slick/slick-theme.css';
+import theme from "../../utils/theme";
+
+
+const CustomPrevBtn = (props) => {
+    const {onClick} = props;
+    return(
+        <Box sx={{
+            height: '380px',
+            width: '120px',
+            background: 'linear-gradient(90deg,#fdecef 25%,hsla(0,20%,98%,0))',
+            position: 'absolute',
+            top: 0,
+            left: -20,
+            zIndex: '2',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <IconButton sx={{
+                width: 60,
+                height: 60,
+                backgroundColor: '#ffffff',
+                border: '1px solid #BCB7BC',
+                cursor: 'pointer',
+                zIndex: '2',
+                ml: '-50px',
+                "&:hover": {
+                    color: theme.palette.primary.main,
+                    borderColor: theme.palette.primary.main,
+                    backgroundColor: '#ffffff'
+                }
+            }} onClick={onClick}>
+                    <ArrowBackIosNewRoundedIcon sx={{
+                        //position: 'absolute',
+                        //left: '28%'
+                    }}/> 
+            </IconButton>
+        </Box>
+    );
+}
+
+const CustomNextBtn = (props) => {
+    const {onClick} = props;
+    return(
+        <Box sx={{
+            height: '380px',
+            width: '120px',
+            background: 'linear-gradient(90deg,hsla(0,20%,98%,0),#fdecef 75%)',
+            position: 'absolute',
+            top: 0,
+            right: -15,
+            zIndex: '2',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}>
+            <IconButton sx={{
+                width: 60,
+                height: 60,
+                backgroundColor: '#ffffff',
+                border: '1px solid #BCB7BC',
+                cursor: 'pointer',
+                zIndex: '2',
+                mr: '-50px',
+                "&:hover": {
+                    color: theme.palette.primary.main,
+                    borderColor: theme.palette.primary.main,
+                    backgroundColor: '#ffffff'
+                }
+            }} onClick={onClick}>
+                    <ArrowForwardIosRoundedIcon sx={{
+                        //position: 'absolute',
+                        //left: '28%'
+                    }}/> 
+            </IconButton>
+        </Box>
+    );
+}
+
 
 const MyCarousel = (props) => {
     var items = [
         {
+            id: 0,
             name: "Random Name #1",
-            description: "have ever seen!"
+            description: "Mi descripcion 1",
+            image: Img1
         },
         {
+            id: 1,
             name: "Random Name #2",
-            description: "Hello World!"
+            description: "Mi descripcion 2",
+            image: Img2
         },
         {
+            id: 2,
             name: "Random Name #3",
-            description: "Hello World!"
+            description: "Mi descripcion 3",
+            image: Img3
+        },
+        {
+            id: 3,
+            name: "Random Name #4",
+            description: "Mi descripcion 4",
+            image: Img4
+        },
+        {
+            id: 4,
+            name: "Random Name #5",
+            description: "Mi descripcion 5",
+            image: Img5
+        },
+        {
+            id: 5,
+            name: "Random Name #6",
+            description: "Mi descripcion 6",
+            image: Img6
         }
-    ]
-
+    ];
+    /*
     return (
         <Carousel>
             <Grid container sx={{display: 'flex', justifyContent: 'center'}} spacing={3}>
@@ -38,21 +145,44 @@ const MyCarousel = (props) => {
                 </Grid>
             </Grid>
         </Carousel>
-    )
+    )*/
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        centerMode: true,
+        prevArrow: <CustomPrevBtn />,
+        nextArrow: <CustomNextBtn />
+    };
+
+    return(
+        <Box sx={{width: '75%', p: 0, m: '0 auto'}}>
+            <Slider {...settings}>
+                {
+                    items.map(item => {
+                        return(<CarouselItem key={item.id} item={item} />);
+                    })
+                }
+            </Slider>
+        </Box>
+    );
 }
 
-const CarouselItem = (props) => {
+const CarouselItem = ({item}) => {
     return (
         <Paper sx={{
-            width: '100%',
-            height: '300px'
+            height: '380px',
+            width: '300px',
+            display: 'flex',
+            justifyContent: 'center',
+            borderRadius: '8px!important',
+            mb: 3
         }}>
-            <h2>{props.item.name}</h2>
-            <p>{props.item.description}</p>
-
-            <Button className="CheckButton">
-                Check it out!
-            </Button>
+            <img src={item.image} alt="carousel_item_image" width={"100%"} height={"320px"} style={{borderTopLeftRadius: '8px', borderTopRightRadius: '8px'}}/>
+            
         </Paper>
     )
 }

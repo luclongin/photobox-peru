@@ -241,13 +241,13 @@ const FourthPart = () => {
             backgroundColor: "#fdecef"
         }}>
             <Grid container>
-                <Grid item xs={12}>
-                    <Typography variant="thirdpart">
-                        Siguenos
+                <Grid item xs={12} sx={{pb: 5}}>
+                    <Typography variant="secondparttitle">
+                        Siguenos en Instagram<span>.</span>
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sx={{
-                    height: '50vh',
+                    height: '80vh'
                 }}>
                     <Carousel />
                 </Grid>

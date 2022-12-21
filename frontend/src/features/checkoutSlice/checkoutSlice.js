@@ -6,19 +6,17 @@ const initialState = [];
 export const createPreference = createAsyncThunk(
       "createPreference",
       async (data) => {
-            console.log("pref before", data);
             const res = await CheckoutService.createPreference(data);
-            console.log("pref after");
             return res.data;
       }
 );
 
 export const getFeedback = createAsyncThunk(
-        "getFeedback",
-        async () => {
-                const res = await CheckoutService.getFeedback();
-                return res.data;
-        }
+      "getFeedback",
+      async () => {
+            const res = await CheckoutService.getFeedback();
+            return res.data;
+      }
 );
 
 const checkoutSlice = createSlice({

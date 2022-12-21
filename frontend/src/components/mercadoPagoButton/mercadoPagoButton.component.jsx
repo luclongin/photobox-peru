@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import theme from "../../utils/theme";
 
 const MercadoPagoButton = () => {
     // PUBLIC KEY
@@ -15,15 +16,15 @@ const MercadoPagoButton = () => {
     const dispatch = useDispatch();
     const order = useSelector(state => state.orders);
     const id = order.orderId;
+    const totalPrice = useSelector(state => state.totalPrice);
     const [preferenceId, setPreferenceId] = useState(null);
 
     useEffect(() => {
         const orderData = new FormData();
         orderData.append('quantity', 1);
-        orderData.append('description', 'PhotoBox Peru Gift Card');
-        orderData.append('price', 100);
+        orderData.append('description', 'PhotoBox Peru');
+        orderData.append('price', totalPrice);
         
-        console.log("let's go mercadopago");
         dispatch(createPreference(orderData))
         .then(res => {
             //console.log("this is res", res);
@@ -45,9 +46,7 @@ const MercadoPagoButton = () => {
     }, [preferenceId]);
 
     useEffect(() => {
-
         if(mercadopago && preferenceId) {
-            console.log("prefid:", preferenceId);
             mercadopago.checkout({
                 preference: {
                     id: preferenceId
