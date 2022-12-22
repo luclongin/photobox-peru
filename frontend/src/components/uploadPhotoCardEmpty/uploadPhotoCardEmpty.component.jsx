@@ -14,7 +14,6 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const letters = useSelector(state => state.letters);
 
       const PaperButton = styled(Paper) ({
-            elevation: "2",
             display: 'flex',
             width: width,
             minWidth: width,
@@ -90,7 +89,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       return(
             <Fragment>
                   <HoverBox sx={{position: 'relative'}}>
-                        <PaperButton>
+                        <PaperButton elevation={4}>
                                     <AddIcon sx={{fontSize: relativeFontSize, color: '#F374E7'}}/>
                               <Typography variant="h10" component="p" hidden style={{
                                     position: 'absolute',

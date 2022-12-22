@@ -10,18 +10,22 @@ import { photoAdded } from "../../../features/photoEdition/PhotoSlice";
 import { Fragment } from "react";
 import { dispatchLetters } from "../../../features/lettersEdition/LettersSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
+import AmpersandPhoto from '../../../images/ampersand.png';
+
 const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
 
     return(
-        <TextField autoFocus={autofocus}
-        onChange={(e) => handler(e, letterOrder)}
-        variant="standard"
-        value={value}
-        placeholder={placeholder}
+        <TextField
+            autoFocus={autofocus}
+            onChange={(e) => handler(e, letterOrder)}
+            variant="standard"
+            value={value}
+            placeholder={placeholder}
             InputProps={{
                 inputProps: {
                     style: {
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        p: 0
                     },
                     maxLength: 1,
                 },
@@ -37,7 +41,7 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
                 position: 'absolute',
                 top: "-45px",
                 left: "0px",
-                textAlign: "center",
+                textAlign: "center"
             }}
         />
     );
@@ -103,7 +107,7 @@ const Letras = () => {
                             <MyTextField letters={letters} setLetters={setLetters} value={letters.letter1} handler={textOnChangeHandler} letterOrder="letter1" placeholder={"P"} autofocus={true}/>
                         </Grid>
                         <Grid item xs={6}>
-                        <UploadPhotoCard photo={addedPhotos[0]} width={160} />
+                            <UploadPhotoCard photo={addedPhotos[0]} width={160}/>
                         </Grid>
                         <Grid item xs={6} sx={{display: 'flex', justifyContent: 'flex-end'}}>
                             <UploadPhotoCard photo={addedPhotos[1]} width={160} />
@@ -112,9 +116,11 @@ const Letras = () => {
                             position: 'relative',
                             display: 'flex',
                             justifyContent: 'flex-start',
-                            overflow: 'hidden'
+                            pl: 2.5,
+                            pt: 1
                         }}>
-                            <Typography variant="letrasinput">&</Typography>
+                            <img src={AmpersandPhoto} alt="Ampersand" width={"130px"} height={"145px"}/>
+
                         </Grid>
                         <Grid item xs={6} sx={{
                             position: 'relative',
