@@ -65,13 +65,13 @@ const OrderFeedbackYape = () => {
                         mt: 0
                     }}>
                         <a href="https://wa.me/51972043075">
-                            <WhatsAppIcon sx={{fontSize: '1.6em', color: '#37cb73'}} />
+                            <WhatsAppIcon sx={{fontSize: '1.3em', color: 'rgb(100,100,100)'}} />
                         </a>
                         <Typography variant="p" sx={{
                             fontSize: '1.1em',
                             fontFamily: 'Questrial',
                             position: 'relative',
-                            top: '-6.5px',
+                            top: '-5px',
                             pl: 0.5
                         }}>
                             972 043 075
