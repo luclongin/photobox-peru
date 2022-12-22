@@ -10,7 +10,7 @@ const UploadPhotoCard = ({photo, width="350px"}) => {
       const [openDialog, setOpenDialog] = useState(false);
       
             return(
-                  <Button component="label" sx={{padding: 0}}>
+                  <Button component="label" sx={{padding: 0, pt: 2, pb: 2}}>
                         {
                               photo.hidden ? (<UploadPhotoCardEmpty id={photo.id} width={width}/>
                               ): null 
