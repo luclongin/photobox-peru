@@ -322,7 +322,7 @@ const FifthPart = () => {
                         </Grid>
                         <Grid item xs={12} sx={{pb: 2}}>
                             <a href="https://wa.me/51972043075">
-                                <WhatsAppIcon sx={{fontSize: '2.6em', color: '#37cb73'}} />
+                                <WhatsAppIcon sx={{fontSize: '2em', color: '#37cb73'}} />
                             </a>
                             <Typography variant="whatsapp" sx={{pl: 0.5}}>
                                 972 043 075

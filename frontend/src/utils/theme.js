@@ -58,17 +58,10 @@ const theme = createTheme({
           color: '#FF66C4'
         }
       },
-      whatsappYape: {
-        fontSize: '2em',
-        fontWeight: 'bold',
-        "span": {
-          color: '#FF66C4'
-        }
-      },
       whatsapp: {
-        fontSize: '1.4em',
+        fontSize: '1.2em',
         position: 'relative',
-        top: '-13px',
+        top: '-10px',
         fontWeight: ''
       },
       secondpartsubtitle: {

@@ -15,8 +15,11 @@ import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
 import { getPrice } from "../../utils/pricing";
 import FamilyPhoto from '../../images/letras_family.jpg';
+import ThisIsUsPhoto from '../../images/letras_thisisus.png';
+
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {Divider} from "@mui/material";
+import { useState } from "react";
 /*
       React Component that handles the order or one or multiple Phrases
 */
@@ -24,6 +27,7 @@ const AddPhraseContainer = () => {
       const defaultPhraseColor = 'lightWood';
       const dispatch = useDispatch();
       const letters = useSelector(state => state.letters);
+      const [showThisIsUs, setShowThisIsUs] = useState(false);
 
       console.log("letras", letters);
       // 2 backgrounds available for demo preview
@@ -62,7 +66,7 @@ const AddPhraseContainer = () => {
       // Using Formik for simple form handling
       const formik = useFormik({
             initialValues: {
-                  phraseType: "",
+                  phraseType: "family",
                   phraseText: "",
                   phraseColor: defaultPhraseColor
             },
@@ -80,6 +84,7 @@ const AddPhraseContainer = () => {
                         dispatch(defaultPhraseAdded({
                               defaultPhrase: values.phraseType
                         }));
+                        
                   }
                   resetForm();
             },
@@ -120,13 +125,25 @@ const AddPhraseContainer = () => {
                               </Fragment>
                               : <Card sx={{
                                     width: '350px',
-                                    height: '400px'
+                                    height: '400px',
+                                    position: 'relative'
                               }}>
                                     <CardMedia
                                           component="img"
                                           image={FamilyPhoto}
                                           alt="Family Photo" 
                                     />
+                                    { formik.values.phraseType==="thisisus" ? (<Box sx={{
+                                                width: '178px',
+                                                height: '84px',
+                                                position: 'absolute',
+                                                top: 128,
+                                                left: 85,
+                                                overflow: 'hidden'
+                                          }}>
+                                                <img src={ThisIsUsPhoto} alt="This is us" width={"100%"} height={"100%"}/>
+                                          </Box>) : null
+                                    }
                               </Card>
                               }
                         </Fragment>
@@ -178,7 +195,7 @@ const AddPhraseContainer = () => {
                                                             }}
                                                       >
                                                             <MenuItem value="family">Family</MenuItem>      
-                                                            <MenuItem value="friends">Friends</MenuItem>
+                                                            <MenuItem value="thisisus">This is us</MenuItem>
                                                             <MenuItem value="Personalizado">Personalizado</MenuItem> 
                                                       </Select>
                                                 </FormControl>
