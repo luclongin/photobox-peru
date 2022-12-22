@@ -13,6 +13,7 @@ import Girl from '../../images/girl.png';
 import Baby from '../../images/baby.png';
 import Carousel from "../carousel/carousel.component";
 import { Link } from "react-router-dom";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const FirstPart = () => {
     return(
@@ -60,7 +61,7 @@ const FirstPart = () => {
                             <Grid item xs={12} sx={{textAlign: 'left', pt: 2}}>
                                     <LocalShippingIcon sx={{fontSize: '1.8em', position: 'relative', top: 7}}/> 
                                     <Typography variant="p" sx={{fontSize: '1.1em', pl: 0.5}}>
-                                        Envios gratis a todo el Perú
+                                        Envíos gratis a todo el Perú
                                     </Typography>
                             </Grid>
                         </Grid>
@@ -96,7 +97,7 @@ const SecondPart = () => {
                 pb: 2
             }}>
                 <Typography variant="secondparttitle">
-                    Cuadros magicos para llenar<br />tus paredes<span>.</span>
+                    Cuadros mágicos para llenar<br />tus paredes<span>.</span>
                 </Typography>
             </Grid>
             <Grid item xs={12} sx={{pt: 5, pb: 5}}>
@@ -238,17 +239,17 @@ const ThirdPart = () => {
 const FourthPart = () => {
     return(
         <Box sx={{
-            backgroundColor: "#fff",
-            pt: 6
+            backgroundColor: "#FAF9F9",
+            pt: 10
         }}>
             <Grid container>
-                <Grid item xs={12} sx={{pb: 6}}>
-                    <Typography variant="secondparttitle">
-                        Siguenos en Instagram<span>.</span>
+                <Grid item xs={12} sx={{pb: 8}}>
+                    <Typography variant="carouselh1">
+                        Síguenos en Instagram<span>.</span>
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sx={{
-                    height: '80vh'
+                    height: '70vh'
                 }}>
                     <Carousel />
                 </Grid>
@@ -257,24 +258,79 @@ const FourthPart = () => {
     );
 }
 
-const BottomToolbar = () => {
+const FifthPart = () => {
     return(
-        <Box>
-            <Grid container>
-                <Grid item xs={4}>
+        <Box sx={{pt: 5, pb: 20}}>
+            <Grid container sx={{display: 'flex', justifyContent: 'center', textAlign: 'left'}}>
+                <Grid item xs={3} sx={{backgroundColor: ''}}>
                     <Grid container>
-                        <Grid item xs={12}>
-                            <Typography variant="p">
-                                Sobre nosotros
+                        <Grid item xs={12} sx={{pb: 2}}>
+                            <Typography variant="homepage_bottom_h1">
+                                Nosotros
                             </Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{pb: 2}}>
+                            <Link to="/nosotros" style={{ textDecoration: 'none' }}>
+                                <Typography variant="homepage_bottom_links">
+                                    Sobre nosotros
+                                </Typography>
+                            </Link>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Link to="/faq" style={{ textDecoration: 'none' }}>
+                                <Typography variant="homepage_bottom_links">
+                                    Preguntas frecuentes
+                                </Typography>
+                            </Link>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                    
+                <Grid item xs={3} sx={{backgroundColor: ''}}>
+                    <Grid container>
+                        <Grid item xs={12} sx={{pb: 2}}>
+                            <Typography variant="homepage_bottom_h1">
+                                Síguenos
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{pb: 2}}>
+                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                <Typography variant="homepage_bottom_links">
+                                    Instagram
+                                </Typography>
+                            </Link>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                <Typography variant="homepage_bottom_links">
+                                    Facebook
+                                </Typography>
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                    
+                <Grid item xs={2} sx={{
+                }}>
+                    <Grid container>
+                        <Grid item xs={12} sx={{pb: 2, textAlign: 'left'}}>
+                            <Typography variant="homepage_bottom_h1">
+                                Contáctanos
+                            </Typography>
+                        </Grid>
+                        
+                        <Grid item xs={12} sx={{pb: 1.5}}>
+                            <Typography variant="p" sx={{color: "#9B8E9A"}}>
+                                No dudes en contactarnos, estamos siempre pendiente    
+                            </Typography>    
+                        </Grid>
+                        <Grid item xs={12} sx={{pb: 2}}>
+                            <a href="https://wa.me/51972043075">
+                                <WhatsAppIcon sx={{fontSize: '3em', color: '#37cb73'}} />
+                            </a>
+                            <Typography variant="whatsapp" sx={{pl: 0.5}}>
+                                972 043 075
+                            </Typography>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Box>
@@ -291,6 +347,9 @@ const HomePage = () => {
             <SecondPart />
             <ThirdPart />
             <FourthPart />
+            <Divider sx={{width: '100%'}} />
+            <FifthPart />
+            
         </Box>
     );
 }

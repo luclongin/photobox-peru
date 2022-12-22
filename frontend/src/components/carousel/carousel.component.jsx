@@ -20,7 +20,7 @@ const CustomPrevBtn = (props) => {
         <Box sx={{
             height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,#fff 18%,hsla(0,28%,80%,0))',
+            background: 'linear-gradient(90deg,#FAF9F9 18%,hsla(0,28%,80%,0))',
             position: 'absolute',
             top: 0,
             left: -20,
@@ -60,7 +60,7 @@ const CustomNextBtn = (props) => {
         <Box sx={{
             height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,hsla(0,18%,80%,0),#fff 85%)',
+            background: 'linear-gradient(90deg,hsla(0,18%,80%,0),#FAF9F9 85%)',
             position: 'absolute',
             top: 0,
             right: -15,

@@ -21,6 +21,18 @@ const theme = createTheme({
       button: {
             textTransform: 'none'
       },
+      homepage_bottom_h1: {
+        fontSize: '1.15em',
+        fontWeight: 'bold'
+      },
+      homepage_bottom_links: {
+        fontSize: '1.1em',
+        color: '#9B8E9A',
+        textDecoration: 'none',
+        "&:hover": {
+          color: 'rgb(0,0,0,0.5)'
+        }
+      },
       thirdparth1: {
         fontSize: '3.4em',
         fontWeight: 'bold',
@@ -38,6 +50,19 @@ const theme = createTheme({
         "span": {
           color: '#FF66C4'
         }
+      },
+      carouselh1: {
+        fontSize: '2.2em',
+        fontWeight: '',
+        "span": {
+          color: '#FF66C4'
+        }
+      },
+      whatsapp: {
+        fontSize: '1.4em',
+        position: 'relative',
+        top: '-15px',
+        fontWeight: ''
       },
       secondpartsubtitle: {
         fontSize: '1.1em',
