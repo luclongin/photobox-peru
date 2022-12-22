@@ -20,7 +20,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
             height: width,
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: '0',
+            borderRadius: '5px',
             border: '2px color #666',
             "&:hover": {
                   backgroundColor: "rgb(100,100,100,0.8)",

@@ -47,7 +47,8 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="35
                   minWidth: hoverWidth,
                   position: 'absolute',
                   zIndex: 2,
-                  backgroundColor: 'rgb(0,0,0,0.3)'
+                  backgroundColor: 'rgb(0,0,0,0.3)',
+                  borderRadius: '5px',
             }}>
                   { !noButtonShown && (
                   <Fragment>

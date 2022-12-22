@@ -31,7 +31,7 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
                 },
                 disableUnderline: true,
                 style: {
-                    fontSize: "10.6em",
+                    fontSize: "10.7em",
                     fontWeight: 'bold',
                     fontFamily: 'Arial',
                 },
@@ -116,10 +116,10 @@ const Letras = () => {
                             position: 'relative',
                             display: 'flex',
                             justifyContent: 'flex-start',
-                            pl: 2.5,
-                            pt: 1
+                            pl: 3.2,
+                            pt: 2
                         }}>
-                            <img src={AmpersandPhoto} alt="Ampersand" width={"130px"} height={"145px"}/>
+                            <img src={AmpersandPhoto} alt="Ampersand" width={"115px"} height={"130px"}/>
 
                         </Grid>
                         <Grid item xs={6} sx={{
