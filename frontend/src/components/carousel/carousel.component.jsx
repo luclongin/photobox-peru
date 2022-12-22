@@ -14,13 +14,13 @@ import '../../../node_modules/slick-carousel/slick/slick-theme.css';
 import theme from "../../utils/theme";
 
 
-const CustomPrevBtn = (props) => {
+const CustomPrevBtn = ({ shadowColor, ...props}) => {
     const {onClick} = props;
     return(
         <Box sx={{
             height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,#FAF9F9 18%,hsla(0,28%,80%,0))',
+            background: `linear-gradient(90deg,${shadowColor} 18%,hsla(0,28%,80%,0))`,
             position: 'absolute',
             top: 0,
             left: -20,
@@ -54,13 +54,13 @@ const CustomPrevBtn = (props) => {
     );
 }
 
-const CustomNextBtn = (props) => {
+const CustomNextBtn = ({ shadowColor, ...props}) => {
     const {onClick} = props;
     return(
         <Box sx={{
             height: '383px',
             width: '120px',
-            background: 'linear-gradient(90deg,hsla(0,18%,80%,0),#FAF9F9 85%)',
+            background: `linear-gradient(90deg,hsla(0,18%,80%,0),${shadowColor} 85%)`,
             position: 'absolute',
             top: 0,
             right: -15,
@@ -95,7 +95,7 @@ const CustomNextBtn = (props) => {
 }
 
 
-const MyCarousel = (props) => {
+const MyCarousel = ({ shadowColor, ...props}) => {
     var items = [
         {
             id: 0,
@@ -134,22 +134,6 @@ const MyCarousel = (props) => {
             image: Img6
         }
     ];
-    /*
-    return (
-        <Carousel>
-            <Grid container sx={{display: 'flex', justifyContent: 'center'}} spacing={3}>
-                <Grid item xs={3}>
-                    <CarouselItem key={items[0]} item={items[0]} />
-                </Grid>
-                <Grid item xs={3}>
-                    <CarouselItem key={items[1]} item={items[1]} />
-                </Grid>
-                <Grid item xs={3}>
-                    <CarouselItem key={items[2]} item={items[2]} />
-                </Grid>
-            </Grid>
-        </Carousel>
-    )*/
 
     const settings = {
         dots: true,
@@ -158,8 +142,8 @@ const MyCarousel = (props) => {
         slidesToShow: 3,
         slidesToScroll: 3,
         centerMode: true,
-        prevArrow: <CustomPrevBtn />,
-        nextArrow: <CustomNextBtn />
+        prevArrow: <CustomPrevBtn shadowColor={shadowColor} />,
+        nextArrow: <CustomNextBtn shadowColor={shadowColor} />
     };
 
     return(

@@ -61,7 +61,7 @@ const theme = createTheme({
       whatsapp: {
         fontSize: '1.4em',
         position: 'relative',
-        top: '-15px',
+        top: '-13px',
         fontWeight: ''
       },
       secondpartsubtitle: {

@@ -20,7 +20,7 @@ const FirstPart = () => {
         <Fragment>
             <Box sx={{
                 backgroundColor: theme.palette.background.main,
-                minHeight: "86vh",
+                minHeight: "83vh",
                 margin: 0,
                 padding: 0,
             }}>
@@ -87,9 +87,8 @@ const SecondPart = () => {
     return(
         <Grid container sx={{
             display: 'flex',
-            justifyContent: 'center',
-            backgroundColor: '#fdecef',
-            pb: 6,
+            justifyContent: 'center',            
+            backgroundImage: 'linear-gradient(to top, #fdecef, #fceff1, #fcf3f3, #fbf6f6, #faf9f9)',
             pt: 7
         }}>
             <Grid item xs={6} sx={{
@@ -198,8 +197,7 @@ const ThirdPart = () => {
                             height: '360px',
                             textAlign: 'left',
                             display: 'flex',
-                            alignItems: 'center',
-                            backgroundColor: '#FAF9F9'
+                            alignItems: 'center', 
                         }}>
                             <CardActionArea sx={{width: '100%', height: '100%',
                             pl: 8,
@@ -239,7 +237,7 @@ const ThirdPart = () => {
 const FourthPart = () => {
     return(
         <Box sx={{
-            backgroundColor: "#FAF9F9",
+            backgroundColor: "#fdecef",
             pt: 10
         }}>
             <Grid container>
@@ -251,7 +249,7 @@ const FourthPart = () => {
                 <Grid item xs={12} sx={{
                     height: '70vh'
                 }}>
-                    <Carousel />
+                    <Carousel shadowColor={"#fdecef"}/>
                 </Grid>
             </Grid>
         </Box>
@@ -324,7 +322,7 @@ const FifthPart = () => {
                         </Grid>
                         <Grid item xs={12} sx={{pb: 2}}>
                             <a href="https://wa.me/51972043075">
-                                <WhatsAppIcon sx={{fontSize: '3em', color: '#37cb73'}} />
+                                <WhatsAppIcon sx={{fontSize: '2.6em', color: '#37cb73'}} />
                             </a>
                             <Typography variant="whatsapp" sx={{pl: 0.5}}>
                                 972 043 075
