@@ -25,12 +25,12 @@ const OrderFeedbackYape = () => {
                 <Grid item xs={6} sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    pt: 4,
+                    pt: 5,
                     
                 }}>
                     <Box sx={{
-                        height: '280px',
-                        width: '53%',
+                        height: '250px',
+                        width: '50%',
                         borderRadius: '10px',
                         overflow: 'hidden',
                     }}>
@@ -38,7 +38,7 @@ const OrderFeedbackYape = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} sx={{textAlign: 'center', pt: 3.5, pb: 3.5}}>
-                    <Typography variant="h3" sx={{fontFamily: 'Questrial', fontSize: '3.2em', fontWeight: '', "span": {color: "#FF66C4"}}}>
+                    <Typography variant="h3" sx={{fontFamily: 'Questrial', fontSize: '3.5em', fontWeight: '', "span": {color: "#FF66C4"}}}>
                         Gracias por tu compra<span>.</span>
                     </Typography>
                 </Grid>
@@ -71,7 +71,7 @@ const OrderFeedbackYape = () => {
                             fontSize: '1.1em',
                             fontFamily: 'Questrial',
                             position: 'relative',
-                            top: '-5px',
+                            top: '-4px',
                             pl: 0.5
                         }}>
                             972 043 075
