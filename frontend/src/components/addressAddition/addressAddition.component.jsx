@@ -9,11 +9,7 @@ import theme from "../../utils/theme";
 
 const AddressAddition = () => {
       const [open, setOpen] = useState(false);
-
       const addedUserInfo = useSelector(state => state.userInfo);
-      console.log("addedUserInfo:", addedUserInfo);
-
-      
       let initialAddedAddress = false;
       // adding this bit to true when the user has already filled in the userInfo
       // and has gone back and forth through the process
@@ -22,7 +18,6 @@ const AddressAddition = () => {
             initialAddedAddress = true;
       }
       const [addressAdded, setAddressAdded] = useState(initialAddedAddress);
-
       const [userInfo, setUserInfo] = useState({});
 
       const handleOpen = () => {
@@ -37,9 +32,6 @@ const AddressAddition = () => {
             setOpen(true);    
       }
       
-
-      
-
       return(
             <Fragment> 
                   {

@@ -98,11 +98,6 @@ const Checkout = () => {
                                                 </Grid>
                                           </FormGroup>
                                     </Grid>
-                                    {
-                                          /*<Button onClick={handleCheckout}>
-                                                Subir fotoss en FS
-                                          </Button>*/
-                                    }
                               </Grid>
                         </Grid>
                         <Grid item xs={3}>

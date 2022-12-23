@@ -13,7 +13,6 @@ import { setAddress } from '../../features/userInfo/userInfoSlice';
 
 const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, defaultValues}) => {
       const dispatch = useDispatch();
-      
       const validationSchema = yup.object({
             userFullName: yup.string()
                               .matches(/^[A-Za-z]*(\s[A-Za-z]*)+$/, 'Nombre completo incorrecto')
@@ -54,11 +53,10 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
       const formik = useFormik({
             initialValues: formValues,
             validationSchema: validationSchema,
-            onSubmit: (values, { resetForm }) => {
+            onSubmit: (values) => {
                   dispatch(setAddress(values));
                   setAddressAdded(true);
                   setUserInfo(values);
-                  //resetForm();
                   handleClose();
             },
       });
@@ -105,7 +103,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                 fullWidth
                                                 value={formik.values.userFullName}
                                                 onChange={formik.handleChange}
-                                                error={formik.touched.userFullName && Boolean(formik.errors.userFullName)}
+                                                error={Boolean(formik.errors.userFullName)}
                                                 helperText={formik.touched.userFullName && formik.errors.userFullName}
                                           />
                                     </Grid>
@@ -120,7 +118,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                 fullWidth
                                                 value={formik.values.userEmail}
                                                 onChange={formik.handleChange}
-                                                error={formik.touched.userEmail && Boolean(formik.errors.userEmail)}
+                                                error={Boolean(formik.errors.userEmail)}
                                                 helperText={formik.touched.userEmail && formik.errors.userEmail}
                                           />
                                     </Grid>
@@ -135,7 +133,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                 fullWidth
                                                 value={formik.values.userAddress}
                                                 onChange={formik.handleChange}
-                                                error={formik.touched.userAddress && Boolean(formik.errors.userAddress)}
+                                                error={Boolean(formik.errors.userAddress)}
                                                 helperText={formik.touched.userAddress && formik.errors.userAddress}
                                           />
                                     </Grid>
@@ -150,7 +148,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                 fullWidth
                                                 value={formik.values.userPhoneNumber}
                                                 onChange={formik.handleChange}
-                                                error={formik.touched.userPhoneNumber && Boolean(formik.errors.userPhoneNumber)}
+                                                error={Boolean(formik.errors.userPhoneNumber)}
                                                 helperText={formik.touched.userPhoneNumber && formik.errors.userPhoneNumber}
                                           />
                                     </Grid>
@@ -166,7 +164,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                       fullWidth
                                                       value={formik.values.userDistrict}
                                                       onChange={formik.handleChange}
-                                                      error={formik.touched.userDistrict && Boolean(formik.errors.userDistrict)}
+                                                      error={Boolean(formik.errors.userDistrict)}
                                                       helperText={formik.touched.userDistrict && formik.errors.userDistrict}
                                                 />
                                           </Grid>
@@ -181,7 +179,7 @@ const AddressDialog = ({open, handleClose, setUserInfo, setAddressAdded, default
                                                       fullWidth
                                                       value={formik.values.userCity}
                                                       onChange={formik.handleChange}
-                                                      error={formik.touched.userCity && Boolean(formik.errors.userCity)}
+                                                      error={Boolean(formik.errors.userCity)}
                                                       helperText={formik.touched.userCity && formik.errors.userCity}
                                                 />
                                           </Grid>

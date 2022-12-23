@@ -502,7 +502,7 @@ const Cart = () => {
                                                       color: 'red',
                                                       fontSize: '0.8em'
                                                 }}>
-                                                      Asegúrate de que hayas completado todo lo necesario
+                                                      Asegúrate de que hayas completado toda la información requirida
                                                 </Typography>
                                           )
                                           }
