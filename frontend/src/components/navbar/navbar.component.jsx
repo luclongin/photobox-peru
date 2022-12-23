@@ -51,7 +51,8 @@ const NavBar = () => {
                   backgroundColor: "#FFF",
                   color: "#FF66C4",
                   justifyContent: 'center',
-                  boxShadow: 2
+                  boxShadow: 2,
+                  height: '10vh'
             }}>
                   <Toolbar height="100%" sx={{position: 'relative', overflow: 'hidden', justifyContent: 'center'}}>
                         <Fragment>

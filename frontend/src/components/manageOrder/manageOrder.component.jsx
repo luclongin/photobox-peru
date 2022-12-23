@@ -47,9 +47,9 @@ const ManageOrder = () => {
             borderRadius: 5,
             color: '#ffffff',
             backgroundColor: 'rgb(255, 102, 196, 1)',
-            width: 200,
+            width: 160,
             height: 50,
-            fontSize: '1em',
+            fontSize: '1.05em',
             "&:disabled": {
                   backgroundColor: 'rgb(255, 102, 196, 0.3)',
                   color: '#ffffff'
