@@ -12,12 +12,9 @@ import {FormControl} from "@mui/material";
 import theme from "../../utils/theme";
 import Cart from "../cart/cart.component";
 import { OrderStepTitle } from "../OrderStepTitle/orderStepTitle.component";
-import { setTotalPrice } from "../../features/totalPrice/totalPrice";
-import { getPrice } from "../../utils/pricing";
 import FamilyPhoto from '../../images/letras_family.jpg';
 import ThisIsUsPhoto from '../../images/letras_thisisus.png';
 import AddIcon from '@mui/icons-material/Add';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {Divider} from "@mui/material";
 import { useState } from "react";
 /*
