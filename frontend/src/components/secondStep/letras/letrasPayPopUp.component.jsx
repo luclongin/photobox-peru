@@ -102,7 +102,7 @@ const LetrasDialog = ({open, handleOpen}) => {
                             position: 'relative',
                             top: 4
                         }}>
-                            Llena tus datos y escoje un metodo de pago
+                            Asegúrate de que hayas completado todo lo necesario
                         </Typography>
                         )
                     }

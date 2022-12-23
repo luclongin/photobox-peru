@@ -57,8 +57,7 @@ const Cart = () => {
                   }
 
             // step === 3 means final checkout, because of 1 step lag
-            if (step.value === 3) {
-                  console.log("paymentMethod from click", paymentMethod);
+            if (step.value === 3 && !missingInfo) {
                   if(paymentMethod === "card") {
                         document.getElementsByClassName("mercadopago-button")[0].click();
                   } else if(paymentMethod === "yape") {
@@ -503,7 +502,7 @@ const Cart = () => {
                                                       color: 'red',
                                                       fontSize: '0.8em'
                                                 }}>
-                                                      Asegúrate que hayas completado todo lo necesario
+                                                      Asegúrate de que hayas completado todo lo necesario
                                                 </Typography>
                                           )
                                           }

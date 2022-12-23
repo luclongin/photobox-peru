@@ -1,4 +1,4 @@
-import { Box, } from "@mui/material";
+import { Box, Typography} from "@mui/material";
 import CropIcon from '@mui/icons-material/Crop';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ const UploadPhotoCardHover = ({ id, setOpenDialog, noButtonShown, hoverWidth="35
             width: 30,
             height: 30,
             color:"primary",
-            ariaLabel:"Crop Photo",
+            ariaLabel:"Recortar Foto",
             backgroundColor: 'white',
       });
            

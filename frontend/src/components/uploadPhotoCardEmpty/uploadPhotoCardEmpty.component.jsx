@@ -7,6 +7,7 @@ import { nextButtonEnabled } from "../../features/handleFormButtons/FormButtonsS
 import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.component";
 import { photoSetFile } from "../../features/photoEdition/PhotoSlice";
 import { uploadCroppedPhotos } from "../../features/order/orders";
+import theme from "../../utils/theme";
 
 const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const dispatch = useDispatch();
@@ -27,9 +28,10 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                   "& svg": {
                         color: "rgb(243, 116, 231, 0.1)"
                   },
-                  "& p": {
+                  "&.MuiTypography-root": {
                         color: 'white',
-                        display: 'block'
+                        zIndex: 4,
+                        display: 'block!important'
                   }
             },
       })
@@ -77,7 +79,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
             },
             "&:hover .hidden-hover": {
                   display: "flex",
-                  marginTop: 6
+                  marginTop: 0,
             }
       });
 
@@ -90,16 +92,20 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
             <Fragment>
                   <HoverBox sx={{position: 'relative'}}>
                         <PaperButton elevation={4}>
-                                    <AddIcon sx={{fontSize: relativeFontSize, color: '#F374E7'}}/>
-                              <Typography variant="h10" component="p" hidden style={{
+                              <AddIcon sx={{fontSize: relativeFontSize, color: theme.palette.primary.main}}/> 
+                        </PaperButton>
+                        <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
+                        <Box sx={{zIndex: 3, position: 'absolute', top: 0, width: '100%', height: '100%'}} className="hidden-hover" >
+                              <Typography variant="h10" component="p" style={{
                                     position: 'absolute',
-                                    bottom: 0
+                                    bottom: -10,
+                                    width: '100%',
+                                    lineHeight: '16px',
+                                    zIndex: 4,
+                                    color: 'white'
                               }}>
                                     Haz un clic aquí para subir una foto
                               </Typography>
-                        </PaperButton>
-                        <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
-                        <Box sx={{zIndex: 3, position: 'absolute', top: -6}} className="hidden-hover" >
                               <UploadPhotoCardHover width={width} id={id} setOpenDialog={null} noButtonShown={true} hoverWidth={width}/>
                         </Box>
                   </HoverBox>
