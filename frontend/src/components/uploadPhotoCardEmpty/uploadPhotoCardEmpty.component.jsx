@@ -24,17 +24,6 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
             alignItems: 'center',
             borderRadius: '5px',
             border: '2px color #666',
-            "&:hover": {
-                  backgroundColor: "rgb(100,100,100,0.8)",
-                  "& svg": {
-                        color: "rgb(243, 116, 231, 0.1)"
-                  },
-                  "&.MuiTypography-root": {
-                        color: 'white',
-                        zIndex: 4,
-                        display: 'block!important'
-                  }
-            },
       })
 
       const handleImage = async (e) => {
@@ -100,16 +89,16 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                               }
                         </PaperButton>
                         <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
-                        <Box sx={{zIndex: 3, position: 'absolute', top: 0, width: '100%', height: '100%'}} className="hidden-hover" >
+                        <Box sx={{zIndex: 3, position: 'absolute', top: 0, width: '100%', height: '100%', textAlign: 'center'}} className="hidden-hover" >
                               <Typography variant="h10" component="p" style={{
                                     position: 'absolute',
-                                    bottom: -10,
+                                    bottom: -8,
                                     width: '100%',
                                     lineHeight: '16px',
                                     zIndex: 4,
-                                    color: 'white'
+                                    color: "#9B8E9A"
                               }}>
-                                    Haz un clic aquí para subir una foto
+                                    Haz clic aquí para subir una foto
                               </Typography>
                               <UploadPhotoCardHover width={width} id={id} setOpenDialog={null} noButtonShown={true} hoverWidth={width}/>
                         </Box>

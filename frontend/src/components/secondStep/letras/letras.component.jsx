@@ -54,6 +54,8 @@ const Letras = () => {
     
     const textOnChangeHandler = (e, letterOrder) => {
         const letter = e.target.value.toUpperCase();
+
+
         if(letter === "Q") {
             console.log(e.target.style);
             e.target.style.margin = '-16px 0 0 0'
@@ -67,7 +69,6 @@ const Letras = () => {
     useEffect(() => {
         // each time you have values for the three letters
         // dispatch
-        console.log("letters", letters);
         const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
         if(lettersAllFilled) {
             dispatch(dispatchLetters(letters));
@@ -75,7 +76,6 @@ const Letras = () => {
         
         // CASE: ALL PHOTOS ARE ADDED AND LAST LETTER IS GOING TO BE ADDED
         // CHECK IF ALL PHOTOS ARE UPLOADED AND IF ALL LETTERS ARE ADDED
-        console.log("photos", addedPhotos);
         let enableNext = true;
         addedPhotos.map(photo => {
             enableNext = enableNext && (photo.imgSrc !== null);
