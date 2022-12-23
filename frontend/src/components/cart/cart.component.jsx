@@ -43,14 +43,19 @@ const Cart = () => {
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
       const yapeState = useSelector(state => state.dialogs);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
-      const [missingInfo, setMissingInfo] = useState(true);
+      const [missingInfo, setMissingInfo] = useState(false);
 
       const handleClick = (e) => {
             e.preventDefault();
 
             /*CHECK IF ALL INFO HAS BEEN COMPLETED */
+            if((userInfo.userFullName === "" || userInfo.userFullName === null) || 
+                  (paymentMethod === "" || paymentMethod === null)) {
+                        setMissingInfo(true);
+                  } else {
+                        setMissingInfo(false);
+                  }
 
-            console.log("selected method:", paymentMethod);
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
                   console.log("paymentMethod from click", paymentMethod);
