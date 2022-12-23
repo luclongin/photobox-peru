@@ -53,11 +53,13 @@ const Letras = () => {
     const [letters, setLetters] = useState({letter1: "", letter2: "&", letter3: ""});
     
     const textOnChangeHandler = (e, letterOrder) => {
-        const letter = e.target.value.toUpperCase();
-
+        // only accept alpha numeric
+        let letter = e.target.value.toUpperCase().replace(/[\W_]+/g,"");
+        
+        //
+        //const filteredLetter = letter.match(regex)[0];
 
         if(letter === "Q") {
-            console.log(e.target.style);
             e.target.style.margin = '-16px 0 0 0'
         } else {
             e.target.style.margin = "0"
