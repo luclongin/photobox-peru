@@ -192,7 +192,7 @@ const AddPhraseContainer = () => {
                                                             }}
                                                       >
                                                             <MenuItem value="family">Family</MenuItem>      
-                                                            <MenuItem value="thisisus">This is us</MenuItem>
+                                                            <MenuItem value="thisisus">This is us - our life, our home, our story</MenuItem>
                                                             <MenuItem value="Personalizado">Personalizado</MenuItem> 
                                                       </Select>
                                                 </FormControl>

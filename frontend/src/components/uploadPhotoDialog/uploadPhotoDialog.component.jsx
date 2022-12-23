@@ -108,8 +108,13 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
           fullWidth={true}
           maxWidth='sm'
         >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => setOpenDialog(false)}>
-          Crop Image
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={() => setOpenDialog(false)} sx={{
+          textAlign: 'center',
+          fontSize: '1.6em',
+          pt: 2,
+          pb: 1
+        }}>
+          Recortar foto
         </BootstrapDialogTitle>
         <DialogContent dividers>
               { photo.imgResult ? (
@@ -117,7 +122,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
                 <Box sx={{
                   position: 'relative',
                   width: '100%',
-                  height: 200,
+                  height: 250,
                   background: '#333',
                 }}>
                   <Cropper
@@ -140,10 +145,11 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
                   <Box sx={{
                     display: 'flex',
                     flex: '1',
-                    alignItems: 'center',}}
-                  >
+                    alignItems: 'center',
+                    pt: 1
+                  }}>
                     <Typography
-                      variant="overline">
+                      variant="overline" sx={{fontSize: '0.9em', fontWeight: 'bold'}}>
                       Zoom
                     </Typography>
                     <Slider
@@ -161,9 +167,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
                   </Box>
                 </Box>
               </Fragment>
-            ) : (
-              <div>MERDE</div>
-            )
+            ) : null
             }
             </DialogContent>
             <DialogActions>
@@ -171,9 +175,14 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
               autoFocus
               onClick={handleSave}
               variant="contained"
-              color="primary"
+              sx={{
+                color: "white",
+                fontSize: '1em',
+                pl: 3,
+                pr: 3
+              }}
             >
-              Done
+              Listo
             </Button>
           </DialogActions>
           </Dialog>

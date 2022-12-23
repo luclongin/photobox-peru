@@ -128,7 +128,7 @@ const YapePopUp = ({open, handleOpen, price, handlePayment}) => {
                         
                     </Box>
                 </Grid>
-                <Grid item xs={8} sx={{textAlign: 'center', pt: 4, pb: 3}}>
+                <Grid item xs={8} sx={{textAlign: 'center', pt: 3, pb: 3}}>
                       <Typography variant="p" sx={{
                           fontSize: '1.5em'
                       }}>

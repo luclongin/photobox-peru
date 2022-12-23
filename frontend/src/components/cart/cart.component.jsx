@@ -432,14 +432,14 @@ const Cart = () => {
                         <Grid container justifyContent="center" sx={{pt: 2}}>
                               <Grid item xs={9} justifyContent="space-between" display="flex">
                                     <Typography variant="carth1gray">Subtotal</Typography>      
-                                    <Typography variant="carth1gray">{totalPrice} S/</Typography>            
+                                    <Typography variant="carth1gray">S/ {totalPrice}</Typography>            
                               </Grid>
                               <Grid item xs={9} justifyContent="space-between" display="flex" sx={{
                                     mt: 1
                               }}>
                                     <Typography variant="carth1gray">Delivery</Typography>      
                                     <Typography variant="carth1gray">{
-                                          delivery === "gratis" ? "GRATIS" : "14 S/"
+                                          delivery === "gratis" ? "GRATIS" : "S/ 14"
                                     }</Typography>            
                               </Grid>
                               { appliedDiscount.type === "amount" ?
@@ -448,7 +448,7 @@ const Cart = () => {
                               }}>
                                     <Typography variant="carth1gray">Descuento</Typography>      
                                     <Typography variant="carth1gray">
-                                          {appliedDiscount.value} S/
+                                          S/ {appliedDiscount.value}
                                     </Typography>            
                               </Grid>
                               : null
@@ -469,7 +469,7 @@ const Cart = () => {
                         <Grid container justifyContent="center" sx={{pt: 2}}>
                               <Grid item xs={9} justifyContent="space-between" display="flex">
                                     <Typography variant="carth1">Total</Typography>
-                                    <Typography variant="carth1">{price} S/</Typography>
+                                    <Typography variant="carth1">S/ {price}</Typography>
                               </Grid>
                         </Grid>
                         <Button variant="contained" sx={{
@@ -491,7 +491,7 @@ const Cart = () => {
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>
-                        <YapePopUp handlePayment={handleCheckout} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
+                        <YapePopUp handlePayment={handleCheckout} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={price} />
                         {
                         // have to create a new component for plin. Saving for later.
                         }
