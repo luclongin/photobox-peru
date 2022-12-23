@@ -9,7 +9,20 @@ import theme from "../../utils/theme";
 
 const AddressAddition = () => {
       const [open, setOpen] = useState(false);
-      const [addressAdded, setAddressAdded] = useState(false);
+
+      const addedUserInfo = useSelector(state => state.userInfo);
+      console.log("addedUserInfo:", addedUserInfo);
+
+      
+      let initialAddedAddress = false;
+      // adding this bit to true when the user has already filled in the userInfo
+      // and has gone back and forth through the process
+      // in order for him not to have to re-fill in the form every time
+      if(addedUserInfo.userFullName !== "" || addedUserInfo.userFullName !== null) {
+            initialAddedAddress = true;
+      }
+      const [addressAdded, setAddressAdded] = useState(initialAddedAddress);
+
       const [userInfo, setUserInfo] = useState({});
 
       const handleOpen = () => {
@@ -24,6 +37,9 @@ const AddressAddition = () => {
             setOpen(true);    
       }
       
+
+      
+
       return(
             <Fragment> 
                   {
@@ -44,35 +60,39 @@ const AddressAddition = () => {
                   :
                   <Box sx={{display: 'flex', alignItems: 'center', width: '380px'}}>
                         <Grid container sx={{pl: 1}}>
-                              <Grid item xs={1} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                              <Grid item xs={1} sx={{
+                                    display: 'flex', 
+                                    justifyContent: 'center', 
+                                    alignItems: 'center'
+                              }}>
                                     <HomeIcon sx={{fontSize: '1.6em'}}/>
                               </Grid>
-                              <Grid item xs={8} sx={{pl: 1}}>
+                              <Grid item xs={"auto"} sx={{pl: 1, textAlign: 'left'}}>
                                     <Grid container>
                                           <Grid item xs={12}>
                                                 <Typography variant="p" sx={{
                                                       fontSize: '1em',
                                                       fontWeight: 'bold'
                                                 }}>
-                                                      {userInfo.userFullName}
+                                                      {addedUserInfo.userFullName}
                                                 </Typography>
                                           </Grid>
                                           <Grid item xs={12} sx={{
-                                                mt: -0.5
+                                                mt: 0
                                           }}>
                                                 <Typography variant="p" sx={{
                                                       fontSize: '0.9em',
                                                 }}>
-                                                      {userInfo.userDistrict}, {userInfo.userCity}
+                                                      {addedUserInfo.userDistrict}, {addedUserInfo.userCity}
                                                 </Typography>
                                           </Grid>
                                     </Grid>
                               </Grid>
-                              <Grid item xs={3} sx={{
+                              <Grid item xs={"auto"} sx={{
                                     display: 'flex', 
                                     justifyContent: 'start', 
                                     alignItems: 'center',
-                                    pl: 2
+                                    pl: 0
                               }}>
                                     <Button onClick={handleChangeAddress} variant="outlined" sx={{
                                           borderColor: "rgb(0,0,0,0.3)", 

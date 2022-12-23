@@ -142,9 +142,7 @@ const Cart = () => {
             dispatch(setTotalPrice(price));
       }
 
-
       restartProcessOrNot();
-
 
       // CHECKOUT
       // These next functions handle checkout btn
@@ -486,7 +484,9 @@ const Cart = () => {
                               (step.value === 3) ? "Realizar Pago" : "Siguiente"
                               }
                         </Button>
-                        <Button onClick={handleCheckout}>Handle Checkout</Button>
+                        {
+                              /*<Button onClick={handleCheckout}>Handle Checkout</Button>*/
+                        }
 
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
