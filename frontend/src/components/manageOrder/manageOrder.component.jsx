@@ -269,7 +269,9 @@ const ManageOrder = () => {
                                     <NavigationButton variant="contained" disabled={!enableNextButton} onClick={handleNext} sx={{
                                                 display: `${isHiddenNextBtn}`,
                                                 position: 'absolute',
-                                                right: 30
+                                                right: 30,
+                                                bottom: 20
+
                                           }}>
                                           Siguiente
                                     </NavigationButton>
