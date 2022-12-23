@@ -346,7 +346,7 @@ const Cart = () => {
                                                 <CartItem
                                                       key={phrase.id}
                                                       id={phrase.id}
-                                                      title={`Letrero ${phrase.phraseText}`}
+                                                      title={`Letrero "${phrase.phraseText}"`}
                                                       image={null}
                                                       quantity={1}
                                                       price={getPrice("additionalPhrase", 1)}

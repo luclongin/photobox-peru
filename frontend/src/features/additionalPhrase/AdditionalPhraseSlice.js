@@ -7,8 +7,8 @@ export const defaultPhrases = {
             phraseText: "Family",
             phraseType: "default"
       },
-      "friends": {
-            phraseText: "Friends",
+      "thisisus": {
+            phraseText: "This is us",
             phraseType: "default"
       }
 };

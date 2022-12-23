@@ -18,7 +18,7 @@ const AddressAddition = () => {
       // adding this bit to true when the user has already filled in the userInfo
       // and has gone back and forth through the process
       // in order for him not to have to re-fill in the form every time
-      if(addedUserInfo.userFullName !== "" || addedUserInfo.userFullName !== null) {
+      if(addedUserInfo.userFullName !== "" && addedUserInfo.userFullName !== null) {
             initialAddedAddress = true;
       }
       const [addressAdded, setAddressAdded] = useState(initialAddedAddress);

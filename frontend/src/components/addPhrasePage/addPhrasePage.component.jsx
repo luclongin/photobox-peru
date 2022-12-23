@@ -156,7 +156,7 @@ const AddPhraseContainer = () => {
                         <Typography variant="h5" sx={{color: "#9B8E9A", mt: "-8px"}}>
                               20x40cm
                         </Typography>
-                        <Box>
+                        <Box sx={{pt: 1}}>
                               <Grid container>
                                     <form onSubmit={formik.handleSubmit} style={{width: '100%'}}>
                                           <Grid item xs={12} sx={{
