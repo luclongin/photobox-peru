@@ -110,7 +110,7 @@ const AddPhraseContainer = () => {
                                                       width: 400,
                                                       height: 200,
                                                       color: '#FFFFFF',
-                                                      fontSize: '2em',
+                                                      fontSize: '5em',
                                                       alignItems: 'center',
                                                       display: 'flex',
                                                       justifyContent: 'center'
@@ -280,7 +280,8 @@ const AddPhraseContainer = () => {
                                                 width: "120px",
                                                 p: 1,
                                                 pl: 0,
-                                                mt: "-5px"
+                                                mt: "-5px",
+                                                fontSize: '0.9em'
                                           }} startIcon={<AddIcon sx={{color: "#FF66C4"}} />}>
                                                 Añadir
                                           </Button>
