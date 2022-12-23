@@ -43,9 +43,12 @@ const Cart = () => {
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
       const yapeState = useSelector(state => state.dialogs);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
+      const [missingInfo, setMissingInfo] = useState(true);
 
       const handleClick = (e) => {
             e.preventDefault();
+
+            /*CHECK IF ALL INFO HAS BEEN COMPLETED */
 
             console.log("selected method:", paymentMethod);
             // step === 3 means final checkout, because of 1 step lag
@@ -472,18 +475,38 @@ const Cart = () => {
                                     <Typography variant="carth1">S/ {price}</Typography>
                               </Grid>
                         </Grid>
-                        <Button variant="contained" sx={{
-                              color: '#FFFFFF',
-                              width: 180,
-                              padding: 1,
-                              fontSize: '1.2em',
-                              mt: 3
-                        }} onClick={handleClick}>
-                              {// step 2 because we're at a 1 step lag
-                              // step 2 onclick gives step 2, meaning we'll be in step 3
-                              (step.value === 3) ? "Realizar Pago" : "Siguiente"
-                              }
-                        </Button>
+                        <Grid item xs={12}>
+                              <Grid container sx={{display: 'flex', justifyContent: 'center'}}>
+                                    <Grid item xs={12}>
+                                          <Button variant="contained" sx={{
+                                          color: '#FFFFFF',
+                                          width: 180,
+                                          padding: 1,
+                                          fontSize: '1.2em',
+                                          mt: 3
+                                          }} onClick={handleClick}>
+                                                {// step 2 because we're at a 1 step lag
+                                                // step 2 onclick gives step 2, meaning we'll be in step 3
+                                                (step.value === 3) ? "Realizar Pago" : "Siguiente"
+                                                }
+                                          </Button>
+                                    </Grid>
+                                    <Grid item xs={8} sx={{pt: 1}}>
+                                          {
+                                          missingInfo && (
+                                                <Typography variant="p" sx={{
+                                                      color: 'red',
+                                                      fontSize: '0.8em'
+                                                }}>
+                                                      Asegúrate que hayas completado todo lo necesario
+                                                </Typography>
+                                          )
+                                          }
+                                    </Grid>
+                              </Grid>
+                              
+                              
+                        </Grid>
                         {
                               /*<Button onClick={handleCheckout}>Handle Checkout</Button>*/
                         }
