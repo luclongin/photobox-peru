@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import AddCardButtonPulseRaw from '../manageOrder/addCardButtonPulse/addCardButtonPulseRaw.component';
 import AddIcon from '@mui/icons-material/Add';
 import { Paper, styled, Typography, Box} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,7 +93,11 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
             <Fragment>
                   <HoverBox sx={{position: 'relative'}}>
                         <PaperButton elevation={4}>
-                              <AddIcon sx={{fontSize: relativeFontSize, color: theme.palette.primary.main}}/> 
+                              <AddCardButtonPulseRaw width={45} plusSize="1.8em" textOnly={true} /> 
+                              { /*
+                              <AddIcon sx={{fontSize: relativeFontSize, color: theme.palette.primary.main}}/>
+                              */
+                              }
                         </PaperButton>
                         <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
                         <Box sx={{zIndex: 3, position: 'absolute', top: 0, width: '100%', height: '100%'}} className="hidden-hover" >
