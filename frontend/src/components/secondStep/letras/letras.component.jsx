@@ -116,7 +116,7 @@ const Letras = () => {
                             position: 'relative',
                             display: 'flex',
                             justifyContent: 'flex-start',
-                            pl: 3.2,
+                            pl: 3.5,
                             pt: 2
                         }}>
                             <img src={AmpersandPhoto} alt="Ampersand" width={"115px"} height={"130px"}/>

@@ -16,7 +16,7 @@ import { setTotalPrice } from "../../features/totalPrice/totalPrice";
 import { getPrice } from "../../utils/pricing";
 import FamilyPhoto from '../../images/letras_family.jpg';
 import ThisIsUsPhoto from '../../images/letras_thisisus.png';
-
+import AddIcon from '@mui/icons-material/Add';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {Divider} from "@mui/material";
 import { useState } from "react";
@@ -205,7 +205,14 @@ const AddPhraseContainer = () => {
                                           <Grid item xs={12} sx={{marginBottom: 2}}>
 
                                                 <Divider sx={{width: "80%", pt: 0, mb: 2}}/>
-                                                <Grid container>
+                                                <Typography variant="p" sx={{
+                                                      fontWeight: '',
+                                                      fontSize: '0.95em',
+                                                      pl: 0.2
+                                                }}>
+                                                      Personalizar
+                                                </Typography>
+                                                <Grid container sx={{pt: 3}}>
                                                       <Grid item xs={12}>
                                                             <FormControl size="small">
                                                                   <InputLabel id="choosePhraseColor" sx={{ml: "-5px"}}>Tipo de fondo</InputLabel>
@@ -218,9 +225,9 @@ const AddPhraseContainer = () => {
                                                                         error={formik.touched.phraseColor && Boolean(formik.errors.phraseColor)}
                                                                         helpertext={formik.touched.phraseColor && formik.errors.phraseColor}
                                                                         sx={{
-                                                                              width: 150,
+                                                                              width: 250,
                                                                               fontSize: '0.9em',
-                                                                              p: 0,
+                                                                              p: 1.2,
                                                                               backgroundColor: '#FFFFFF',
                                                                               "& fieldset": {
                                                                                     borderColor: "rgba(0, 0, 0, 0.23)"
@@ -233,8 +240,8 @@ const AddPhraseContainer = () => {
                                                                               },
                                                                         }}
                                                                   >
-                                                                        <MenuItem value="lightWood">Light Wood</MenuItem>      
-                                                                        <MenuItem value="darkWood">Dark Wood</MenuItem>
+                                                                        <MenuItem value="lightWood">Madera clara</MenuItem>      
+                                                                        <MenuItem value="darkWood">Madera oscura</MenuItem>
                                                                   </Select>
                                                             </FormControl>
                                                       </Grid>
@@ -243,7 +250,7 @@ const AddPhraseContainer = () => {
                                                                   type="string"
                                                                   variant="outlined"
                                                                   name="phraseText"
-                                                                  size="small"
+                                                                  size="medium"
                                                                   label="Escribe texto"
                                                                   FormHelperTextProps={{style: {backgroundColor: theme.palette.background.main, margin: 0}}}
                                                                   defaultValue={formik.values.phraseText}
@@ -253,7 +260,7 @@ const AddPhraseContainer = () => {
                                                                   sx={{
                                                                         backgroundColor: '#FFFFFF',
                                                                         width: 250,
-                                                                        p: 0,
+                                                                        mt: "-6px",
                                                                         fontSize: '0.9em',
                                                                         "& fieldset": {
                                                                               borderColor: "rgba(0, 0, 0, 0.23)"
@@ -277,7 +284,7 @@ const AddPhraseContainer = () => {
                                                 p: 1,
                                                 pl: 0,
                                                 mt: "-5px"
-                                          }} startIcon={<AddShoppingCartIcon sx={{color: "#FF66C4"}} />}>
+                                          }} startIcon={<AddIcon sx={{color: "#FF66C4"}} />}>
                                                 Añadir
                                           </Button>
                                     </form>
