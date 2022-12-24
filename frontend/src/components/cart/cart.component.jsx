@@ -446,7 +446,7 @@ const Cart = () => {
                               }}>
                                     <Typography variant="carth1gray">Delivery</Typography>      
                                     <Typography variant="carth1gray">{
-                                          delivery === "gratis" ? "GRATIS" : "S/ 14"
+                                          delivery === "gratis" ? "Gratis" : "S/ 14"
                                     }</Typography>            
                               </Grid>
                               { appliedDiscount.type === "amount" ?
