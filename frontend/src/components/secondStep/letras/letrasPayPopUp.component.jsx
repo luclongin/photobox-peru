@@ -98,7 +98,7 @@ const LetrasDialog = ({open, handleOpen}) => {
                     {
                         !infoAdded && (<Typography variant="p" sx={{
                             fontSize: '0.9em',
-                            color: 'red',
+                            color: '#FF66C4',
                             position: 'relative',
                             top: 4
                         }}>

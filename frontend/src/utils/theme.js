@@ -95,7 +95,7 @@ const theme = createTheme({
         fontFamily: 'Questrial'
       },
       carth1: {
-        fontSize: '1em',
+        fontSize: '1.1em',
         color: '#000'
       },
       carth2: {

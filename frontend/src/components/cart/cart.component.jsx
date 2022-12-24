@@ -43,27 +43,27 @@ const Cart = () => {
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
       const yapeState = useSelector(state => state.dialogs);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
-      const [missingInfo, setMissingInfo] = useState(false);
+      const [enablePayment, setEnablePayment] = useState(true);
 
       const handleClick = (e) => {
             e.preventDefault();
 
-            /*CHECK IF ALL INFO HAS BEEN COMPLETED */
-            if((userInfo.userFullName === "" || userInfo.userFullName === null) || 
-                  (paymentMethod === "" || paymentMethod === null)) {
-                        setMissingInfo(true);
-                  } else {
-                        setMissingInfo(false);
-                  }
+            
 
             // step === 3 means final checkout, because of 1 step lag
-            if (step.value === 3 && !missingInfo) {
-                  if(paymentMethod === "card") {
-                        document.getElementsByClassName("mercadopago-button")[0].click();
-                  } else if(paymentMethod === "yape") {
-                        setYapeIsOpen(true);
-                  } else if(paymentMethod === "plin") {
-                        setPlinIsOpen(true);
+            if (step.value === 3) {
+                  /*CHECK IF ALL INFO HAS BEEN COMPLETED */
+                  if(userInfo.userFullName === "" || paymentMethod === "") {
+                        setEnablePayment(false);
+                  } else {
+                        setEnablePayment(true);
+                        if(paymentMethod === "card") {
+                              document.getElementsByClassName("mercadopago-button")[0].click();
+                        } else if(paymentMethod === "yape") {
+                              setYapeIsOpen(true);
+                        } else if(paymentMethod === "plin") {
+                              setPlinIsOpen(true);
+                        }
                   }
             } else {
                   dispatch(incrementStep());
@@ -373,7 +373,7 @@ const Cart = () => {
                         <FormGroup sx={{width: "100%", display: 'flex', justifyContent: 'center'}}>
                         <Grid container display="flex" justifyContent="center">
 
-                        <Grid item xs={9} sx={{}}>
+                        <Grid item xs={9} sx={{pt: 0.5}}>
                               <FormControl sx={{position: 'relative', width: '100%'}}>
                                     <InputLabel htmlFor="outlined-adornment-discount"
                                     sx={{m: 0, p: 0, position: 'absolute', top: "-7px",
@@ -436,7 +436,7 @@ const Cart = () => {
                               </Grid>
                         </Grid>
                         </FormGroup>
-                        <Grid container justifyContent="center" sx={{pt: 2}}>
+                        <Grid container justifyContent="center" sx={{pt: 2.5}}>
                               <Grid item xs={9} justifyContent="space-between" display="flex">
                                     <Typography variant="carth1gray">Subtotal</Typography>      
                                     <Typography variant="carth1gray">S/ {totalPrice}</Typography>            
@@ -487,7 +487,7 @@ const Cart = () => {
                                           width: 180,
                                           padding: 1,
                                           fontSize: '1.2em',
-                                          mt: 3
+                                          mt: 4
                                           }} onClick={handleClick}>
                                                 {// step 2 because we're at a 1 step lag
                                                 // step 2 onclick gives step 2, meaning we'll be in step 3
@@ -497,9 +497,9 @@ const Cart = () => {
                                     </Grid>
                                     <Grid item xs={8} sx={{pt: 1}}>
                                           {
-                                          missingInfo && (
+                                          !enablePayment && (
                                                 <Typography variant="p" sx={{
-                                                      color: 'red',
+                                                      color: '#FF66C4',
                                                       fontSize: '0.8em'
                                                 }}>
                                                       Asegúrate de que hayas completado toda la información requirida

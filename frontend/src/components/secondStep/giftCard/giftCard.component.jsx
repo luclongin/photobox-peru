@@ -206,7 +206,7 @@ const GiftCard = () => {
                             toggleErrorText && (
                              <Grid xs={12} sx={{textAlign: 'left', pl: 2, pt: 1}}>
                              {
-                                 toggleErrorText && (<Typography variant="p" sx={{color: 'red'}}>
+                                 toggleErrorText && (<Typography variant="p" sx={{color: '#FF66C4'}}>
                                      Escoje un monto
                                  </Typography>)
                              }
