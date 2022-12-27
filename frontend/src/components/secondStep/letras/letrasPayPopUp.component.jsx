@@ -13,8 +13,11 @@ import AddressAddition from '../../addressAddition/addressAddition.component';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import YapePopUp from '../../yapePopUp/yapePopUp.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAddress
- } from '../../../features/userInfo/userInfoSlice';
+import { deleteAddress} from '../../../features/userInfo/userInfoSlice';
+import { nanoid } from '@reduxjs/toolkit';
+import { setGiftCard } from '../../../features/giftCard/giftCardSlice';
+import { createDiscount } from '../../../features/discountUpload/discountUpload';
+
 const StyleDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiPaper-root": {
       overflowY: "visible",
@@ -27,6 +30,7 @@ const LetrasDialog = ({open, handleOpen}) => {
     const paymentMethod = useSelector(state => state.paymentMethod);
     const [yapeIsOpen, setYapeIsOpen] = useState(false);
     const [plinIsOpen, setPlinIsOpen] = useState(false);
+    const totalPrice = useSelector(state => state.totalPrice);
 
     const handleClose = () => {
         handleOpen(false);
@@ -44,11 +48,33 @@ const LetrasDialog = ({open, handleOpen}) => {
                 document.getElementsByClassName("mercadopago-button")[0].click();
             } else if(paymentMethod === "yape") {
                 setYapeIsOpen(true);
+                handleUploadToDb();
             } else if(paymentMethod === "plin") {
                 setPlinIsOpen(true);
             }
         } else {
             setInfoAdded(false);
+        }
+    }
+
+    const handleUploadToDb = () => {
+        let giftCardData = new FormData();
+        const giftCardId = nanoid();
+        giftCardData.append('discountId', giftCardId);
+        giftCardData.append('discountType', 'giftCard');
+        giftCardData.append('discountAmount', totalPrice);
+        giftCardData.append('discountPercentage', "");
+        const dateOfCreation = new Date().toISOString();
+        giftCardData.append('discountStartDate', dateOfCreation);
+        giftCardData.append('discountEndDate', "");
+        giftCardData.append('discountUsedAddresses', "");
+        if(giftCardId !== "" && totalPrice !== "" && dateOfCreation !== "") {
+            dispatch(setGiftCard({
+                giftCardId: giftCardId,
+                giftCardAmount: totalPrice,
+                giftCardDate: dateOfCreation
+            }));
+            dispatch(createDiscount(giftCardData));
         }
     }
 
@@ -122,11 +148,11 @@ const LetrasDialog = ({open, handleOpen}) => {
             <Box sx={{display: 'none'}}>
                 <MercadoPagoButton/>
             </Box>
-            <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={"100"} />
+            <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={totalPrice} />
             {
             // have to create a new component for plin. Saving for later.
             }
-            <YapePopUp open={plinIsOpen} handleOpen={setPlinIsOpen} price={"100"} />
+            <YapePopUp open={plinIsOpen} handleOpen={setPlinIsOpen} price={totalPrice} />
         </Box> 
       </StyleDialog>
     </Box>

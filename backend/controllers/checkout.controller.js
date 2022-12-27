@@ -35,6 +35,7 @@ exports.createPreference = (req, res) => {
             "pending": "http://localhost:3000/feedback",
         },
         auto_return: "approved",
+        "binary_mode": true,
         notification_url: "http://localhost:3000/notifications",
         payment_methods: {
           excluded_payment_methods: [
@@ -48,7 +49,8 @@ exports.createPreference = (req, res) => {
             {
                 "id": "bank_transfer"
             }
-          ]
+          ],
+          "installments": 1
         },
     };
 

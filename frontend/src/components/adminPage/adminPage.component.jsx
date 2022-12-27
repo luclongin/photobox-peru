@@ -16,8 +16,14 @@ import { deleteAdditionalPhrase } from "../../features/additionalPhraseUpload/ad
 import { getLetters } from "../../features/lettersUpload/lettersUploadSlice";
 import { useState } from "react";
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { createDiscount } from "../../features/discountUpload/discountUpload";
+import { createDiscount, getDiscounts } from "../../features/discountUpload/discountUpload";
 import { nanoid } from "@reduxjs/toolkit";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const AdminPage = () => {
       const dispatch = useDispatch();
@@ -26,46 +32,22 @@ const AdminPage = () => {
       const uploadedUsers = useSelector(state => state.uploadedUser);
       const uploadedPhrases = useSelector(state => state.uploadedAdditionalPhrases);
       const uploadedLetters = useSelector(state => state.uploadedLetters);
+      const [couponStartDate, setCouponStartDate] = useState(null);
+      const [couponEndDate, setCouponEndDate] = useState(null);
+      const discounts = useSelector(state => state.uploadedDiscounts);
 
-      const initFetchLetters = useCallback(() => {
+      const initFnc = useCallback(() => {
+            dispatch(getDiscounts());
             dispatch(getLetters());
-      }, [dispatch]);
-
-      useEffect(() => {
-            initFetchLetters()
-      }, [initFetchLetters])
-
-      const initFetchOrders = useCallback(() => {
             dispatch(retrieveOrders());
-      }, [dispatch]);
-
-      useEffect(() => {
-            initFetchOrders()
-      }, [initFetchOrders]);
-
-      const initFetchUploadedPhotos = useCallback(() => {
             dispatch(getPhotos());
-      }, [dispatch]);
-
-      useEffect(() => {
-            initFetchUploadedPhotos()
-      }, [initFetchUploadedPhotos]);
-
-      const initFetchUploadedUsers = useCallback(() => {
             dispatch(getUsers());
-      }, [dispatch]);
-
-      useEffect(() => {
-            initFetchUploadedUsers()
-      }, [initFetchUploadedUsers]);
-
-      const initFetchUploadedPhrases = useCallback(() => {
             dispatch(getAdditionalPhrases());
       }, [dispatch]);
 
       useEffect(() => {
-            initFetchUploadedPhrases()
-      }, [initFetchUploadedPhrases]);
+            initFnc();
+      }, [initFnc]);
 
       const [coupon, setCoupon] = useState({
             type: "percentage",
@@ -75,10 +57,6 @@ const AdminPage = () => {
             endDate: null
       });
 
-      useEffect(() => {
-            console.log("coupon", coupon);
-      }, [coupon]);
-
       const handleCouponChange = (e) => {
             const name = e.target.name;
             setCoupon({
@@ -86,13 +64,6 @@ const AdminPage = () => {
                   [name]: e.target.value
             });
       }
-
-      useEffect(() => {
-            console.log("coupon", coupon);
-      }, [coupon]);
-
-      const [couponStartDate, setCouponStartDate] = useState(null);
-      const [couponEndDate, setCouponEndDate] = useState(null);
 
       const handleStartDateChange = (newValue) => {
             setCouponStartDate(newValue);
@@ -222,6 +193,53 @@ const AdminPage = () => {
                                           Iniciar Coupon
                                     </Button>
                               </Grid>
+                        </Grid>
+                  </Box>
+                  <Divider sx={{mt: 5, mb: 2}}></Divider>
+                  <Box>
+                        <Grid container sx={{width: '80%'}}>
+                              <Grid item xs={12}>
+                                    <h1>Lista de descuentos</h1>
+                              </Grid>   
+                              <TableContainer component={Paper}>
+                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">                                          <TableHead>
+                                                <TableRow>
+                                                      <TableCell>Descuento ID</TableCell>
+                                                      <TableCell align="right">Tipo</TableCell>
+                                                      <TableCell align="right">Monto (S/)</TableCell>
+                                                      <TableCell align="right">Porcentaje</TableCell>
+                                                      <TableCell align="right">Fecha creacion</TableCell>
+                                                      <TableCell align="right">Fecha expiracion</TableCell>
+                                                </TableRow>
+                                          </TableHead>
+                                          <TableBody>
+                                                {
+                                                      discounts.map((discount, discountIndex) => {
+                                                            return(<TableRow key={discount.discountId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountId}
+                                                                  </TableCell>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountType}
+                                                                  </TableCell>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountAmount}
+                                                                  </TableCell>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountPercentage}
+                                                                  </TableCell>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountStartDate}
+                                                                  </TableCell>
+                                                                  <TableCell component="th" scope="row">
+                                                                        {discount.discountEndDate}
+                                                                  </TableCell>
+                                                            </TableRow>);
+                                                      })
+                                                }
+                                          </TableBody>
+                                    </Table>
+                              </TableContainer>
                         </Grid>
                   </Box>
                   <Divider sx={{mt: 5, mb: 2}}></Divider>

@@ -12,6 +12,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import RedeemOutlinedIcon from '@mui/icons-material/RedeemOutlined';
 import SendToMobileOutlinedIcon from '@mui/icons-material/SendToMobileOutlined';
 import LetrasDialog from "../letras/letrasPayPopUp.component";
+import { setTotalPrice } from "../../../features/totalPrice/totalPrice";
 
 const GiftCard = () => {
     const dispatch = useDispatch();
@@ -29,31 +30,9 @@ const GiftCard = () => {
         } else {
             setToggleErrorText(false);
             setDialogOpen(true);
+            dispatch(setTotalPrice(finalAmount));
         }
-
-
-        /*
-        let giftCardData = new FormData();
-        const giftCardId = nanoid();
-        giftCardData.append('discountId', giftCardId);
-        giftCardData.append('discountType', 'giftCard');
-        giftCardData.append('discountAmount', finalAmount);
-        giftCardData.append('discountPercentage', "");
-        const dateOfCreation = new Date().toISOString();
-        giftCardData.append('discountStartDate', dateOfCreation);
-        giftCardData.append('discountEndDate', "");
-        giftCardData.append('discountUsedAddresses', "");
-        if(giftCardId !== "" && finalAmount !== "" && dateOfCreation !== "") {
-            dispatch(setGiftCard({
-                giftCardId: giftCardId,
-                giftCardAmount: finalAmount,
-                giftCardDate: dateOfCreation
-            }));
-            dispatch(createDiscount(giftCardData));
-            dispatch(incrementStep());
-        }*/
     }
-
 
     const AddButton = styled(Button)({
         borderRadius: 5,
@@ -67,8 +46,6 @@ const GiftCard = () => {
               color: '#ffffff'
         }
   })
-
-    
 
     const toggleClicked = (e) => {
         let clickedCopy = [false, false, false, false];

@@ -48,8 +48,6 @@ const Cart = () => {
       const handleClick = (e) => {
             e.preventDefault();
 
-            
-
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
                   /*CHECK IF ALL INFO HAS BEEN COMPLETED */
@@ -171,8 +169,8 @@ const Cart = () => {
             }
       }
 
-      const handleAdditionalPhrase = async (e, orderId) => {
-            e.preventDefault();
+      const handleAdditionalPhrase = async (orderId) => {
+            //e.preventDefault();
             //create new phrase
             await Promise.all(additionalPhrases.map(async (phrase) => {
                   let phraseData = new FormData();
@@ -192,8 +190,8 @@ const Cart = () => {
             }));
       }
 
-      const handlePhotoUpload = async (e, orderId) => {
-            e.preventDefault();
+      const handlePhotoUpload = async (orderId) => {
+            //e.preventDefault();
 
             // HANDLING UPLOAD OF PHOTOS
             let photosFormData = new FormData();
@@ -232,8 +230,9 @@ const Cart = () => {
             }));
       };
 
-      const handleCreateOrder = async e => {
-            e.preventDefault();
+      const handleCreateOrder = async () => {
+            //e.preventDefault();
+            console.log("start handleCreateOrder");
             // HANDLING ORDER 
             let orderData = new FormData();
             // create new id 
@@ -259,14 +258,14 @@ const Cart = () => {
             dispatch(createOrder(orderData)).unwrap()
             .then(data => {
                   console.log(data);
-            }).catch(e => {
-                  console.log("oh merde", e);
+            }).catch(err => {
+                  console.log("oh merde", err);
             });
             return orderId;
       };
 
-      const handleCreateUser = async e => {
-            e.preventDefault();
+      const handleCreateUser = async () => {
+            //e.preventDefault();
             const userData = new FormData();
             //create new user
             userData.append('userId', userInfo.userId);
@@ -283,8 +282,8 @@ const Cart = () => {
             });
       }
 
-      const handleCreateLetter = async (e, orderId) => {
-            e.preventDefault();
+      const handleCreateLetter = async (orderId) => {
+//            e.preventDefault();
             const letterData = new FormData();
             //create new letters input\
             letterData.append('orderId', orderId);
@@ -298,15 +297,16 @@ const Cart = () => {
             })
       }
 
-      const handleCheckout = async e => {  
-            const orderId = await handleCreateOrder(e);
+      const handleCheckout = async ()=> {  
+            console.log('start handleCheckout');
+            const orderId = await handleCreateOrder();
             console.log("order created");
             console.log("orderId:", orderId);
-            handlePhotoUpload(e, orderId);
-            handleCreateUser(e);
-            handleAdditionalPhrase(e, orderId);
+            handlePhotoUpload(orderId);
+            handleCreateUser();
+            handleAdditionalPhrase(orderId);
             if(letters.letter1) {
-                  handleCreateLetter(e, orderId);
+                  handleCreateLetter(orderId);
             }
             //console.log("discountApplied from handleCheckout", discountApplied);
             /*if(discountApplied) {
@@ -518,7 +518,7 @@ const Cart = () => {
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>
-                        <YapePopUp handlePayment={handleCheckout} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={price} />
+                        <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={price} handlePayment={handleCheckout} />
                         {
                         // have to create a new component for plin. Saving for later.
                         }
