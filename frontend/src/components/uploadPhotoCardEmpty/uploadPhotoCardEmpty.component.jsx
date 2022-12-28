@@ -80,7 +80,7 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
 
       return(
             <Fragment>
-                  <HoverBox sx={{position: 'relative'}}>
+                  <HoverBox sx={{position: 'relative', display: 'flex', justifyContent: 'center'}}>
                         <PaperButton elevation={4}>
                               <AddCardButtonPulseRaw width={45} plusSize="1.8em" textOnly={true} /> 
                               { /*
@@ -89,14 +89,15 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
                               }
                         </PaperButton>
                         <input hidden accept="image/*" multiple={false} type="file" onChange={handleImage}/>
-                        <Box sx={{zIndex: 3, position: 'absolute', top: 0, width: '100%', height: '100%', textAlign: 'center'}} className="hidden-hover" >
+                        <Box sx={{zIndex: 3, position: 'absolute', top: -15, width: '80%', height: '100%', textAlign: 'center'}} className="hidden-hover" >
                               <Typography variant="h10" component="p" style={{
                                     position: 'absolute',
                                     bottom: -8,
                                     width: '100%',
                                     lineHeight: '16px',
                                     zIndex: 4,
-                                    color: "#9B8E9A"
+                                    color: "#9B8E9A",
+                                    fontSize: '0.85em'
                               }}>
                                     Haz clic aquí para subir una foto
                               </Typography>

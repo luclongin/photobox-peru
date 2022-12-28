@@ -374,12 +374,14 @@ const Cart = () => {
                         <Grid container display="flex" justifyContent="center">
 
                         <Grid item xs={9} sx={{pt: 0.5}}>
-                              <FormControl sx={{position: 'relative', width: '100%'}}>
+                              <FormControl sx={{position: 'relative', width: '100%',
+                                    "& .MuiInputLabel-shrink": {
+                                          top: '0!important'
+                                    },
+                              }}>
                                     <InputLabel htmlFor="outlined-adornment-discount"
                                     sx={{m: 0, p: 0, position: 'absolute', top: "-7px",
-                                          "&.Mui-focused": {
-                                                mt: "6px"
-                                          },
+                                          
                                     }}>Añadir descuento</InputLabel>
                                     <OutlinedInput
                                           label="Añadir descuento"
@@ -430,7 +432,7 @@ const Cart = () => {
                                     }
                   
                                     {(discountApplied!==null) ?
-                                          <FormHelperText sx={{ml: 0, mt: 0, color: '#3CB371'}}>El descuento esta anadido</FormHelperText> : null
+                                          <FormHelperText sx={{ml: 0, mt: 0, color: '#3CB371'}}>Descuento aplicado</FormHelperText> : null
                                     }
                                     </FormControl>
                               </Grid>
@@ -487,7 +489,7 @@ const Cart = () => {
                                           width: 180,
                                           padding: 1,
                                           fontSize: '1.2em',
-                                          mt: 4
+                                          mt: 3
                                           }} onClick={handleClick}>
                                                 {// step 2 because we're at a 1 step lag
                                                 // step 2 onclick gives step 2, meaning we'll be in step 3

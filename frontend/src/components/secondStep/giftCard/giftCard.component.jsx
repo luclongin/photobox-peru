@@ -25,7 +25,7 @@ const GiftCard = () => {
 
     const handleSubmitGiftCard = (e) => {
         e.preventDefault();
-        if(finalAmount === "" || finalAmount === 0) {
+        if(finalAmount === "" || finalAmount <= 0) {
             setToggleErrorText(true);
         } else {
             setToggleErrorText(false);
@@ -156,6 +156,7 @@ const GiftCard = () => {
                                     placeholder="Monto"
                                     defaultValue={customAmount}
                                     value={customAmount}
+                                    type="number"
                                     inputProps={{
                                     'aria-label': 'weight',
                                     }}

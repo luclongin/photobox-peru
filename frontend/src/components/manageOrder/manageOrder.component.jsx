@@ -21,10 +21,20 @@ import DisplayGiftCard from "../displayGiftCard/displayGiftCard.component";
 import { getPrice } from "../../utils/pricing";
 import { setTotalPrice } from "../../features/totalPrice/totalPrice";
 import { setAppliedDiscount } from "../../features/appliedDiscount/appliedDiscountSlice";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { forwardRef } from "react";
+import { setImgResolutionMsg } from "../../features/errorMessages/errorMessages";
 
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
+
+const Alert = forwardRef(function Alert(props, ref) {
+return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+    
 const ManageOrder = () => {
       const dispatch = useDispatch();
 
@@ -41,8 +51,9 @@ const ManageOrder = () => {
       const photos = useSelector(state => state.photos);
       const step = useSelector(state => state.step.value);
       const letters = useSelector(state => state.letters);
-      const additionalPhrases = useSelector(state => state.additionalPhrases);
-
+      const additionalPhrases = useSelector(state => state.additionalPhrases); 
+      const imgResErrorState = useSelector(state => state.errorMessages.imgResolution);
+      
       const NavigationButton = styled(Button)({
             borderRadius: 5,
             color: '#ffffff',
@@ -211,6 +222,13 @@ const ManageOrder = () => {
             }
       }
 
+      const handleCloseAlert = (e, reason) => {
+            if (reason === 'clickaway') {
+                  return;
+            }
+            dispatch(setImgResolutionMsg(false));
+      }
+
       return(
             <Box>
                   <Box flex={1} overflow="auto" sx={{
@@ -248,6 +266,18 @@ const ManageOrder = () => {
                               height: '100%',
                               backgroundColor: '#FAF9F9'
                         }}>
+                              <Snackbar open={imgResErrorState} autoHideDuration={5000} onClose={handleCloseAlert}
+                                    sx={{
+                                          zIndex: 5,
+                                          position: 'absolute',
+                                          left: 0,
+                                          bottom: 0
+                                    }}
+                              >
+                                    <Alert onClose={handleCloseAlert} severity="error" sx={{ width: '100%' }}>
+                                          Asegúrate de que la resolución de tu foto sea suficientemente buena
+                                    </Alert>
+                              </Snackbar>
                               <Toolbar sx={{
                                     height: '100%',
                                     display: 'flex',

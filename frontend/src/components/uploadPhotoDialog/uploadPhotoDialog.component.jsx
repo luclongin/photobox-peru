@@ -49,8 +49,6 @@ BootstrapDialogTitle.propTypes = {
 const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
       const dispatch = useDispatch();
       const mounted = useRef();
-      
-
       // troublesome because could be heavy on the computing side
       const photo = useSelector(state=>state.photos.find(photo => photo.id === id));
 
@@ -60,6 +58,7 @@ const UploadPhotoDialog = ({id, openDialog, setOpenDialog}) => {
       const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
       const [croppedImage, setCroppedImage] = useState(null);
       const [croppedBlob, setCroppedBlob] = useState(null);
+      
       const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
         setCroppedAreaPixels(croppedAreaPixels);
       }, [])
