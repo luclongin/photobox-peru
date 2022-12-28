@@ -4,16 +4,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
 import { photoDirectAdded, photoUpdatedSrc } from "../../../features/photoEdition/PhotoSlice";
 import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButtonsSlice";
-import { Fragment } from "react";
 import theme from "../../../utils/theme";
 import {styled} from "@mui/material";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import { forwardRef } from "react";
-import { useState } from "react";
 import { setImgResolutionMsg } from "../../../features/errorMessages/errorMessages";
-
-
+import {getImageSize} from '../../../utils/imageTools';
 
 /*
       Button in order to add directly a photo. Works exactly like your model website's button.
@@ -54,31 +48,6 @@ const AddCardButtonPulse = ({width, plusSize, textOnly=false}) => {
             }
         }
       });
-
-      // async/promise function for retrieving image dimensions for a URL
-      const getImageSize = (url) => {
-            const imgElement = document.createElement("img");
-            const promise = new Promise((resolve, reject) => {
-                  imgElement.onload = () => {
-                  // Natural size is the actual image size regardless of rendering.
-                  // The 'normal' `width`/`height` are for the **rendered** size.
-                  const width  = imgElement.naturalWidth;
-                  const height = imgElement.naturalHeight; 
-            
-                  // Resolve promise with the width and height
-                  resolve({width, height});
-            };
-      
-            // Reject promise on error
-            imgElement.onerror = reject;
-            });
-      
-            // Setting the source makes it start downloading and eventually call `onload`
-            imgElement.src = url;
-      
-            return promise;
-      }
-    
 
       const handleImage = async (e) => {
             let acceptImage = false;

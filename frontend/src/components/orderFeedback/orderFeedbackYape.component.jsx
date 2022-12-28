@@ -11,6 +11,38 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 
 const OrderFeedbackYape = () => {
     const currentOrder = useSelector(state => state.orders);
+    const formButtons = useSelector(state => state.formButtons);
+    const photos = useSelector(state => state.photos);
+    const additionalPhrases = useSelector(state => state.additionalPhrases);
+    const step = useSelector(state => state.step);
+    const delivery = useSelector(state => state.delivery);
+    const userInfo = useSelector(state => state.userInfo);
+    const letters = useSelector(state => state.letters);
+    const appliedDiscount = useSelector(state => state.appliedDiscount);
+    const paymentMethod = useSelector(state => state.paymentMethod);
+    const totalPrice = useSelector(state => state.totalPrice);
+    const errorMessages = useSelector(state => state.errorMessages);
+    const uploadedUser = useSelector(state => state.uploadedUser);
+    const uploadedDiscounts = useSelector(state => state.uploadedDiscounts);
+    const uploadedAdditionalPhrases = useSelector(state => state.uploadedAdditionalPhrases);
+    console.log("START");
+    console.log("order", currentOrder);
+    console.log("formButtons", formButtons);
+    console.log("photos", photos);
+    console.log("additionalPhrases", additionalPhrases);
+    console.log("step", step);
+    console.log("delivery", delivery);
+    console.log("userInfo", userInfo);
+    console.log("letters", letters);
+    console.log("paymentMethod", paymentMethod);
+    console.log("appliedDiscount", appliedDiscount);
+    console.log("userInfo", userInfo);
+    console.log("totalPrice", totalPrice);
+    console.log("errorMessages", errorMessages);
+    console.log("uploadedUser", uploadedUser);
+    console.log("uploadedDiscounts", uploadedDiscounts);
+    console.log("uploadedAdditionalPhrases", uploadedAdditionalPhrases);
+    console.log("END");
 
     return(
         <Box sx={{

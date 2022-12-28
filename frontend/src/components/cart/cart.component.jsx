@@ -22,10 +22,15 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import MercadoPagoButton from "../mercadoPagoButton/mercadoPagoButton.component";
 import YapePopUp from "../yapePopUp/yapePopUp.component";
 import { nanoid } from "@reduxjs/toolkit";
+import { deleteOrder } from "../../features/order/orders";
+import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
+import { deleteAddress } from "../../features/userInfo/userInfoSlice";
+import resetApp from "../../utils/reset";
 
 const Cart = () => {
 
       const dispatch = useDispatch();
+      const orders = useSelector(state => state.orders);
       const letters = useSelector(state => state.letters);
       const userInfo = useSelector(state => state.userInfo);
       const photos = useSelector(state => state.photos);
@@ -170,7 +175,6 @@ const Cart = () => {
       }
 
       const handleAdditionalPhrase = async (orderId) => {
-            //e.preventDefault();
             //create new phrase
             await Promise.all(additionalPhrases.map(async (phrase) => {
                   let phraseData = new FormData();
@@ -191,8 +195,6 @@ const Cart = () => {
       }
 
       const handlePhotoUpload = async (orderId) => {
-            //e.preventDefault();
-
             // HANDLING UPLOAD OF PHOTOS
             let photosFormData = new FormData();
             // a way to execute await in a for loop all simultaneously
@@ -231,8 +233,6 @@ const Cart = () => {
       };
 
       const handleCreateOrder = async () => {
-            //e.preventDefault();
-            console.log("start handleCreateOrder");
             // HANDLING ORDER 
             let orderData = new FormData();
             // create new id 
@@ -297,23 +297,28 @@ const Cart = () => {
             })
       }
 
-      const handleCheckout = async ()=> {  
-            console.log('start handleCheckout');
+      const handleUploadToDb = async () => {  
             const orderId = await handleCreateOrder();
-            console.log("order created");
-            console.log("orderId:", orderId);
             handlePhotoUpload(orderId);
             handleCreateUser();
             handleAdditionalPhrase(orderId);
             if(letters.letter1) {
                   handleCreateLetter(orderId);
             }
+            
+            // CODE TO DELETE DISCOUNT CODE AFTER APPLYING IT
             //console.log("discountApplied from handleCheckout", discountApplied);
             /*if(discountApplied) {
                   // if there is an applied discount
                   // remove discount from db
                   dispatch(deleteDiscount(discountCode));
             } */
+      }
+
+      const handleCheckout = () => {
+            handleUploadToDb().then(() => {
+                  resetApp(orders, dispatch);
+            });
       }
 
       return(

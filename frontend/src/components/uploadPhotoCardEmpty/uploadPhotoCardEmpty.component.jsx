@@ -9,6 +9,8 @@ import UploadPhotoCardHover from "../UploadPhotoCardHover/uploadPhotoCardHover.c
 import { photoSetFile } from "../../features/photoEdition/PhotoSlice";
 import { uploadCroppedPhotos } from "../../features/order/orders";
 import theme from "../../utils/theme";
+import {getImageSize} from '../../utils/imageTools';
+import { setImgResolutionMsg } from "../../features/errorMessages/errorMessages";
 
 const UploadPhotoCardEmpty = ({ id, width=350 }) => {
       const dispatch = useDispatch();
@@ -28,37 +30,50 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
 
       const handleImage = async (e) => {
             e.preventDefault();
+            let acceptImage = false;
             const imageBlob = URL.createObjectURL(e.target.files[0]);
-            dispatch(photoUpdatedSrc({
-                  id: id,
-                  imgSrc: imageBlob,
-                  type: e.target.files[0].type
-            }));
-            
-            // HANDLE NEXT BUTTON IF THREE PHOTOS
-            // INDEPENDENT FROM PHOTOS
-            // CASE: LAST IMAGE IS UPLOADED AND ALL LETTERS ARE ALREADY FILLED
-            let enableNext = true;
-            // because this is dispatch image, there is a lag of one photo
-            // so if we have 2 photos imgSrc already completed
-            // and this function is called, then that means that a 3rd one
-           
-            let imgCount = 0;
-            photos.map(photo => {
-                  if(photo.imgSrc !== null) {
-                        imgCount += 1;  
-                  }
-            });
-            if(imgCount < 2) {
-                  enableNext = false;
+            // checking if image size is acceptable
+            const imgSize = await getImageSize(imageBlob);
+                        
+            if (imgSize.width > 500 && imgSize.height > 500) {
+                  acceptImage = true;
             }
 
-            const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
-            enableNext = enableNext && lettersAllFilled;
-            if(enableNext) {
-                  dispatch(nextButtonEnabled(true));
+            // if image is within the accepted dimensions
+            if(acceptImage) {
+                  dispatch(photoUpdatedSrc({
+                        id: id,
+                        imgSrc: imageBlob,
+                        type: e.target.files[0].type
+                  }));
+                  
+                  // HANDLE NEXT BUTTON IF THREE PHOTOS
+                  // INDEPENDENT FROM PHOTOS
+                  // CASE: LAST IMAGE IS UPLOADED AND ALL LETTERS ARE ALREADY FILLED
+                  let enableNext = true;
+                  // because this is dispatch image, there is a lag of one photo
+                  // so if we have 2 photos imgSrc already completed
+                  // and this function is called, then that means that a 3rd one
+            
+                  let imgCount = 0;
+                  photos.map(photo => {
+                        if(photo.imgSrc !== null) {
+                              imgCount += 1;  
+                        }
+                  });
+                  if(imgCount < 2) {
+                        enableNext = false;
+                  }
+
+                  const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
+                  enableNext = enableNext && lettersAllFilled;
+                  if(enableNext) {
+                        dispatch(nextButtonEnabled(true));
+                  } else {
+                        dispatch(nextButtonEnabled(false));
+                  }
             } else {
-                  dispatch(nextButtonEnabled(false));
+                  dispatch(setImgResolutionMsg(true));
             }
       };
 

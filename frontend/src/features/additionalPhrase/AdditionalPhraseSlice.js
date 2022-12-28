@@ -14,7 +14,7 @@ export const defaultPhrases = {
 };
 
 const AdditionalPhraseSlice = createSlice({
-      name: 'photos',
+      name: 'additionalPhrases',
       initialState,
       reducers: {
             customPhraseAdded: {
