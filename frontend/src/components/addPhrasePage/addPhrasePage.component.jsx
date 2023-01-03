@@ -26,7 +26,6 @@ const AddPhraseContainer = () => {
       const letters = useSelector(state => state.letters);
       const [showThisIsUs, setShowThisIsUs] = useState(false);
 
-      console.log("letras", letters);
       // 2 backgrounds available for demo preview
       const backgrounds = {
             "lightWood": lightWoodBackground,

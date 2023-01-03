@@ -130,7 +130,6 @@ const ManageOrder = () => {
             let ifIs = true;
             if(photos.length > 0) {
                   photos.map(photo => {
-                        console.log("ifIsPhoto", photo.imgSrc);
                         ifIs = ifIs && (photo.imgSrc !== "" || photo.imgSrc !== null)
                   });
             } else {
@@ -167,7 +166,6 @@ const ManageOrder = () => {
 
             if(step === 1) {
                   const ifIs = checkIfAllPhotosUploaded();
-                  console.log("Current ifIS", ifIs);
                   if(ifIs) {
                         dispatch(nextButtonEnabled(true));
                   }

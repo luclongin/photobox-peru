@@ -39,20 +39,23 @@ const Cart = () => {
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", additionalPhrases.length);
       const delivery = useSelector(state => state.delivery);
       const appliedDiscount = useSelector(state => state.appliedDiscount);
+      const step = useSelector(state => state.step);
+      const paymentMethod = useSelector(state => state.paymentMethod);
+      const yapeState = useSelector(state => state.dialogs);
+      
+      // states
       const [finalPrice, setFinalPrice] = useState(0);
+      const [plinIsOpen, setPlinIsOpen] = useState(false);
+      const [yapeIsOpen, setYapeIsOpen] = useState(false);
       const [discountCode, setDiscountCode] = useState("");
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
-      const step = useSelector(state => state.step);
-      const paymentMethod = useSelector(state => state.paymentMethod);
-      const [yapeIsOpen, setYapeIsOpen] = useState(false);
-      const yapeState = useSelector(state => state.dialogs);
-      const [plinIsOpen, setPlinIsOpen] = useState(false);
       const [enablePayment, setEnablePayment] = useState(true);
 
       const handleClick = (e) => {
             e.preventDefault();
-
+            dispatch(setTotalPrice(price));
+            
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
                   /*CHECK IF ALL INFO HAS BEEN COMPLETED */
@@ -141,15 +144,16 @@ const Cart = () => {
       } else if (appliedDiscount.type === "percentage") {
             // toFixed(2) fixes the total amount to 2 decimals always
             price = ((1-(appliedDiscount.value/100))*(price + getPrice("delivery", delivery))).toFixed(2);
-      } 
+      }
+
 
       if(price < 0) {
             price=0;
-            dispatch(setTotalPrice(price));
+            //dispatch(setTotalPrice(price));
       }
 
       if(price >= 0) {
-            dispatch(setTotalPrice(price));
+            //dispatch(setTotalPrice(price));
       }
 
       restartProcessOrNot();
@@ -265,7 +269,6 @@ const Cart = () => {
       };
 
       const handleCreateUser = async () => {
-            //e.preventDefault();
             const userData = new FormData();
             //create new user
             userData.append('userId', userInfo.userId);
@@ -283,7 +286,6 @@ const Cart = () => {
       }
 
       const handleCreateLetter = async (orderId) => {
-//            e.preventDefault();
             const letterData = new FormData();
             //create new letters input\
             letterData.append('orderId', orderId);

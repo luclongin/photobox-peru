@@ -25,8 +25,10 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
                 inputProps: {
                     style: {
                         textAlign: 'center',
-                        p: 0
+                        position: 'relative',
+                        top: '15px'
                     },
+
                     maxLength: 1,
                 },
                 disableUnderline: true,
@@ -34,14 +36,14 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
                     fontSize: "10.7em",
                     fontWeight: 'bold',
                     fontFamily: 'Arial',
+                    height: '162px'
                 },
             }} sx={{
-                margin: "0",
-                padding: "0",
-                position: 'absolute',
-                top: "-45px",
-                left: "0px",
-                textAlign: "center"
+                height: '100%',
+                width: '100%',
+                textAlign: "center",
+                height: '162px',
+            
             }}
         />
     );
@@ -60,9 +62,9 @@ const Letras = () => {
         //const filteredLetter = letter.match(regex)[0];
 
         if(letter === "Q") {
-            e.target.style.margin = '-16px 0 0 0'
+            
+            //e.target.style.margin = '-16px 0 0 0'
         } else {
-            e.target.style.margin = "0"
         }
 
         setLetters({...letters, [letterOrder]: letter});
@@ -94,17 +96,19 @@ const Letras = () => {
 
 
     return(
-        <Container>
+        <Container sx={{
+            pt: 1.5
+        }}>
             {addedPhotos.length > 0 ?
             (<Fragment>
                 <OrderStepTitle title="Escoje tus fotos y letras" />
-                <Box display="flex" justifyContent="center">
+                <Box display="flex" justifyContent="center" sx={{
+                }}>
                     <Grid container sx={{
                         width:'320px',
                 }}>
                         <Grid item xs={6} sx={{
                             position: 'relative',
-                            overflow: 'hidden',
                         }}>
                             <MyTextField letters={letters} setLetters={setLetters} value={letters.letter1} handler={textOnChangeHandler} letterOrder="letter1" placeholder={"P"} autofocus={true}/>
                         </Grid>
@@ -128,7 +132,6 @@ const Letras = () => {
                             position: 'relative',
                             display: 'flex',
                             justifyContent: 'flex-end',
-                            overflow: 'hidden'
                         }}>
                             <MyTextField letters={letters} value={letters.letter3} setLetters={setLetters} handler={textOnChangeHandler} letterOrder="letter3" placeholder={"B"} autofocus={false}/>
                         </Grid>
