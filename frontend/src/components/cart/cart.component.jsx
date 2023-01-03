@@ -55,7 +55,7 @@ const Cart = () => {
       const handleClick = (e) => {
             e.preventDefault();
             dispatch(setTotalPrice(price));
-            
+
             // step === 3 means final checkout, because of 1 step lag
             if (step.value === 3) {
                   /*CHECK IF ALL INFO HAS BEEN COMPLETED */
@@ -334,7 +334,7 @@ const Cart = () => {
             }}>
                   <Grid container justifyContent="center" sx={{
                         height: "50vh",
-                        maxHeight: "50vh",
+                        maxHeight: "50vh"
                   }}>
                        <Grid item xs={12}>
                               <OrderStepTitle title="Mi carrito" marginBottom="3" />
@@ -342,7 +342,7 @@ const Cart = () => {
                         <Grid container justifyContent="center" sx={{
                               height: "40vh",
                               maxHeight: "40vh",
-                              overflowY: "scroll"
+                              overflowY: "auto"
                         }}>
                               <Grid item xs={10}>
                                     {(photos.length > 0) && 
