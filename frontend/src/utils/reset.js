@@ -12,11 +12,10 @@ import { setImgResolutionMsg } from "../features/errorMessages/errorMessages";
 import { setTotalPrice } from "../features/totalPrice/totalPrice";
 
 const resetApp = (orders, dispatch) => {
+    
     // reset Order
     orders.map((order, index) => {
-        console.log("order map", order);
         const orderId = order.orderId;
-
         dispatch(deleteOrder(orderId));
     });
 

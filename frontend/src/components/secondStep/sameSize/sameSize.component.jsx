@@ -10,6 +10,7 @@ import {styled} from '@mui/material';
 import AddCardButtonPulse from '../../manageOrder/addCardButtonPulse/addCardButtonPulse.component';
 const SameSize = () => {  
   const addedPhotos = useSelector(state => state.photos);
+  console.log("addedPhotos", addedPhotos);
   const [isHiddenAddCardBtn, setIsHiddenAddCardBtn] = useState(false);
 
   const dispatch = useDispatch();

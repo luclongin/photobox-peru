@@ -25,7 +25,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { forwardRef } from "react";
 import { setImgResolutionMsg } from "../../features/errorMessages/errorMessages";
-
+import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -147,8 +147,16 @@ const ManageOrder = () => {
 
             if(step === 0) {
                   // back to product grid, starting from scratch
-                  dispatch(allPhotosDeleted());
+                  //dispatch(allPhotosDeleted());
+                  // delete all photos
+                  photos.map(photo => {
+                        dispatch(photoDeleted({id: photo.id}));
+                  });
+
                   dispatch(deleteProduct());
+                  console.log("dispatched photos", photos);
+                  console.log("dispatched orders", photos);
+                  
                   hideBackButton();
                   dispatch(nextButtonEnabled(false));
                   dispatch(backButtonEnabled(false));

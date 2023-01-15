@@ -13,7 +13,6 @@ import { nextButtonEnabled } from "../../../features/handleFormButtons/FormButto
 import AmpersandPhoto from '../../../images/ampersand.png';
 
 const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
-
     return(
         <TextField
             autoFocus={autofocus}
@@ -50,32 +49,29 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
 
 const Letras = () => {
     const dispatch = useDispatch();
-    const addedPhotos = useSelector(state => state.photos);   
+    const addedPhotos = useSelector(state => state.photos);  
+    const addedLetters = useSelector(state => state.letters);
+
     const [letters, setLetters] = useState({letter1: "", letter2: "&", letter3: ""});
     
+    console.log("dispatched letters:", addedLetters);
+    console.log("dispatched photos:", addedPhotos);
+
     const textOnChangeHandler = (e, letterOrder) => {
         // only accept alpha numeric
         let letter = e.target.value.toUpperCase().replace(/[\W_]+/g,"");
-        
-        //
-        //const filteredLetter = letter.match(regex)[0];
-
-        if(letter === "Q") {
-            
-            //e.target.style.margin = '-16px 0 0 0'
-        } else {
-        }
-
-        setLetters({...letters, [letterOrder]: letter});
+        setLetters({...letters, [letterOrder]: letter});    
     }
 
     useEffect(() => {
+        // when letters are changed, dispatch change
+        dispatch(dispatchLetters(letters));
+
         // each time you have values for the three letters
         // dispatch
         const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
-        if(lettersAllFilled) {
-            dispatch(dispatchLetters(letters));
-        }
+        console.log("letters:", letters);
+        console.log("lettersAllFilled", lettersAllFilled);
         
         // CASE: ALL PHOTOS ARE ADDED AND LAST LETTER IS GOING TO BE ADDED
         // CHECK IF ALL PHOTOS ARE UPLOADED AND IF ALL LETTERS ARE ADDED
@@ -83,16 +79,16 @@ const Letras = () => {
         addedPhotos.map(photo => {
             enableNext = enableNext && (photo.imgSrc !== null);
         });
+
         enableNext = enableNext && lettersAllFilled;
+        console.log("enableNext2", enableNext);
+
         if(enableNext) {
             dispatch(nextButtonEnabled(true));
         } else {
             dispatch(nextButtonEnabled(false));
         }
-
     }, [letters]);
-
-
 
     return(
         <Container sx={{

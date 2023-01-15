@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = []
+const initialState = new Array();
 
 const photoSlice = createSlice({
       name: 'photos',
@@ -62,9 +62,6 @@ const photoSlice = createSlice({
                   const existingPhoto = state.find(photo => photo.id === id);
                   const idx = state.indexOf(existingPhoto);
                   state.splice(idx, 1);
-            },
-            allPhotosDeleted(state) {
-                  return []
             }
       }
 })

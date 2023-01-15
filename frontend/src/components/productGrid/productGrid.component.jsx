@@ -1,6 +1,7 @@
 import { Typography, FormControl, Grid, Box } from "@mui/material";
 import ProductCard from "../productCard/productCard.component";
 import {OrderStepTitle} from "../OrderStepTitle/orderStepTitle.component";
+
 const ProductGrid = () => {
       return(
             <Box sx={{height: "100%", direction: 'column', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
