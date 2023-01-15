@@ -26,24 +26,23 @@ const MyTextField = ({autofocus, placeholder, handler, letterOrder, value}) => {
                     style: {
                         textAlign: 'center',
                         position: 'relative',
-                        top: '15px'
+                        top: '20px'
                     },
 
                     maxLength: 1,
                 },
                 disableUnderline: true,
                 style: {
-                    fontSize: "10.7em",
+                    fontSize: "10em",
                     fontWeight: 'bold',
-                    fontFamily: 'Arial',
+                    fontFamily: 'Arial Bold',
                     height: '162px'
                 },
             }} sx={{
                 height: '100%',
                 width: '100%',
                 textAlign: "center",
-                height: '162px',
-            
+                height: '162px'
             }}
         />
     );
@@ -97,7 +96,7 @@ const Letras = () => {
 
     return(
         <Container sx={{
-            pt: 1.5
+            overflow: 'hidden'
         }}>
             {addedPhotos.length > 0 ?
             (<Fragment>
@@ -126,7 +125,6 @@ const Letras = () => {
                             pt: 2
                         }}>
                             <img src={AmpersandPhoto} alt="Ampersand" width={"115px"} height={"130px"}/>
-
                         </Grid>
                         <Grid item xs={6} sx={{
                             position: 'relative',

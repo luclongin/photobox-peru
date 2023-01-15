@@ -41,7 +41,7 @@ const SameSize = () => {
         </Box>
         : null
         }
-        <ImageList cols={3} gap={0} sx={{
+        <ImageList cols={3} gap={20} sx={{
           height: '100%'
         }}>
           {
