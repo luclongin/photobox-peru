@@ -139,11 +139,15 @@ const Cart = () => {
       }
 
       let price = totalPrice + getPrice("delivery", delivery);
+      console.log("initial price", price);
+
       if(appliedDiscount.type === "amount") {
-            price = price + getPrice("delivery", delivery) - appliedDiscount.value;
+            console.log("discount value", appliedDiscount.value);
+            price = price - appliedDiscount.value;
+            console.log("price final", price);
       } else if (appliedDiscount.type === "percentage") {
             // toFixed(2) fixes the total amount to 2 decimals always
-            price = ((1-(appliedDiscount.value/100))*(price + getPrice("delivery", delivery))).toFixed(2);
+            price = ((1-(appliedDiscount.value/100))*price).toFixed(2);
       }
 
 
@@ -439,7 +443,7 @@ const Cart = () => {
                                     }
                   
                                     {(discountApplied!==null) ?
-                                          <FormHelperText sx={{ml: 0, mt: 0, color: '#3CB371'}}>Descuento aplicado</FormHelperText> : null
+                                          <FormHelperText sx={{ml: 0, mt: 0, mb: -1, color: '#3CB371'}}>Descuento aplicado</FormHelperText> : null
                                     }
                                     </FormControl>
                               </Grid>
