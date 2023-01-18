@@ -26,6 +26,7 @@ import MuiAlert from '@mui/material/Alert';
 import { forwardRef } from "react";
 import { setImgResolutionMsg } from "../../features/errorMessages/errorMessages";
 import { photoDeleted } from "../../features/photoEdition/PhotoSlice";
+import { phraseDeleted } from "../../features/additionalPhrase/AdditionalPhraseSlice";
 /*
       Main function of our application. Handles the navigation and rendering of components.
 */
@@ -147,15 +148,19 @@ const ManageOrder = () => {
 
             if(step === 0) {
                   // back to product grid, starting from scratch
-                  //dispatch(allPhotosDeleted());
+            
                   // delete all photos
+                  // because of delete async, only able to visualize deletion
+                  // in the next step 
                   photos.map(photo => {
                         dispatch(photoDeleted({id: photo.id}));
                   });
 
+                  additionalPhrases.map(phrase => {
+                        dispatch(phraseDeleted({id: phrase.id}));
+                  });
+
                   dispatch(deleteProduct());
-                  console.log("dispatched photos", photos);
-                  console.log("dispatched orders", photos);
                   
                   hideBackButton();
                   dispatch(nextButtonEnabled(false));
@@ -284,6 +289,7 @@ const ManageOrder = () => {
                                           Asegúrate de que la resolución de tu foto sea suficientemente buena
                                     </Alert>
                               </Snackbar>
+                              
                               <Toolbar sx={{
                                     height: '100%',
                                     display: 'flex',

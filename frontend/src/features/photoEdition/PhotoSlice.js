@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialState = new Array();
+const initialState = [];
 
 const photoSlice = createSlice({
       name: 'photos',
@@ -59,9 +59,13 @@ const photoSlice = createSlice({
             },
             photoDeleted(state, action) {
                   const {id} = action.payload;
-                  const existingPhoto = state.find(photo => photo.id === id);
-                  const idx = state.indexOf(existingPhoto);
-                  state.splice(idx, 1);
+                  //console.log("reduxid", id);
+                  //const idx = state.findIndex(photo => photo.id === id);
+                  //console.log("existingPhoto", existingPhoto);
+                  //const idx = state.indexOf(existingPhoto);
+                  //console.log("idx", idx);
+                  //state.splice(idx, 1);
+                  return state.filter(photo => photo.id !== id);
             }
       }
 })

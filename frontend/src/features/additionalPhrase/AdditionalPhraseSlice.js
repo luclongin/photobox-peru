@@ -45,9 +45,10 @@ const AdditionalPhraseSlice = createSlice({
             },
             phraseDeleted(state, action) {
                   const {id} = action.payload;
-                  const existingPhrase = state.find(phrase => phrase.id === id);
-                  const idx = state.indexOf(existingPhrase);
-                  state.splice(idx, 1);
+                  //const existingPhrase = state.find(phrase => phrase.id === id);
+                  //const idx = state.indexOf(existingPhrase);
+                  //state.splice(idx, 1);
+                  return state.filter(phrase => phrase.id !== id);
             },
             allPhrasesDeleted(state) {
                   return []
