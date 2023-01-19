@@ -140,14 +140,72 @@ const MyCarousel = ({ shadowColor, ...props}) => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         centerMode: true,
         prevArrow: <CustomPrevBtn shadowColor={shadowColor} />,
-        nextArrow: <CustomNextBtn shadowColor={shadowColor} />
+        nextArrow: <CustomNextBtn shadowColor={shadowColor} />,
+        responsive: [
+            {
+                breakpoint: 1250,
+                settings: {
+                    slidesToShow: 2.5,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                    centerMode: true     
+                  }
+            },
+            {
+              breakpoint: 1060,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerMode: true,
+                infinite: true,
+                dots: true,
+              }
+            },
+            {
+                breakpoint: 880,
+                settings: {
+                  slidesToShow: 1.5,
+                  slidesToScroll: 1,
+                  centerMode: true,
+                  infinite: true,
+                  dots: true,
+                }
+              },
+            {
+                breakpoint: 690,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 0.5,
+                  centerMode: true,
+                  infinite: true,
+                  dots: true,
+                  initialSlide: 0.5
+                }
+              },
+              {
+                breakpoint: 505,
+                settings: {
+                  slidesToShow: 0.8,
+                  slidesToScroll: 0.5,
+                  centerMode: true,
+                  infinite: true,
+                  dots: true,
+                  initialSlide: 0.5
+                }
+              }
+        ]
     };
 
     return(
-        <Box sx={{width: '75%', p: 0, m: '0 auto'}}>
+        <Box sx={{
+            width: '80%', 
+            p: 0, 
+            m: '0 auto',            
+        }}>
             <Slider {...settings}>
                 {
                     items.map(item => {
