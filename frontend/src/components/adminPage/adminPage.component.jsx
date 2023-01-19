@@ -291,7 +291,6 @@ const AdminPage = () => {
                                                                   }
                                                             })
                                                       }
-                                                      
                                                       <p>
                                                             {
                                                                   uploadedLetters.map((letter, letterIndex) => {

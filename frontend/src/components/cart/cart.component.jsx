@@ -48,9 +48,13 @@ const Cart = () => {
       const [finalPrice, setFinalPrice] = useState(0);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
-      const [discountCode, setDiscountCode] = useState((appliedDiscount.id!=="" && appliedDiscount.id !== null) ? appliedDiscount.id : "");
-      const [discountApplied, setDiscountApplied] = useState((appliedDiscount.id!=="" && appliedDiscount.id !== null));
+      // if applied discount exists since additionalPhrases page
+      // then apply it
+      const [discountCode, setDiscountCode] = useState((appliedDiscount.id!=="") ? appliedDiscount.id : "");
+      const [discountApplied, setDiscountApplied] = useState((appliedDiscount.id!==""));
       
+      console.log("discountCode", discountCode);
+      console.log("discountApplied", discountApplied);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const [enablePayment, setEnablePayment] = useState(true);
       const [appliedCorrectDiscountCode, setAppliedCorrectDiscountCode] = useState("");
@@ -97,6 +101,7 @@ const Cart = () => {
             dispatch(checkDiscount(discountCode)).then(res => {
                   if(res.payload !== false) {
                         setDiscountApplied(true);
+                        console.log("res.payload.discountId", res.payload.discountId);
                         setAppliedCorrectDiscountCode(res.payload.discountId);
 
                         setDiscountCodeFailed(false);     
@@ -131,6 +136,7 @@ const Cart = () => {
                   type: "",
                   value: ""
             }));
+            console.log("ALL DISCOUNTS REMOVED");
       }
 
       const getCartItemTitle = (product) => {
@@ -246,6 +252,7 @@ const Cart = () => {
             orderData.append('deliveryType', delivery);
             orderData.append('totalPrice', price);
             orderData.append('paymentType', paymentMethod);
+            console.log("appliedCorrectDiscountCode", appliedCorrectDiscountCode);
             orderData.append('discountApplied', appliedCorrectDiscountCode);  
             
             // if yape/plin: desconocido -> check your payment system
@@ -308,7 +315,6 @@ const Cart = () => {
             if(letters.letter1) {
                   handleCreateLetter(orderId);
             }
-            
             // CODE TO DELETE DISCOUNT CODE AFTER APPLYING IT
             //console.log("discountApplied from handleCheckout", discountApplied);
             /*if(discountApplied) {
@@ -319,6 +325,7 @@ const Cart = () => {
       }
 
       const handleCheckout = () => {
+            handleRemoveDiscount();
             handleUploadToDb().then(() => {
                   resetApp(orders, dispatch);
             });
@@ -402,8 +409,9 @@ const Cart = () => {
                                           onChange={handleDiscountChange}
                                           endAdornment={
                                                 <InputAdornment position="end">
-                                                      { discountApplied===null ?
-                                                            
+                                                      {
+                                                            console.log("discountApplied===null??", discountApplied)}
+                                                      { discountApplied===false ?
                                                             <IconButton
                                                                   aria-label="toggle search"
                                                                   edge="end"
@@ -439,7 +447,7 @@ const Cart = () => {
                                           : null
                                     }
                   
-                                    {(discountApplied!==null) ?
+                                    {(discountApplied!==false) ?
                                           <FormHelperText sx={{ml: 0, mt: 0, mb: -1, color: '#3CB371'}}>Descuento aplicado</FormHelperText> : null
                                     }
                                     </FormControl>

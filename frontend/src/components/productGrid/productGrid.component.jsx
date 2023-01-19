@@ -1,8 +1,11 @@
 import { Typography, FormControl, Grid, Box } from "@mui/material";
 import ProductCard from "../productCard/productCard.component";
 import {OrderStepTitle} from "../OrderStepTitle/orderStepTitle.component";
+import { useSelector } from "react-redux";
 
 const ProductGrid = () => {
+      const appliedDiscount = useSelector(state => state.appliedDiscount);
+      console.log("applied discount:", appliedDiscount);
       return(
             <Box sx={{height: "100%", direction: 'column', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
                   <Grid container spacing={4} wrap='wrap' display="flex" alignItems="center" justifyContent='center' sx={{
