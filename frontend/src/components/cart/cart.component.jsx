@@ -57,8 +57,6 @@ const Cart = () => {
       console.log("discountApplied", discountApplied);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const [enablePayment, setEnablePayment] = useState(true);
-      const [appliedCorrectDiscountCode, setAppliedCorrectDiscountCode] = useState("");
-
       const handleClick = (e) => {
             e.preventDefault();
             dispatch(setTotalPrice(price));
@@ -101,9 +99,6 @@ const Cart = () => {
             dispatch(checkDiscount(discountCode)).then(res => {
                   if(res.payload !== false) {
                         setDiscountApplied(true);
-                        console.log("res.payload.discountId", res.payload.discountId);
-                        setAppliedCorrectDiscountCode(res.payload.discountId);
-
                         setDiscountCodeFailed(false);     
                         let amount = null;
                         let typeOfDiscount = "";
