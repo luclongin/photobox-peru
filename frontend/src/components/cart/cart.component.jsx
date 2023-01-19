@@ -252,8 +252,7 @@ const Cart = () => {
             orderData.append('deliveryType', delivery);
             orderData.append('totalPrice', price);
             orderData.append('paymentType', paymentMethod);
-            console.log("appliedCorrectDiscountCode", appliedCorrectDiscountCode);
-            orderData.append('discountApplied', appliedCorrectDiscountCode);  
+            orderData.append('discountApplied', discountCode);  
             
             // if yape/plin: desconocido -> check your payment system
             // if card than should be TRUE as this function is always 
@@ -325,10 +324,11 @@ const Cart = () => {
       }
 
       const handleCheckout = () => {
-            handleRemoveDiscount();
             handleUploadToDb().then(() => {
+                  handleRemoveDiscount();
                   resetApp(orders, dispatch);
             });
+            
       }
 
       return(
@@ -402,8 +402,8 @@ const Cart = () => {
                                           label="Añadir descuento"
                                           id="outlined-adornment-discount"
                                           size="small"
-                                          color={(discountApplied===null) ? null: "success"}
-                                          disabled={(discountApplied!==null)}
+                                          color={(discountApplied===false) ? null: "success"}
+                                          disabled={(discountApplied!==false)}
                                           error={discountCodeFailed===true}
                                           value={discountCode}
                                           onChange={handleDiscountChange}
@@ -420,8 +420,7 @@ const Cart = () => {
                                                                   }}
                                                             >
                                                                   <SearchIcon/>
-                                                            </IconButton>
-                                                            
+                                                            </IconButton>      
                                                             :
                                                             <Fragment>
                                                             <CheckCircleOutlineIcon sx={{color:"#3CB371", marginRight: -1}} />
