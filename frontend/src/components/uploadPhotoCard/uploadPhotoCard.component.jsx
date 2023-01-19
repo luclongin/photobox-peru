@@ -9,10 +9,6 @@ const UploadPhotoCard = ({photo, width="350px"}) => {
       
       const [openDialog, setOpenDialog] = useState(false);
       
-      const checkImgDimensions = (photo) => {
-            
-      }
-
       return(
             <Button component="label" sx={{p: 0.1}} id={photo.id}>
                   {

@@ -53,10 +53,6 @@ const Letras = () => {
     const addedLetters = useSelector(state => state.letters);
 
     const [letters, setLetters] = useState({letter1: "", letter2: "&", letter3: ""});
-    
-    console.log("dispatched letters:", addedLetters);
-    console.log("dispatched photos:", addedPhotos);
-
     const textOnChangeHandler = (e, letterOrder) => {
         // only accept alpha numeric
         let letter = e.target.value.toUpperCase().replace(/[\W_]+/g,"");
@@ -70,9 +66,7 @@ const Letras = () => {
         // each time you have values for the three letters
         // dispatch
         const lettersAllFilled = (letters.letter1 !== "") && (letters.letter2 !== "") && (letters.letter3 !== "");
-        console.log("letters:", letters);
-        console.log("lettersAllFilled", lettersAllFilled);
-        
+
         // CASE: ALL PHOTOS ARE ADDED AND LAST LETTER IS GOING TO BE ADDED
         // CHECK IF ALL PHOTOS ARE UPLOADED AND IF ALL LETTERS ARE ADDED
         let enableNext = true;

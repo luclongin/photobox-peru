@@ -26,6 +26,7 @@ import { deleteOrder } from "../../features/order/orders";
 import { allPhotosDeleted } from "../../features/photoEdition/PhotoSlice";
 import { deleteAddress } from "../../features/userInfo/userInfoSlice";
 import resetApp from "../../utils/reset";
+import { getAppliedDiscount } from "../../features/appliedDiscount/appliedDiscountSlice";
 
 const Cart = () => {
 
@@ -34,6 +35,8 @@ const Cart = () => {
       const letters = useSelector(state => state.letters);
       const userInfo = useSelector(state => state.userInfo);
       const photos = useSelector(state => state.photos);
+      console.log("photos from cart", photos);
+
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const product = useSelector(state => state.product);
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", additionalPhrases.length);
@@ -51,6 +54,7 @@ const Cart = () => {
       const [discountApplied, setDiscountApplied] = useState(null);
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const [enablePayment, setEnablePayment] = useState(true);
+      const [appliedCorrectDiscountCode, setAppliedCorrectDiscountCode] = useState("");
 
       const handleClick = (e) => {
             e.preventDefault();
@@ -92,9 +96,10 @@ const Cart = () => {
 
       const handleDiscount = () => {
             dispatch(checkDiscount(discountCode)).then(res => {
-                  console.log("res.payload:", res.payload);
                   if(res.payload !== false) {
                         setDiscountApplied(true);
+                        setAppliedCorrectDiscountCode(res.payload.discountId);
+
                         setDiscountCodeFailed(false);     
                         let amount = null;
                         let typeOfDiscount = "";
@@ -106,6 +111,7 @@ const Cart = () => {
                               typeOfDiscount = "percentage";
                         }
                         dispatch(setAppliedDiscount({
+                              id: discountCode,
                               type: typeOfDiscount,
                               value: amount
                         }));
@@ -122,6 +128,7 @@ const Cart = () => {
             setDiscountApplied(null);
             setDiscountCodeFailed(false);
             dispatch(setAppliedDiscount({
+                  id: "",
                   type: "",
                   value: ""
             }));
@@ -139,32 +146,21 @@ const Cart = () => {
       }
 
       let price = totalPrice + getPrice("delivery", delivery);
-      console.log("initial price", price);
-
       if(appliedDiscount.type === "amount") {
-            console.log("discount value", appliedDiscount.value);
             price = price - appliedDiscount.value;
-            console.log("price final", price);
       } else if (appliedDiscount.type === "percentage") {
             // toFixed(2) fixes the total amount to 2 decimals always
             price = ((1-(appliedDiscount.value/100))*price).toFixed(2);
       }
 
-
       if(price < 0) {
             price=0;
-            //dispatch(setTotalPrice(price));
-      }
-
-      if(price >= 0) {
-            //dispatch(setTotalPrice(price));
       }
 
       restartProcessOrNot();
 
       // CHECKOUT
       // These next functions handle checkout btn
-
       const getFileFromUrl = async (url, name) => {
             let file = await fetch(url).then(async r => await r.blob())
             .then(blobFile => new File([blobFile], name, {type: "image/jpeg"}));
@@ -251,6 +247,8 @@ const Cart = () => {
             orderData.append('deliveryType', delivery);
             orderData.append('totalPrice', price);
             orderData.append('paymentType', paymentMethod);
+            orderData.append('discountApplied', appliedCorrectDiscountCode);  
+            
             // if yape/plin: desconocido -> check your payment system
             // if card than should be TRUE as this function is always 
             // executed after the payment has been successful..

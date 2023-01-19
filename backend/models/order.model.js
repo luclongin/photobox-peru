@@ -25,6 +25,10 @@ module.exports = (sequelize, Sequelize) => {
                   type: Sequelize.STRING,
                   allowNull: false
             },
+            discountApplied: {
+                  type: Sequelize.STRING,
+                  allowNull: false
+            },
             hasPaid: {
                   type: Sequelize.STRING,
                   allowNull: false

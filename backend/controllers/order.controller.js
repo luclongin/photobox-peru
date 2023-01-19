@@ -20,14 +20,13 @@ exports.createOrder = (req, res) => {
         deliveryType: data.deliveryType,
         totalPrice: data.totalPrice,
         paymentType: data.paymentType,
+        discountApplied: data.discountApplied,
         hasPaid: data.hasPaid
       };
 
-      console.log("newOrder:", newOrder);
-
       // Save Order in the database
       Order.create(newOrder).then(data => {
-        console.log("Finished creating user:", data);
+        console.log("Finished creating order:", data);
         res.send(data);
       }).catch(err => {
           res.status(500).send({
@@ -38,9 +37,8 @@ exports.createOrder = (req, res) => {
     };
 
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Orders from the database.
 exports.findAll = (req, res) => {
-  console.log("got me some data??");
   Order.findAll().then(data => {
       console.log("got me some data");
       res.send(data);

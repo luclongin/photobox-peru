@@ -167,6 +167,7 @@ const ManageOrder = () => {
                   dispatch(backButtonEnabled(false));
                   // remove all added coupons
                   dispatch(setAppliedDiscount({
+                        id: "",
                         type: "",
                         value: ""
                   }));

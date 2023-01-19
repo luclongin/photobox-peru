@@ -27,6 +27,17 @@ import TableRow from '@mui/material/TableRow';
 
 const AdminPage = () => {
       const dispatch = useDispatch();
+
+      useEffect(() => {
+            dispatch(getDiscounts());
+            console.log("first dispatch");
+            dispatch(getLetters());
+            dispatch(retrieveOrders());
+            dispatch(getPhotos());
+            dispatch(getUsers());
+            dispatch(getAdditionalPhrases());
+      }, []);
+
       const orders = useSelector(state => state.orders);
       const uploadedPhotos = useSelector(state => state.uploadedPhotos);
       const uploadedUsers = useSelector(state => state.uploadedUser);
@@ -35,19 +46,6 @@ const AdminPage = () => {
       const [couponStartDate, setCouponStartDate] = useState(null);
       const [couponEndDate, setCouponEndDate] = useState(null);
       const discounts = useSelector(state => state.uploadedDiscounts);
-
-      const initFnc = useCallback(() => {
-            dispatch(getDiscounts());
-            dispatch(getLetters());
-            dispatch(retrieveOrders());
-            dispatch(getPhotos());
-            dispatch(getUsers());
-            dispatch(getAdditionalPhrases());
-      }, [dispatch]);
-
-      useEffect(() => {
-            initFnc();
-      }, [initFnc]);
 
       const [coupon, setCoupon] = useState({
             type: "percentage",
@@ -280,6 +278,7 @@ const AdminPage = () => {
                                                       <p><b>Delivery</b> {order.deliveryType}</p>
                                                       <p><b>Set</b> {order.productType}</p>
                                                       <p><b>Precio</b> {order.totalPrice}</p>
+                                                      <p><b>Descuento</b> {order.discountApplied}</p>
                                                       <p><b>Metodo de pago</b> {order.paymentType}</p>
                                                       <p><b>Estado de pago</b> {order.hasPaid}</p>
                                                       <Divider sx={{mt: 2, mb: 2}}></Divider>

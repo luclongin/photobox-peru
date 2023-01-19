@@ -41,6 +41,8 @@ const UploadPhotoCardEmpty = ({ id, width=350 }) => {
 
             // if image is within the accepted dimensions
             if(acceptImage) {
+                  dispatch(setImgResolutionMsg(false));
+                  
                   dispatch(photoUpdatedSrc({
                         id: id,
                         imgSrc: imageBlob,
