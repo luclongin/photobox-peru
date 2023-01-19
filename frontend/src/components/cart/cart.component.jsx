@@ -35,8 +35,6 @@ const Cart = () => {
       const letters = useSelector(state => state.letters);
       const userInfo = useSelector(state => state.userInfo);
       const photos = useSelector(state => state.photos);
-      console.log("photos from cart", photos);
-
       const additionalPhrases = useSelector(state => state.additionalPhrases);
       const product = useSelector(state => state.product);
       const totalPrice = getPrice(product, photos.length) + getPrice("additionalPhrase", additionalPhrases.length);
@@ -50,8 +48,9 @@ const Cart = () => {
       const [finalPrice, setFinalPrice] = useState(0);
       const [plinIsOpen, setPlinIsOpen] = useState(false);
       const [yapeIsOpen, setYapeIsOpen] = useState(false);
-      const [discountCode, setDiscountCode] = useState("");
-      const [discountApplied, setDiscountApplied] = useState(null);
+      const [discountCode, setDiscountCode] = useState((appliedDiscount.id!=="" && appliedDiscount.id !== null) ? appliedDiscount.id : "");
+      const [discountApplied, setDiscountApplied] = useState((appliedDiscount.id!=="" && appliedDiscount.id !== null));
+      
       const [discountCodeFailed, setDiscountCodeFailed] = useState(false);
       const [enablePayment, setEnablePayment] = useState(true);
       const [appliedCorrectDiscountCode, setAppliedCorrectDiscountCode] = useState("");
