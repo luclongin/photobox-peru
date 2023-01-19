@@ -16,6 +16,8 @@ import OrderFeedbackCard from './components/orderFeedback/orderFeedbackCard.comp
 import OrderFeedbackYape from './components/orderFeedback/orderFeedbackYape.component';
 import ManageOrder from './components/manageOrder/manageOrder.component';
 import Order from './components/order/order.component';
+import GiftCardFeedbackYape from './components/orderFeedback/giftCardFeedbackYape.component';
+import DisplayGiftCard from './components/displayGiftCard/displayGiftCard.component';
 
 const router = createBrowserRouter([
   {
@@ -27,13 +29,25 @@ const router = createBrowserRouter([
     path: "/kat",
     element: <AdminPage />,
   },
+  // normal photobox order bought with tarjeta
   {
     path: "/gracias",
     element: <OrderFeedbackCard />,
   },
+  // normal photobox order bought with yape
   {
     path: "/yape",
     element: <OrderFeedbackYape />
+  },
+  // gift card bought with card
+  {
+    path: "/giftcard",
+    element: <DisplayGiftCard />
+  },
+  // gift card bought with yape
+  {
+    path: "/yape/giftcard",
+    element: <GiftCardFeedbackYape />
   },
   {
     path: "/pedido",

@@ -18,8 +18,6 @@ const OrderFeedbackCard = () => {
     });
 
     console.log("merci", mercadopago);
-
-
     return(
         <Box>
             <NavBar/>

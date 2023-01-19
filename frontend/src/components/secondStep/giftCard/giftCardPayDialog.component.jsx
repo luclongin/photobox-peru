@@ -25,7 +25,7 @@ const StyleDialog = styled(Dialog)(({ theme }) => ({
     }
   }));
 
-const LetrasDialog = ({open, handleOpen}) => {
+const GiftCardPayDialog = ({open, handleOpen}) => {
     const dispatch = useDispatch();
     const paymentMethod = useSelector(state => state.paymentMethod);
     const [yapeIsOpen, setYapeIsOpen] = useState(false);
@@ -148,15 +148,15 @@ const LetrasDialog = ({open, handleOpen}) => {
             <Box sx={{display: 'none'}}>
                 <MercadoPagoButton/>
             </Box>
-            <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={totalPrice} />
+            <YapePopUp product={"giftCard"} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={totalPrice} handlePayment={() => {}}/>
             {
             // have to create a new component for plin. Saving for later.
             }
-            <YapePopUp open={plinIsOpen} handleOpen={setPlinIsOpen} price={totalPrice} />
+            <YapePopUp product={"giftCard"} open={plinIsOpen} handleOpen={setPlinIsOpen} price={totalPrice} handlePayment={() => {}}/>
         </Box> 
       </StyleDialog>
     </Box>
   );
 }
 
-export default LetrasDialog;
+export default GiftCardPayDialog;

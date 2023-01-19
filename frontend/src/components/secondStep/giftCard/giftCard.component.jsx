@@ -11,8 +11,8 @@ import { setGiftCard } from "../../../features/giftCard/giftCardSlice";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import RedeemOutlinedIcon from '@mui/icons-material/RedeemOutlined';
 import SendToMobileOutlinedIcon from '@mui/icons-material/SendToMobileOutlined';
-import LetrasDialog from "../letras/letrasPayPopUp.component";
 import { setTotalPrice } from "../../../features/totalPrice/totalPrice";
+import GiftCardPayDialog from "./giftCardPayDialog.component";
 
 const GiftCard = () => {
     const dispatch = useDispatch();
@@ -178,7 +178,7 @@ const GiftCard = () => {
                             >
                                 Comprar
                             </AddButton>
-                            <LetrasDialog open={dialogOpen} handleOpen={setDialogOpen} />
+                            <GiftCardPayDialog open={dialogOpen} handleOpen={setDialogOpen} />
                         </Grid>
                         {
                             toggleErrorText && (

@@ -57,7 +57,7 @@ function BootstrapDialogTitle(props) {
   
 
 
-const YapePopUp = ({open, handleOpen, price, handlePayment}) => {
+const YapePopUp = ({product, open, handleOpen, price, handlePayment}) => {
 
     const navigate = useNavigate();
 
@@ -152,7 +152,6 @@ const YapePopUp = ({open, handleOpen, price, handlePayment}) => {
         <DialogActions sx={{
             backgroundColor: '#FAF9F9'
           }}>
-          
             <Button variant="contained" sx={{
               backgroundColor: 'white', 
               color: "#FF66C4",
@@ -161,7 +160,12 @@ const YapePopUp = ({open, handleOpen, price, handlePayment}) => {
               }
             }} autoFocus onClick={() => {
               handlePayment();
-              navigate('/yape');
+              if(product === "giftCard") {
+                navigate('/yape/giftcard');
+              } else {
+                navigate('/yape');
+              }
+              console.log("yooooo");
             }}>
               Ya pagué
             </Button>

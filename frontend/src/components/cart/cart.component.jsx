@@ -529,11 +529,11 @@ const Cart = () => {
                         <Box sx={{display: 'none'}}>
                               <MercadoPagoButton/>
                         </Box>
-                        <YapePopUp open={yapeIsOpen} handleOpen={setYapeIsOpen} price={price} handlePayment={handleCheckout} />
+                        <YapePopUp product={"sameSize"} open={yapeIsOpen} handleOpen={setYapeIsOpen} price={price} handlePayment={handleCheckout} />
                         {
                         // have to create a new component for plin. Saving for later.
                         }
-                        <YapePopUp open={plinIsOpen} handleOpen={setPlinIsOpen} price={"100"} />
+                        <YapePopUp product={"sameSize"} open={plinIsOpen} handleOpen={setPlinIsOpen} price={"100"} />
                   </Box>      
             </Box>
       );
