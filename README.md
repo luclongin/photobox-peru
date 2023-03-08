@@ -2,13 +2,13 @@
 
 **Disclaimer: at the time of this writing, it is not used by the client to handle customer orders. The end-product will contain custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with **React.js** (using Redux.js) with a **MySQL database** and served with **Express** (Node.js framework).
-
 <div align="center">
   <a href="https://github.com/luclongin/photobox-peru">
-    <img src="readme/logo.jpg" alt="Logo" width="80" height="80">
+    <img src="readme/logo.jpg" alt="Logo" width="150" height="150">
   </a>
 </div>
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with **React.js** (using Redux.js) with a **MySQL database** and served with **Express** (Node.js framework).
 
 ## What is it?
 [PhotoBox Peru](https://www.instagram.com/photobox.peru/) is a startup that receives orders from customers (photos and dimensions) via WhatsApp, prints them into physical framed pictures and ships them to the customer's address. 
