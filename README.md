@@ -1,9 +1,17 @@
 # Website v1.0 for Photobox Peru 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with React.js (using Redux.js) with a MySQL database and served with Express (Node.js).
+**Disclaimer: at the time of this writing, it is not used by the client to handle customer orders. The end-product will contain custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).**
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with **React.js** (using Redux.js) with a **MySQL database** and served with **Express** (Node.js framework).
+
+<div align="center">
+  <a href="https://github.com/luclongin/photobox-peru">
+    <img src="readme/logo.jpg" alt="Logo" width="80" height="80">
+  </a>
+</div>
 
 ## What is it?
-PhotoBox Peru is a startup that receives orders from customers (photos and dimensions) via WhatsApp, prints them into physical framed pictures and ships them to the customer's address. 
+[PhotoBox Peru](https://www.instagram.com/photobox.peru/) is a startup that receives orders from customers (photos and dimensions) via WhatsApp, prints them into physical framed pictures and ships them to the customer's address. 
 
 The website's objective is to automatize the current work done manually via WhatsApp, eliminating effectively all direct contact with clients and image handling (and WhatsApp's default photo formatting). 
 
@@ -54,3 +62,9 @@ To view the project,
 4. Open [http://localhost:8080](http://localhost:8080) to view it in your browser
    
 Enjoy!
+
+## Contact
+
+Luc Longin - luc.longin@gmail.com
+
+Project Link: [https://github.com/luclongin/photobox-peru]([https://github.com/your_username/repo_name](https://github.com/luclongin/photobox-peru))
