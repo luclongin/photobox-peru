@@ -9,6 +9,8 @@ At the time of this writing, it is not used by the client to handle customer ord
   </a>
 </div>
 
+## Getting started
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with **React.js** (using Redux.js) with a **MySQL database** and served with **Express** (Node.js framework).
 
 ## What is it?
