@@ -1,7 +1,13 @@
 # Website v1.0 for Photobox Peru 
 
 ## Disclaimer
-At the time of this writing, it is not used by the client to handle customer orders. The end-product will contain cross-browser compatibility, responsive design for varying screen sizes, custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).
+At the time of this writing, it is not used by the client to handle customer orders. The end-product will contain:
+* Deployment of React app and Node.js app 
+* Cross-browser compatibility and responsive design for varying screen sizes
+* Designed custom images
+* Implementation of loading spinner for async operations that take time
+* Implementation of the MercadoPago payment system, v1.0 implements Yape/Plin QR codes for payment
+* Additional pages and content (FAQ, Who we are, implementation of Instagram posts)
 
 <div align="center">
   <a href="https://github.com/luclongin/photobox-peru">
