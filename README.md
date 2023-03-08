@@ -1,6 +1,7 @@
 # Website v1.0 for Photobox Peru 
 
-**Disclaimer: at the time of this writing, it is not used by the client to handle customer orders. The end-product will contain custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).**
+## Disclaimer
+At the time of this writing, it is not used by the client to handle customer orders. The end-product will contain custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).
 
 <div align="center">
   <a href="https://github.com/luclongin/photobox-peru">
