@@ -37,7 +37,7 @@ My client then receives this order in a private, automatically-updated page with
 `Back-end`: 
 
 * **Express (Node.js framework)** for Routing (handling GET and POST requests with `front-end`) and to update a **MySQL database**
-* **MySQL database** for storing user data and order data (uploaded images are kept in the Filesystem)
+* **MySQL database** for storing user data and order data (uploaded images are kept in the Filesystem).
 * **Sequelize** (promise-based Node.js ORM tool for the database)
 * Various **JS libraries** to handle photo uploading and payment systems (e.g MercadoPago)
 
@@ -62,7 +62,8 @@ To view the project,
    yarn 
    node server.js
    ```
-4. Open [http://localhost:8080](http://localhost:8080) to view it in your browser
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
+5. Open [http://localhost:3000/kat](http://localhost:3000/kat) to access the **Admin Page (view only)** and view new orders/manage discounts. The database is currently hosted in Dreamhost servers but the backend is run on your computer - Chances are, Dreamhost will not recognize your IP address in its Allowable Hosts registry and you will therefore not be able to communicate with the database. No data will therefore be shown. 
    
 Enjoy!
 
