@@ -62,14 +62,8 @@ To view the project,
    yarn 
    yarn start
    ```
-3. Install Yarn packages of `backend` folder and serve
-   ```sh
-   cd ../backend
-   yarn 
-   node server.js
-   ```
 4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
-5. Open [http://localhost:3000/kat](http://localhost:3000/kat) to access the **Admin Page (view only)** and view new orders/manage discounts. The database is currently hosted in Dreamhost servers but the backend is run on your computer - Chances are, Dreamhost will not recognize your IP address in its Allowable Hosts registry and you will therefore not be able to communicate with the database. No data will therefore be shown. 
+5. Open [http://localhost:3000/kat](http://localhost:3000/kat) to access the **Admin Page (view only)** and view new orders/manage discounts. The database is hosted online but the backend is not - The database will not recognize your IP address in its Allowable Hosts registry and no data will therefore be shown. 
    
 Enjoy!
 
