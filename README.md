@@ -33,8 +33,24 @@ My client then receives this order in a private, automatically-updated page with
 ## View project
 The project is divided into two folders, `frontend` and `backend`
 
-To view the project, open Terminal and `cd` into `frontend` and run `yarn start`.
-
-Open other Terminal and `cd` into `backend` and run `node server.js`.
-
-Open [http://localhost:8080](http://localhost:8080) to view it in your browser. Enjoy!
+To view the project, 
+1. Clone the repo and move into project folder
+   ```sh
+   git clone https://github.com/luclongin/photobox-peru.git
+   cd photobox-peru
+   ```
+2. Install Yarn packages of `frontend` folder and launch
+   ```sh
+   cd frontend
+   yarn 
+   yarn start
+   ```
+3. Install Yarn packages of `backend` folder and serve
+   ```sh
+   cd ../backend
+   yarn 
+   node server.js
+   ```
+4. Open [http://localhost:8080](http://localhost:8080) to view it in your browser
+   
+Enjoy!
