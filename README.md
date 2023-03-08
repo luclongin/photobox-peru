@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Website v1.0 for Photobox Peru 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Disclaimer: at the time of this writing, it is not used by the client to handle customer orders. The end-product will contain custom images selected by the client, the implementation of the MercadoPago payment system, additional pages and content (FAQ, Who we are, implementation of Instagram posts).**
 
-## Available Scripts
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), developed with **React.js** (using Redux.js) with a **MySQL database** and served with **Express** (Node.js framework).
 
-In the project directory, you can run:
+<div align="center">
+  <a href="https://github.com/luclongin/photobox-peru">
+    <img src="readme/logo.jpg" alt="Logo" width="80" height="80">
+  </a>
+</div>
 
-### `npm start`
+## What is it?
+[PhotoBox Peru](https://www.instagram.com/photobox.peru/) is a startup that receives orders from customers (photos and dimensions) via WhatsApp, prints them into physical framed pictures and ships them to the customer's address. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The website's objective is to automatize the current work done manually via WhatsApp, eliminating effectively all direct contact with clients and image handling (and WhatsApp's default photo formatting). 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Once a customer enters the website, purchase options are presented to them via an interactive SPA alongside an interactive cart component. Once the customer has finished their purchase and uploaded/cropped their photos, the website asks for the customer's address, preferred delivery method and preferred payment method. The customer then pays following the selected payment method.
 
-### `npm test`
+My client then receives this order in a private, automatically-updated page with order data, user data and uploaded photos.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies used
+`Client-facing`:
 
-### `npm run build`
+* **Figma** for mocking and communicating with client before starting development.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`Front-end`: 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* **React framework** (using Redux store)
+* **Material UI** component library for style
+* Various **JS libraries** for image cropping, form handling (formik) and components (e.g carousel, loading spinners)
+* **Axios** (promise-based HTTP Client) for communicating with backend API
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`Back-end`: 
 
-### `npm run eject`
+* **Express (Node.js framework)** for Routing (handling GET and POST requests with `front-end`) and to update a **MySQL database**
+* **MySQL database** for storing user data and order data (uploaded images are kept in the Filesystem)
+* **Sequelize** (promise-based Node.js ORM tool for the database)
+* Various **JS libraries** to handle photo uploading and payment systems (e.g MercadoPago)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## View project
+The project is divided into two folders, `frontend` and `backend`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To view the project, 
+1. Clone the repo and move into project folder
+   ```sh
+   git clone https://github.com/luclongin/photobox-peru.git
+   cd photobox-peru
+   ```
+2. Install Yarn packages of `frontend` folder and launch
+   ```sh
+   cd frontend
+   yarn 
+   yarn start
+   ```
+3. Install Yarn packages of `backend` folder and serve
+   ```sh
+   cd ../backend
+   yarn 
+   node server.js
+   ```
+4. Open [http://localhost:8080](http://localhost:8080) to view it in your browser
+   
+Enjoy!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contact
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Luc Longin - luc.longin@gmail.com
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Link: [https://github.com/luclongin/photobox-peru]([https://github.com/your_username/repo_name](https://github.com/luclongin/photobox-peru))
