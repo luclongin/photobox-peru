@@ -14,6 +14,7 @@ import Baby from '../../images/baby.png';
 import Carousel from "../carousel/carousel.component";
 import { Link } from "react-router-dom";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import HomePageImg from '../../images/homepage.png';
 
 const FirstPart = () => {
     return(
@@ -25,13 +26,8 @@ const FirstPart = () => {
                 padding: 0,
             }}>
                 <Grid container sx={{}}>
-                    {
-                        // BACKRGOUND IMAGE
-                    }
-                    <Grid item xs={6.5} sx={{
-
-                    }}>
-
+                    <Grid item xs={6.5} sx={{pt: "10%"}}>
+                        <img src={HomePageImg} width='300px' height='300px' />
                     </Grid>
                     <Grid item xs={5.5}>
                         <Grid container>
@@ -109,21 +105,6 @@ const SecondPart = () => {
                             <Box>
                                 <Typography variant="secondpartsubtitle">
                                     Seguro para tus paredes
-                                </Typography>
-                            </Box>
-                            <Box>
-                                <Typography variant="p">
-                                    Sin clavos
-                                </Typography>
-                            </Box>
-                            <Box>
-                                <Typography variant="p">
-                                    Sin agujeros
-                                </Typography>
-                            </Box>
-                            <Box>
-                                <Typography variant="p">
-                                    Sin dejar marcas
                                 </Typography>
                             </Box>
                         </DetailPaper>

@@ -2,7 +2,6 @@ const mercadopago = require("mercadopago");
 
 exports.createPreference = (req, res) => {
     console.log("what's my body:", req.body);
-
     const orderData = Object.assign({}, req.body);
     if (!req.body) {
           res.status(400).send({
@@ -15,7 +14,7 @@ exports.createPreference = (req, res) => {
         items: [
             {
                 title: orderData.description,
-                unit_price: Number(orderData.price),
+                unit_price: 0,
                 currency_id: 'PEN',
                 quantity: Number(orderData.quantity),
                 //additional_info: orderData.additionalInfo,

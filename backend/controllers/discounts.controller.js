@@ -37,7 +37,10 @@ exports.createDiscount = (req, res) => {
 };
 
 exports.getDiscounts = (req, res) => {
+  console.log("getting discounts!!");
+  console.log("all discounts: ", Discounts.findAll());
   Discounts.findAll().then(data => {
+      console.log("data:", data);
         res.send(data);
       }).catch(err => {
         res.status(500).send({

@@ -113,11 +113,6 @@ const AdminPage = () => {
       return(
             <Container fluid="true">
                   <Box>
-                        <Button variant="contained" sx={{}}>
-                              Refresh
-                        </Button>
-                  </Box>
-                  <Box>
                         <Grid container>
                               <Grid item xs={12}>
                                     <h1>
@@ -213,6 +208,7 @@ const AdminPage = () => {
                                           <TableBody>
                                                 {
                                                       discounts.map((discount, discountIndex) => {
+                                                            console.log("discount:", discount);
                                                             return(<TableRow key={discount.discountId} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                                                   <TableCell component="th" scope="row">
                                                                         {discount.discountId}
